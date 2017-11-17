@@ -1,0 +1,124 @@
+//
+//  WDPersonBehavior.swift
+//  WDZombies
+//
+//  Created by 吴冬 on 2017/10/24.
+//  Copyright © 2017年 吴冬. All rights reserved.
+//
+
+import UIKit
+import SpriteKit
+
+class WDPersonBehavior: WDBaseNodeBehavior {
+
+    weak var personNode:WDPersonNode! = nil
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "position" {
+            WDTool.addSpeedSkillMove(direction: personNode.direction, personNode: personNode)
+        }
+    }
+    
+    /// 操作停止移动
+    ///
+    /// - Parameter direction: 方向
+    override func stopMoveAction(direction:NSString) -> Void {
+        
+        self.personNode.texture = (self.personNode.moveDic.object(forKey: direction)as! NSMutableArray).object(at: 0) as? SKTexture
+        self.personNode.direction = direction
+        self.personNode.removeAction(forKey: "move")
+        self.personNode.isMove = false
+        
+    }
+    
+    
+    /// 人物移动
+    ///
+    /// - Parameter direction: 方向
+    override func moveAction(direction:NSString) -> Void {
+      
+        if personNode.canMove {
+            let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
+            personNode.position = point
+            personNode.zPosition = 3 * 667 - personNode.position.y
+        }
+      
+        
+       
+     
+        if !direction.isEqual(to: personNode.direction as String) || !personNode.isMove {
+           
+            WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
+            personNode.direction = direction
+            personNode.isMove = true
+        }
+  
+    }
+    
+    
+    
+    /// 人物受到伤害
+    ///
+    /// - Parameters:
+    ///   - attackNode:
+    ///   - beAttackNode:
+    override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
+       
+        personNode.wdBlood -= attackNode.wdAttack
+        
+        if personNode.wdBlood <= 0 {
+            personNode.ggAction()
+            return
+        }
+        
+        WDAnimationTool.bloodAnimation(node:personNode)
+        WDAnimationTool.beAttackAnimationForPerson(attackNode: attackNode, beAttackNode: beAttackNode as! WDPersonNode)
+        
+        let percentage:CGFloat = personNode.wdBlood / personNode.wdAllBlood
+        let width:CGFloat = personNode.size.width * percentage
+        //let x:CGFloat = personNode.size.width - width
+        var bloodColor = UIColor.green
+        
+        if percentage >= 0.7{
+            bloodColor = UIColor.init(red: 0, green: 165 / 255.0, blue: 129 / 255.0, alpha: 1)
+        }else if percentage < 0.7 &&  percentage >= 0.4{
+            bloodColor = UIColor.init(red: 255 / 255.0, green: 232 / 255.0, blue: 81 / 255.0, alpha: 1)
+        }else if percentage < 0.4 && percentage >= 0.2{
+            bloodColor = UIColor.init(red: 240 / 255.0, green: 136 / 255.0, blue: 66 / 255.0, alpha: 1)
+        }else{
+            bloodColor = UIColor.init(red: 115 / 255.0, green: 21 / 255.0, blue: 26 / 255.0, alpha: 1)
+        }
+        
+       
+        if #available(iOS 10.0, *) {
+            let colorAction = SKAction.colorize(with: bloodColor, colorBlendFactor: 1, duration: 0.1)
+            var widthAction:SKAction? = nil
+            widthAction = SKAction.scale(to: CGSize(width:width,height:5), duration: 0.1)
+            let group = SKAction.group([colorAction,widthAction!])
+            
+            personNode.bloodNode.run(group)
+        } else {
+            personNode.bloodNode.size = CGSize(width:width,height:5)
+            personNode.color = bloodColor
+        }
+        
+        
+ 
+    }
+    
+
+    
+    
+    override func attackAction(node: WDBaseNode) {
+        personNode.fireNode.position = WDTool.firePosition(direction: personNode.direction)
+        personNode.fireNode.texture = personNode.fireDic.object(forKey: personNode.direction) as? SKTexture
+        personNode.fireNode.isHidden = false
+        self.perform(#selector(hiddenFireNode), with: nil, afterDelay: 0.1)
+        WDAnimationTool.fireAnimation(node: node as! WDPersonNode)
+    }
+    
+    @objc func hiddenFireNode() -> Void {
+        personNode.fireNode.isHidden = true
+    }
+    
+}
