@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
    
+        //测试github
         mapName = "WDMap_1Scene"
         
         //初始化地图
