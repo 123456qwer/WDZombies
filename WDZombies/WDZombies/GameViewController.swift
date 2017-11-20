@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
    
         //测试github
+        //测试成功，可以开始搞了
         mapName = "WDMap_1Scene"
         
         //初始化地图
