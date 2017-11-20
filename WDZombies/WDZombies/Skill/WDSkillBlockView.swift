@@ -17,6 +17,29 @@ class WDSkillBlockView: UIView {
     var isSelect = false
     var initFrame:CGRect = CGRect()
     
+    
+    func blinkAction() {
+        
+        let page:CGFloat = 5
+        let width = (self.frame.size.height - page * 3) / 2.0
+        let x:CGFloat = self.frame.size.width - page - width
+
+        let passiveCD = UIButton.init(frame: CGRect(x:x,y:page ,width:width,height:width))
+        passiveCD.backgroundColor = UIColor.blue
+        self.addSubview(passiveCD)
+        
+      
+        
+        let passiveDis = UIButton.init(frame: CGRect(x:x,y:WDTool.bottom(View: passiveCD) + page ,width:width,height:width))
+        passiveDis.backgroundColor = UIColor.blue
+        self.addSubview(passiveDis)
+        
+        
+        WDTool.masksToCircle(View: passiveCD)
+        WDTool.masksToCircle(View: passiveDis)
+        
+    }
+    
     func createSkillWithType(type:personSkillType)  {
         
         initFrame = self.frame
@@ -33,8 +56,7 @@ class WDSkillBlockView: UIView {
         initiative.alpha = 0.5
         self.addSubview(initiative)
         
-        initiative.layer.masksToBounds = true
-        initiative.layer.cornerRadius = width / 2.0
+        WDTool.masksToCircle(View: initiative)
         
         
         initLabel = UILabel.init(frame: CGRect(x:10,y:WDTool.top(View: initiative) - 5 - 20,width:width,height:20))
@@ -42,6 +64,26 @@ class WDSkillBlockView: UIView {
         initLabel.backgroundColor = UIColor.blue
         initLabel.textAlignment = .center
         self.addSubview(initLabel)
+        
+        
+        switch skillType {
+        case .Attack:
+            break
+        case .Blink:
+            self.blinkAction()
+            break
+        case .Speed:
+            break
+        case .Boom:
+            break
+        case .Attack_distance:
+            break
+        case .NoSelect:
+            break
+        case .Fire:
+            break
+        }
+        
         
         
     }
