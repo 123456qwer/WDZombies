@@ -315,11 +315,6 @@ class WDAnimationTool: NSObject {
     let point:CGPoint = WDTool.calculateMovePoint(direction: node.direction, speed: 200, node: node)
     
     
-   
-   
-    
-    
-   
     
     let hide:SKAction = SKAction.fadeAlpha(to: 0, duration: 0.1)
     let moveAction:SKAction = SKAction.move(to: point, duration: 0.3)

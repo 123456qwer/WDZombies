@@ -15,6 +15,21 @@ class WDKulouNode: WDBaseNode {
     var beAttackTexture:SKTexture! = nil
     var behavior:WDKulouBehavior! = nil
     
+    
+    func setPhy() -> Void {
+        
+        self.physicsBody?.categoryBitMask = normal_zom;
+        self.physicsBody?.contactTestBitMask = player_type;
+        self.physicsBody?.collisionBitMask = normal_zom;
+        
+    }
+    
+    func removePhy() -> Void {
+        self.physicsBody?.categoryBitMask = 0;
+        self.physicsBody?.contactTestBitMask = 0;
+        self.physicsBody?.collisionBitMask = 0;
+    }
+    
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
         
         moveArr = NSMutableArray.init()
@@ -57,6 +72,12 @@ class WDKulouNode: WDBaseNode {
         physicsBody.contactTestBitMask = player_type;
         physicsBody.collisionBitMask = normal_zom;
         physicsBody.isDynamic = true;
+        
+        let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
+        let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
+        
+        self.position = CGPoint(x:x, y:y);
+        self.zPosition = 3 * 667 - y;
         
         self.physicsBody = physicsBody
         self.direction = kLeft

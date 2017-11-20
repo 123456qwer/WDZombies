@@ -73,7 +73,10 @@ class WDTool: NSObject {
         return View.frame.size.height
     }
     
-    
+    static func masksToCircle(View:UIView) {
+        View.layer.masksToBounds = true
+        View.layer.cornerRadius = View.frame.size.width / 2.0
+    }
     
     /// 人物移动时增加速度特效也移动
     ///

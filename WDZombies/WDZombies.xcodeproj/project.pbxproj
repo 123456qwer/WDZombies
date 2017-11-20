@@ -30,6 +30,9 @@
 		432F84DA1F99DA0800F51146 /* WDTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F84D91F99DA0800F51146 /* WDTool.swift */; };
 		432F84DC1F99E97800F51146 /* weaponBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 432F84DB1F99E97800F51146 /* weaponBtn.png */; };
 		432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F84DE1F99F2CF00F51146 /* WDSkillSelectView.swift */; };
+		43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43365B711FC266ED00356D64 /* WDSkillViewController.swift */; };
+		43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43365B731FC2674C00356D64 /* WDSkillBlockView.swift */; };
+		43365B761FC2789000356D64 /* launchgifpic.gif in Resources */ = {isa = PBXBuildFile; fileRef = 43365B751FC2788F00356D64 /* launchgifpic.gif */; };
 		433B050A1FB19CCB006210B2 /* boomAnimation.png in Resources */ = {isa = PBXBuildFile; fileRef = 433B05081FB19CCB006210B2 /* boomAnimation.png */; };
 		433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */ = {isa = PBXBuildFile; fileRef = 433B05091FB19CCB006210B2 /* boomBegin.png */; };
 		433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D18451FA017E900A283E0 /* WDSkillManager.swift */; };
@@ -144,6 +147,9 @@
 		432F84D91F99DA0800F51146 /* WDTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDTool.swift; sourceTree = "<group>"; };
 		432F84DB1F99E97800F51146 /* weaponBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weaponBtn.png; sourceTree = "<group>"; };
 		432F84DE1F99F2CF00F51146 /* WDSkillSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillSelectView.swift; sourceTree = "<group>"; };
+		43365B711FC266ED00356D64 /* WDSkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillViewController.swift; sourceTree = "<group>"; };
+		43365B731FC2674C00356D64 /* WDSkillBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillBlockView.swift; sourceTree = "<group>"; };
+		43365B751FC2788F00356D64 /* launchgifpic.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchgifpic.gif; sourceTree = "<group>"; };
 		433B05081FB19CCB006210B2 /* boomAnimation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomAnimation.png; sourceTree = "<group>"; };
 		433B05091FB19CCB006210B2 /* boomBegin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomBegin.png; sourceTree = "<group>"; };
 		433D18451FA017E900A283E0 /* WDSkillManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillManager.swift; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 		432F84CC1F99939A00F51146 /* BGPic */ = {
 			isa = PBXGroup;
 			children = (
+				43365B751FC2788F00356D64 /* launchgifpic.gif */,
 				432F84CD1F9993E600F51146 /* starBG.jpg */,
 			);
 			path = BGPic;
@@ -359,6 +366,8 @@
 		432F84DD1F99F2B500F51146 /* Skill */ = {
 			isa = PBXGroup;
 			children = (
+				43365B711FC266ED00356D64 /* WDSkillViewController.swift */,
+				43365B731FC2674C00356D64 /* WDSkillBlockView.swift */,
 				432F84DE1F99F2CF00F51146 /* WDSkillSelectView.swift */,
 				4348DC251F9D92BF0072D030 /* WDSelectBtn.swift */,
 				433D18451FA017E900A283E0 /* WDSkillManager.swift */,
@@ -569,7 +578,7 @@
 				TargetAttributes = {
 					432F84AD1F998A5B00F51146 = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -680,6 +689,7 @@
 				436799131FB0543900454274 /* Bokeh.sks in Resources */,
 				432F84B61F998A5B00F51146 /* Actions.sks in Resources */,
 				4348DC381F9DE7DA0072D030 /* starGame.png in Resources */,
+				43365B761FC2789000356D64 /* launchgifpic.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,6 +713,7 @@
 				4376D1C11F9F28FD004E6188 /* WDPersonBehavior.swift in Sources */,
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
+				43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */,
 				43E9B9681FBED25F00A2DBF3 /* WDKulouBehavior.swift in Sources */,
 				43E9B9661FBECEE700A2DBF3 /* WDKulouNode.swift in Sources */,
 				434B4C491FB98F40000A6566 /* WDBossBehavior_1.swift in Sources */,
@@ -710,6 +721,7 @@
 				433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */,
 				432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */,
 				435589831FA0701500C80CA8 /* WDZombieNode.swift in Sources */,
+				43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */,
 				432F84D61F99A85300F51146 /* WDSkillView.swift in Sources */,
 				4376D1BF1F9F28BC004E6188 /* WDBaseNodeBehavior.swift in Sources */,
 				432F84BA1F998A5B00F51146 /* GameViewController.swift in Sources */,
@@ -851,15 +863,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66J6Z6X3YP;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 9728B43SWE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WDZombies/WDPCH.pch;
 				INFOPLIST_FILE = WDZombies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "496011b0-3378-4cff-9d46-662c74decce7";
+				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -869,15 +884,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66J6Z6X3YP;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 9728B43SWE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WDZombies/WDPCH.pch;
 				INFOPLIST_FILE = WDZombies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "496011b0-3378-4cff-9d46-662c74decce7";
+				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
