@@ -98,7 +98,7 @@ class WDSkillManager: NSObject {
     
     //炸弹技能
     func boomAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
-         let pasDic:NSDictionary = self.createLabelWithNumber(str: "45", skillView: skillView, node: node, color: UIColor.blue)
+         let pasDic:NSDictionary = self.createLabelWithNumber(str: "1", skillView: skillView, node: node, color: UIColor.blue)
          let imageView:UIImageView = pasDic.object(forKey: "imageView") as! UIImageView
          imageView.removeFromSuperview()
         WDAnimationTool.boomAnimation(node:node)
@@ -107,7 +107,7 @@ class WDSkillManager: NSObject {
     
     //闪现技能
     func blinkAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
-        let pasDic:NSDictionary = self.createLabelWithNumber(str: "20", skillView: skillView, node: node ,color: UIColor.black)
+        let pasDic:NSDictionary = self.createLabelWithNumber(str: "30", skillView: skillView, node: node ,color: UIColor.black)
      
         let imageView:UIImageView = pasDic.object(forKey: "imageView") as! UIImageView
         imageView.removeFromSuperview()

@@ -141,8 +141,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             let link = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
-            self.createKulou()
-            self.createKulou()
+            //self.createKulou()
 
             //self.createBoss1()
             //测试新粒子效果

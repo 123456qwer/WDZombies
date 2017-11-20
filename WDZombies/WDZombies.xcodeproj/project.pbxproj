@@ -37,6 +37,9 @@
 		433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */ = {isa = PBXBuildFile; fileRef = 433B05091FB19CCB006210B2 /* boomBegin.png */; };
 		433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D18451FA017E900A283E0 /* WDSkillManager.swift */; };
 		433D184C1FA0303500A283E0 /* person4.png in Resources */ = {isa = PBXBuildFile; fileRef = 433D184B1FA0303500A283E0 /* person4.png */; };
+		433F10D11FC2FFB700DECFBF /* blink.gif in Resources */ = {isa = PBXBuildFile; fileRef = 433F10D01FC2FFB700DECFBF /* blink.gif */; };
+		433F10D31FC3045A00DECFBF /* speed.gif in Resources */ = {isa = PBXBuildFile; fileRef = 433F10D21FC3045A00DECFBF /* speed.gif */; };
+		433F10D51FC3078500DECFBF /* boom.gif in Resources */ = {isa = PBXBuildFile; fileRef = 433F10D41FC3078500DECFBF /* boom.gif */; };
 		4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348DC251F9D92BF0072D030 /* WDSelectBtn.swift */; };
 		4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC281F9D98B20072D030 /* addFast.jpg */; };
 		4348DC2F1F9D98B30072D030 /* addAttack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC291F9D98B30072D030 /* addAttack.jpg */; };
@@ -154,6 +157,9 @@
 		433B05091FB19CCB006210B2 /* boomBegin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomBegin.png; sourceTree = "<group>"; };
 		433D18451FA017E900A283E0 /* WDSkillManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillManager.swift; sourceTree = "<group>"; };
 		433D184B1FA0303500A283E0 /* person4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person4.png; sourceTree = "<group>"; };
+		433F10D01FC2FFB700DECFBF /* blink.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blink.gif; sourceTree = "<group>"; };
+		433F10D21FC3045A00DECFBF /* speed.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = speed.gif; sourceTree = "<group>"; };
+		433F10D41FC3078500DECFBF /* boom.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = boom.gif; sourceTree = "<group>"; };
 		4348DC251F9D92BF0072D030 /* WDSelectBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSelectBtn.swift; sourceTree = "<group>"; };
 		4348DC281F9D98B20072D030 /* addFast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addFast.jpg; sourceTree = "<group>"; };
 		4348DC291F9D98B30072D030 /* addAttack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addAttack.jpg; sourceTree = "<group>"; };
@@ -346,6 +352,9 @@
 		432F84CC1F99939A00F51146 /* BGPic */ = {
 			isa = PBXGroup;
 			children = (
+				433F10D41FC3078500DECFBF /* boom.gif */,
+				433F10D21FC3045A00DECFBF /* speed.gif */,
+				433F10D01FC2FFB700DECFBF /* blink.gif */,
 				43365B751FC2788F00356D64 /* launchgifpic.gif */,
 				432F84CD1F9993E600F51146 /* starBG.jpg */,
 			);
@@ -618,6 +627,7 @@
 				43563FA51FB3DB9F00D4BD46 /* RedNormalAttack.png in Resources */,
 				43765FD81FBAE6F5006E37D2 /* boss1Att2_right4.png in Resources */,
 				43656BBD1F9EDFED001EFDA5 /* bigCircle.png in Resources */,
+				433F10D31FC3045A00DECFBF /* speed.gif in Resources */,
 				43765FCA1FBAE53E006E37D2 /* boss1Att2_left1.png in Resources */,
 				435589881FA0753500C80CA8 /* NormalZom.png in Resources */,
 				43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */,
@@ -637,6 +647,7 @@
 				43765FA21FBACF61006E37D2 /* boss1_att2_2.png in Resources */,
 				4360090F1FA9642A006D48ED /* skillFrame.gif in Resources */,
 				432F84BD1F998A5B00F51146 /* Main.storyboard in Resources */,
+				433F10D51FC3078500DECFBF /* boom.gif in Resources */,
 				43765FD51FBAE6F5006E37D2 /* boss1Att2_right1.png in Resources */,
 				43765FCB1FBAE53E006E37D2 /* boss1Att2_left4.png in Resources */,
 				433B050A1FB19CCB006210B2 /* boomAnimation.png in Resources */,
@@ -668,6 +679,7 @@
 				432F84BF1F998A5B00F51146 /* Assets.xcassets in Resources */,
 				4392CE211FA6B7AD00A52D12 /* NormalDied.png in Resources */,
 				43765FCC1FBAE53E006E37D2 /* boss1Att2_left3.png in Resources */,
+				433F10D11FC2FFB700DECFBF /* blink.gif in Resources */,
 				432F84C21F998A5B00F51146 /* LaunchScreen.storyboard in Resources */,
 				4348DC331F9D98B30072D030 /* blink.jpg in Resources */,
 				43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */,

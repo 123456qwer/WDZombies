@@ -21,7 +21,7 @@ class WDSkillBlockView: UIView {
     var initFrame:CGRect = CGRect()
     
     var detailStr:NSString! = nil
-    
+    var gifName:NSString = "blink"
     
     
     var blinkDistance = 200
@@ -29,8 +29,17 @@ class WDSkillBlockView: UIView {
     var blinkCDStr:NSString! = nil
     var blinkDistanceStr:NSString! = nil
     
+    func speedAction() {
+        gifName = "speed"
+    }
+    
+    func boomAction() {
+        gifName = "boom"
+    }
+    
     func blinkAction() {
         
+        gifName = "blink"
         let page:CGFloat = 5
         let width = (self.frame.size.height - page * 3) / 2.0
         let x:CGFloat = self.frame.size.width - page - width
@@ -116,8 +125,10 @@ class WDSkillBlockView: UIView {
             self.blinkAction()
             break
         case .Speed:
+            self.speedAction()
             break
         case .Boom:
+            self.boomAction()
             break
         case .Attack_distance:
             break
@@ -202,7 +213,7 @@ class WDSkillBlockView: UIView {
         detailLabel.textAlignment = .center
         detailLabel.numberOfLines = 0
         detailLabel.font = UIFont.systemFont(ofSize: 25)
-        detailLabel.text = detailStr as! String
+        detailLabel.text = detailStr as String?
         detailLabel.backgroundColor = UIColor.blue
         detailLabel.tag = self.DETAIL_LABEL_TAG
         self.addSubview(detailLabel)
@@ -218,7 +229,7 @@ class WDSkillBlockView: UIView {
          self.addSubview(imageView)
          
          //gif文件路径
-         let path = Bundle.main.path(forResource: "launchgifpic", ofType: "gif")
+        let path = Bundle.main.path(forResource: gifName as String, ofType: "gif")
          //数据
          let source = CGImageSourceCreateWithURL(URL.init(fileURLWithPath: path!) as CFURL, nil)
          //3获取图片个数
@@ -237,7 +248,7 @@ class WDSkillBlockView: UIView {
          }
          
          imageView.animationImages = imageArray as? [UIImage]
-         imageView.animationDuration = 3
+         imageView.animationDuration = 5
          imageView.startAnimating()
  
     }

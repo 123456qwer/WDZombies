@@ -60,7 +60,7 @@ class GameViewController: UIViewController {
             print(skillVC.skillCount)
         }
         
-        /*
+        
         let scroll = self.view.viewWithTag(150)
         scroll?.removeFromSuperview()
         
@@ -75,7 +75,7 @@ class GameViewController: UIViewController {
         button.addTarget(self, action: #selector(selectMapName(button:)), for: .touchUpInside)
         button.tag = 1
         bgScrollView.addSubview(button)
-        */
+        
     }
     
     
