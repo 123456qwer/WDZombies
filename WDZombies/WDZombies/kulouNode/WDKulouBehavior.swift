@@ -15,45 +15,48 @@ class WDKulouBehavior: WDBaseNodeBehavior {
 
     var blood = 0
     
+    @objc func attack(personNode:WDPersonNode)  {
+        if personNode.isBlink == false{
+            let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
+            
+            print(distance)
+            
+            if distance < 95 {
+                personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: personNode)
+            }
+        }
+    }
+    
+    
     override func attackAction(node: WDBaseNode) {
-        
-        let personNode:WDPersonNode = node as! WDPersonNode
         
         kulouNode.removeAction(forKey: "move")
         kulouNode.canMove = false
         kulouNode.isMove  = false
         
         let attackAction = SKAction.animate(with: kulouNode.attackArr as! [SKTexture], timePerFrame: 0.15)
+        self.perform(#selector(self.attack(personNode:)), with: node as! WDPersonNode, afterDelay: 0.15 * 2)
+       
         kulouNode.run(attackAction) {
-            
-            if personNode.isBlink == false{
-                let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
-                
-                print(distance)
-                
-                if distance < 100 {
-                    personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: node)
-                }
-            }
-            
             self.kulouNode.canMove = true
         }
         
     }
     
+    
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
         
         kulouNode.wdBlood -= attackNode.wdAttack
         
-        blood += 1
+        blood += NSInteger(attackNode.wdAttack)
         
         if kulouNode.wdBlood <= 0 {
             self.diedAction()
+            kulouNode.setPhysicsBody(isSet: false)
             return
         }
         
         if blood >= 10 {
-            
             
             WDAnimationTool.bloodAnimation(node: self.kulouNode)
             kulouNode.removeAllActions()
@@ -65,6 +68,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         }
    
     }
+    
     
     @objc func canMove()  {
         kulouNode.canMove = true

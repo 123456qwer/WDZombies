@@ -21,7 +21,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     func createKulou()  {
         
         let kulouNode = WDKulouNode.init()
-        kulouNode.size = CGSize(width:110 ,height:130 )
+        kulouNode.size = CGSize(width:110 ,height:130)
         kulouNode.initWithPersonNode(personNode: personNode)
         bgNode.addChild(kulouNode)
         
@@ -70,9 +70,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
      
         //50只僵尸
         self.zomCount += 1
-        if self.zomCount == 1 {
+        if self.zomCount == 20 {
             timer.invalidate()
         }
+        
+
         
         var arr:NSMutableArray! = nil
         var type:zomType = .Normal
@@ -140,6 +142,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             self.createKulou()
+            self.createKulou()
+
             //self.createBoss1()
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
@@ -304,6 +308,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         if kulouNode != nil && fireNode != nil {
             kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
             fireNode?.removeFromParent()
+
+        }
+        
+        if kulouNode != nil && boomNode != nil {
+            personNode.wdAttack += 5
+            kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: personNode)
+            personNode.wdAttack -= 5
 
         }
         

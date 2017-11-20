@@ -49,7 +49,7 @@ class WDKulouNode: WDBaseNode {
         
         self.name = "KULOU"
         
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:90,height:90))
+        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:80,height:80))
         physicsBody.affectedByGravity = false;
         physicsBody.allowsRotation = false;
         
@@ -62,8 +62,20 @@ class WDKulouNode: WDBaseNode {
         self.direction = kLeft
         self.wdFire_impact = 100
         self.texture = moveArr.object(at: 0) as? SKTexture
-        
+        self.position = CGPoint(x:600,y:600)
         self.wdBlood = 100
     }
     
+    func setPhysicsBody(isSet:Bool) -> Void {
+ 
+        if isSet {
+            self.physicsBody?.categoryBitMask = normal_zom
+            self.physicsBody?.contactTestBitMask = player_type
+            self.physicsBody?.collisionBitMask = normal_zom
+        }else{
+            self.physicsBody?.categoryBitMask = 0
+            self.physicsBody?.contactTestBitMask = 0
+            self.physicsBody?.collisionBitMask = 0
+        }
+    }
 }
