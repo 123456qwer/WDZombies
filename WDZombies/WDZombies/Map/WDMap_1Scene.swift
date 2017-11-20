@@ -18,6 +18,28 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var a = 0
     
     
+    func createKulou()  {
+        
+        let kulouNode = WDKulouNode.init()
+        kulouNode.size = CGSize(width:110 ,height:130 )
+        kulouNode.initWithPersonNode(personNode: personNode)
+        bgNode.addChild(kulouNode)
+        
+        let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.kulouMove(link:)))
+        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+        objc_setAssociatedObject(link, self.zomLink, kulouNode, objc_AssociationPolicy(rawValue: 01401)!)
+    }
+    
+    @objc func kulouMove(link:CADisplayLink) {
+        let kulou:WDKulouNode = objc_getAssociatedObject(link, self.zomLink) as! WDKulouNode
+        if kulou.wdBlood <= 0 {
+            link.invalidate()
+        }
+        
+        let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: personNode.position)
+        kulou.behavior.moveActionForKulou(direction: direction, personNode: personNode)
+    }
+    
     func createBoss1() -> Void {
         
         let arr:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "BOSS1_move")!, line: 2, arrange: 5, size: CGSize(width:183,height:174))
@@ -117,8 +139,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             let link = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
-            
-            self.createBoss1()
+            self.createKulou()
+            //self.createBoss1()
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -202,7 +224,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         var boomNode:SKSpriteNode?
         var magicNode:SKEmitterNode?
         var boss1Node:WDBossNode_1?
+        var kulouNode:WDKulouNode?
 
+        kulouNode = (A?.name?.isEqual(KULOU))! ? (A as? WDKulouNode):nil;
+        if kulouNode == nil {
+            kulouNode = (B?.name?.isEqual(KULOU))! ? (B as? WDKulouNode):nil;
+        }
       
         boss1Node = (A?.name?.isEqual(BOSS1))! ? (A as? WDBossNode_1):nil;
         if boss1Node == nil {
@@ -250,7 +277,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomNode?.zombieBehavior.stopMoveAction(direction: direction)
             zomNode?.zombieBehavior.attackAction(node: pNode!)
             
-            
         }
         
         
@@ -274,6 +300,25 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             fireNode?.removeFromParent()
             zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
         }
+        
+        if kulouNode != nil && fireNode != nil {
+            kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
+            fireNode?.removeFromParent()
+
+        }
+        
+        if kulouNode != nil && boomNode != nil {
+            
+            personNode.wdAttack += 5
+            kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
+            fireNode?.removeFromParent()
+            personNode.wdAttack -= 5
+        }
+        
+        if kulouNode != nil && pNode != nil {
+            kulouNode?.behavior.attackAction(node: personNode)
+        }
+        
     }
     
     

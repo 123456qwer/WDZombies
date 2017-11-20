@@ -113,6 +113,9 @@
 		4392CE241FA6BC0200A52D12 /* fireAc.png in Resources */ = {isa = PBXBuildFile; fileRef = 4392CE231FA6BC0200A52D12 /* fireAc.png */; };
 		43E974D71FA978760065F6FF /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 43E974D51FA978760065F6FF /* Fire.sks */; };
 		43E974D81FA978760065F6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43E974D61FA978760065F6FF /* Assets.xcassets */; };
+		43E9B9641FBECE6500A2DBF3 /* kulouPic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43E9B9631FBECE6500A2DBF3 /* kulouPic.atlas */; };
+		43E9B9661FBECEE700A2DBF3 /* WDKulouNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9B9651FBECEE700A2DBF3 /* WDKulouNode.swift */; };
+		43E9B9681FBED25F00A2DBF3 /* WDKulouBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9B9671FBED25F00A2DBF3 /* WDKulouBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -224,6 +227,9 @@
 		4392CE231FA6BC0200A52D12 /* fireAc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireAc.png; sourceTree = "<group>"; };
 		43E974D51FA978760065F6FF /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 		43E974D61FA978760065F6FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		43E9B9631FBECE6500A2DBF3 /* kulouPic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = kulouPic.atlas; sourceTree = "<group>"; };
+		43E9B9651FBECEE700A2DBF3 /* WDKulouNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouNode.swift; sourceTree = "<group>"; };
+		43E9B9671FBED25F00A2DBF3 /* WDKulouBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +277,7 @@
 		432F84B01F998A5B00F51146 /* WDZombies */ = {
 			isa = PBXGroup;
 			children = (
+				43E9B9611FBECE2600A2DBF3 /* kulouNode */,
 				434B4C451FB98E53000A6566 /* BossNode */,
 				435589811FA06FF300C80CA8 /* ZombiesNode */,
 				4376D1B71F9F2829004E6188 /* PersonNode */,
@@ -519,6 +526,16 @@
 			path = FirePic;
 			sourceTree = "<group>";
 		};
+		43E9B9611FBECE2600A2DBF3 /* kulouNode */ = {
+			isa = PBXGroup;
+			children = (
+				43E9B9631FBECE6500A2DBF3 /* kulouPic.atlas */,
+				43E9B9651FBECEE700A2DBF3 /* WDKulouNode.swift */,
+				43E9B9671FBED25F00A2DBF3 /* WDKulouBehavior.swift */,
+			);
+			path = kulouNode;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -552,7 +569,7 @@
 				TargetAttributes = {
 					432F84AD1F998A5B00F51146 = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -628,6 +645,7 @@
 				43765FA01FBACF61006E37D2 /* boss1_att2_6.png in Resources */,
 				43765FAA1FBAD65D006E37D2 /* boss1_att2_star1.png in Resources */,
 				4367991D1FB05A1000454274 /* Spark.sks in Resources */,
+				43E9B9641FBECE6500A2DBF3 /* kulouPic.atlas in Resources */,
 				4392CE241FA6BC0200A52D12 /* fireAc.png in Resources */,
 				4307E36F1FA1DF0D00E1AD38 /* blood8.png in Resources */,
 				4307E36C1FA1DF0C00E1AD38 /* blood7.png in Resources */,
@@ -685,6 +703,8 @@
 				4376D1C11F9F28FD004E6188 /* WDPersonBehavior.swift in Sources */,
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
+				43E9B9681FBED25F00A2DBF3 /* WDKulouBehavior.swift in Sources */,
+				43E9B9661FBECEE700A2DBF3 /* WDKulouNode.swift in Sources */,
 				434B4C491FB98F40000A6566 /* WDBossBehavior_1.swift in Sources */,
 				434B4C471FB98E77000A6566 /* WDBossNode_1.swift in Sources */,
 				433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */,
@@ -831,15 +851,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66J6Z6X3YP;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 9728B43SWE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WDZombies/WDPCH.pch;
 				INFOPLIST_FILE = WDZombies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "496011b0-3378-4cff-9d46-662c74decce7";
+				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -849,15 +872,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66J6Z6X3YP;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 9728B43SWE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WDZombies/WDPCH.pch;
 				INFOPLIST_FILE = WDZombies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "496011b0-3378-4cff-9d46-662c74decce7";
+				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
