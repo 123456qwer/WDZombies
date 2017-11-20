@@ -73,6 +73,12 @@ class WDKulouNode: WDBaseNode {
         physicsBody.collisionBitMask = normal_zom;
         physicsBody.isDynamic = true;
         
+        let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
+        let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
+        
+        self.position = CGPoint(x:x, y:y);
+        self.zPosition = 3 * 667 - y;
+        
         self.physicsBody = physicsBody
         self.direction = kLeft
         self.wdFire_impact = 100

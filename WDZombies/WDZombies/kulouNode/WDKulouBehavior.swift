@@ -15,27 +15,30 @@ class WDKulouBehavior: WDBaseNodeBehavior {
 
     var blood = 0
     
+    @objc func hitTheTarget(personNode:WDPersonNode)  {
+        if personNode.isBlink == false{
+            let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
+            
+            let dis = personNode.size.width / 2.0 + kulouNode.size.width / 2.0
+            print(dis,distance)
+            
+            if distance < dis {
+                personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: personNode)
+            }
+        }
+    }
+    
     override func attackAction(node: WDBaseNode) {
         
-        let personNode:WDPersonNode = node as! WDPersonNode
         
         kulouNode.removeAction(forKey: "move")
         kulouNode.canMove = false
         kulouNode.isMove  = false
         
         let attackAction = SKAction.animate(with: kulouNode.attackArr as! [SKTexture], timePerFrame: 0.15)
+        self.perform(#selector(hitTheTarget(personNode:)), with: node, afterDelay: 0.25)
         kulouNode.run(attackAction) {
-            
-            if personNode.isBlink == false{
-                let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
-                
-                print(distance)
-                
-                if distance < 100 {
-                    personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: node)
-                }
-            }
-            
+        
             self.kulouNode.canMove = true
         }
         

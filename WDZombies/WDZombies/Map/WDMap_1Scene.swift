@@ -311,7 +311,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             
             personNode.wdAttack += 5
             kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
-            fireNode?.removeFromParent()
             personNode.wdAttack -= 5
         }
         
