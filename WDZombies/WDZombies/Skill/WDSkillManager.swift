@@ -98,7 +98,7 @@ class WDSkillManager: NSObject {
     
     //炸弹技能
     func boomAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
-         let pasDic:NSDictionary = self.createLabelWithNumber(str: "1", skillView: skillView, node: node, color: UIColor.blue)
+         let pasDic:NSDictionary = self.createLabelWithNumber(str: "30", skillView: skillView, node: node, color: UIColor.blue)
          let imageView:UIImageView = pasDic.object(forKey: "imageView") as! UIImageView
          imageView.removeFromSuperview()
         WDAnimationTool.boomAnimation(node:node)
@@ -122,11 +122,11 @@ class WDSkillManager: NSObject {
     func addSpeedAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
         
         
-        let pasDic:NSDictionary = self.createLabelWithNumber(str: "30", skillView: skillView, node: node ,color: UIColor.blue)
+        let pasDic:NSDictionary = self.createLabelWithNumber(str: "50", skillView: skillView, node: node ,color: UIColor.blue)
       
         node.wdSpeed += 2
    
-        self.perform(#selector(speedReduce(dic:)), with: pasDic, afterDelay: 5)
+        self.perform(#selector(speedReduce(dic:)), with: pasDic, afterDelay: 2)
         let emitter:SKEmitterNode = WDAnimationTool.createEmitterNode(name:"Fire")
         emitter.name = "addSpeed"
         emitter.position = node.position

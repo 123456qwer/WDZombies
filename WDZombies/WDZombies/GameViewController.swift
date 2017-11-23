@@ -55,10 +55,10 @@ class GameViewController: UIViewController {
     //地图选择
     @objc func selectMap() -> Void {
        
-        let skillVC = WDSkillViewController.init()
-        self.present(skillVC, animated: true) {
-            print(skillVC.skillCount)
-        }
+//        let skillVC = WDSkillViewController.init()
+//        self.present(skillVC, animated: true) {
+//            print(skillVC.skillCount)
+//        }
         
         
         let scroll = self.view.viewWithTag(150)
