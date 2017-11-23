@@ -11,82 +11,131 @@ import UIKit
 class WDSkillBlockView: UIView {
 
     let IMAGETAG = 100
-    let REDUCE_TIME_TAG  = 200
-    let INCREASE_DISTANCE_TAG = 300
     let DETAIL_LABEL_TAG = 400
+    
+    let BTN_1_TAG = 200
+    let BTN_2_TAG = 300
     
     var skillType:personSkillType = .NoSelect
     var initiativeCount = 0
     var detailBtn:UIButton! = nil
     var initFrame:CGRect = CGRect()
     
-    var detailStr:NSString! = nil
+    var detailStr:NSString = ""
     var gifName:NSString = "blink"
     
     
+    //blink
     var blinkDistance = 200
     var blinkCD = 30
-    var blinkCDStr:NSString! = nil
-    var blinkDistanceStr:NSString! = nil
+    var blinkCDStr:NSString = ""
+    var blinkDistanceStr:NSString = ""
     
-    func speedAction() {
-        gifName = "speed"
-    }
     
-    func boomAction() {
-        gifName = "boom"
-    }
+    //speed
+    var speedCD = 50
+    var speedHoldTime = 2
+    var speedCDStr:NSString = ""
+    var speedHoldTimeStr:NSString = ""
     
-    func blinkAction() {
-        
-        gifName = "blink"
+    
+    var label_1:UILabel! = nil
+    var label_2:UILabel! = nil
+    
+    var skill_btn_1:UIButton! = nil
+    var skill_btn_2:UIButton! = nil
+    
+    
+    func createLabelAndSmallBtn() {
         let page:CGFloat = 5
         let width = (self.frame.size.height - page * 3) / 2.0
         let x:CGFloat = self.frame.size.width - page - width
-
-        let passiveCD = UIButton.init(frame: CGRect(x:x,y:page ,width:width,height:width))
-        passiveCD.backgroundColor = UIColor.blue
-        passiveCD.tag = REDUCE_TIME_TAG
-        passiveCD.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
-        self.addSubview(passiveCD)
+        
+        skill_btn_1 = UIButton.init(frame: CGRect(x:x,y:page ,width:width,height:width))
+        skill_btn_1.backgroundColor = UIColor.blue
+        self.addSubview(skill_btn_1)
         
         let label_x = WDTool.right(View: detailBtn)
         let labelWidth = self.frame.size.width - width - label_x - 5 * 3
         
         
-        let cdLabel = UILabel.init(frame: CGRect(x:WDTool.right(View: detailBtn) + 5,y:5,width:labelWidth,height:width))
-        cdLabel.textAlignment = .center
-        cdLabel.numberOfLines = 0
-        cdLabel.font = UIFont.systemFont(ofSize: 13)
-        cdLabel.backgroundColor = UIColor.blue
-        cdLabel.tag = REDUCE_TIME_TAG + 1
-        cdLabel.text = "0/5\nReduce Waiting Time 5S"
-        self.addSubview(cdLabel)
-      
-        
-        let passiveDis = UIButton.init(frame: CGRect(x:x,y:WDTool.bottom(View: passiveCD) + page ,width:width,height:width))
-        passiveDis.backgroundColor = UIColor.blue
-        passiveDis.tag = INCREASE_DISTANCE_TAG
-        passiveDis.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
-        self.addSubview(passiveDis)
+        label_1 = UILabel.init(frame: CGRect(x:WDTool.right(View: detailBtn) + 5,y:5,width:labelWidth,height:width))
+        label_1.textAlignment = .center
+        label_1.numberOfLines = 0
+        label_1.font = UIFont.systemFont(ofSize: 13)
+        label_1.backgroundColor = UIColor.blue
+        self.addSubview(label_1)
         
         
-        let distanceLabel = UILabel.init(frame: CGRect(x:WDTool.right(View: detailBtn) + 5,y:WDTool.bottom(View: cdLabel) + 5,width:labelWidth,height:width))
-        distanceLabel.textAlignment = .center
-        distanceLabel.numberOfLines = 0
-        distanceLabel.font = UIFont.systemFont(ofSize: 13)
-        distanceLabel.backgroundColor = UIColor.blue
-        distanceLabel.tag = INCREASE_DISTANCE_TAG + 1
-        distanceLabel.text = "0/5\nIncrease Distance 20"
-        self.addSubview(distanceLabel)
-        
-        WDTool.masksToCircle(View: passiveCD)
-        WDTool.masksToCircle(View: passiveDis)
+        skill_btn_2 = UIButton.init(frame: CGRect(x:x,y:WDTool.bottom(View: skill_btn_1) + page ,width:width,height:width))
+        skill_btn_2.backgroundColor = UIColor.blue
+        self.addSubview(skill_btn_2)
         
         
-        detailStr = "Waiting Time:  \(self.blinkCD)S \n Blink Distance: \(self.blinkDistance)" as NSString
+        label_2 = UILabel.init(frame: CGRect(x:WDTool.right(View: detailBtn) + 5,y:WDTool.bottom(View: label_1) + 5,width:labelWidth,height:width))
+        label_2.textAlignment = .center
+        label_2.numberOfLines = 0
+        label_2.font = UIFont.systemFont(ofSize: 13)
+        label_2.backgroundColor = UIColor.blue
+        self.addSubview(label_2)
+        
+        WDTool.masksToCircle(View: skill_btn_1)
+        WDTool.masksToCircle(View: skill_btn_2)
+        
+        skill_btn_1.tag = BTN_1_TAG
+        skill_btn_2.tag = BTN_2_TAG
+    }
+  
+    func boomAction() {
+        gifName = "boom"
+        self.createLabelAndSmallBtn()
+        
+        
+    }
+    
+    func speedAction() {
+        
+        self.createLabelAndSmallBtn()
+
+        gifName = "speed"
+        
+        self.speedCD = 50
+        self.speedHoldTime = 2
+        
+        detailStr = "Waiting Time: \(self.speedCD)S \n Hold Time: \(self.speedHoldTime)S" as NSString
+        speedCDStr = "0/5\nReduce Waiting Time 5S" as NSString
+        speedHoldTimeStr = "0/5\nIncrease Hold Time 1" as NSString
+        
+        label_1.text = speedCDStr as String
+        label_2.text = speedHoldTimeStr as String
+        
+        skill_btn_1.addTarget(self, action: #selector(speedAction(sender:)), for: .touchUpInside)
+        skill_btn_2.addTarget(self, action: #selector(speedAction(sender:)), for: .touchUpInside)
+    }
+    
+    func blinkAction() {
+        
+        self.createLabelAndSmallBtn()
+
+        gifName = "blink"
+       
+        self.blinkCD = 30
+        self.blinkDistance = 200
+        
+     
+        detailStr = "Waiting Time: \(self.blinkCD)S \n Blink Distance: \(self.blinkDistance)" as NSString
         blinkCDStr = "0/5\nReduce Waiting Time 5S"
         blinkDistanceStr = "0/5\nIncrease Distance 20"
+        
+        
+        label_1.text = blinkCDStr as String
+        label_2.text = blinkDistanceStr as String
+        
+        
+        skill_btn_1.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
+        skill_btn_2.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
+        
+        
     }
     
     
@@ -144,32 +193,93 @@ class WDSkillBlockView: UIView {
     
   
     
-    @objc func blinkAction(sender:UIButton) {
+    /// 加速技能
+    ///
+    /// - Parameter sender:
+    @objc func speedAction(sender:UIButton) {
         
-        let dic:NSDictionary = ["30":"0/5\nReduce Waiting Time 5S","25":"1/5\nReduce Waiting Time 5S","20":"0/5\nReduce Waiting Time 5S","15":"0/5\nReduce Waiting Time 5S","10":"0/5\nReduce Waiting Time 5S","5":"0/5\nReduce Waiting Time 5S"]
-        
-        if sender.tag == REDUCE_TIME_TAG {
+        if sender.tag == BTN_1_TAG {
             
-            self.blinkCD -= 5
-
-            if self.blinkCD < 5{
-                return
+            
+            self.speedCD -= 5
+            
+            if self.speedCD <= 25{
+                self.speedCD = 25
             }
             
+            let dic:NSDictionary = ["50":"0/5\nReduce Waiting Time 5S","45":"1/5\nReduce Waiting Time 5S","40":"2/5\nReduce Waiting Time 5S","35":"3/5\nReduce Waiting Time 5S","30":"4/5\nReduce Waiting Time 5S","25":"5/5\nReduce Waiting Time 5S"]
+            speedCDStr = dic.object(forKey: "\(self.speedCD)") as! NSString
+            label_1.text = speedCDStr as String
             
-        }else if(sender.tag == INCREASE_DISTANCE_TAG){
             
-            self.blinkDistance += 20
-
-            if self.blinkDistance > 300 {
-                return
+        }else{
+            
+            
+            self.speedHoldTime += 1
+            if self.speedHoldTime >= 7 {
+                self.speedHoldTime = 7
             }
+            
+            let dic:NSDictionary = ["2":"0/5\nIncrease Hold Time 1","3":"1/5\nIncrease Hold Time 1","4":"2/5\nIncrease Hold Time 1","5":"3/5\nIncrease Hold Time 1","6":"4/5\nIncrease Hold Time 1","7":"5/5\nIncrease Hold Time 1"]
+            speedHoldTimeStr = dic.object(forKey: "\(self.speedHoldTime)") as! NSString
+            label_2.text = speedHoldTimeStr as String
+            
+        }
+        
+        detailStr = "Waiting Time: \(self.speedCD)S \n Hold Time: \(self.speedHoldTime)S" as NSString
+        
+        if self.viewWithTag(DETAIL_LABEL_TAG) != nil{
+            let detailLabel = self.viewWithTag(DETAIL_LABEL_TAG) as! UILabel
+            detailLabel.text = detailStr as String
         }
         
         
-        blinkCDStr = dic.object(forKey: "\(self.blinkCD)") as! NSString
-        detailStr = "Waiting Time:  \(self.blinkCD)S \n Blink Distance: \(self.blinkDistance)" as NSString
         
+    }
+    
+    
+    /// 闪烁技能
+    ///
+    /// - Parameter sender:
+    @objc func blinkAction(sender:UIButton) {
+        
+        
+        
+        if sender.tag == BTN_1_TAG {
+            
+        
+            self.blinkCD -= 5
+            
+            if self.blinkCD <= 5{
+                self.blinkCD = 5
+            }
+            
+            let dic:NSDictionary = ["30":"0/5\nReduce Waiting Time 5S","25":"1/5\nReduce Waiting Time 5S","20":"2/5\nReduce Waiting Time 5S","15":"3/5\nReduce Waiting Time 5S","10":"4/5\nReduce Waiting Time 5S","5":"5/5\nReduce Waiting Time 5S"]
+            blinkCDStr = dic.object(forKey: "\(self.blinkCD)") as! NSString
+            label_1.text = blinkCDStr as String
+            
+
+        }else{
+            
+            
+            self.blinkDistance += 20
+            if self.blinkDistance >= 300 {
+                self.blinkDistance = 300
+            }
+            
+            let dic:NSDictionary = ["200":"0/5\nIncrease Distance 20","220":"1/5\nIncrease Distance 20","240":"2/5\nIncrease Distance 20","260":"3/5\nIncrease Distance 20","280":"4/5\nIncrease Distance 20","300":"5/5\nIncrease Distance 20"]
+            blinkDistanceStr = dic.object(forKey: "\(self.blinkDistance)") as! NSString
+            label_2.text = blinkDistanceStr as String
+
+        }
+        
+        
+        
+        detailStr = "Waiting Time:  \(self.blinkCD)S \n Blink Distance: \(self.blinkDistance)" as NSString
+        if self.viewWithTag(DETAIL_LABEL_TAG) != nil{
+            let detailLabel = self.viewWithTag(DETAIL_LABEL_TAG) as! UILabel
+            detailLabel.text = detailStr as String
+        }
     }
     
     
