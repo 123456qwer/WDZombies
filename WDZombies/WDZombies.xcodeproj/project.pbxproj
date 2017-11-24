@@ -60,6 +60,9 @@
 		43563FA31FB3DB5800D4BD46 /* RedNormalDied.png in Resources */ = {isa = PBXBuildFile; fileRef = 43563F9F1FB3DB5800D4BD46 /* RedNormalDied.png */; };
 		43563FA51FB3DB9F00D4BD46 /* RedNormalAttack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43563FA41FB3DB9F00D4BD46 /* RedNormalAttack.png */; };
 		43563FA71FB3DDAE00D4BD46 /* RedNormalZom.png in Resources */ = {isa = PBXBuildFile; fileRef = 43563FA61FB3DDAE00D4BD46 /* RedNormalZom.png */; };
+		4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359835C1FC7A2D400894AAD /* WDDataManager.swift */; };
+		435983621FC7A52900894AAD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 435983611FC7A52200894AAD /* libsqlite3.tbd */; };
+		435983641FC7A77700894AAD /* WDSkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435983631FC7A77700894AAD /* WDSkillModel.swift */; };
 		4360090F1FA9642A006D48ED /* skillFrame.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4360090E1FA9642A006D48ED /* skillFrame.gif */; };
 		43625F811FA1C62B00910ED0 /* NormalAttack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43625F801FA1C62B00910ED0 /* NormalAttack.png */; };
 		43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43625F821FA1C7FB00910ED0 /* WDAnimationTool.swift */; };
@@ -180,6 +183,10 @@
 		43563F9F1FB3DB5800D4BD46 /* RedNormalDied.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedNormalDied.png; sourceTree = "<group>"; };
 		43563FA41FB3DB9F00D4BD46 /* RedNormalAttack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedNormalAttack.png; sourceTree = "<group>"; };
 		43563FA61FB3DDAE00D4BD46 /* RedNormalZom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedNormalZom.png; sourceTree = "<group>"; };
+		4359835C1FC7A2D400894AAD /* WDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDataManager.swift; sourceTree = "<group>"; };
+		4359835F1FC7A49500894AAD /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		435983611FC7A52200894AAD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		435983631FC7A77700894AAD /* WDSkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillModel.swift; sourceTree = "<group>"; };
 		4360090E1FA9642A006D48ED /* skillFrame.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = skillFrame.gif; sourceTree = "<group>"; };
 		43625F801FA1C62B00910ED0 /* NormalAttack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NormalAttack.png; sourceTree = "<group>"; };
 		43625F821FA1C7FB00910ED0 /* WDAnimationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDAnimationTool.swift; sourceTree = "<group>"; };
@@ -249,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				435983621FC7A52900894AAD /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +283,7 @@
 			children = (
 				432F84B01F998A5B00F51146 /* WDZombies */,
 				432F84AF1F998A5B00F51146 /* Products */,
+				4359835E1FC7A49500894AAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -289,6 +298,7 @@
 		432F84B01F998A5B00F51146 /* WDZombies */ = {
 			isa = PBXGroup;
 			children = (
+				4359835B1FC7A2BF00894AAD /* WDData */,
 				43E9B9611FBECE2600A2DBF3 /* kulouNode */,
 				434B4C451FB98E53000A6566 /* BossNode */,
 				435589811FA06FF300C80CA8 /* ZombiesNode */,
@@ -493,6 +503,24 @@
 				435589871FA0753500C80CA8 /* NormalZom.png */,
 			);
 			path = ZombiesPic;
+			sourceTree = "<group>";
+		};
+		4359835B1FC7A2BF00894AAD /* WDData */ = {
+			isa = PBXGroup;
+			children = (
+				4359835C1FC7A2D400894AAD /* WDDataManager.swift */,
+				435983631FC7A77700894AAD /* WDSkillModel.swift */,
+			);
+			path = WDData;
+			sourceTree = "<group>";
+		};
+		4359835E1FC7A49500894AAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				435983611FC7A52200894AAD /* libsqlite3.tbd */,
+				4359835F1FC7A49500894AAD /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		43656BB71F9EDD61001EFDA5 /* Base */ = {
@@ -722,9 +750,11 @@
 				43656BC21F9F1EBA001EFDA5 /* WDMap_1Scene.swift in Sources */,
 				43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */,
 				432F84D11F9999E800F51146 /* WDSkillAndFireView.swift in Sources */,
+				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
 				4376D1C11F9F28FD004E6188 /* WDPersonBehavior.swift in Sources */,
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
+				435983641FC7A77700894AAD /* WDSkillModel.swift in Sources */,
 				43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */,
 				43E9B9681FBED25F00A2DBF3 /* WDKulouBehavior.swift in Sources */,
 				43E9B9661FBECEE700A2DBF3 /* WDKulouNode.swift in Sources */,

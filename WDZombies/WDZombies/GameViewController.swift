@@ -21,6 +21,24 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
    
+        let skillModel = WDSkillModel.init()
+        skillModel.skillName = "Blink"
+        skillModel.haveLearn = 0
+        skillModel.skillLevel1 = 0
+        skillModel.skillLevel2 = 0
+        skillModel.skillLevel1Str = "123"
+        skillModel.skillLevel2Str = "123"
+        skillModel.skillDetailStr = "456"
+        
+        if WDDataManager.shareInstance().openDB(){
+            skillModel.insertSelfToDB()
+        }
+        
+        let skillModel1 = WDSkillModel.init()
+        skillModel1.skillName = "Blink"
+        
+        skillModel1.searchToDB()
+        
         //测试github
         //测试成功，可以开始搞了
         mapName = "WDMap_1Scene"
@@ -55,12 +73,12 @@ class GameViewController: UIViewController {
     //地图选择
     @objc func selectMap() -> Void {
        
-//        let skillVC = WDSkillViewController.init()
-//        self.present(skillVC, animated: true) {
-//            print(skillVC.skillCount)
-//        }
+        let skillVC = WDSkillViewController.init()
+        self.present(skillVC, animated: true) {
+            print(skillVC.skillCount)
+        }
         
-        
+        /*
         let scroll = self.view.viewWithTag(150)
         scroll?.removeFromSuperview()
         
@@ -75,7 +93,7 @@ class GameViewController: UIViewController {
         button.addTarget(self, action: #selector(selectMapName(button:)), for: .touchUpInside)
         button.tag = 1
         bgScrollView.addSubview(button)
-        
+        */
     }
     
     
