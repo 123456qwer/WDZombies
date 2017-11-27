@@ -21,6 +21,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
    
+        print(kScreenWidth,kScreenHeight)
+        
         let defaults:UserDefaults = UserDefaults.standard
         
         
@@ -199,6 +201,7 @@ class GameViewController: UIViewController {
     
     //开始游戏
     @objc func starGame() -> Void {
+        
         
         //技能按钮界面位置改变
         skillAndFireView.setConfirmFrame()
