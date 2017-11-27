@@ -56,23 +56,12 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     }
     
     
-    
-    /// 人物受到伤害
-    ///
-    /// - Parameters:
-    ///   - attackNode:
-    ///   - beAttackNode:
-    override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
-       
-        personNode.wdBlood -= attackNode.wdAttack
-        
+    func reduceBlood(number:CGFloat)  {
+        personNode.wdBlood -= number
         if personNode.wdBlood <= 0 {
             personNode.ggAction()
             return
         }
-        
-        WDAnimationTool.bloodAnimation(node:personNode)
-        WDAnimationTool.beAttackAnimationForPerson(attackNode: attackNode, beAttackNode: beAttackNode as! WDPersonNode)
         
         let percentage:CGFloat = personNode.wdBlood / personNode.wdAllBlood
         let width:CGFloat = personNode.size.width * percentage
@@ -89,21 +78,30 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             bloodColor = UIColor.init(red: 115 / 255.0, green: 21 / 255.0, blue: 26 / 255.0, alpha: 1)
         }
         
-       
         if #available(iOS 10.0, *) {
             let colorAction = SKAction.colorize(with: bloodColor, colorBlendFactor: 1, duration: 0.1)
             var widthAction:SKAction? = nil
             widthAction = SKAction.scale(to: CGSize(width:width,height:5), duration: 0.1)
             let group = SKAction.group([colorAction,widthAction!])
-            
             personNode.bloodNode.run(group)
         } else {
             personNode.bloodNode.size = CGSize(width:width,height:5)
             personNode.color = bloodColor
         }
+    }
+    
+    
+    /// 人物受到伤害
+    ///
+    /// - Parameters:
+    ///   - attackNode:
+    ///   - beAttackNode:
+    override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
+       
+        self.reduceBlood(number: attackNode.wdAttack)
         
-        
- 
+        WDAnimationTool.bloodAnimation(node:personNode)
+        WDAnimationTool.beAttackAnimationForPerson(attackNode: attackNode, beAttackNode: beAttackNode as! WDPersonNode)
     }
     
 

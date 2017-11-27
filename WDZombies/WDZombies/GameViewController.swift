@@ -21,24 +21,27 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
    
-        let skillModel = WDSkillModel.init()
-        skillModel.skillName = "Blink"
-        skillModel.haveLearn = 0
-        skillModel.skillLevel1 = 0
-        skillModel.skillLevel2 = 0
-        skillModel.skillLevel1Str = "123"
-        skillModel.skillLevel2Str = "123"
-        skillModel.skillDetailStr = "456"
+        let defaults:UserDefaults = UserDefaults.standard
         
-        if WDDataManager.shareInstance().openDB(){
-            skillModel.insertSelfToDB()
+        
+        if defaults.object(forKey: "NewFile") as? NSInteger == 1{
+            print("已经有数据了!")
+
+        }else{
+            
+            print("首次进入!")
+            
+            if WDDataManager.shareInstance().openDB(){
+                if WDDataManager.shareInstance().removeAllData(){
+                    WDDataManager.initData()
+                    defaults.set(1, forKey: "NewFile")
+                }
+            }
+        
+        WDDataManager.shareInstance().closeDB()
+
         }
-        
-        let skillModel1 = WDSkillModel.init()
-        skillModel1.skillName = "Blink"
-        
-        skillModel1.searchToDB()
-        
+     
         //测试github
         //测试成功，可以开始搞了
         mapName = "WDMap_1Scene"
@@ -54,6 +57,8 @@ class GameViewController: UIViewController {
     
     //开始菜单
     func createBg() -> Void {
+      
+        
         let bgImageView = UIImageView(image:UIImage(named:"starBG.jpg"))
         let rect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:kScreenWidth,height:kScreenHeight))
         bgImageView.frame = rect
@@ -62,23 +67,40 @@ class GameViewController: UIViewController {
         self.view.addSubview(bgImageView)
         
         
+        //开始游戏选择技能
         let selectMapBtn:UIButton = UIButton(type:.custom)
-        selectMapBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:kScreenHeight / 2.0 - 80 / 2.0,width:120,height:80)
+        selectMapBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:kScreenHeight / 3.0 - 80 / 2.0,width:120,height:80)
         selectMapBtn.addTarget(self, action: #selector(selectMap), for:.touchUpInside)
         selectMapBtn.setImage(UIImage(named:"starGame.png"), for: .normal)
         //starBtn.backgroundColor = UIColor.green
         bgImageView.addSubview(selectMapBtn)
+        
+        
+        
+        //学习技能
+        let learnSkillBtn:UIButton = UIButton(type:.custom)
+        learnSkillBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:WDTool.bottom(View: selectMapBtn) + 10,width:120,height:80)
+        learnSkillBtn.addTarget(self, action: #selector(learnSkill), for: .touchUpInside)
+        learnSkillBtn.backgroundColor = UIColor.green
+        learnSkillBtn.setTitle("LearnSkill", for: .normal)
+        bgImageView.addSubview(learnSkillBtn)
+        
+    }
+    
+    
+    //技能选择
+    @objc func learnSkill() {
+    
+        let skillVC = WDSkillViewController.init()
+        self.present(skillVC, animated: true) {
+            print(skillVC.skillCount)
+        }
+    
     }
     
     //地图选择
     @objc func selectMap() -> Void {
        
-        let skillVC = WDSkillViewController.init()
-        self.present(skillVC, animated: true) {
-            print(skillVC.skillCount)
-        }
-        
-        /*
         let scroll = self.view.viewWithTag(150)
         scroll?.removeFromSuperview()
         
@@ -93,7 +115,7 @@ class GameViewController: UIViewController {
         button.addTarget(self, action: #selector(selectMapName(button:)), for: .touchUpInside)
         button.tag = 1
         bgScrollView.addSubview(button)
-        */
+        
     }
     
     
@@ -141,7 +163,6 @@ class GameViewController: UIViewController {
         skillAndFireView.isHidden = false
 
         
-        
         //开始游戏按妞
         let starBtn:UIButton = UIButton(type:.custom)
         starBtn.frame = CGRect(x:kScreenWidth - 120 / 2.0  - 20,y:10,width:60,height:40)
@@ -149,21 +170,12 @@ class GameViewController: UIViewController {
         starBtn.setImage(UIImage(named:"starGame.png"), for: .normal)
         //starBtn.backgroundColor = UIColor.green
         starBtn.tag = 500
-        starBtn.alpha = 0.2
-        starBtn.isUserInteractionEnabled = false
+        starBtn.alpha = 1
         self.view.addSubview(starBtn)
         
         
         skillSelectView.selectAction = {(Bool:Bool,skillType:personSkillType,skillCount:NSInteger) ->Void in
-          
-            if skillCount == 4 {
-                starBtn.isUserInteractionEnabled = true
-                starBtn.alpha = 1
-            }else{
-                starBtn.isUserInteractionEnabled = false
-                starBtn.alpha = 0.2
-            }
-            
+        
             self.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
         }
         
@@ -190,7 +202,8 @@ class GameViewController: UIViewController {
         
         //技能按钮界面位置改变
         skillAndFireView.setConfirmFrame()
-       
+        WDSkillManager.sharedInstance.initModelDic()
+        
         //技能按钮回调
         skillAndFireView.tapAction = {(view:WDSkillView)->Void in
             
@@ -199,6 +212,7 @@ class GameViewController: UIViewController {
             if view.skillType == .Fire{
                 self.showScene.fireAction(direction: "")
             }
+            
             
             //技能释放
             WDSkillManager.sharedInstance.skillWithType(skillView: view, node:self.showScene.personNode)

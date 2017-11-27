@@ -46,8 +46,8 @@ class WDSkillView: UIButton {
         skillImage?.frame = CGRect(x:page,y:page,width:skillImageWidth,height:skillImageWidth)
         skillImage?.image = WDTool.skillImage(skillType: skillType!)
         self.addSubview(skillImage!)
-        
     }
+    
     
     //删除skillImage<游戏结束>
     func removeImageView() -> Void {

@@ -11,7 +11,7 @@ import SpriteKit
 
 enum  personSkillType{
     
-   case NoSelect,Speed,Attack,Attack_distance,Blink,Boom,Fire
+   case NoSelect,SPEED,Attack,Attack_distance,BLINK,BOOM,Fire
 };
 
 enum  zomType{
@@ -45,6 +45,7 @@ public let kLU:NSString = String("kLU") as NSString
 public let kLD:NSString = String("kLD") as NSString
 public let kRU:NSString = String("kRU") as NSString
 public let kRD:NSString = String("kRD") as NSString
+
 
 
 
@@ -144,21 +145,44 @@ class WDTool: NSObject {
         switch skillType {
         case .Attack:
             return UIImage(named:"addAttack.jpg")!
-        case .Blink:
+        case .BLINK:
             return UIImage(named:"blink.jpg")!
-        case .Speed:
+        case .SPEED:
             return UIImage(named:"addSpeed.jpg")!
-        case .Boom:
+        case .BOOM:
             return UIImage(named:"boomIcon.png")!
         case .Attack_distance:
             return UIImage(named:"addDistance.jpg")!
         case .NoSelect:
-            return UIImage(named:"boomIcon.png")!
+            return UIImage(named:"starGame.png")!
         case .Fire:
             return UIImage(named:"fire.png")!
         }
     }
     
+    
+    /// 技能名称
+    ///
+    /// - Parameter skillType:
+    /// - Returns: 
+    static func skillName(skillType:personSkillType) ->String{
+        switch skillType {
+        case .Attack:
+            return "123"
+        case .BLINK:
+            return BLINK
+        case .SPEED:
+            return SPEED
+        case .BOOM:
+            return BOOM
+        case .Attack_distance:
+            return "123"
+        case .NoSelect:
+            return "123"
+        case .Fire:
+            return "123"
+        }
+    }
     
     
    /// 移动距离

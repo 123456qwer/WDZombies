@@ -16,7 +16,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var zomCount:NSInteger = 0
     var boss1Node:WDBossNode_1! = nil
     var a = 0
-    
+    var boomModel:WDSkillModel! = nil
     
     func createKulou()  {
         
@@ -126,6 +126,19 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         if !isCreateScene {
            
+            
+            //需要获取炸弹伤害
+            boomModel = WDSkillModel.init()
+            boomModel.skillName = BOOM
+            
+            if WDDataManager.shareInstance().openDB(){
+                if boomModel.searchToDB(){
+                    print("炸弹Model伤害就位")
+                }
+            }
+            
+            WDDataManager.shareInstance().closeDB()
+            
             self.createNodes()
        
 //            let magic:SKSpriteNode = SKSpriteNode.init()
@@ -284,14 +297,15 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         
         if boomNode != nil && zomNode != nil {
-            personNode.wdAttack += 5
+            personNode.wdAttack += CGFloat(boomModel.skillLevel2)
             zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
-            personNode.wdAttack -= 5
+            personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
 
         }
         
         if magicNode != nil && pNode != nil {
             WDAnimationTool.bloodAnimation(node:personNode)
+            personNode.personBehavior.reduceBlood(number:3)
         }
         
 //        if magicNode != nil && zomNode != nil {
@@ -311,9 +325,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
         
         if kulouNode != nil && boomNode != nil {
-            personNode.wdAttack += 5
+            
+            
+            personNode.wdAttack += CGFloat(boomModel.skillLevel2)
             kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: personNode)
-            personNode.wdAttack -= 5
+            personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
 
         }
         

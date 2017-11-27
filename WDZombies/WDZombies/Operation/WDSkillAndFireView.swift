@@ -94,9 +94,6 @@ class WDSkillAndFireView: UIView {
                 return
             }
         }
-        
-  
-        
     }
     
     
@@ -143,8 +140,12 @@ class WDSkillAndFireView: UIView {
         for skillBtn:WDSkillView in swiftArray {
             skillBtn.removeSelectImage()
             skillBtn.addImageView()
-            skillBtn.alpha = 0.6
             skillBtn.isUserInteractionEnabled = true
+            if skillBtn.skillType == .NoSelect{
+                skillBtn.alpha = 0
+            }else{
+                skillBtn.alpha = 0.6
+            }
         }
         
         
@@ -168,7 +169,6 @@ class WDSkillAndFireView: UIView {
 
         }
     }
-   
     
     
 }

@@ -17,27 +17,20 @@ class WDSkillBlockView: UIView {
     let BTN_2_TAG = 300
     
     var skillType:personSkillType = .NoSelect
-    var initiativeCount = 0
     var detailBtn:UIButton! = nil
     var initFrame:CGRect = CGRect()
     
-    var detailStr:NSString = ""
-    var gifName:NSString = "blink"
+    var detailStr:String = ""
+    var gifName:String = "blink"
     
+    var _model:WDSkillModel! = nil
     
-    //blink
-    var blinkDistance = 200
-    var blinkCD = 30
-    var blinkCDStr:NSString = ""
-    var blinkDistanceStr:NSString = ""
+  
     
-    
-    //speed
-    var speedCD = 50
-    var speedHoldTime = 2
-    var speedCDStr:NSString = ""
-    var speedHoldTimeStr:NSString = ""
-    
+    var skillLevel1 = 0
+    var skillLevel2 = 0
+    var skillLevel1Str:String = ""
+    var skillLevel2Str:String = ""
     
     var label_1:UILabel! = nil
     var label_2:UILabel! = nil
@@ -45,7 +38,50 @@ class WDSkillBlockView: UIView {
     var skill_btn_1:UIButton! = nil
     var skill_btn_2:UIButton! = nil
     
+    var initiative:UIButton!  = nil
     
+    
+//********************  data  ********************************//
+    func model(name:String) -> WDSkillModel {
+        let skillModel:WDSkillModel = WDSkillModel.init()
+        skillModel.skillName = name
+        
+        if WDDataManager.shareInstance().openDB() {
+            if skillModel.searchToDB(){
+                print("查询成功")
+            }else{
+                print("查询失败")
+            }
+            
+            WDDataManager.shareInstance().closeDB()
+        }
+        
+        _model = skillModel
+        return skillModel
+    }
+    
+    func changeModel() {
+        
+        _model.skillLevel1 = skillLevel1
+        _model.skillLevel2 = skillLevel2
+        
+        _model.skillDetailStr = detailStr
+        _model.skillLevel1Str = skillLevel1Str
+        _model.skillLevel2Str = skillLevel2Str
+   
+        
+        if WDDataManager.shareInstance().openDB() {
+            if _model.changeSkillToSqlite(){
+                print("修改完毕")
+            }else{
+                print("修改出错")
+            }
+        }
+        
+        WDDataManager.shareInstance().closeDB()
+    }
+    
+//***********************  界面  ******************************//
     func createLabelAndSmallBtn() {
         let page:CGFloat = 5
         let width = (self.frame.size.height - page * 3) / 2.0
@@ -85,60 +121,119 @@ class WDSkillBlockView: UIView {
         skill_btn_1.tag = BTN_1_TAG
         skill_btn_2.tag = BTN_2_TAG
     }
+    
+    func setContent(model:WDSkillModel)  {
+       
+        gifName = model.skillName
+        skillLevel1 = model.skillLevel1
+        skillLevel2 = model.skillLevel2
+        
+        detailStr = model.skillDetailStr
+        skillLevel1Str = model.skillLevel1Str
+        skillLevel2Str = model.skillLevel2Str
+        
+        label_1.text = skillLevel1Str as String
+        label_2.text = skillLevel2Str as String
+        
+        self.isCanUse()
+    }
+    
+    func isCanUse() {
+        if _model.haveLearn == 0{
+            skill_btn_1.isUserInteractionEnabled = false
+            skill_btn_2.isUserInteractionEnabled = false
+            skill_btn_1.alpha = 0.2
+            skill_btn_2.alpha = 0.2
+            initiative.alpha  = 0.2
+        }else{
+            skill_btn_1.isUserInteractionEnabled = true
+            skill_btn_2.isUserInteractionEnabled = true
+            skill_btn_1.alpha = 1
+            skill_btn_2.alpha = 1
+            initiative.alpha  = 1
+        }
+    }
   
+    
     func boomAction() {
-        gifName = "boom"
+        
         self.createLabelAndSmallBtn()
+        self.setContent(model:self.model(name: BOOM))
         
-        
+        skill_btn_1.addTarget(self, action: #selector(boomAction(sender:)), for: .touchUpInside)
+        skill_btn_2.addTarget(self, action: #selector(boomAction(sender:)), for: .touchUpInside)
     }
     
     func speedAction() {
         
         self.createLabelAndSmallBtn()
+        self.setContent(model:self.model(name: SPEED))
 
-        gifName = "speed"
-        
-        self.speedCD = 50
-        self.speedHoldTime = 2
-        
-        detailStr = "Waiting Time: \(self.speedCD)S \n Hold Time: \(self.speedHoldTime)S" as NSString
-        speedCDStr = "0/5\nReduce Waiting Time 5S" as NSString
-        speedHoldTimeStr = "0/5\nIncrease Hold Time 1" as NSString
-        
-        label_1.text = speedCDStr as String
-        label_2.text = speedHoldTimeStr as String
-        
         skill_btn_1.addTarget(self, action: #selector(speedAction(sender:)), for: .touchUpInside)
         skill_btn_2.addTarget(self, action: #selector(speedAction(sender:)), for: .touchUpInside)
     }
     
+    
     func blinkAction() {
-        
+  
         self.createLabelAndSmallBtn()
-
-        gifName = "blink"
-       
-        self.blinkCD = 30
-        self.blinkDistance = 200
-        
-     
-        detailStr = "Waiting Time: \(self.blinkCD)S \n Blink Distance: \(self.blinkDistance)" as NSString
-        blinkCDStr = "0/5\nReduce Waiting Time 5S"
-        blinkDistanceStr = "0/5\nIncrease Distance 20"
-        
-        
-        label_1.text = blinkCDStr as String
-        label_2.text = blinkDistanceStr as String
-        
+        self.setContent(model:self.model(name: BLINK))
         
         skill_btn_1.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
         skill_btn_2.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
+    }
+    
+    
+    
+    func createDetailLabel(sender:UIButton)  {
         
+        let height = self.frame.size.height - WDTool.bottom(View: sender) - 20
+        let detailLabel = UILabel.init(frame: CGRect(x:WDTool.left(View: sender),y:WDTool.bottom(View: sender) + 10,width:self.frame.size.width - 20,height:height))
+        detailLabel.textAlignment = .center
+        detailLabel.numberOfLines = 0
+        detailLabel.font = UIFont.systemFont(ofSize: 25)
+        detailLabel.text = detailStr as String?
+        detailLabel.backgroundColor = UIColor.blue
+        detailLabel.tag = self.DETAIL_LABEL_TAG
+        self.addSubview(detailLabel)
+    }
+    
+    
+    func createDetailImageView(sender:UIButton)  {
+        
+        let width = self.frame.size.width / 2.0 - 20
+        let imageView = UIImageView.init(frame: CGRect(x:self.frame.size.width / 2.0 + 10,y:CGFloat(10),width:width,height:self.frame.size.height / 2.0 - 10 - 10 - 5))
+        imageView.backgroundColor = UIColor.darkGray
+        imageView.tag = self.IMAGETAG
+        self.addSubview(imageView)
+        
+        //gif文件路径
+        let path = Bundle.main.path(forResource: gifName as String, ofType: "gif")
+        //数据
+        let source = CGImageSourceCreateWithURL(URL.init(fileURLWithPath: path!) as CFURL, nil)
+        //3获取图片个数
+        let count = CGImageSourceGetCount(source!)
+        //time
+        //let allTime = 0
+        //所有图片
+        let imageArray = NSMutableArray.init()
+        //每针播放时间
+        //let timeArray  = NSMutableArray.init()
+        
+        for i:size_t in 0...count - 1{
+            let image = CGImageSourceCreateImageAtIndex(source!, i, nil)
+            let imageA = UIImage.init(cgImage: image!)
+            imageArray.add(imageA)
+        }
+        
+        imageView.animationImages = imageArray as? [UIImage]
+        imageView.animationDuration = 5
+        imageView.startAnimating()
         
     }
     
     
+//*****************  根据类型创建界面  ************************//
     func createSkillWithType(type:personSkillType)  {
         
         initFrame = self.frame
@@ -150,7 +245,7 @@ class WDSkillBlockView: UIView {
         let width = (self.frame.size.height - page * 2)
         
     
-        let initiative = UIButton.init(frame:CGRect(x:10,y:5,width:width,height:width))
+        initiative = UIButton.init(frame:CGRect(x:10,y:5,width:width,height:width))
         initiative.setBackgroundImage(WDTool.skillImage(skillType: skillType), for: .normal)
         initiative.addTarget(self, action: #selector(initiativeAction(sender:)), for: .touchUpInside)
         initiative.alpha = 0.2
@@ -170,13 +265,13 @@ class WDSkillBlockView: UIView {
         switch skillType {
         case .Attack:
             break
-        case .Blink:
+        case .BLINK:
             self.blinkAction()
             break
-        case .Speed:
+        case .SPEED:
             self.speedAction()
             break
-        case .Boom:
+        case .BOOM:
             self.boomAction()
             break
         case .Attack_distance:
@@ -186,11 +281,61 @@ class WDSkillBlockView: UIView {
         case .Fire:
             break
         }
-        
-        
-        
     }
     
+    
+    
+//******************* 选择技能的方法  ***********************//
+   
+    func changeLabel()  {
+        
+        label_1.text = skillLevel1Str as String
+        label_2.text = skillLevel2Str as String
+        
+        if self.viewWithTag(DETAIL_LABEL_TAG) != nil{
+            let detailLabel = self.viewWithTag(DETAIL_LABEL_TAG) as! UILabel
+            detailLabel.text = detailStr as String
+        }
+
+        self.changeModel()
+
+    }
+    
+    
+    /// 炸弹技能
+    ///
+    /// - Parameter sender:
+    @objc func boomAction(sender:UIButton)  {
+        
+        if sender.tag == BTN_1_TAG {
+            
+            
+            skillLevel1 -= 5
+            
+            if skillLevel1 <= 25{
+                skillLevel1 = 25
+            }
+            
+            let dic:NSDictionary = ["50":"0/5\nReduce Waiting Time 5S","45":"1/5\nReduce Waiting Time 5S","40":"2/5\nReduce Waiting Time 5S","35":"3/5\nReduce Waiting Time 5S","30":"4/5\nReduce Waiting Time 5S","25":"5/5\nReduce Waiting Time 5S"]
+            skillLevel1Str = dic.object(forKey: "\(skillLevel1)") as! String
+            
+            
+        }else{
+            
+            
+            skillLevel2 += 1
+            if skillLevel2 >= 10 {
+                skillLevel2 = 10
+            }
+            
+            let dic:NSDictionary = ["5":"0/5\nIncrease Damage 1","6":"1/5\nIncrease Damage 1","7":"2/5\nIncrease Damage 1","8":"3/5\nIncrease Damage 1","9":"4/5\nIncrease Damage 1","10":"5/5\nIncrease Damage 1"]
+            skillLevel2Str = dic.object(forKey: "\(skillLevel2)") as! String
+            
+        }
+        
+        detailStr = "Waiting Time: \(skillLevel1)S \n Increase Damage: \(skillLevel2)S" as String
+        self.changeLabel()
+    }
   
     
     /// 加速技能
@@ -201,40 +346,31 @@ class WDSkillBlockView: UIView {
         if sender.tag == BTN_1_TAG {
             
             
-            self.speedCD -= 5
+            skillLevel1 -= 5
             
-            if self.speedCD <= 25{
-                self.speedCD = 25
+            if skillLevel1 <= 25{
+                skillLevel1 = 25
             }
             
             let dic:NSDictionary = ["50":"0/5\nReduce Waiting Time 5S","45":"1/5\nReduce Waiting Time 5S","40":"2/5\nReduce Waiting Time 5S","35":"3/5\nReduce Waiting Time 5S","30":"4/5\nReduce Waiting Time 5S","25":"5/5\nReduce Waiting Time 5S"]
-            speedCDStr = dic.object(forKey: "\(self.speedCD)") as! NSString
-            label_1.text = speedCDStr as String
+            skillLevel1Str = dic.object(forKey: "\(skillLevel1)") as! String
             
             
         }else{
             
             
-            self.speedHoldTime += 1
-            if self.speedHoldTime >= 7 {
-                self.speedHoldTime = 7
+            skillLevel2 += 1
+            if skillLevel2 >= 7 {
+                skillLevel2 = 7
             }
             
             let dic:NSDictionary = ["2":"0/5\nIncrease Hold Time 1","3":"1/5\nIncrease Hold Time 1","4":"2/5\nIncrease Hold Time 1","5":"3/5\nIncrease Hold Time 1","6":"4/5\nIncrease Hold Time 1","7":"5/5\nIncrease Hold Time 1"]
-            speedHoldTimeStr = dic.object(forKey: "\(self.speedHoldTime)") as! NSString
-            label_2.text = speedHoldTimeStr as String
+            skillLevel2Str = dic.object(forKey: "\(skillLevel2)") as! String
             
         }
         
-        detailStr = "Waiting Time: \(self.speedCD)S \n Hold Time: \(self.speedHoldTime)S" as NSString
-        
-        if self.viewWithTag(DETAIL_LABEL_TAG) != nil{
-            let detailLabel = self.viewWithTag(DETAIL_LABEL_TAG) as! UILabel
-            detailLabel.text = detailStr as String
-        }
-        
-        
-        
+        detailStr = "Waiting Time: \(skillLevel1)S \n Hold Time: \(skillLevel2)S" as String
+        self.changeLabel()
     }
     
     
@@ -242,44 +378,43 @@ class WDSkillBlockView: UIView {
     ///
     /// - Parameter sender:
     @objc func blinkAction(sender:UIButton) {
-        
+  
         
         
         if sender.tag == BTN_1_TAG {
             
-        
-            self.blinkCD -= 5
+          
             
-            if self.blinkCD <= 5{
-                self.blinkCD = 5
+            skillLevel1 -= 5
+            
+            if skillLevel1 <= 5{
+                skillLevel1 = 5
             }
             
             let dic:NSDictionary = ["30":"0/5\nReduce Waiting Time 5S","25":"1/5\nReduce Waiting Time 5S","20":"2/5\nReduce Waiting Time 5S","15":"3/5\nReduce Waiting Time 5S","10":"4/5\nReduce Waiting Time 5S","5":"5/5\nReduce Waiting Time 5S"]
-            blinkCDStr = dic.object(forKey: "\(self.blinkCD)") as! NSString
-            label_1.text = blinkCDStr as String
+            skillLevel1Str = dic.object(forKey: "\(skillLevel1)") as! String
             
 
         }else{
             
             
-            self.blinkDistance += 20
-            if self.blinkDistance >= 300 {
-                self.blinkDistance = 300
+            skillLevel2 += 20
+            if skillLevel2 >= 300 {
+                skillLevel2 = 300
             }
             
             let dic:NSDictionary = ["200":"0/5\nIncrease Distance 20","220":"1/5\nIncrease Distance 20","240":"2/5\nIncrease Distance 20","260":"3/5\nIncrease Distance 20","280":"4/5\nIncrease Distance 20","300":"5/5\nIncrease Distance 20"]
-            blinkDistanceStr = dic.object(forKey: "\(self.blinkDistance)") as! NSString
-            label_2.text = blinkDistanceStr as String
-
+            skillLevel2Str = dic.object(forKey: "\(skillLevel2)") as! String
+     
         }
-        
-        
-        
-        detailStr = "Waiting Time:  \(self.blinkCD)S \n Blink Distance: \(self.blinkDistance)" as NSString
+    
+        detailStr = "Waiting Time:  \(skillLevel1)S \n Blink Distance: \(skillLevel2)" as String
         if self.viewWithTag(DETAIL_LABEL_TAG) != nil{
             let detailLabel = self.viewWithTag(DETAIL_LABEL_TAG) as! UILabel
             detailLabel.text = detailStr as String
         }
+        
+        self.changeLabel()
     }
     
     
@@ -316,62 +451,16 @@ class WDSkillBlockView: UIView {
     
     
     
-    func createDetailLabel(sender:UIButton)  {
-        
-        let height = self.frame.size.height - WDTool.bottom(View: sender) - 20
-        let detailLabel = UILabel.init(frame: CGRect(x:WDTool.left(View: sender),y:WDTool.bottom(View: sender) + 10,width:self.frame.size.width - 20,height:height))
-        detailLabel.textAlignment = .center
-        detailLabel.numberOfLines = 0
-        detailLabel.font = UIFont.systemFont(ofSize: 25)
-        detailLabel.text = detailStr as String?
-        detailLabel.backgroundColor = UIColor.blue
-        detailLabel.tag = self.DETAIL_LABEL_TAG
-        self.addSubview(detailLabel)
-    }
-    
-    
-    func createDetailImageView(sender:UIButton)  {
-        
-         let width = self.frame.size.width / 2.0 - 20
-         let imageView = UIImageView.init(frame: CGRect(x:self.frame.size.width / 2.0 + 10,y:CGFloat(10),width:width,height:self.frame.size.height / 2.0 - 10 - 10 - 5))
-         imageView.backgroundColor = UIColor.darkGray
-         imageView.tag = self.IMAGETAG
-         self.addSubview(imageView)
-         
-         //gif文件路径
-        let path = Bundle.main.path(forResource: gifName as String, ofType: "gif")
-         //数据
-         let source = CGImageSourceCreateWithURL(URL.init(fileURLWithPath: path!) as CFURL, nil)
-         //3获取图片个数
-         let count = CGImageSourceGetCount(source!)
-         //time
-         //let allTime = 0
-         //所有图片
-         let imageArray = NSMutableArray.init()
-         //每针播放时间
-         //let timeArray  = NSMutableArray.init()
-         
-         for i:size_t in 0...count - 1{
-         let image = CGImageSourceCreateImageAtIndex(source!, i, nil)
-         let imageA = UIImage.init(cgImage: image!)
-         imageArray.add(imageA)
-         }
-         
-         imageView.animationImages = imageArray as? [UIImage]
-         imageView.animationDuration = 5
-         imageView.startAnimating()
- 
-    }
-    
-    
     @objc func initiativeAction(sender:UIButton)  {
         
-        if initiativeCount == 1{
+        if _model.haveLearn == 1{
             return
         }
         
-        initiativeCount += 1
-        sender.alpha = 1
+        _model.haveLearn = 1
+        self.changeModel()
+        self.isCanUse()
+    
     }
     
 }

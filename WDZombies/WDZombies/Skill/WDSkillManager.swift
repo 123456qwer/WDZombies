@@ -9,11 +9,47 @@
 import UIKit
 import SpriteKit
 
+
+public let BLINK:String = "blink"
+public let SPEED:String = "speed"
+public let BOOM :String = "boom"
+
+
 class WDSkillManager: NSObject {
     
     static let sharedInstance = WDSkillManager.init()
     private override init() {}
     
+    var modelDic:NSMutableDictionary! = nil
+    
+    func initModelDic() {
+        
+        if modelDic == nil{
+            modelDic = NSMutableDictionary.init()
+        }else{
+            modelDic.removeAllObjects()
+        }
+        
+        let skillArr:NSArray = [BLINK,SPEED,BOOM]
+        if WDDataManager.shareInstance().openDB(){
+            for index:NSInteger in 0...skillArr.count - 1 {
+                let skillName = skillArr.object(at: index)
+                let model:WDSkillModel = WDSkillModel.init()
+                model.skillName = skillName as! String
+                if model.searchToDB(){
+                    print("技能管理者插入\(model.skillName) 技能成功")
+                }else{
+                    print("插入技能失败")
+                }
+                
+                modelDic.setObject(model, forKey: model.skillName as NSCopying)
+            }
+    
+        }
+        
+        WDDataManager.shareInstance().closeDB()
+        
+    }
     
     func skillWithType(skillView:WDSkillView,node:WDPersonNode) -> Void {
         
@@ -21,13 +57,13 @@ class WDSkillManager: NSObject {
         case .Attack?:
             self.addAttackAction(skillView: skillView, node: node)
             break
-        case .Blink?:
+        case .BLINK?:
             self.blinkAction(skillView: skillView, node: node)
             break
-        case .Speed?:
+        case .SPEED?:
             self.addSpeedAction(skillView: skillView, node: node)
             break
-        case .Boom?:
+        case .BOOM?:
             self.boomAction(skillView: skillView, node: node)
             break
         case .Attack_distance?:
@@ -49,7 +85,7 @@ class WDSkillManager: NSObject {
     
     /// 公用
     /// - Returns:
-    func createLabelWithNumber(str:NSString,skillView:WDSkillView,node:WDPersonNode,color:UIColor) -> NSDictionary {
+    func createLabelWithNumber(str:String,skillView:WDSkillView,node:WDPersonNode,color:UIColor) -> NSDictionary {
         
         skillView.isUserInteractionEnabled = false
         skillView.alpha = 0.2
@@ -98,7 +134,9 @@ class WDSkillManager: NSObject {
     
     //炸弹技能
     func boomAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
-         let pasDic:NSDictionary = self.createLabelWithNumber(str: "30", skillView: skillView, node: node, color: UIColor.blue)
+        
+         let model:WDSkillModel = modelDic.object(forKey: BOOM) as! WDSkillModel
+         let pasDic:NSDictionary = self.createLabelWithNumber(str: "\(model.skillLevel1)", skillView: skillView, node: node, color: UIColor.blue)
          let imageView:UIImageView = pasDic.object(forKey: "imageView") as! UIImageView
          imageView.removeFromSuperview()
         WDAnimationTool.boomAnimation(node:node)
@@ -107,12 +145,14 @@ class WDSkillManager: NSObject {
     
     //闪现技能
     func blinkAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
-        let pasDic:NSDictionary = self.createLabelWithNumber(str: "30", skillView: skillView, node: node ,color: UIColor.black)
+        
+        let model:WDSkillModel = modelDic.object(forKey: BLINK) as! WDSkillModel
+        let pasDic:NSDictionary = self.createLabelWithNumber(str: "\(model.skillLevel1)", skillView: skillView, node: node ,color: UIColor.black)
      
         let imageView:UIImageView = pasDic.object(forKey: "imageView") as! UIImageView
         imageView.removeFromSuperview()
      
-        WDAnimationTool.blinkAnimation(node: node)
+        WDAnimationTool.blinkAnimation(node: node,model:model)
         
         
     }
@@ -121,12 +161,12 @@ class WDSkillManager: NSObject {
     //增加移速技能
     func addSpeedAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
         
-        
-        let pasDic:NSDictionary = self.createLabelWithNumber(str: "50", skillView: skillView, node: node ,color: UIColor.blue)
+        let model:WDSkillModel = modelDic.object(forKey: SPEED) as! WDSkillModel
+        let pasDic:NSDictionary = self.createLabelWithNumber(str: "\(model.skillLevel1)", skillView: skillView, node: node ,color: UIColor.blue)
       
         node.wdSpeed += 2
    
-        self.perform(#selector(speedReduce(dic:)), with: pasDic, afterDelay: 2)
+        self.perform(#selector(speedReduce(dic:)), with: pasDic, afterDelay: TimeInterval(model.skillLevel2))
         let emitter:SKEmitterNode = WDAnimationTool.createEmitterNode(name:"Fire")
         emitter.name = "addSpeed"
         emitter.position = node.position

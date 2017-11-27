@@ -28,10 +28,9 @@ class WDSkillViewController: UIViewController {
         self.view.addSubview(skillView1)
         
         
-        
-        let skillView2 = WDSkillBlockView.init(frame: CGRect(x:WDTool.right(View: skillView1) + page ,y:page,width:width,height:height))
-        skillView2.backgroundColor = UIColor.yellow
-        self.view.addSubview(skillView2)
+//        let skillView2 = WDSkillBlockView.init(frame: CGRect(x:WDTool.right(View: skillView1) + page ,y:page,width:width,height:height))
+//        skillView2.backgroundColor = UIColor.yellow
+//        self.view.addSubview(skillView2)
         
         let skillView3 = WDSkillBlockView.init(frame: CGRect(x:page,y:WDTool.bottom(View: skillView1) + page,width:width,height:height))
         skillView3.backgroundColor = UIColor.yellow
@@ -43,14 +42,29 @@ class WDSkillViewController: UIViewController {
         
         
         
-        skillView1.createSkillWithType(type: .Blink)
-        skillView2.createSkillWithType(type: .Attack)
-        skillView3.createSkillWithType(type: .Speed)
-        skillView4.createSkillWithType(type: .Boom)
+        skillView1.createSkillWithType(type: .BLINK)
+        //skillView2.createSkillWithType(type: .Attack)
+        skillView3.createSkillWithType(type: .SPEED)
+        skillView4.createSkillWithType(type: .BOOM)
         
+        
+        
+        let confirmBtn:UIButton = UIButton.init(frame: CGRect(x:WDTool.right(View: skillView1) + page ,y:page,width:width,height:height))
+        confirmBtn.backgroundColor = UIColor.gray
+        confirmBtn.layer.masksToBounds = true
+        confirmBtn.layer.cornerRadius = 50 / 2.0
+        confirmBtn.setTitle("Confirm", for: .normal)
+        confirmBtn.setTitleColor(UIColor.black, for: .normal)
+        confirmBtn.addTarget(self, action: #selector(confirmAction(sender:)), for: .touchUpInside)
+        self.view.addSubview(confirmBtn)
     }
 
     
+    @objc func confirmAction(sender:UIButton)  {
+        self.dismiss(animated: true) {
+            
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

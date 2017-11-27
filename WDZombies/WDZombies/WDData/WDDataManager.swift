@@ -12,6 +12,36 @@ import SQLite3
 
 class WDDataManager: NSObject {
 
+    
+    static func initData(){
+        
+        let nameStrArr:NSArray = [BOOM,BLINK,SPEED]
+        let detailStrAarr:NSArray = ["Waiting Time: 50S \n Damage: 5","Waiting Time: 30S \n Blink Distance: 200","Waiting Time: 50S \n Hold Time: 5S"]
+        let level1StrArr:NSArray = ["0/5 \n Reduce Waiting Time 5S","0/5 \n Reduce Waiting Time 5S","0/5\n Reduce Waiting Time 5S"]
+        let level2StrArr:NSArray = ["0/5 \n Increase Damage 1","0/5 \n Increase Distance 20","0/5 \n Increase Hold Time 1"]
+        let level1Arr:NSArray = [50,30,50]
+        let level2Arr:NSArray = [5,200,2]
+        
+        for index:NSInteger in 0...2 {
+            
+            let skillModel:WDSkillModel = WDSkillModel.init()
+            skillModel.skillName = nameStrArr.object(at: index) as! String
+            
+            skillModel.skillLevel1Str = level1StrArr.object(at: index) as! String
+            skillModel.skillLevel2Str = level2StrArr.object(at: index) as! String
+            skillModel.skillDetailStr = detailStrAarr.object(at: index) as! String
+
+            skillModel.skillLevel1 = level1Arr.object(at: index) as! Int
+            skillModel.skillLevel2 = level2Arr.object(at: index) as! Int
+            skillModel.haveLearn   = 0
+            
+            if skillModel.insertSelfToDB(){
+                print("插入成功了!!!!again")
+            }
+        }
+        
+    }
+    
     static let instance = WDDataManager()
     //对外提供创建单例对象的接口
     class func shareInstance() -> WDDataManager {
@@ -19,6 +49,11 @@ class WDDataManager: NSObject {
     }
  
     var db:OpaquePointer? = nil
+    
+    
+    func closeDB() {
+        sqlite3_close(db)
+    }
     
     func openDB() -> Bool {
         
@@ -76,6 +111,15 @@ class WDDataManager: NSObject {
     }
     
     
+    
+    /// 删除所有数据
+    ///
+    /// - Returns: 
+    func removeAllData() -> Bool {
+        
+        let SQL:String = "DELETE FROM t_Skill"
+        return self.execSQL(SQL: SQL)
+    }
     
     //查询数据库中数据
     func queryDBData(querySQL : String) -> [[String : AnyObject]]? {

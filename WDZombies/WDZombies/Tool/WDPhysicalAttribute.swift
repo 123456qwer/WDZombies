@@ -24,7 +24,6 @@ let connon_type: UInt32  = 0x08;
 let ZOMBIE:NSString = "zombie"
 let PERSON:NSString = "person"
 let FIRE:NSString   = "fire"
-let BOOM:NSString   = "boom"
 let MAGIC:NSString   = "magic"
 let BOSS1:NSString = "BOSS1"
 let KULOU:NSString = "KULOU"

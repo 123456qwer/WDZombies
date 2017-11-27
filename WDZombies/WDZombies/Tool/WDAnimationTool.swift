@@ -290,7 +290,6 @@ class WDAnimationTool: NSObject {
             body.collisionBitMask = player_type ;
             boomNode.physicsBody = body;
             boomNode.run(boomBomAn, completion: {
-
                 boomNode.removeFromParent()
             })
         }
@@ -304,7 +303,7 @@ class WDAnimationTool: NSObject {
    /// 闪现动画
    ///
    /// - Parameter node: <#node description#>
-   static func blinkAnimation(node:WDPersonNode) -> Void {
+    static func blinkAnimation(node:WDPersonNode,model:WDSkillModel) -> Void {
     
         node.removeAllActions()
         node.canMove = false
@@ -312,7 +311,7 @@ class WDAnimationTool: NSObject {
     
 
     
-    let point:CGPoint = WDTool.calculateMovePoint(direction: node.direction, speed: 200, node: node)
+        let point:CGPoint = WDTool.calculateMovePoint(direction: node.direction, speed: CGFloat(model.skillLevel2), node: node)
     
     
     

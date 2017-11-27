@@ -14,11 +14,16 @@ class WDSelectBtn: UIButton {
     var _skillType:personSkillType!
     var _select:Bool!
     var _selectAction:selectSkill!
+    var _lockImage:UIImageView!
     
     func initWithType(frame:CGRect,skillType:personSkillType) -> Void {
         _skillType = skillType
         self.frame = frame
         _select = false
+        
+       
+        
+        
         
         self.backgroundColor = UIColor.yellow
         self.layer.masksToBounds = true
@@ -27,7 +32,37 @@ class WDSelectBtn: UIButton {
         let imageView:UIImageView = UIImageView(frame:CGRect(x:0,y:0,width:frame.size.width,height:frame.size.height))
         imageView.image = WDTool.skillImage(skillType: _skillType)
         self.addSubview(imageView)
-     
+        
+        let lockImage:UIImageView = UIImageView(frame:CGRect(x:5,y:5,width:frame.size.width - 10,height:frame.size.height - 10))
+        lockImage.image = UIImage.init(named: "starGame")
+        self.addSubview(lockImage)
+        
+        
+        
+        let skillName = WDTool.skillName(skillType: _skillType)
+        let model:WDSkillModel = WDSkillModel.init()
+        model.skillName = skillName
+        if WDDataManager.shareInstance().openDB(){
+            if model.searchToDB(){
+                if model.haveLearn == 0{
+                    lockImage.isHidden = false
+                    self.isUserInteractionEnabled = false
+                }else{
+                    lockImage.isHidden = true
+                    self.isUserInteractionEnabled = true
+                }
+            }else{
+                
+                lockImage.isHidden = false
+                self.isUserInteractionEnabled = false
+            }
+            
+        }else{
+            lockImage.isHidden = false
+            self.isUserInteractionEnabled = false
+        }
+        WDDataManager.shareInstance().closeDB()
+        
     }
     
     

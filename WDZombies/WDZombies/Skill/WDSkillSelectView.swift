@@ -31,8 +31,6 @@ class WDSkillSelectView: UIScrollView ,UIScrollViewDelegate{
         self.addSubview(titleLabel)
         
      
-        
-        
         let page:CGFloat = 20
         let btnWidth:CGFloat = (kScreenWidth - page * 7) / 6.0
   
@@ -43,17 +41,17 @@ class WDSkillSelectView: UIScrollView ,UIScrollViewDelegate{
         
         //炸弹
         let boomSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        boomSkill.initWithType(frame: CGRect(x:WDTool.right(View: attackSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .Boom)
+        boomSkill.initWithType(frame: CGRect(x:WDTool.right(View: attackSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .BOOM)
         self.addSubview(boomSkill)
         
         //闪现
         let blinkSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        blinkSkill.initWithType(frame: CGRect(x:WDTool.right(View: boomSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .Blink)
+        blinkSkill.initWithType(frame: CGRect(x:WDTool.right(View: boomSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .BLINK)
         self.addSubview(blinkSkill)
         
         //增加移速
         let addSpeedSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        addSpeedSkill.initWithType(frame: CGRect(x:WDTool.right(View: blinkSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .Speed)
+        addSpeedSkill.initWithType(frame: CGRect(x:WDTool.right(View: blinkSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .SPEED)
         self.addSubview(addSpeedSkill)
         
         
@@ -83,8 +81,6 @@ class WDSkillSelectView: UIScrollView ,UIScrollViewDelegate{
                 }
                 
                 self.selectAction(Bool,skillType,self.selectCount)
-
-           
             }
         }
      
