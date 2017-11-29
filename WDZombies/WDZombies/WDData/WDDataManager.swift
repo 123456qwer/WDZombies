@@ -12,8 +12,25 @@ import SQLite3
 
 class WDDataManager: NSObject {
 
+    var canUseSkillPoint:NSInteger = 0
+  
     
     static func initData(){
+        
+        let userModel:WDUserModel = WDUserModel.init()
+        userModel.blood = 10
+        userModel.speed = 3
+        userModel.attack = 1
+        userModel.fire_impact = 10
+        userModel.attackDistance = 170
+        userModel.skillCount = 1
+        userModel.level = 0
+        userModel.mapLevel = 0
+        
+        if userModel.insertSelfToDB(){
+            print("人物属性插入成功")
+        }
+        
         
         let nameStrArr:NSArray = [BOOM,BLINK,SPEED]
         let detailStrAarr:NSArray = ["Waiting Time: 50S \n Damage: 5","Waiting Time: 30S \n Blink Distance: 200","Waiting Time: 50S \n Hold Time: 5S"]
@@ -69,20 +86,16 @@ class WDDataManager: NSObject {
     }
     
     
-//    var skillName:NSString = ""
-//    var skillLevel1:Int = 0
-//    var skillLevel2:Int = 0
-//    var skillLevel1Str:NSString = ""
-//    var skillLevel2Str:NSString = ""
-//    var skillDetailStr:NSString = ""
+
     
     //创建表
     func creatTable() -> Bool {
         //建表的SQL语句
         let creatUserTable = "CREATE TABLE IF NOT EXISTS 't_Skill' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'skillName' TEXT,'haveLearn' INTEGER,'skillLevel1' INTEGER,'skillLevel2' INTEGER,'skillLevel1Str' TEXT,'skillLevel2Str' TEXT,'skillDetailStr' TEXT);"
+        let createUserTable2 = "CREATE TABLE IF NOT EXISTS 't_User' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'blood' TEXT,'attack' TEXT,'speed' TEXT,'level' INTEGER,'skillCount' INTEGER,'fire_impact' TEXT,'attackDistance' TEXT,'mapLevel' INTEGER)"
         //let creatCarTable = "CREATE TABLE IF NOT EXISTS 't_Car' ('ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'type' TEXT,'output' REAL,'master' TEXT);"
         //执行SQL语句-创建表 依然,项目中一般不会只有一个表
-        return creatTableExecSQL(SQL_ARR: [creatUserTable])
+        return creatTableExecSQL(SQL_ARR: [creatUserTable,createUserTable2])
     }
     
     

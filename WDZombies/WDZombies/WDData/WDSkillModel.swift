@@ -35,7 +35,6 @@ class WDSkillModel: NSObject {
             
             return false
         }
-        
     }
     
     override func setValue(_ value: Any?, forUndefinedKey key: String) {

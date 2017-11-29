@@ -58,6 +58,8 @@
 		43551B141FCE7FC600B86587 /* increaseDistance.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B131FCE7FC600B86587 /* increaseDistance.png */; };
 		43551B161FCE806800B86587 /* holdTime.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B151FCE806800B86587 /* holdTime.png */; };
 		43551B181FCE814200B86587 /* increaseBoom.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B171FCE814100B86587 /* increaseBoom.png */; };
+		43551B1A1FCE969F00B86587 /* WDUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43551B191FCE969F00B86587 /* WDUserModel.swift */; };
+		43551B1D1FCEAF7300B86587 /* Level.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43551B1C1FCEAF7200B86587 /* Level.atlas */; };
 		435589801FA06DEF00C80CA8 /* WDPhysicalAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4355897F1FA06DEF00C80CA8 /* WDPhysicalAttribute.swift */; };
 		435589831FA0701500C80CA8 /* WDZombieNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435589821FA0701500C80CA8 /* WDZombieNode.swift */; };
 		435589851FA0706700C80CA8 /* WDZombieBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435589841FA0706700C80CA8 /* WDZombieBehavior.swift */; };
@@ -188,6 +190,8 @@
 		43551B131FCE7FC600B86587 /* increaseDistance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = increaseDistance.png; sourceTree = "<group>"; };
 		43551B151FCE806800B86587 /* holdTime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = holdTime.png; sourceTree = "<group>"; };
 		43551B171FCE814100B86587 /* increaseBoom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = increaseBoom.png; sourceTree = "<group>"; };
+		43551B191FCE969F00B86587 /* WDUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDUserModel.swift; sourceTree = "<group>"; };
+		43551B1C1FCEAF7200B86587 /* Level.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Level.atlas; sourceTree = "<group>"; };
 		4355897F1FA06DEF00C80CA8 /* WDPhysicalAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDPhysicalAttribute.swift; sourceTree = "<group>"; };
 		435589821FA0701500C80CA8 /* WDZombieNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDZombieNode.swift; sourceTree = "<group>"; };
 		435589841FA0706700C80CA8 /* WDZombieBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDZombieBehavior.swift; sourceTree = "<group>"; };
@@ -359,6 +363,7 @@
 		432F84CB1F99938900F51146 /* Picture */ = {
 			isa = PBXGroup;
 			children = (
+				43551B1B1FCEAF5600B86587 /* LevelPic */,
 				434B4C421FB98C40000A6566 /* BOSS1 */,
 				4392CE221FA6BBF400A52D12 /* FirePic */,
 				4307E3631FA1DE7000E1AD38 /* BloodPic */,
@@ -502,6 +507,14 @@
 			path = BossNode;
 			sourceTree = "<group>";
 		};
+		43551B1B1FCEAF5600B86587 /* LevelPic */ = {
+			isa = PBXGroup;
+			children = (
+				43551B1C1FCEAF7200B86587 /* Level.atlas */,
+			);
+			path = LevelPic;
+			sourceTree = "<group>";
+		};
 		435589811FA06FF300C80CA8 /* ZombiesNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				4359835C1FC7A2D400894AAD /* WDDataManager.swift */,
+				43551B191FCE969F00B86587 /* WDUserModel.swift */,
 				435983631FC7A77700894AAD /* WDSkillModel.swift */,
 			);
 			path = WDData;
@@ -669,6 +683,7 @@
 				43765FA91FBAD65D006E37D2 /* boss1_att2_star5.png in Resources */,
 				436799171FB0550F00454274 /* Rain.sks in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
+				43551B1D1FCEAF7300B86587 /* Level.atlas in Resources */,
 				43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */,
 				4307E3701FA1DF0D00E1AD38 /* blood5.png in Resources */,
 				43551B101FCE61C300B86587 /* sun.jpg in Resources */,
@@ -769,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43656BBF1F9F1D9C001EFDA5 /* WDBaseScene.swift in Sources */,
+				43551B1A1FCE969F00B86587 /* WDUserModel.swift in Sources */,
 				4376D1C31F9F2A47004E6188 /* WDMapManager.swift in Sources */,
 				435589851FA0706700C80CA8 /* WDZombieBehavior.swift in Sources */,
 				43656BB91F9EDE47001EFDA5 /* WDMoveView.swift in Sources */,

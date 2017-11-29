@@ -68,7 +68,59 @@ class WDPersonNode: WDBaseNode {
         bloodNode.color = UIColor.init(red: 0, green: 165 / 255.0, blue: 129 / 255.0, alpha: 1)
         bloodNode.zPosition = 3
         self.addChild(bloodNode)
+        
+        let model:WDUserModel = WDUserModel.init()
+        if model.searchToDB(){
+            self.wdBlood = model.blood
+            self.wdSpeed = model.speed
+            self.wdAllBlood = model.blood
+            self.wdFire_impact = Int(model.fire_impact)
+            self.wdAttackDistance = Int(model.attackDistance)
+            self.wdLevel = model.level
+            self.wdSkillCount = model.skillCount
+        }
+        
+        self.createLevelUpNode()
     }
+    
+    
+    func createLevelUpNode()  {
+        let arr:NSMutableArray = NSMutableArray.init()
+        let textures = SKTextureAtlas.init(named: "Level")
+        for index:NSInteger in 0...textures.textureNames.count - 1 {
+            let name = "level_\(index + 1)"
+            let temp = textures.textureNamed(name)
+            arr.add(temp)
+        }
+        
+        let texture:SKTexture = arr.lastObject as! SKTexture
+        arr.removeLastObject()
+        
+        let action = SKAction.animate(with: arr as! [SKTexture], timePerFrame: TimeInterval(0.3 / CGFloat(arr.count)))
+        let repeatA = SKAction.repeat(action, count: 5)
+        let upNode:SKSpriteNode = SKSpriteNode.init(texture: arr.object(at: 0) as? SKTexture)
+        self.addChild(upNode)
+        
+        upNode.zPosition = 2
+        upNode.position = CGPoint(x:0,y:upNode.size.height + 30)
+        upNode.run(repeatA) {
+            
+            let action1 = SKAction.fadeAlpha(to: 0, duration: 1.5)
+            upNode.size = CGSize(width:37,height:14)
+            upNode.texture = texture
+            upNode.run(action1, completion: {
+                upNode.removeFromParent()
+                
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 }

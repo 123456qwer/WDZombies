@@ -22,12 +22,11 @@ class WDBaseNode: SKSpriteNode {
     var canMove:Bool! = true
     var isBlink:Bool! = false
     var isAttack:Bool! = false
-//    self.speeds = 3;
-//    self.attack_distance = 170;
-//    self.attack = 1;
-//    self.direction = kLeft;
-//    self.blood = 10;
-//    self.fire_impact = 3;
+    
+    
+    var wdLevel:NSInteger = 0
+    var wdSkillCount:NSInteger = 0
+
     
     
 //    self.beatOff = 5;

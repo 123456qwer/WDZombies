@@ -62,7 +62,6 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         
         if blood >= 10 {
             
-            WDAnimationTool.bloodAnimation(node: self.kulouNode)
             kulouNode.removeAllActions()
             kulouNode.canMove = false
             kulouNode.isMove = false

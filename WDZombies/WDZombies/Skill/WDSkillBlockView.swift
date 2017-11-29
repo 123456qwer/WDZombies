@@ -26,6 +26,7 @@ class WDSkillBlockView: UIView {
     var gifName:String = "blink"
     
     var _model:WDSkillModel! = nil
+    var _userModel:WDUserModel! = nil
     var changeFrameAction:changeFrame?
   
     
@@ -58,7 +59,27 @@ class WDSkillBlockView: UIView {
         }
         
         _model = skillModel
+        if _model.haveLearn == 1{
+            initiative.alpha = 1
+        }else{
+            initiative.alpha = 0.3
+        }
         return skillModel
+    }
+    
+    func userModel()  {
+        _userModel = WDUserModel.init()
+        
+        if WDDataManager.shareInstance().openDB(){
+            if _userModel.searchToDB(){
+                print("人物信息查询成功")
+            }else{
+                print("人物信息查询失败")
+            }
+        }
+        
+        WDDataManager.shareInstance().closeDB()
+
     }
     
     func changeModel() {
@@ -76,6 +97,20 @@ class WDSkillBlockView: UIView {
                 print("修改完毕")
             }else{
                 print("修改出错")
+            }
+        }
+        
+        WDDataManager.shareInstance().closeDB()
+    }
+    
+    func changeUserModel()  {
+        _userModel.skillCount -= 1
+        WDDataManager.shareInstance().canUseSkillPoint = _userModel.skillCount
+        if WDDataManager.shareInstance().openDB(){
+            if _userModel.changeSkillToSqlite(){
+                print("人物信息修改成功")
+            }else{
+                print("人物信息修改失败")
             }
         }
         
@@ -135,7 +170,19 @@ class WDSkillBlockView: UIView {
         label_1.text = skillLevel1Str as String
         label_2.text = skillLevel2Str as String
         
-        self.isCanUse()
+        if model.haveLearn == 1 {
+            self.isSmallBtnCanUse(isCanUse: true, alpha: 1)
+        }else{
+            self.isSmallBtnCanUse(isCanUse: false, alpha: 0.4)
+        }
+    }
+    
+    func isSmallBtnCanUse(isCanUse:Bool,alpha:CGFloat)  {
+
+            skill_btn_1.alpha = alpha
+            skill_btn_2.alpha = alpha
+            skill_btn_1.isUserInteractionEnabled = isCanUse
+            skill_btn_2.isUserInteractionEnabled = isCanUse
     }
     
     func setBtn2BgImage(name:String)  {
@@ -143,22 +190,7 @@ class WDSkillBlockView: UIView {
     }
     
     
-    
-    func isCanUse() {
-        if _model.haveLearn == 0{
-            skill_btn_1.isUserInteractionEnabled = false
-            skill_btn_2.isUserInteractionEnabled = false
-            skill_btn_1.alpha = 0.2
-            skill_btn_2.alpha = 0.2
-            initiative.alpha  = 0.2
-        }else{
-            skill_btn_1.isUserInteractionEnabled = true
-            skill_btn_2.isUserInteractionEnabled = true
-            skill_btn_1.alpha = 1
-            skill_btn_2.alpha = 1
-            initiative.alpha  = 1
-        }
-    }
+ 
   
     
     func boomAction() {
@@ -246,6 +278,9 @@ class WDSkillBlockView: UIView {
     func createSkillWithType(type:personSkillType)  {
         
         
+        //初始化一下玩家Model
+        self.userModel()
+        
         initFrame = self.frame
         skillType = type
         detailStr = "123"
@@ -306,6 +341,17 @@ class WDSkillBlockView: UIView {
     
 //******************* 选择技能的方法  ***********************//
    
+    func canSelectSkill() -> Bool {
+        if WDDataManager.shareInstance().canUseSkillPoint > 0{
+            return true
+        }else{
+            
+            let alertView = UIAlertView(title: "", message: "Lack of skill points", delegate: nil, cancelButtonTitle: "confirm")
+            alertView.show()
+            return false
+        }
+    }
+    
     func changeLabel()  {
         
         label_1.text = skillLevel1Str as String
@@ -317,6 +363,7 @@ class WDSkillBlockView: UIView {
         }
 
         self.changeModel()
+        self.changeUserModel()
 
     }
     
@@ -325,6 +372,10 @@ class WDSkillBlockView: UIView {
     ///
     /// - Parameter sender:
     @objc func boomAction(sender:UIButton)  {
+        
+        if !self.canSelectSkill() {
+            return
+        }
         
         if sender.tag == BTN_1_TAG {
             
@@ -362,8 +413,11 @@ class WDSkillBlockView: UIView {
     /// - Parameter sender:
     @objc func speedAction(sender:UIButton) {
         
+        if !self.canSelectSkill() {
+            return
+        }
+        
         if sender.tag == BTN_1_TAG {
-            
             
             skillLevel1 -= 5
             
@@ -373,10 +427,8 @@ class WDSkillBlockView: UIView {
             
             let dic:NSDictionary = ["50":"0/5\nReduce Waiting Time 5S","45":"1/5\nReduce Waiting Time 5S","40":"2/5\nReduce Waiting Time 5S","35":"3/5\nReduce Waiting Time 5S","30":"4/5\nReduce Waiting Time 5S","25":"5/5\nReduce Waiting Time 5S"]
             skillLevel1Str = dic.object(forKey: "\(skillLevel1)") as! String
-            
-            
+         
         }else{
-            
             
             skillLevel2 += 1
             if skillLevel2 >= 7 {
@@ -398,12 +450,12 @@ class WDSkillBlockView: UIView {
     /// - Parameter sender:
     @objc func blinkAction(sender:UIButton) {
   
-        
+        if !self.canSelectSkill() {
+            return
+        }
         
         if sender.tag == BTN_1_TAG {
-            
-          
-            
+  
             skillLevel1 -= 5
             
             if skillLevel1 <= 5{
@@ -412,11 +464,9 @@ class WDSkillBlockView: UIView {
             
             let dic:NSDictionary = ["30":"0/5\nReduce Waiting Time 5S","25":"1/5\nReduce Waiting Time 5S","20":"2/5\nReduce Waiting Time 5S","15":"3/5\nReduce Waiting Time 5S","10":"4/5\nReduce Waiting Time 5S","5":"5/5\nReduce Waiting Time 5S"]
             skillLevel1Str = dic.object(forKey: "\(skillLevel1)") as! String
-            
-
+   
         }else{
-            
-            
+   
             skillLevel2 += 20
             if skillLevel2 >= 300 {
                 skillLevel2 = 300
@@ -424,7 +474,6 @@ class WDSkillBlockView: UIView {
             
             let dic:NSDictionary = ["200":"0/5\nIncrease Distance 20","220":"1/5\nIncrease Distance 20","240":"2/5\nIncrease Distance 20","260":"3/5\nIncrease Distance 20","280":"4/5\nIncrease Distance 20","300":"5/5\nIncrease Distance 20"]
             skillLevel2Str = dic.object(forKey: "\(skillLevel2)") as! String
-     
         }
     
         detailStr = "Waiting Time:  \(skillLevel1)S \n Blink Distance: \(skillLevel2)" as String
@@ -475,13 +524,21 @@ class WDSkillBlockView: UIView {
     @objc func initiativeAction(sender:UIButton)  {
         
         if _model.haveLearn == 1{
+            let alertView = UIAlertView(title: "", message: "Finished learning", delegate: nil, cancelButtonTitle: "confirm")
+            alertView.show()
             return
         }
         
+        if !self.canSelectSkill() {
+            return
+        }
+        
+        
         _model.haveLearn = 1
+        sender.alpha = 1
         self.changeModel()
-        self.isCanUse()
-    
+        self.changeUserModel()
+        self.isSmallBtnCanUse(isCanUse: true, alpha: 1)
     }
     
 }

@@ -15,6 +15,17 @@ class WDSkillViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  
+       
+        let model:WDUserModel = WDUserModel.init()
+        if WDDataManager.shareInstance().openDB(){
+            if model.searchToDB(){
+                WDDataManager.shareInstance().canUseSkillPoint = model.skillCount
+            }
+        }
+        
+        WDDataManager.shareInstance().closeDB()
+       
+        
         let bgImage:UIImageView = UIImageView.init(frame: self.view.frame)
         bgImage.image = UIImage.init(named: "sun.jpg")
         self.view.addSubview(bgImage)

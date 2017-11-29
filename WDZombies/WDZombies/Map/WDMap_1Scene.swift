@@ -320,6 +320,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         if kulouNode != nil && fireNode != nil {
             kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
+            WDAnimationTool.bloodAnimation(node: kulouNode!)
             fireNode?.removeFromParent()
 
         }
