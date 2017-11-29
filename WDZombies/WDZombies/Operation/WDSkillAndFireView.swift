@@ -103,7 +103,7 @@ class WDSkillAndFireView: UIView {
         skillView.selectBegin = { (select : Bool, index:NSInteger) -> Void in
             
             //选中方法
-            self.tapAction!(skillView)
+            self.tapAction?(skillView)
             
         }
     }
@@ -126,6 +126,8 @@ class WDSkillAndFireView: UIView {
        skillBtn2?.frame = CGRect(x:WDTool.right(View: skillBtn1!) + page, y:y, width:width, height:width)
        skillBtn3?.frame = CGRect(x:WDTool.right(View: skillBtn2!) + page, y:y, width:width, height:width)
        skillBtn4?.frame = CGRect(x:WDTool.right(View: skillBtn3!) + page, y:y, width:width, height:width);
+        
+    
 
     }
     

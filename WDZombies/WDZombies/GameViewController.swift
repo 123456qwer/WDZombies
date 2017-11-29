@@ -39,7 +39,7 @@ class GameViewController: UIViewController {
                     defaults.set(1, forKey: "NewFile")
                 }
             }
-        
+
         WDDataManager.shareInstance().closeDB()
 
         }
@@ -118,6 +118,20 @@ class GameViewController: UIViewController {
         button.tag = 1
         bgScrollView.addSubview(button)
         
+        let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
+        backBtn.addTarget(self, action: #selector(backHomePage(sender:)), for: .touchUpInside)
+        backBtn.setTitle("back", for: .normal)
+        backBtn.backgroundColor = UIColor.orange
+        backBtn.tag = 456
+        self.view.addSubview(backBtn)
+        
+    }
+    
+    @objc func backHomePage(sender:UIButton)  {
+        sender.removeFromSuperview()
+        let bgScrollView = self.view.viewWithTag(234)
+        bgScrollView?.removeFromSuperview()
+        self.createBg()
     }
     
     
@@ -126,9 +140,10 @@ class GameViewController: UIViewController {
             mapName = "WDMap_1Scene"
         }
         
-        
+        let btn = self.view.viewWithTag(456)
         let scroll = self.view.viewWithTag(234)
         scroll?.removeFromSuperview()
+        btn?.removeFromSuperview()
         self.selectSkill()
     }
   

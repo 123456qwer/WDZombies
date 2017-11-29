@@ -10,6 +10,8 @@ import UIKit
 
 class WDSkillBlockView: UIView {
 
+    typealias changeFrame = (_ Bool : Bool) -> Void
+    
     let IMAGETAG = 100
     let DETAIL_LABEL_TAG = 400
     
@@ -24,7 +26,7 @@ class WDSkillBlockView: UIView {
     var gifName:String = "blink"
     
     var _model:WDSkillModel! = nil
-    
+    var changeFrameAction:changeFrame?
   
     
     var skillLevel1 = 0
@@ -39,7 +41,6 @@ class WDSkillBlockView: UIView {
     var skill_btn_2:UIButton! = nil
     
     var initiative:UIButton!  = nil
-    
     
 //********************  data  ********************************//
     func model(name:String) -> WDSkillModel {
@@ -89,6 +90,7 @@ class WDSkillBlockView: UIView {
         
         skill_btn_1 = UIButton.init(frame: CGRect(x:x,y:page ,width:width,height:width))
         skill_btn_1.backgroundColor = UIColor.blue
+        skill_btn_1.setBackgroundImage(UIImage.init(named: "reduceTime"), for: .normal)
         self.addSubview(skill_btn_1)
         
         let label_x = WDTool.right(View: detailBtn)
@@ -98,8 +100,8 @@ class WDSkillBlockView: UIView {
         label_1 = UILabel.init(frame: CGRect(x:WDTool.right(View: detailBtn) + 5,y:5,width:labelWidth,height:width))
         label_1.textAlignment = .center
         label_1.numberOfLines = 0
-        label_1.font = UIFont.systemFont(ofSize: 13)
-        label_1.backgroundColor = UIColor.blue
+        label_1.font = UIFont.boldSystemFont(ofSize: 13)
+        //label_1.backgroundColor = UIColor.blue
         self.addSubview(label_1)
         
         
@@ -111,12 +113,10 @@ class WDSkillBlockView: UIView {
         label_2 = UILabel.init(frame: CGRect(x:WDTool.right(View: detailBtn) + 5,y:WDTool.bottom(View: label_1) + 5,width:labelWidth,height:width))
         label_2.textAlignment = .center
         label_2.numberOfLines = 0
-        label_2.font = UIFont.systemFont(ofSize: 13)
-        label_2.backgroundColor = UIColor.blue
+        label_2.font = UIFont.boldSystemFont(ofSize: 13)
+        //label_2.backgroundColor = UIColor.blue
         self.addSubview(label_2)
         
-        WDTool.masksToCircle(View: skill_btn_1)
-        WDTool.masksToCircle(View: skill_btn_2)
         
         skill_btn_1.tag = BTN_1_TAG
         skill_btn_2.tag = BTN_2_TAG
@@ -137,6 +137,12 @@ class WDSkillBlockView: UIView {
         
         self.isCanUse()
     }
+    
+    func setBtn2BgImage(name:String)  {
+           skill_btn_2.setBackgroundImage(UIImage.init(named: name), for: .normal)
+    }
+    
+    
     
     func isCanUse() {
         if _model.haveLearn == 0{
@@ -162,6 +168,7 @@ class WDSkillBlockView: UIView {
         
         skill_btn_1.addTarget(self, action: #selector(boomAction(sender:)), for: .touchUpInside)
         skill_btn_2.addTarget(self, action: #selector(boomAction(sender:)), for: .touchUpInside)
+        self.setBtn2BgImage(name: "increaseBoom")
     }
     
     func speedAction() {
@@ -171,6 +178,7 @@ class WDSkillBlockView: UIView {
 
         skill_btn_1.addTarget(self, action: #selector(speedAction(sender:)), for: .touchUpInside)
         skill_btn_2.addTarget(self, action: #selector(speedAction(sender:)), for: .touchUpInside)
+        self.setBtn2BgImage(name: "holdTime")
     }
     
     
@@ -181,6 +189,7 @@ class WDSkillBlockView: UIView {
         
         skill_btn_1.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
         skill_btn_2.addTarget(self, action: #selector(blinkAction(sender:)), for: .touchUpInside)
+        self.setBtn2BgImage(name: "increaseDistance")
     }
     
     
@@ -193,7 +202,7 @@ class WDSkillBlockView: UIView {
         detailLabel.numberOfLines = 0
         detailLabel.font = UIFont.systemFont(ofSize: 25)
         detailLabel.text = detailStr as String?
-        detailLabel.backgroundColor = UIColor.blue
+        //detailLabel.backgroundColor = UIColor.white
         detailLabel.tag = self.DETAIL_LABEL_TAG
         self.addSubview(detailLabel)
     }
@@ -236,6 +245,7 @@ class WDSkillBlockView: UIView {
 //*****************  根据类型创建界面  ************************//
     func createSkillWithType(type:personSkillType)  {
         
+        
         initFrame = self.frame
         skillType = type
         detailStr = "123"
@@ -251,14 +261,18 @@ class WDSkillBlockView: UIView {
         initiative.alpha = 0.2
         self.addSubview(initiative)
         
-        WDTool.masksToCircle(View: initiative)
+       // WDTool.masksToCircle(View: initiative)
         
         
         detailBtn = UIButton.init(frame: CGRect(x:10,y:WDTool.bottom(View: initiative) + 5,width:width,height:40))
         detailBtn.backgroundColor = UIColor.blue
         detailBtn.setTitle("Detail", for: .normal)
         detailBtn.setTitle("Close", for: .selected)
+        
         detailBtn.addTarget(self, action: #selector(detailAction(sender:)), for: .touchUpInside)
+        detailBtn.layer.masksToBounds = true
+        detailBtn.layer.cornerRadius = 10
+        detailBtn.backgroundColor = self.backgroundColor?.withAlphaComponent(1.0)
         self.addSubview(detailBtn)
         
         
@@ -266,13 +280,18 @@ class WDSkillBlockView: UIView {
         case .Attack:
             break
         case .BLINK:
+            detailBtn.setTitleColor(UIColor.black, for: .normal)
             self.blinkAction()
             break
         case .SPEED:
             self.speedAction()
+            label_1.textColor = UIColor.white
+            label_2.textColor = UIColor.white
             break
         case .BOOM:
             self.boomAction()
+            label_1.textColor = UIColor.white
+            label_2.textColor = UIColor.white
             break
         case .Attack_distance:
             break
@@ -333,7 +352,7 @@ class WDSkillBlockView: UIView {
             
         }
         
-        detailStr = "Waiting Time: \(skillLevel1)S \n Increase Damage: \(skillLevel2)S" as String
+        detailStr = "Waiting Time: \(skillLevel1)S \n Increase Damage: \(skillLevel2)" as String
         self.changeLabel()
     }
   
@@ -422,7 +441,7 @@ class WDSkillBlockView: UIView {
        
         sender.isSelected = !sender.isSelected
         self.superview?.bringSubview(toFront: self)
-        
+      
         if sender.isSelected == true{
             
             UIView.animate(withDuration: 0.3, animations: {
@@ -431,8 +450,9 @@ class WDSkillBlockView: UIView {
                 
               self.createDetailLabel(sender: sender)
               self.createDetailImageView(sender: sender)
-                
             })
+            self.changeFrameAction?(true)
+            
             
         }else{
             
@@ -444,7 +464,8 @@ class WDSkillBlockView: UIView {
             detailLabel?.removeFromSuperview()
             let imageV = self.viewWithTag(IMAGETAG)
             imageV?.removeFromSuperview()
-            
+            self.changeFrameAction?(false)
+
         }
     }
     

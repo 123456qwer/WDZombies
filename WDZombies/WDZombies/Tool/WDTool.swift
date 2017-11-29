@@ -79,6 +79,11 @@ class WDTool: NSObject {
         View.layer.cornerRadius = View.frame.size.width / 2.0
     }
     
+    static func masksToSize(View:UIView,cornerRadius:CGFloat){
+        View.layer.masksToBounds = true
+        View.layer.cornerRadius = cornerRadius
+    }
+    
     /// 人物移动时增加速度特效也移动
     ///
     /// - Parameters:

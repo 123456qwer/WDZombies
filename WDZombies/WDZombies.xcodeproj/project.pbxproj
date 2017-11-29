@@ -51,6 +51,13 @@
 		434B4C411FB98A5B000A6566 /* map1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434B4C401FB98A5B000A6566 /* map1.png */; };
 		434B4C471FB98E77000A6566 /* WDBossNode_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B4C461FB98E77000A6566 /* WDBossNode_1.swift */; };
 		434B4C491FB98F40000A6566 /* WDBossBehavior_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B4C481FB98F40000A6566 /* WDBossBehavior_1.swift */; };
+		43551B0C1FCE3AF800B86587 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0B1FCE3AF800B86587 /* lock.png */; };
+		43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0D1FCE3F0D00B86587 /* skill_1.png */; };
+		43551B101FCE61C300B86587 /* sun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0F1FCE61C300B86587 /* sun.jpg */; };
+		43551B121FCE7F1900B86587 /* reduceTime.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B111FCE7F1900B86587 /* reduceTime.png */; };
+		43551B141FCE7FC600B86587 /* increaseDistance.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B131FCE7FC600B86587 /* increaseDistance.png */; };
+		43551B161FCE806800B86587 /* holdTime.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B151FCE806800B86587 /* holdTime.png */; };
+		43551B181FCE814200B86587 /* increaseBoom.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B171FCE814100B86587 /* increaseBoom.png */; };
 		435589801FA06DEF00C80CA8 /* WDPhysicalAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4355897F1FA06DEF00C80CA8 /* WDPhysicalAttribute.swift */; };
 		435589831FA0701500C80CA8 /* WDZombieNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435589821FA0701500C80CA8 /* WDZombieNode.swift */; };
 		435589851FA0706700C80CA8 /* WDZombieBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435589841FA0706700C80CA8 /* WDZombieBehavior.swift */; };
@@ -174,6 +181,13 @@
 		434B4C401FB98A5B000A6566 /* map1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map1.png; sourceTree = "<group>"; };
 		434B4C461FB98E77000A6566 /* WDBossNode_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBossNode_1.swift; sourceTree = "<group>"; };
 		434B4C481FB98F40000A6566 /* WDBossBehavior_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBossBehavior_1.swift; sourceTree = "<group>"; };
+		43551B0B1FCE3AF800B86587 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		43551B0D1FCE3F0D00B86587 /* skill_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skill_1.png; sourceTree = "<group>"; };
+		43551B0F1FCE61C300B86587 /* sun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sun.jpg; sourceTree = "<group>"; };
+		43551B111FCE7F1900B86587 /* reduceTime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reduceTime.png; sourceTree = "<group>"; };
+		43551B131FCE7FC600B86587 /* increaseDistance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = increaseDistance.png; sourceTree = "<group>"; };
+		43551B151FCE806800B86587 /* holdTime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = holdTime.png; sourceTree = "<group>"; };
+		43551B171FCE814100B86587 /* increaseBoom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = increaseBoom.png; sourceTree = "<group>"; };
 		4355897F1FA06DEF00C80CA8 /* WDPhysicalAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDPhysicalAttribute.swift; sourceTree = "<group>"; };
 		435589821FA0701500C80CA8 /* WDZombieNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDZombieNode.swift; sourceTree = "<group>"; };
 		435589841FA0706700C80CA8 /* WDZombieBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDZombieBehavior.swift; sourceTree = "<group>"; };
@@ -362,6 +376,7 @@
 		432F84CC1F99939A00F51146 /* BGPic */ = {
 			isa = PBXGroup;
 			children = (
+				43551B0F1FCE61C300B86587 /* sun.jpg */,
 				433F10D41FC3078500DECFBF /* boom.gif */,
 				433F10D21FC3045A00DECFBF /* speed.gif */,
 				433F10D01FC2FFB700DECFBF /* blink.gif */,
@@ -415,6 +430,12 @@
 		4348DC271F9D989C0072D030 /* SkillPic */ = {
 			isa = PBXGroup;
 			children = (
+				43551B171FCE814100B86587 /* increaseBoom.png */,
+				43551B151FCE806800B86587 /* holdTime.png */,
+				43551B131FCE7FC600B86587 /* increaseDistance.png */,
+				43551B0D1FCE3F0D00B86587 /* skill_1.png */,
+				43551B111FCE7F1900B86587 /* reduceTime.png */,
+				43551B0B1FCE3AF800B86587 /* lock.png */,
 				433B05081FB19CCB006210B2 /* boomAnimation.png */,
 				433B05091FB19CCB006210B2 /* boomBegin.png */,
 				4360090E1FA9642A006D48ED /* skillFrame.gif */,
@@ -650,6 +671,7 @@
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */,
 				4307E3701FA1DF0D00E1AD38 /* blood5.png in Resources */,
+				43551B101FCE61C300B86587 /* sun.jpg in Resources */,
 				433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */,
 				436799151FB054B400454274 /* FireFlies.sks in Resources */,
 				43563FA51FB3DB9F00D4BD46 /* RedNormalAttack.png in Resources */,
@@ -669,6 +691,7 @@
 				4348DC2F1F9D98B30072D030 /* addAttack.jpg in Resources */,
 				432F84CE1F9993E600F51146 /* starBG.jpg in Resources */,
 				43625F811FA1C62B00910ED0 /* NormalAttack.png in Resources */,
+				43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */,
 				43765FAC1FBAD65D006E37D2 /* boss1_att2_star3.png in Resources */,
 				43765FAB1FBAD65D006E37D2 /* boss1_att2_star2.png in Resources */,
 				4348DC301F9D98B30072D030 /* addDistance.jpg in Resources */,
@@ -697,7 +720,9 @@
 				4392CE241FA6BC0200A52D12 /* fireAc.png in Resources */,
 				4307E36F1FA1DF0D00E1AD38 /* blood8.png in Resources */,
 				4307E36C1FA1DF0C00E1AD38 /* blood7.png in Resources */,
+				43551B0C1FCE3AF800B86587 /* lock.png in Resources */,
 				43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */,
+				43551B141FCE7FC600B86587 /* increaseDistance.png in Resources */,
 				4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */,
 				43765FDA1FBAE6F5006E37D2 /* boss1Att2_right7.png in Resources */,
 				4307E36D1FA1DF0C00E1AD38 /* blood2.png in Resources */,
@@ -707,10 +732,12 @@
 				432F84BF1F998A5B00F51146 /* Assets.xcassets in Resources */,
 				4392CE211FA6B7AD00A52D12 /* NormalDied.png in Resources */,
 				43765FCC1FBAE53E006E37D2 /* boss1Att2_left3.png in Resources */,
+				43551B181FCE814200B86587 /* increaseBoom.png in Resources */,
 				433F10D11FC2FFB700DECFBF /* blink.gif in Resources */,
 				432F84C21F998A5B00F51146 /* LaunchScreen.storyboard in Resources */,
 				4348DC331F9D98B30072D030 /* blink.jpg in Resources */,
 				43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */,
+				43551B161FCE806800B86587 /* holdTime.png in Resources */,
 				43656BC41F9F1FCE001EFDA5 /* WDMap_1Scene.sks in Resources */,
 				43765FDB1FBAE6F5006E37D2 /* boss1Att2_right5.png in Resources */,
 				43563FA71FB3DDAE00D4BD46 /* RedNormalZom.png in Resources */,
@@ -727,6 +754,7 @@
 				43765FC81FBAE53E006E37D2 /* boss1Att2_left7.png in Resources */,
 				43656BBC1F9EDFED001EFDA5 /* smallCircle.png in Resources */,
 				436799131FB0543900454274 /* Bokeh.sks in Resources */,
+				43551B121FCE7F1900B86587 /* reduceTime.png in Resources */,
 				432F84B61F998A5B00F51146 /* Actions.sks in Resources */,
 				4348DC381F9DE7DA0072D030 /* starGame.png in Resources */,
 				43365B761FC2789000356D64 /* launchgifpic.gif in Resources */,

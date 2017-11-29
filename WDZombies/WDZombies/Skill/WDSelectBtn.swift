@@ -22,19 +22,18 @@ class WDSelectBtn: UIButton {
         _select = false
         
        
-        
-        
+
         
         self.backgroundColor = UIColor.yellow
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 20
+//        self.layer.masksToBounds = true
+//        self.layer.cornerRadius = 20
         
-        let imageView:UIImageView = UIImageView(frame:CGRect(x:0,y:0,width:frame.size.width,height:frame.size.height))
+        let imageView:UIImageView = UIImageView(frame:CGRect(x:3,y:3,width:frame.size.width - 6,height:frame.size.height - 6))
         imageView.image = WDTool.skillImage(skillType: _skillType)
         self.addSubview(imageView)
         
         let lockImage:UIImageView = UIImageView(frame:CGRect(x:5,y:5,width:frame.size.width - 10,height:frame.size.height - 10))
-        lockImage.image = UIImage.init(named: "starGame")
+        lockImage.image = UIImage.init(named: "lock")
         self.addSubview(lockImage)
         
         

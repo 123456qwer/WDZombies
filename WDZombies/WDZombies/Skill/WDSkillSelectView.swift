@@ -23,7 +23,7 @@ class WDSkillSelectView: UIScrollView ,UIScrollViewDelegate{
         
         let titleLabel:UILabel = UILabel(frame:CGRect(x:0,y:10,width:kScreenWidth,height:40))
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name:"Zapfino", size:30)
+        titleLabel.font = UIFont.systemFont(ofSize: 30)
         titleLabel.text = "INITIATIVE"
         titleLabel.textColor = UIColor.black
         titleLabel.backgroundColor = UIColor.orange
