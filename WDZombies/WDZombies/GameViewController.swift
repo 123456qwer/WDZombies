@@ -12,11 +12,14 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    let PLAY_BTN_TAG     = 160
+    let BG_IAMGEVIEW_TAG = 150
+    let SKILL_LABEL_TAG  = 170
     var skillAndFireView:WDSkillAndFireView! = nil
-    var skillSelectView :WDSkillSelectView!  = nil
     var moveView:WDMoveView!                 = nil
     var showScene:WDBaseScene!               = nil
-    var mapName:NSString!                    = nil
+    var mapName:String!                    = nil
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +55,15 @@ class GameViewController: UIViewController {
         let manager:WDMapManager = WDMapManager.sharedInstance
         manager.createX_Y(x: 2001, y: 1125)
         
+        //技能按钮界面
+        let rect2 = CGRect(x:kScreenWidth / 2.0,y:0,width:kScreenWidth / 2.0,height:kScreenHeight)
+        
+        if skillAndFireView == nil {
+            skillAndFireView = WDSkillAndFireView()
+            skillAndFireView.initWithFrame(frame: rect2)
+            self.view.addSubview(skillAndFireView)
+        }
+        
        //self.showScene(sceneName: mapName)
        self.createBg()
         
@@ -65,7 +77,7 @@ class GameViewController: UIViewController {
         let rect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:kScreenWidth,height:kScreenHeight))
         bgImageView.frame = rect
         bgImageView.isUserInteractionEnabled = true
-        bgImageView.tag = 150
+        bgImageView.tag = BG_IAMGEVIEW_TAG
         self.view.addSubview(bgImageView)
         
         
@@ -74,28 +86,52 @@ class GameViewController: UIViewController {
         selectMapBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:kScreenHeight / 3.0 - 80 / 2.0,width:120,height:80)
         selectMapBtn.addTarget(self, action: #selector(selectMap), for:.touchUpInside)
         selectMapBtn.setImage(UIImage(named:"starGame.png"), for: .normal)
-        //starBtn.backgroundColor = UIColor.green
         bgImageView.addSubview(selectMapBtn)
         
+        
+        
+        _ = WDDataManager.shareInstance().openDB()
+        let userModel:WDUserModel = WDUserModel.init()
+        _ = userModel.searchToDB()
+        WDDataManager.shareInstance().closeDB()
         
         
         //学习技能
         let learnSkillBtn:UIButton = UIButton(type:.custom)
         learnSkillBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:WDTool.bottom(View: selectMapBtn) + 10,width:120,height:80)
         learnSkillBtn.addTarget(self, action: #selector(learnSkill), for: .touchUpInside)
-        learnSkillBtn.backgroundColor = UIColor.green
-        learnSkillBtn.setTitle("LearnSkill", for: .normal)
+        learnSkillBtn.backgroundColor = UIColor.orange
+        learnSkillBtn.titleLabel?.numberOfLines = 0
+        learnSkillBtn.tag = SKILL_LABEL_TAG
+        learnSkillBtn.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
         bgImageView.addSubview(learnSkillBtn)
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let btn = self.view.viewWithTag(SKILL_LABEL_TAG)
+        if btn != nil{
+            
+            _ = WDDataManager.shareInstance().openDB()
+            let userModel:WDUserModel = WDUserModel.init()
+            _ = userModel.searchToDB()
+            WDDataManager.shareInstance().closeDB()
+            
+            let button:UIButton = btn as! UIButton
+            button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
+            
+        }
+        
+    }
     
     //技能选择
     @objc func learnSkill() {
     
+        
         let skillVC = WDSkillViewController.init()
         self.present(skillVC, animated: true) {
-            print(skillVC.skillCount)
         }
     
     }
@@ -103,103 +139,56 @@ class GameViewController: UIViewController {
     //地图选择
     @objc func selectMap() -> Void {
        
-        let scroll = self.view.viewWithTag(150)
-        scroll?.removeFromSuperview()
-        
-        let bgScrollView:UIScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
-        bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 2.0,height:kScreenHeight)
-        bgScrollView.tag = 234
-        self.view.addSubview(bgScrollView)
-        
-        let button:UIButton = UIButton.init(frame: CGRect(x:20,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
-        button.setImage(UIImage.init(named: "map1.png"), for: .normal)
-        button.addTarget(self, action: #selector(selectMapName(button:)), for: .touchUpInside)
-        button.tag = 1
-        bgScrollView.addSubview(button)
-        
-        let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
-        backBtn.addTarget(self, action: #selector(backHomePage(sender:)), for: .touchUpInside)
-        backBtn.setTitle("back", for: .normal)
-        backBtn.backgroundColor = UIColor.orange
-        backBtn.tag = 456
-        self.view.addSubview(backBtn)
-        
-    }
-    
-    @objc func backHomePage(sender:UIButton)  {
-        sender.removeFromSuperview()
-        let bgScrollView = self.view.viewWithTag(234)
-        bgScrollView?.removeFromSuperview()
-        self.createBg()
-    }
-    
-    
-    @objc func selectMapName(button:UIButton) -> Void {
-        if button.tag == 1 {
-            mapName = "WDMap_1Scene"
+        let mapVC = WDMapViewController.init()
+        self.present(mapVC, animated: true) {
+            
         }
         
-        let btn = self.view.viewWithTag(456)
-        let scroll = self.view.viewWithTag(234)
-        scroll?.removeFromSuperview()
-        btn?.removeFromSuperview()
-        self.selectSkill()
+        mapVC.disMiss = {(mapName:String) -> Void in
+            self.mapName = mapName
+            self.selectSkill()
+        }
+        
     }
-  
     
-    
+ 
     //技能选择
     @objc func selectSkill() -> Void {
        
-  
-        //技能按钮界面
-        let rect2 = CGRect(x:kScreenWidth / 2.0,y:0,width:kScreenWidth / 2.0,height:kScreenHeight)
+   
         
-        if skillAndFireView == nil {
-            skillAndFireView = WDSkillAndFireView()
-            skillAndFireView.initWithFrame(frame: rect2)
-            self.view.addSubview(skillAndFireView)
+        let selectSkillVC = WDSelectSkillVC.init()
+        self.present(selectSkillVC, animated: true) {
+            
         }
-       
+        
+    
         skillAndFireView.setSelectFrame()
    
         
-        
-        
-        //技能选择界面
-        if skillSelectView == nil {
-            skillSelectView = WDSkillSelectView()
-            skillSelectView.initWithFrame(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
-            skillSelectView.backgroundColor = UIColor.orange
-            self.view.insertSubview(skillSelectView, belowSubview: skillAndFireView)
-        }
-      
-        
-        skillSelectView.isHidden = false
-        skillAndFireView.isHidden = false
-
-        //开始游戏按妞
-        let starBtn:UIButton = UIButton(type:.custom)
-        starBtn.frame = CGRect(x:kScreenWidth - 120 / 2.0  - 20,y:10,width:60,height:40)
-        starBtn.addTarget(self, action: #selector(starGame), for:.touchUpInside)
-        starBtn.setImage(UIImage(named:"starGame.png"), for: .normal)
-        //starBtn.backgroundColor = UIColor.green
-        starBtn.tag = 500
-        starBtn.alpha = 1
-        self.view.addSubview(starBtn)
-        
-        
-        skillSelectView.selectAction = {(Bool:Bool,skillType:personSkillType,skillCount:NSInteger) ->Void in
-        
+        selectSkillVC.passAction = {(Bool:Bool ,skillType:personSkillType) -> Void in
             self.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
         }
         
+        selectSkillVC.removeBGAction = {() -> Void in
+            let bgScrollView = self.view.viewWithTag(self.BG_IAMGEVIEW_TAG)
+            bgScrollView?.removeFromSuperview()
+            self.skillAndFireView.isHidden = false
+
+        }
+        
+        selectSkillVC.disMiss = {() -> Void in
+            self.starGame()
+        }
+        
+        selectSkillVC.backDisMiss = {() -> Void in
+            self.skillAndFireView.isHidden = true
+        }
+      
     }
     
     
-
-    
+ 
     
     //游戏结束
     func gameOver() -> Void {
@@ -207,7 +196,6 @@ class GameViewController: UIViewController {
         moveView.isHidden = true
         skillAndFireView.isHidden = true
        
-        
         skillAndFireView.gameOverReload()
         self.createBg()
     }
@@ -216,8 +204,9 @@ class GameViewController: UIViewController {
     //开始游戏
     @objc func starGame() -> Void {
         
+     
         
-        //技能按钮界面位置改变
+        //技能按钮界面位置改变,增加技能Model
         skillAndFireView.setConfirmFrame()
         WDSkillManager.sharedInstance.initModelDic()
         
@@ -234,13 +223,7 @@ class GameViewController: UIViewController {
         }
         
         
-        //移除选择技能界面
-        skillSelectView.removeFromSuperview()
-        skillSelectView = nil
-        
-        //移除开始按钮
-        let starBtn:UIButton = self.view.viewWithTag(500) as! UIButton
-        starBtn.removeFromSuperview()
+
         
         //添加移动操作界面
         if moveView == nil {
@@ -268,7 +251,7 @@ class GameViewController: UIViewController {
     /// 跳转到场景
     ///
     /// - Parameter sceneName: 场景名字
-    func showScene(sceneName:NSString) -> Void {
+    func showScene(sceneName:String) -> Void {
         if let view = self.view as! SKView? {
             
                 if sceneName == "WDMap_1Scene" {

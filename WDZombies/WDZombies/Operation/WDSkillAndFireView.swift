@@ -37,6 +37,7 @@ class WDSkillAndFireView: UIView {
         let swiftArray: Array<WDSkillView> = [skillBtn1!,skillBtn2!,skillBtn3!,skillBtn4!]
         for skillBtn:WDSkillView in swiftArray {
             skillBtn.removeImageView()
+            skillBtn.removeSelectImage()
             skillBtn.isUserInteractionEnabled = false
         }
     }

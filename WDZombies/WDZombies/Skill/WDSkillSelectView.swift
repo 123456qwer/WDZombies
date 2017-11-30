@@ -17,16 +17,22 @@ class WDSkillSelectView: UIScrollView ,UIScrollViewDelegate{
     
     func initWithFrame(frame:CGRect) -> Void {
        
+       
+        
         self.delegate = self
         self.frame = frame
         selectCount = 0;
+        
+        let bgImage:UIImageView = UIImageView.init(frame: self.frame)
+        bgImage.image = UIImage.init(named: "sun.jpg")
+        self.addSubview(bgImage)
         
         let titleLabel:UILabel = UILabel(frame:CGRect(x:0,y:10,width:kScreenWidth,height:40))
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 30)
         titleLabel.text = "INITIATIVE"
-        titleLabel.textColor = UIColor.black
-        titleLabel.backgroundColor = UIColor.orange
+        titleLabel.textColor = UIColor.white
+        //titleLabel.backgroundColor = UIColor.orange
         titleLabel.isUserInteractionEnabled = true
         self.addSubview(titleLabel)
         

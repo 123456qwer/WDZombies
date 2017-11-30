@@ -51,6 +51,9 @@
 		434B4C411FB98A5B000A6566 /* map1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434B4C401FB98A5B000A6566 /* map1.png */; };
 		434B4C471FB98E77000A6566 /* WDBossNode_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B4C461FB98E77000A6566 /* WDBossNode_1.swift */; };
 		434B4C491FB98F40000A6566 /* WDBossBehavior_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434B4C481FB98F40000A6566 /* WDBossBehavior_1.swift */; };
+		43524CD01FCFE78100326EFF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 43524CCF1FCFE78000326EFF /* back.png */; };
+		43524CD21FCFEF0000326EFF /* WDMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43524CD11FCFEF0000326EFF /* WDMapViewController.swift */; };
+		43524CD41FCFF0CA00326EFF /* WDSelectSkillVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43524CD31FCFF0CA00326EFF /* WDSelectSkillVC.swift */; };
 		43551B0C1FCE3AF800B86587 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0B1FCE3AF800B86587 /* lock.png */; };
 		43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0D1FCE3F0D00B86587 /* skill_1.png */; };
 		43551B101FCE61C300B86587 /* sun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0F1FCE61C300B86587 /* sun.jpg */; };
@@ -183,6 +186,9 @@
 		434B4C401FB98A5B000A6566 /* map1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map1.png; sourceTree = "<group>"; };
 		434B4C461FB98E77000A6566 /* WDBossNode_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBossNode_1.swift; sourceTree = "<group>"; };
 		434B4C481FB98F40000A6566 /* WDBossBehavior_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBossBehavior_1.swift; sourceTree = "<group>"; };
+		43524CCF1FCFE78000326EFF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		43524CD11FCFEF0000326EFF /* WDMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMapViewController.swift; sourceTree = "<group>"; };
+		43524CD31FCFF0CA00326EFF /* WDSelectSkillVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSelectSkillVC.swift; sourceTree = "<group>"; };
 		43551B0B1FCE3AF800B86587 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		43551B0D1FCE3F0D00B86587 /* skill_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skill_1.png; sourceTree = "<group>"; };
 		43551B0F1FCE61C300B86587 /* sun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sun.jpg; sourceTree = "<group>"; };
@@ -332,6 +338,8 @@
 				432F84B51F998A5B00F51146 /* Actions.sks */,
 				432F84B71F998A5B00F51146 /* GameScene.swift */,
 				432F84B91F998A5B00F51146 /* GameViewController.swift */,
+				43524CD11FCFEF0000326EFF /* WDMapViewController.swift */,
+				43524CD31FCFF0CA00326EFF /* WDSelectSkillVC.swift */,
 				432F84BB1F998A5B00F51146 /* Main.storyboard */,
 				432F84BE1F998A5B00F51146 /* Assets.xcassets */,
 				432F84C01F998A5B00F51146 /* LaunchScreen.storyboard */,
@@ -457,6 +465,7 @@
 		4348DC361F9DE7CC0072D030 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				43524CCF1FCFE78000326EFF /* back.png */,
 				4348DC371F9DE7DA0072D030 /* starGame.png */,
 			);
 			path = Menus;
@@ -717,6 +726,7 @@
 				43765FD51FBAE6F5006E37D2 /* boss1Att2_right1.png in Resources */,
 				43765FCB1FBAE53E006E37D2 /* boss1Att2_left4.png in Resources */,
 				433B050A1FB19CCB006210B2 /* boomAnimation.png in Resources */,
+				43524CD01FCFE78100326EFF /* back.png in Resources */,
 				43765FA31FBACF61006E37D2 /* boss1_att2_5.png in Resources */,
 				43656BCD1F9F2055001EFDA5 /* railing_left.png in Resources */,
 				43E974D81FA978760065F6FF /* Assets.xcassets in Resources */,
@@ -786,6 +796,7 @@
 				43656BBF1F9F1D9C001EFDA5 /* WDBaseScene.swift in Sources */,
 				43551B1A1FCE969F00B86587 /* WDUserModel.swift in Sources */,
 				4376D1C31F9F2A47004E6188 /* WDMapManager.swift in Sources */,
+				43524CD41FCFF0CA00326EFF /* WDSelectSkillVC.swift in Sources */,
 				435589851FA0706700C80CA8 /* WDZombieBehavior.swift in Sources */,
 				43656BB91F9EDE47001EFDA5 /* WDMoveView.swift in Sources */,
 				4376D1BB1F9F286B004E6188 /* WDPersonNode.swift in Sources */,
@@ -800,6 +811,7 @@
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
 				435983641FC7A77700894AAD /* WDSkillModel.swift in Sources */,
 				43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */,
+				43524CD21FCFEF0000326EFF /* WDMapViewController.swift in Sources */,
 				43E9B9681FBED25F00A2DBF3 /* WDKulouBehavior.swift in Sources */,
 				43E9B9661FBECEE700A2DBF3 /* WDKulouNode.swift in Sources */,
 				434B4C491FB98F40000A6566 /* WDBossBehavior_1.swift in Sources */,
