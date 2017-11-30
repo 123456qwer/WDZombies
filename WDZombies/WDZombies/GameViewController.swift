@@ -179,7 +179,6 @@ class GameViewController: UIViewController {
         skillSelectView.isHidden = false
         skillAndFireView.isHidden = false
 
-        
         //开始游戏按妞
         let starBtn:UIButton = UIButton(type:.custom)
         starBtn.frame = CGRect(x:kScreenWidth - 120 / 2.0  - 20,y:10,width:60,height:40)
@@ -226,16 +225,13 @@ class GameViewController: UIViewController {
         skillAndFireView.tapAction = {(view:WDSkillView)->Void in
             
             //print(Bool,skillType,index)
-            
             if view.skillType == .Fire{
                 self.showScene.fireAction(direction: "")
             }
             
-            
             //技能释放
             WDSkillManager.sharedInstance.skillWithType(skillView: view, node:self.showScene.personNode)
         }
-        
         
         
         //移除选择技能界面

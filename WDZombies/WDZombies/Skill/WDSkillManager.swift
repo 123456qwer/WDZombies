@@ -48,7 +48,6 @@ class WDSkillManager: NSObject {
         }
         
         WDDataManager.shareInstance().closeDB()
-        
     }
     
     func skillWithType(skillView:WDSkillView,node:WDPersonNode) -> Void {
@@ -72,7 +71,6 @@ class WDSkillManager: NSObject {
         case .NoSelect?:
             
             break
-   
         case .Fire?:
             
             break
@@ -121,7 +119,6 @@ class WDSkillManager: NSObject {
         
         return  ["personNode":node,"imageView":imageView]
     }
-    
     
     
     //增加攻击

@@ -21,7 +21,6 @@ class WDPersonNode: WDBaseNode {
     }
     
     
-    
     func initWithPersonDic(dic:NSMutableDictionary) -> Void {
       
         personBehavior = WDPersonBehavior.init()
@@ -80,7 +79,6 @@ class WDPersonNode: WDBaseNode {
             self.wdSkillCount = model.skillCount
         }
         
-        self.createLevelUpNode()
     }
     
     
@@ -109,8 +107,16 @@ class WDPersonNode: WDBaseNode {
             upNode.size = CGSize(width:37,height:14)
             upNode.texture = texture
             upNode.run(action1, completion: {
-                upNode.removeFromParent()
                 
+                let model:WDUserModel = WDUserModel.init()
+                _ = WDDataManager.shareInstance().openDB()
+                _ = model.searchToDB()
+                model.skillCount += 1
+                _ = model.changeSkillToSqlite()
+                WDDataManager.shareInstance().closeDB()
+                
+                upNode.removeFromParent()
+                self.ggAction()
             })
         }
     }

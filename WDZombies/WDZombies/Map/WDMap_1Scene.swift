@@ -12,6 +12,11 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
+    static let ZOMCOUNT = 50
+    
+    
+    
+    
     var zomLink:UnsafePointer<Any> = UnsafePointer.init(bitPattern: 10)!
     var zomCount:NSInteger = 0
     var boss1Node:WDBossNode_1! = nil
@@ -28,6 +33,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.kulouMove(link:)))
         link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
         objc_setAssociatedObject(link, self.zomLink, kulouNode, objc_AssociationPolicy(rawValue: 01401)!)
+        
+        //骷髅死亡，可以升级加技能
+        kulouNode.behavior.alreadyDied = {() -> Void in
+            self.personNode.createLevelUpNode()
+        }
+        
     }
     
     @objc func kulouMove(link:CADisplayLink) {
@@ -39,6 +50,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: personNode.position)
         kulou.behavior.moveActionForKulou(direction: direction, personNode: personNode)
     }
+    
     
     func createBoss1() -> Void {
         
@@ -70,14 +82,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
      
         //50只僵尸
         self.zomCount += 1
-        if self.zomCount == 20 {
+        if self.zomCount == WDMap_1Scene.ZOMCOUNT {
+            self.createKulou()
             timer.invalidate()
         }
         
-        
         var arr:NSMutableArray! = nil
         var type:zomType = .Normal
-        
         
         if zomCount % 5 == 0 {
              arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
@@ -137,24 +148,14 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             }
             
             WDDataManager.shareInstance().closeDB()
-            
             self.createNodes()
-       
-//            let magic:SKSpriteNode = SKSpriteNode.init()
-//            magic.color = UIColor.yellow
-//            magic.position = CGPoint(x:200,y:200)
-//            magic.size = CGSize(width:20,height:20)
-//            magic.zPosition = 200
-//            bgNode.addChild(magic)
-            
             self.physicsWorld.contactDelegate = self
             
             Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
             let link = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
-            self.createKulou()
-
+    
             //self.createBoss1()
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)

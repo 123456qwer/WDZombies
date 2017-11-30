@@ -11,6 +11,11 @@ import SpriteKit
 
 class WDBaseNodeBehavior: NSObject {
 
+    
+    typealias diedReturn = () -> Void
+  
+    var alreadyDied:diedReturn?
+    
     func stopMoveAction(direction:NSString) -> Void {}
     func moveAction(direction:NSString) -> Void {}
     func attackAction(node:WDBaseNode) -> Void {}

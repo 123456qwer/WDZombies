@@ -19,11 +19,25 @@ class WDSkillAndFireView: UIView {
     var skillBtn4:WDSkillView?
     var tapAction:tapAction?
     
+    func starReload() -> Void {
+        let swiftArray: Array<WDSkillView> = [skillBtn1!,skillBtn2!,skillBtn3!,skillBtn4!]
+        for skillBtn:WDSkillView in swiftArray {
+            skillBtn.removeSelectImage()
+            skillBtn.addImageView()
+            skillBtn.isUserInteractionEnabled = true
+            if skillBtn.skillType == .NoSelect{
+                skillBtn.alpha = 0
+            }else{
+                skillBtn.alpha = 0.6
+            }
+        }
+    }
+    
     func gameOverReload() -> Void {
         let swiftArray: Array<WDSkillView> = [skillBtn1!,skillBtn2!,skillBtn3!,skillBtn4!]
         for skillBtn:WDSkillView in swiftArray {
             skillBtn.removeImageView()
-            
+            skillBtn.isUserInteractionEnabled = false
         }
     }
     
@@ -104,7 +118,7 @@ class WDSkillAndFireView: UIView {
             
             //选中方法
             self.tapAction?(skillView)
-            
+
         }
     }
     
@@ -122,12 +136,13 @@ class WDSkillAndFireView: UIView {
        let page = (kScreenWidth - width * 4 ) / 5.0
        let y = (WDTool.height(View:self) - width)/2.0
         
+        
        skillBtn1?.frame = CGRect(x:page, y:y, width:width, height:width)
        skillBtn2?.frame = CGRect(x:WDTool.right(View: skillBtn1!) + page, y:y, width:width, height:width)
        skillBtn3?.frame = CGRect(x:WDTool.right(View: skillBtn2!) + page, y:y, width:width, height:width)
        skillBtn4?.frame = CGRect(x:WDTool.right(View: skillBtn3!) + page, y:y, width:width, height:width);
         
-    
+       self.gameOverReload()
 
     }
     
@@ -138,18 +153,7 @@ class WDSkillAndFireView: UIView {
     func setConfirmFrame() -> Void {
         
        //删除旧image,添加新image
-        let swiftArray: Array<WDSkillView> = [skillBtn1!,skillBtn2!,skillBtn3!,skillBtn4!]
-        for skillBtn:WDSkillView in swiftArray {
-            skillBtn.removeSelectImage()
-            skillBtn.addImageView()
-            skillBtn.isUserInteractionEnabled = true
-            if skillBtn.skillType == .NoSelect{
-                skillBtn.alpha = 0
-            }else{
-                skillBtn.alpha = 0.6
-            }
-        }
-        
+        self.starReload()
         
         let dis:CGFloat = smallBtn / 2.0 + bigBtn / 2.0;
         let distance:CGFloat = sqrt(dis * dis / 2.0);
