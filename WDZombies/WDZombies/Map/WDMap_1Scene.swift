@@ -74,7 +74,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             timer.invalidate()
         }
         
-
         
         var arr:NSMutableArray! = nil
         var type:zomType = .Normal
@@ -283,7 +282,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
            
             boss1Node?.bossBehavior.stopMoveAction(direction: "")
             boss1Node?.bossBehavior.attackAction(node: personNode)
-          
         }
         
         
