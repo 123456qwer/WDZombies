@@ -103,7 +103,8 @@ class WDSkillViewController: UIViewController {
         bgScrollView.isPagingEnabled = true
         self.view.addSubview(bgScrollView)
         bgScrollView.contentSize = CGSize(width:kScreenWidth * 5,height:0)
-        
+        bgScrollView.bounces = false
+
        
         let model:WDUserModel = WDUserModel.init()
         if WDDataManager.shareInstance().openDB(){

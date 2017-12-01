@@ -25,6 +25,7 @@ class WDMapViewController: UIViewController {
         let bgScrollView:UIScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
         bgScrollView.contentSize = CGSize(width:kScreenWidth * 2.0,height:kScreenHeight)
+        bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
         let button:UIButton = UIButton.init(frame: CGRect(x:20,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
