@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     var showScene:WDBaseScene!               = nil
     var mapName:String!                    = nil
     
-
+//********************生命周期*********************************//
     override func viewDidLoad() {
         super.viewDidLoad()
    
@@ -69,10 +69,27 @@ class GameViewController: UIViewController {
         
     }
     
-    //开始菜单
-    func createBg() -> Void {
-      
+    override func viewWillAppear(_ animated: Bool) {
         
+        super.viewWillAppear(animated)
+        let btn = self.view.viewWithTag(SKILL_LABEL_TAG)
+        if btn != nil{
+            
+            _ = WDDataManager.shareInstance().openDB()
+            let userModel:WDUserModel = WDUserModel.init()
+            _ = userModel.searchToDB()
+            WDDataManager.shareInstance().closeDB()
+            
+            let button:UIButton = btn as! UIButton
+            button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
+            
+        }
+    }
+    
+//*********************操作界面******************************//
+    //主界面
+    func createBg(){
+      
         let bgImageView = UIImageView(image:UIImage(named:"starBG.jpg"))
         let rect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:kScreenWidth,height:kScreenHeight))
         bgImageView.frame = rect
@@ -87,8 +104,7 @@ class GameViewController: UIViewController {
         selectMapBtn.addTarget(self, action: #selector(selectMap), for:.touchUpInside)
         selectMapBtn.setImage(UIImage(named:"starGame.png"), for: .normal)
         bgImageView.addSubview(selectMapBtn)
-        
-        
+      
         
         _ = WDDataManager.shareInstance().openDB()
         let userModel:WDUserModel = WDUserModel.init()
@@ -106,66 +122,43 @@ class GameViewController: UIViewController {
         learnSkillBtn.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
         bgImageView.addSubview(learnSkillBtn)
         
+        //怪物图鉴
+        let monseterBtn:UIButton = UIButton(type:.custom)
+        monseterBtn.frame = CGRect(x:20,y:WDTool.bottom(View: selectMapBtn) + 10,width:120,height:80)
+        monseterBtn.addTarget(self, action: #selector(showMonster), for: .touchUpInside)
+        monseterBtn.backgroundColor = UIColor.orange
+        monseterBtn.titleLabel?.numberOfLines = 0
+        monseterBtn.tag = SKILL_LABEL_TAG
+        monseterBtn.setTitle("Monster", for: .normal)
+        bgImageView.addSubview(monseterBtn)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let btn = self.view.viewWithTag(SKILL_LABEL_TAG)
-        if btn != nil{
-            
-            _ = WDDataManager.shareInstance().openDB()
-            let userModel:WDUserModel = WDUserModel.init()
-            _ = userModel.searchToDB()
-            WDDataManager.shareInstance().closeDB()
-            
-            let button:UIButton = btn as! UIButton
-            button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
-            
-        }
-        
-    }
-    
-    //技能选择
+    //技能学习
     @objc func learnSkill() {
-    
         
         let skillVC = WDSkillViewController.init()
-        self.present(skillVC, animated: true) {
-        }
-    
+        self.present(skillVC, animated: true) {}
     }
     
     //地图选择
     @objc func selectMap() -> Void {
-       
+        
         let mapVC = WDMapViewController.init()
-        self.present(mapVC, animated: true) {
-            
-        }
+        self.present(mapVC, animated: true) {}
         
         mapVC.disMiss = {(mapName:String) -> Void in
             self.mapName = mapName
             self.selectSkill()
         }
-        
     }
     
- 
     //技能选择
-    @objc func selectSkill() -> Void {
-       
-   
+    @objc func selectSkill() {
         
         let selectSkillVC = WDSelectSkillVC.init()
-        self.present(selectSkillVC, animated: true) {
-            
-        }
-        
-    
+        self.present(selectSkillVC, animated: true) {}
+  
         skillAndFireView.setSelectFrame()
-   
-        
         selectSkillVC.passAction = {(Bool:Bool ,skillType:personSkillType) -> Void in
             self.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
         }
@@ -174,7 +167,6 @@ class GameViewController: UIViewController {
             let bgScrollView = self.view.viewWithTag(self.BG_IAMGEVIEW_TAG)
             bgScrollView?.removeFromSuperview()
             self.skillAndFireView.isHidden = false
-
         }
         
         selectSkillVC.disMiss = {() -> Void in
@@ -184,27 +176,17 @@ class GameViewController: UIViewController {
         selectSkillVC.backDisMiss = {() -> Void in
             self.skillAndFireView.isHidden = true
         }
-      
     }
     
-    
- 
-    
-    //游戏结束
-    func gameOver() -> Void {
+    //怪物简介
+    @objc func showMonster(){
         
-        moveView.isHidden = true
-        skillAndFireView.isHidden = true
-       
-        skillAndFireView.gameOverReload()
-        self.createBg()
+        let monsterVC = WDMonsterVC.init()
+        self.present(monsterVC, animated: true) {}
     }
-    
-    
+ 
     //开始游戏
     @objc func starGame() -> Void {
-        
-     
         
         //技能按钮界面位置改变,增加技能Model
         skillAndFireView.setConfirmFrame()
@@ -223,14 +205,12 @@ class GameViewController: UIViewController {
         }
         
         
-
-        
         //添加移动操作界面
         if moveView == nil {
             moveView = WDMoveView()
             moveView.initWithFrame(frame: CGRect(x:0,y:0,width:kScreenWidth / 2.0,height:kScreenHeight))
             self.view.addSubview(moveView)
-           
+            
             //移动方法
             moveView.moveAction = {(direction:NSString) -> Void in
                 self.showScene.moveAction(direction: direction)
@@ -241,13 +221,22 @@ class GameViewController: UIViewController {
                 self.showScene.stopMoveAction(direction: direction)
             }
         }
-      
+        
         moveView.isHidden = false
         //显示场景
         self.showScene(sceneName: mapName)
     }
     
-    
+    //游戏结束
+    func gameOver() -> Void {
+        
+        moveView.isHidden = true
+        skillAndFireView.isHidden = true
+       
+        skillAndFireView.gameOverReload()
+        self.createBg()
+    }
+ 
     /// 跳转到场景
     ///
     /// - Parameter sceneName: 场景名字
@@ -274,7 +263,7 @@ class GameViewController: UIViewController {
     
 
 
-    
+//******************系统方法*************************************//
     override var shouldAutorotate: Bool {
         return true
     }

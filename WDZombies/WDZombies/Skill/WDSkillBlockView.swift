@@ -10,7 +10,6 @@ import UIKit
 
 class WDSkillBlockView: UIView {
 
-    typealias changeFrame = (_ Bool : Bool) -> Void
     
     let IMAGETAG = 100
     let DETAIL_LABEL_TAG = 400
@@ -27,7 +26,6 @@ class WDSkillBlockView: UIView {
     
     var _model:WDSkillModel! = nil
     var _userModel:WDUserModel! = nil
-    var changeFrameAction:changeFrame?
   
     
     var skillLevel1 = 0
@@ -500,8 +498,8 @@ class WDSkillBlockView: UIView {
               self.createDetailLabel(sender: sender)
               self.createDetailImageView(sender: sender)
             })
-            self.changeFrameAction?(true)
             
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: CHANGE_SKILLVIEW_FRAME_NOTIFICATION), object: self, userInfo: ["select":1,"view":self])
             
         }else{
             
@@ -513,8 +511,8 @@ class WDSkillBlockView: UIView {
             detailLabel?.removeFromSuperview()
             let imageV = self.viewWithTag(IMAGETAG)
             imageV?.removeFromSuperview()
-            self.changeFrameAction?(false)
-
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: CHANGE_SKILLVIEW_FRAME_NOTIFICATION), object: self, userInfo: ["select":0,"view":self])
         }
     }
     

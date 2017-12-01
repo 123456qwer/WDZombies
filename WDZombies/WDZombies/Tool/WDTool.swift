@@ -47,7 +47,7 @@ public let kRU:NSString = String("kRU") as NSString
 public let kRD:NSString = String("kRD") as NSString
 
 
-
+public let CHANGE_SKILLVIEW_FRAME_NOTIFICATION = "CHANGE_SKILLVIEW_FRAME_NOTIFICATION"
 
 class WDTool: NSObject {
     static func kScreenWidth() -> CGFloat {

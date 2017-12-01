@@ -103,7 +103,7 @@ class WDPersonNode: WDBaseNode {
         upNode.position = CGPoint(x:0,y:upNode.size.height + 30)
         upNode.run(repeatA) {
             
-            let action1 = SKAction.fadeAlpha(to: 0, duration: 1.5)
+            let action1 = SKAction.fadeAlpha(to: 0, duration: 1.0)
             upNode.size = CGSize(width:37,height:14)
             upNode.texture = texture
             upNode.run(action1, completion: {

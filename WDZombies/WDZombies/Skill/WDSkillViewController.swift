@@ -11,24 +11,14 @@ import UIKit
 class WDSkillViewController: UIViewController {
 
     var skillCount = 0
+    var bgScrollView:UIScrollView! = nil
+    var skillViewArr:NSMutableArray! = nil
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
- 
-       
-        let model:WDUserModel = WDUserModel.init()
-        if WDDataManager.shareInstance().openDB(){
-            if model.searchToDB(){
-                WDDataManager.shareInstance().canUseSkillPoint = model.skillCount
-            }
-        }
-        
-        WDDataManager.shareInstance().closeDB()
-       
-        
-        let bgImage:UIImageView = UIImageView.init(frame: self.view.frame)
-        bgImage.image = UIImage.init(named: "sun.jpg")
-        self.view.addSubview(bgImage)
+    func createSkill1() {
+        let bgImage1:UIImageView = UIImageView.init(frame: self.view.frame)
+        bgImage1.image = UIImage.init(named: "sun.jpg")
+        bgImage1.isUserInteractionEnabled = true
+        bgScrollView.addSubview(bgImage1)
         
         self.view.backgroundColor = UIColor.orange
         skillCount = 5
@@ -41,34 +31,23 @@ class WDSkillViewController: UIViewController {
         let skillView1 = WDSkillBlockView.init(frame: CGRect(x:page,y:page,width:width,height:height))
         skillView1.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         WDTool.masksToSize(View: skillView1, cornerRadius: 10)
-        self.view.addSubview(skillView1)
-        
-        
-//        let skillView2 = WDSkillBlockView.init(frame: CGRect(x:WDTool.right(View: skillView1) + page ,y:page,width:width,height:height))
-//        skillView2.backgroundColor = UIColor.yellow
-//        self.view.addSubview(skillView2)
+        bgImage1.addSubview(skillView1)
         
         let skillView3 = WDSkillBlockView.init(frame: CGRect(x:page,y:WDTool.bottom(View: skillView1) + page,width:width,height:height))
         skillView3.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         WDTool.masksToSize(View: skillView3, cornerRadius: 10)
-        self.view.addSubview(skillView3)
+        bgImage1.addSubview(skillView3)
         
         let skillView4 = WDSkillBlockView.init(frame: CGRect(x:WDTool.right(View: skillView1) + page,y:WDTool.bottom(View: skillView1) + page,width:width,height:height))
         skillView4.backgroundColor = UIColor.purple.withAlphaComponent(0.5)
         WDTool.masksToSize(View: skillView4, cornerRadius: 10)
-        self.view.addSubview(skillView4)
-        
+        bgImage1.addSubview(skillView4)
         
         
         skillView1.createSkillWithType(type: .BLINK)
-        //skillView2.createSkillWithType(type: .Attack)
         skillView3.createSkillWithType(type: .SPEED)
         skillView4.createSkillWithType(type: .BOOM)
-        
-        
-       
-        
-        
+ 
         let confirmBtn:UIButton = UIButton.init(frame: CGRect(x:WDTool.right(View: skillView1) + page ,y:page,width:width,height:height))
         confirmBtn.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         confirmBtn.layer.masksToBounds = true
@@ -76,53 +55,66 @@ class WDSkillViewController: UIViewController {
         confirmBtn.setTitle("Confirm", for: .normal)
         confirmBtn.setTitleColor(UIColor.black, for: .normal)
         confirmBtn.addTarget(self, action: #selector(confirmAction(sender:)), for: .touchUpInside)
-        self.view.addSubview(confirmBtn)
+        bgImage1.addSubview(confirmBtn)
         
+        skillViewArr.add(skillView1)
+        skillViewArr.add(confirmBtn)
+        skillViewArr.add(skillView3)
+        skillViewArr.add(skillView4)
+  
+    }
+    
+    
+    @objc func confirmAction(sender:UIButton)  {
+        self.dismiss(animated: true) {}
+    }
+    
+    @objc func notificationAction(notification:NSNotification)  {
         
-        skillView1.changeFrameAction = {(Bool:Bool) ->Void in
-            if Bool == true{
-                skillView3.alpha = 0
-                skillView4.alpha = 0
-                confirmBtn.alpha = 0
-
+        let dic:NSDictionary = notification.userInfo! as NSDictionary
+        
+        let bool:Int = dic.object(forKey: "select") as! Int
+        let view:WDSkillBlockView = dic.object(forKey: "view") as! WDSkillBlockView
+        
+        for index:NSInteger in 0...skillViewArr.count - 1 {
+            let V:UIView = skillViewArr.object(at: index) as! UIView
+            if bool == 1 {
+                if V != view{
+                    V.alpha = 0
+                }
             }else{
-                skillView3.alpha = 1
-                skillView4.alpha = 1
-                confirmBtn.alpha = 1
-            }
-        }
-        
-        skillView3.changeFrameAction = {(Bool:Bool) ->Void in
-            if Bool == true{
-                skillView1.alpha = 0
-                skillView4.alpha = 0
-                confirmBtn.alpha = 0
-
-            }else{
-                skillView1.alpha = 1
-                skillView4.alpha = 1
-                confirmBtn.alpha = 1
-            }
-        }
-        
-        skillView4.changeFrameAction = {(Bool:Bool) ->Void in
-            if Bool == true{
-                skillView1.alpha = 0
-                skillView3.alpha = 0
-                confirmBtn.alpha = 0
-            }else{
-                skillView1.alpha = 1
-                skillView3.alpha = 1
-                confirmBtn.alpha = 1
+                V.alpha = 1
             }
         }
     }
-
     
-    @objc func confirmAction(sender:UIButton)  {
-        self.dismiss(animated: true) {
-            
+    override func viewDidLoad() {
+        super.viewDidLoad()
+ 
+        let bgImage1:UIImageView = UIImageView.init(frame: self.view.frame)
+        bgImage1.image = UIImage.init(named: "sun.jpg")
+        self.view.addSubview(bgImage1)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationAction(notification:)), name: NSNotification.Name(rawValue: CHANGE_SKILLVIEW_FRAME_NOTIFICATION), object: nil)
+        skillViewArr = NSMutableArray.init()
+        
+        
+        bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
+        bgScrollView.isPagingEnabled = true
+        self.view.addSubview(bgScrollView)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 5,height:0)
+        
+       
+        let model:WDUserModel = WDUserModel.init()
+        if WDDataManager.shareInstance().openDB(){
+            if model.searchToDB(){
+                WDDataManager.shareInstance().canUseSkillPoint = model.skillCount
+            }
         }
+        
+        
+        WDDataManager.shareInstance().closeDB()
+        self.createSkill1()
     }
     
     override func didReceiveMemoryWarning() {
@@ -131,20 +123,11 @@ class WDSkillViewController: UIViewController {
     }
     
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.dismiss(animated: true) {
-//            
-//        }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: CHANGE_SKILLVIEW_FRAME_NOTIFICATION), object: nil)
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
