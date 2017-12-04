@@ -60,7 +60,8 @@ class WDSelectBtn: UIButton {
             lockImage.isHidden = false
             self.isUserInteractionEnabled = false
         }
-        WDDataManager.shareInstance().closeDB()
+        
+        //WDDataManager.shareInstance().closeDB()
         
     }
     

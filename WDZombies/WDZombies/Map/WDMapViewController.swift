@@ -34,6 +34,8 @@ class WDMapViewController: UIViewController {
         button.addTarget(self, action: #selector(selectMapName(sender:)), for: .touchUpInside)
         bgScrollView.addSubview(button)
         
+        WDTool.masksToSize(View: button, cornerRadius: 10)
+        
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
         backBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         backBtn.setImage(UIImage.init(named: "back"), for: .normal)
@@ -59,7 +61,10 @@ class WDMapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    deinit {
+        print("地图VC被销毁了！！！")
+    }
+    
     /*
     // MARK: - Navigation
 

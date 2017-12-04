@@ -74,11 +74,21 @@ class WDTool: NSObject {
         return View.frame.size.height
     }
     
+    
+    /// 切割成圆形
+    ///
+    /// - Parameter View: <#View description#>
     static func masksToCircle(View:UIView) {
         View.layer.masksToBounds = true
         View.layer.cornerRadius = View.frame.size.width / 2.0
     }
     
+    
+    /// 切割想要的圆角
+    ///
+    /// - Parameters:
+    ///   - View:
+    ///   - cornerRadius: 
     static func masksToSize(View:UIView,cornerRadius:CGFloat){
         View.layer.masksToBounds = true
         View.layer.cornerRadius = cornerRadius

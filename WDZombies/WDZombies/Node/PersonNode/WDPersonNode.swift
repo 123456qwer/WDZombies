@@ -18,8 +18,28 @@ class WDPersonNode: WDBaseNode {
     
     deinit {
         self.removeObserver(personBehavior, forKeyPath: "position")
+        self.moveDic.removeAllObjects()
+        self.fireDic.removeAllObjects()
+        self.boomBoomArr.removeAllObjects()
+        
+        self.moveDic = nil
+        self.fireDic = nil
+        self.boomBoomArr = nil
+        print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
+        
     }
     
+    func setPhy() -> Void {
+        self.physicsBody?.categoryBitMask = player_type;
+        self.physicsBody?.contactTestBitMask = normal_zom;
+        self.physicsBody?.collisionBitMask = player_type;
+    }
+    
+    func removePhy() -> Void {
+        self.physicsBody?.categoryBitMask = 0;
+        self.physicsBody?.contactTestBitMask = 0;
+        self.physicsBody?.collisionBitMask = 0;
+    }
     
     func initWithPersonDic(dic:NSMutableDictionary) -> Void {
       
@@ -109,14 +129,14 @@ class WDPersonNode: WDBaseNode {
             upNode.run(action1, completion: {
                 
                 let model:WDUserModel = WDUserModel.init()
-                _ = WDDataManager.shareInstance().openDB()
+                //_ = WDDataManager.shareInstance().openDB()
                 _ = model.searchToDB()
                 model.skillCount += 1
                 _ = model.changeSkillToSqlite()
                 WDDataManager.shareInstance().closeDB()
                 
                 upNode.removeFromParent()
-                self.ggAction()
+                //self.ggAction()
             })
         }
     }

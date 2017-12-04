@@ -107,14 +107,14 @@ class WDSkillViewController: UIViewController {
 
        
         let model:WDUserModel = WDUserModel.init()
-        if WDDataManager.shareInstance().openDB(){
+        //if WDDataManager.shareInstance().openDB(){
             if model.searchToDB(){
                 WDDataManager.shareInstance().canUseSkillPoint = model.skillCount
             }
-        }
+        //}
         
         
-        WDDataManager.shareInstance().closeDB()
+        //WDDataManager.shareInstance().closeDB()
         self.createSkill1()
     }
     
@@ -123,10 +123,11 @@ class WDSkillViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+  
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: CHANGE_SKILLVIEW_FRAME_NOTIFICATION), object: nil)
+        print("技能学习VC被销毁了！！！")
     }
     
 

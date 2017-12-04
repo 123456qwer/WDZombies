@@ -21,6 +21,17 @@ class WDZombieNode: WDBaseNode {
         
     }
     
+    deinit {
+        
+        self.moveDic.removeAllObjects()
+        self.attackDic.removeAllObjects()
+        self.diedArr.removeAllObjects()
+        
+        self.moveDic = nil
+        self.attackDic = nil
+        self.diedArr = nil
+        print("怪物node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
+    }
     
     /// 移除物理碰撞
     func removePhy() -> Void {

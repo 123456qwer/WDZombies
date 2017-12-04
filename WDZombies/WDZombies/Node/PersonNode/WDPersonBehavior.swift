@@ -59,7 +59,11 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     func reduceBlood(number:CGFloat)  {
         personNode.wdBlood -= number
         if personNode.wdBlood <= 0 {
-            personNode.ggAction()
+            let diedAction = SKAction.fadeAlpha(to: 0, duration: 0.5)
+            personNode.removePhy()
+            personNode.run(diedAction, completion: {
+                self.personNode.ggAction()
+            })
             return
         }
         

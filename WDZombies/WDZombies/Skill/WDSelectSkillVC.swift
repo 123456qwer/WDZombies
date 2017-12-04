@@ -64,27 +64,42 @@ class WDSelectSkillVC: UIViewController {
         backBtn.setImage(UIImage.init(named: "back"), for: .normal)
         self.view.addSubview(backBtn)
         backBtn.tag = BACK_BTN_TAG
-        skillSelectView.selectAction = {(Bool:Bool,skillType:personSkillType,skillCount:NSInteger) ->Void in
-            self.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
-            self.passAction(Bool,skillType)
-        }
         
+        weak var weakSelf = self
+        skillSelectView.selectAction = {(Bool:Bool,skillType:personSkillType,skillCount:NSInteger) ->Void in
+            weakSelf?.weakAction(Bool: Bool,skillType: skillType)
+        }
         
     }
     
+    func weakAction(Bool: Bool, skillType: personSkillType)  {
+        self.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
+        self.passAction(Bool,skillType)
+    }
+    
     func removeBtn()  {
-        let btn1 = self.view.viewWithTag(BACK_BTN_TAG)
-        let btn2 = self.view.viewWithTag(PLAY_BTN_TAG)
+        var btn1 = self.view.viewWithTag(BACK_BTN_TAG)
+        var btn2 = self.view.viewWithTag(PLAY_BTN_TAG)
         btn1?.removeFromSuperview()
         btn2?.removeFromSuperview()
+        
+        btn1 = nil
+        btn2 = nil
+        
+        let skillSelectView = self.view.viewWithTag(SELECT_SKILL_TAG)
+        skillSelectView?.removeFromSuperview()
+        skillAndFireView.removeFromSuperview()
+        skillAndFireView = nil
     }
     
     @objc func backAction(){
         
-        //self.removeBtn()
-        
-      
+        self.removeBtn()
         self.backDisMiss()
+       
+        self.backDisMiss = nil
+        self.disMiss = nil
+        
         self.dismiss(animated: true) {
           
         }
@@ -92,19 +107,17 @@ class WDSelectSkillVC: UIViewController {
     
     @objc func starGame()  {
         
-//        self.removeBtn()
-
-//        let skillSelectView = self.view.viewWithTag(SELECT_SKILL_TAG)
-//        skillSelectView?.removeFromSuperview()
-//        skillAndFireView.removeFromSuperview()
-//        skillAndFireView = nil
+        self.removeBtn()
+        
         self.removeBGAction()
         self.dismiss(animated: false) {
             self.disMiss()
         }
     }
 
-    
+    deinit {
+        print("选技能VC被销毁了！！！")
+    }
    
     
     

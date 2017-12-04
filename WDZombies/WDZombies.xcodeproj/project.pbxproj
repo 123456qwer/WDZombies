@@ -73,6 +73,18 @@
 		434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5AA31FD130FA00C921AF /* WDBossNode_1.swift */; };
 		434C5AA71FD131A000C921AF /* WDMonsterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5AA61FD131A000C921AF /* WDMonsterView.swift */; };
 		434C5AA91FD13F4B00C921AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 434C5AA81FD13F4B00C921AF /* Assets.xcassets */; };
+		434D58741FD547BF00253903 /* monster_1_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58701FD547BE00253903 /* monster_1_attack.png */; };
+		434D58751FD547BF00253903 /* monster_2_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58711FD547BE00253903 /* monster_2_attack.png */; };
+		434D58761FD547BF00253903 /* monster_3_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58721FD547BE00253903 /* monster_3_attack.png */; };
+		434D58771FD547BF00253903 /* monster_4_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58731FD547BF00253903 /* monster_4_attack.png */; };
+		434D587A1FD54AEC00253903 /* monster_1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58781FD54AEC00253903 /* monster_1_move.png */; };
+		434D587B1FD54AEC00253903 /* monster_2_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58791FD54AEC00253903 /* monster_2_move.png */; };
+		434D587E1FD54C4900253903 /* monster_2_move_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D587C1FD54C4900253903 /* monster_2_move_red.png */; };
+		434D587F1FD54C4900253903 /* monster_1_move_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D587D1FD54C4900253903 /* monster_1_move_red.png */; };
+		434D58841FD54D4F00253903 /* monster_1_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58801FD54D4E00253903 /* monster_1_attack_red.png */; };
+		434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58811FD54D4E00253903 /* monster_3_attack_red.png */; };
+		434D58861FD54D4F00253903 /* monster_4_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58821FD54D4F00253903 /* monster_4_attack_red.png */; };
+		434D58871FD54D4F00253903 /* monster_2_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58831FD54D4F00253903 /* monster_2_attack_red.png */; };
 		43524CD01FCFE78100326EFF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 43524CCF1FCFE78000326EFF /* back.png */; };
 		43551B0C1FCE3AF800B86587 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0B1FCE3AF800B86587 /* lock.png */; };
 		43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0D1FCE3F0D00B86587 /* skill_1.png */; };
@@ -211,6 +223,18 @@
 		434C5AA31FD130FA00C921AF /* WDBossNode_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WDBossNode_1.swift; sourceTree = "<group>"; };
 		434C5AA61FD131A000C921AF /* WDMonsterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMonsterView.swift; sourceTree = "<group>"; };
 		434C5AA81FD13F4B00C921AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		434D58701FD547BE00253903 /* monster_1_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_attack.png; sourceTree = "<group>"; };
+		434D58711FD547BE00253903 /* monster_2_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_attack.png; sourceTree = "<group>"; };
+		434D58721FD547BE00253903 /* monster_3_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_3_attack.png; sourceTree = "<group>"; };
+		434D58731FD547BF00253903 /* monster_4_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_4_attack.png; sourceTree = "<group>"; };
+		434D58781FD54AEC00253903 /* monster_1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster_1_move.png; path = "../../../../../Desktop/素材/绿色僵尸/monster_1_move.png"; sourceTree = "<group>"; };
+		434D58791FD54AEC00253903 /* monster_2_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster_2_move.png; path = "../../../../../Desktop/素材/绿色僵尸/monster_2_move.png"; sourceTree = "<group>"; };
+		434D587C1FD54C4900253903 /* monster_2_move_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_move_red.png; sourceTree = "<group>"; };
+		434D587D1FD54C4900253903 /* monster_1_move_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_move_red.png; sourceTree = "<group>"; };
+		434D58801FD54D4E00253903 /* monster_1_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_attack_red.png; sourceTree = "<group>"; };
+		434D58811FD54D4E00253903 /* monster_3_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_3_attack_red.png; sourceTree = "<group>"; };
+		434D58821FD54D4F00253903 /* monster_4_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_4_attack_red.png; sourceTree = "<group>"; };
+		434D58831FD54D4F00253903 /* monster_2_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_attack_red.png; sourceTree = "<group>"; };
 		43524CCF1FCFE78000326EFF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		43551B0B1FCE3AF800B86587 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		43551B0D1FCE3F0D00B86587 /* skill_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skill_1.png; sourceTree = "<group>"; };
@@ -586,6 +610,18 @@
 		435589861FA0752700C80CA8 /* ZombiesPic */ = {
 			isa = PBXGroup;
 			children = (
+				434D58801FD54D4E00253903 /* monster_1_attack_red.png */,
+				434D58831FD54D4F00253903 /* monster_2_attack_red.png */,
+				434D58811FD54D4E00253903 /* monster_3_attack_red.png */,
+				434D58821FD54D4F00253903 /* monster_4_attack_red.png */,
+				434D587D1FD54C4900253903 /* monster_1_move_red.png */,
+				434D587C1FD54C4900253903 /* monster_2_move_red.png */,
+				434D58781FD54AEC00253903 /* monster_1_move.png */,
+				434D58791FD54AEC00253903 /* monster_2_move.png */,
+				434D58701FD547BE00253903 /* monster_1_attack.png */,
+				434D58711FD547BE00253903 /* monster_2_attack.png */,
+				434D58721FD547BE00253903 /* monster_3_attack.png */,
+				434D58731FD547BF00253903 /* monster_4_attack.png */,
 				43563FA61FB3DDAE00D4BD46 /* RedNormalZom.png */,
 				43563FA41FB3DB9F00D4BD46 /* RedNormalAttack.png */,
 				43563F9D1FB3DB5800D4BD46 /* RedNormalBorn.png */,
@@ -722,6 +758,7 @@
 				432F84D41F99A70C00F51146 /* fire.png in Resources */,
 				43765FC91FBAE53E006E37D2 /* boss1Att2_left6.png in Resources */,
 				43765FD71FBAE6F5006E37D2 /* boss1Att2_right3.png in Resources */,
+				434D587A1FD54AEC00253903 /* monster_1_move.png in Resources */,
 				43765FA91FBAD65D006E37D2 /* boss1_att2_star5.png in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
@@ -743,6 +780,7 @@
 				434C5A871FD12FAA00C921AF /* Smoke.sks in Resources */,
 				43563FA31FB3DB5800D4BD46 /* RedNormalDied.png in Resources */,
 				4348DC2F1F9D98B30072D030 /* addAttack.jpg in Resources */,
+				434D58771FD547BF00253903 /* monster_4_attack.png in Resources */,
 				432F84CE1F9993E600F51146 /* starBG.jpg in Resources */,
 				43625F811FA1C62B00910ED0 /* NormalAttack.png in Resources */,
 				43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */,
@@ -759,6 +797,7 @@
 				43765FD51FBAE6F5006E37D2 /* boss1Att2_right1.png in Resources */,
 				43765FCB1FBAE53E006E37D2 /* boss1Att2_left4.png in Resources */,
 				433B050A1FB19CCB006210B2 /* boomAnimation.png in Resources */,
+				434D58841FD54D4F00253903 /* monster_1_attack_red.png in Resources */,
 				43524CD01FCFE78100326EFF /* back.png in Resources */,
 				43765FA31FBACF61006E37D2 /* boss1_att2_5.png in Resources */,
 				43656BCD1F9F2055001EFDA5 /* railing_left.png in Resources */,
@@ -777,6 +816,7 @@
 				4392CE241FA6BC0200A52D12 /* fireAc.png in Resources */,
 				4307E36F1FA1DF0D00E1AD38 /* blood8.png in Resources */,
 				4307E36C1FA1DF0C00E1AD38 /* blood7.png in Resources */,
+				434D58761FD547BF00253903 /* monster_3_attack.png in Resources */,
 				43551B0C1FCE3AF800B86587 /* lock.png in Resources */,
 				43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */,
 				43551B141FCE7FC600B86587 /* increaseDistance.png in Resources */,
@@ -784,11 +824,13 @@
 				4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */,
 				43765FDA1FBAE6F5006E37D2 /* boss1Att2_right7.png in Resources */,
 				4307E36D1FA1DF0C00E1AD38 /* blood2.png in Resources */,
+				434D587B1FD54AEC00253903 /* monster_2_move.png in Resources */,
 				43563FA11FB3DB5800D4BD46 /* RedNormalBorn.png in Resources */,
 				4307E36E1FA1DF0C00E1AD38 /* blood4.png in Resources */,
 				43765FD91FBAE6F5006E37D2 /* boss1Att2_right6.png in Resources */,
 				432F84BF1F998A5B00F51146 /* Assets.xcassets in Resources */,
 				4392CE211FA6B7AD00A52D12 /* NormalDied.png in Resources */,
+				434D587E1FD54C4900253903 /* monster_2_move_red.png in Resources */,
 				434C5AA91FD13F4B00C921AF /* Assets.xcassets in Resources */,
 				43765FCC1FBAE53E006E37D2 /* boss1Att2_left3.png in Resources */,
 				43551B181FCE814200B86587 /* increaseBoom.png in Resources */,
@@ -797,14 +839,19 @@
 				4348DC331F9D98B30072D030 /* blink.jpg in Resources */,
 				43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */,
 				43551B161FCE806800B86587 /* holdTime.png in Resources */,
+				434D58751FD547BF00253903 /* monster_2_attack.png in Resources */,
 				43656BC41F9F1FCE001EFDA5 /* WDMap_1Scene.sks in Resources */,
 				43765FDB1FBAE6F5006E37D2 /* boss1Att2_right5.png in Resources */,
 				43563FA71FB3DDAE00D4BD46 /* RedNormalZom.png in Resources */,
+				434D58871FD54D4F00253903 /* monster_2_attack_red.png in Resources */,
 				43765FD61FBAE6F5006E37D2 /* boss1Att2_right2.png in Resources */,
 				434C5A891FD12FAA00C921AF /* Rain.sks in Resources */,
 				4307E3711FA1DF0D00E1AD38 /* blood6.png in Resources */,
+				434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */,
 				43765FAD1FBAD65D006E37D2 /* boss1_att2_star4.png in Resources */,
 				4348DC321F9D98B30072D030 /* addSpeed.jpg in Resources */,
+				434D58741FD547BF00253903 /* monster_1_attack.png in Resources */,
+				434D587F1FD54C4900253903 /* monster_1_move_red.png in Resources */,
 				43765F971FBAA91A006E37D2 /* boss1_attLeft.png in Resources */,
 				4307E3731FA1DF0D00E1AD38 /* blood1.png in Resources */,
 				43656BCA1F9F2055001EFDA5 /* railing_up.png in Resources */,
@@ -816,6 +863,7 @@
 				432F84B61F998A5B00F51146 /* Actions.sks in Resources */,
 				4348DC381F9DE7DA0072D030 /* starGame.png in Resources */,
 				43365B761FC2789000356D64 /* launchgifpic.gif in Resources */,
+				434D58861FD54D4F00253903 /* monster_4_attack_red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

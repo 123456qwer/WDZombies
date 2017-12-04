@@ -15,7 +15,7 @@ class WDZombieBehavior: WDBaseNodeBehavior {
     
     override func moveAction(direction: NSString) {
         
-        if zombieNode.canMove == true {
+        if zombieNode?.canMove == true {
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: zombieNode.speed, node: zombieNode!)
             zombieNode.position = point
             zombieNode.zPosition = 3 * 667 - zombieNode.position.y;

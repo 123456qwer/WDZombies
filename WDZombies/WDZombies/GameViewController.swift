@@ -15,6 +15,11 @@ class GameViewController: UIViewController {
     let PLAY_BTN_TAG     = 160
     let BG_IAMGEVIEW_TAG = 150
     let SKILL_LABEL_TAG  = 170
+    
+    let PLAY_AGIAIN_TAG  = 180
+    let DIED_LABEL_TAG   = 190
+    let GAME_OVER_TAG    = 200
+    
     var skillAndFireView:WDSkillAndFireView! = nil
     var moveView:WDMoveView!                 = nil
     var showScene:WDBaseScene!               = nil
@@ -72,18 +77,20 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
+    
         let btn = self.view.viewWithTag(SKILL_LABEL_TAG)
         if btn != nil{
-            
-            _ = WDDataManager.shareInstance().openDB()
+    
+           // _ = WDDataManager.shareInstance().openDB()
             let userModel:WDUserModel = WDUserModel.init()
             _ = userModel.searchToDB()
-            WDDataManager.shareInstance().closeDB()
+           // WDDataManager.shareInstance().closeDB()
             
             let button:UIButton = btn as! UIButton
             button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
-            
         }
+ 
     }
     
 //*********************操作界面******************************//
@@ -109,7 +116,7 @@ class GameViewController: UIViewController {
         _ = WDDataManager.shareInstance().openDB()
         let userModel:WDUserModel = WDUserModel.init()
         _ = userModel.searchToDB()
-        WDDataManager.shareInstance().closeDB()
+        //WDDataManager.shareInstance().closeDB()
         
         
         //学习技能
@@ -146,36 +153,42 @@ class GameViewController: UIViewController {
         let mapVC = WDMapViewController.init()
         self.present(mapVC, animated: true) {}
         
+        weak var weakSelf = self
         mapVC.disMiss = {(mapName:String) -> Void in
-            self.mapName = mapName
-            self.selectSkill()
+            weakSelf?.mapName = mapName
+            weakSelf?.selectSkill()
         }
     }
     
     //技能选择
     @objc func selectSkill() {
         
-        let selectSkillVC = WDSelectSkillVC.init()
-        self.present(selectSkillVC, animated: true) {}
-  
+        var selectSkillVC:WDSelectSkillVC? = WDSelectSkillVC.init()
+        self.present(selectSkillVC!, animated: true) {}
+        
         skillAndFireView.setSelectFrame()
-        selectSkillVC.passAction = {(Bool:Bool ,skillType:personSkillType) -> Void in
-            self.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
+        
+        weak var weakSelf = self
+        selectSkillVC!.passAction = {(Bool:Bool ,skillType:personSkillType) -> Void in
+            weakSelf?.skillAndFireView.selectAction(Bool: Bool, skillType: skillType)
         }
         
-        selectSkillVC.removeBGAction = {() -> Void in
+        selectSkillVC!.removeBGAction = {() -> Void in
             let bgScrollView = self.view.viewWithTag(self.BG_IAMGEVIEW_TAG)
             bgScrollView?.removeFromSuperview()
-            self.skillAndFireView.isHidden = false
+            weakSelf?.skillAndFireView.isHidden = false
         }
         
-        selectSkillVC.disMiss = {() -> Void in
-            self.starGame()
+        selectSkillVC!.disMiss = {() -> Void in
+            weakSelf?.starGame()
+            selectSkillVC = nil
         }
         
-        selectSkillVC.backDisMiss = {() -> Void in
-            self.skillAndFireView.isHidden = true
+        selectSkillVC!.backDisMiss = {() -> Void in
+            weakSelf?.skillAndFireView.isHidden = true
+            selectSkillVC = nil
         }
+ 
     }
     
     //怪物简介
@@ -212,13 +225,14 @@ class GameViewController: UIViewController {
             self.view.addSubview(moveView)
             
             //移动方法
+            weak var weakSelf = self
             moveView.moveAction = {(direction:NSString) -> Void in
-                self.showScene.moveAction(direction: direction)
+                weakSelf?.showScene.moveAction(direction: direction)
             }
             
             //移动停止方法
             moveView.stopAction = {(direction:NSString) -> Void in
-                self.showScene.stopMoveAction(direction: direction)
+                weakSelf?.showScene.stopMoveAction(direction: direction)
             }
         }
         
@@ -228,15 +242,89 @@ class GameViewController: UIViewController {
     }
     
     //游戏结束
-    func gameOver() -> Void {
+    @objc func gameOver() -> Void {
+  
+        self.removeDiedView()
+
+        if let view = self.view as! SKView?{
+            view.presentScene(nil)
+        }
         
-        moveView.isHidden = true
-        skillAndFireView.isHidden = true
-       
         skillAndFireView.gameOverReload()
         self.createBg()
+        
+
     }
  
+    //playAgain
+    @objc func playAgain()  {
+        
+        self.removeDiedView()
+        
+        
+        skillAndFireView.playAgain()
+        self.moveView.isHidden = false
+        self.skillAndFireView.isHidden = false
+        self.showScene(sceneName: mapName)
+
+        
+    }
+    
+    func removeDiedView()  {
+        var view1 = self.view.viewWithTag(DIED_LABEL_TAG)
+        var view2 = self.view.viewWithTag(PLAY_AGIAIN_TAG)
+        var view3 = self.view.viewWithTag(GAME_OVER_TAG)
+        
+        view1?.removeFromSuperview()
+        view2?.removeFromSuperview()
+        view3?.removeFromSuperview()
+        
+        view1 = nil
+        view2 = nil
+        view3 = nil
+
+    }
+    
+    func createDiedView()  {
+        
+        let label:UILabel = UILabel.init(frame: CGRect(x:0,y:20,width:kScreenWidth,height:40))
+        label.text = "YOU DIED"
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.textAlignment = .center
+        label.textColor = UIColor.red
+        label.tag = DIED_LABEL_TAG
+        label.alpha = 0
+        self.view.addSubview(label)
+        
+        let page:CGFloat = 20
+        let width:CGFloat = 150
+        let playAgainBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 - page - width,y:WDTool.bottom(View: label) + page,width:width,height:width))
+        playAgainBtn.setTitle("Play Again?", for: .normal)
+        playAgainBtn.backgroundColor = UIColor.orange
+        playAgainBtn.addTarget(self, action: #selector(playAgain), for: .touchUpInside)
+        playAgainBtn.tag = PLAY_AGIAIN_TAG
+        playAgainBtn.alpha = 0
+        self.view.addSubview(playAgainBtn)
+        
+        let gameOverBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 + page,y:WDTool.bottom(View: label) + page,width:width,height:width))
+        gameOverBtn.setTitle("Back Home Page", for: .normal)
+        gameOverBtn.backgroundColor = UIColor.orange
+        gameOverBtn.addTarget(self, action: #selector(gameOver), for: .touchUpInside)
+        gameOverBtn.tag = GAME_OVER_TAG
+        gameOverBtn.alpha = 0
+        self.view.addSubview(gameOverBtn)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            label.alpha = 1
+        }) { (true) in
+            UIView.animate(withDuration: 0.5, animations: {
+                playAgainBtn.alpha = 1
+                gameOverBtn.alpha = 1
+            })
+        }
+        
+    }
+    
     /// 跳转到场景
     ///
     /// - Parameter sceneName: 场景名字
@@ -250,8 +338,11 @@ class GameViewController: UIViewController {
                     showScene = scene
                 }
             
+            weak var weakSelf = self
             showScene.ggAction = {() -> Void in
-                self.gameOver()
+                weakSelf?.moveView.isHidden = true
+                weakSelf?.skillAndFireView.isHidden = true
+                weakSelf?.createDiedView()
             }
             
             view.ignoresSiblingOrder = true

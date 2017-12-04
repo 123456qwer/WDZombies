@@ -61,6 +61,14 @@ class WDSkillView: UIButton {
         self.alpha = 0.2
     }
     
+    //重置skill<playAgain>
+    func playAgain(){
+        let label:UILabel? = self.viewWithTag(100) as? UILabel
+        timer?.invalidate()
+        label?.removeFromSuperview()
+        self.alpha = 0.6
+    }
+    
     
     //选择技能页面添加imageView
     func setSelectImage(selectSkillType:personSkillType,selectOrCancel:Bool) -> Void {
@@ -116,7 +124,7 @@ class WDSkillView: UIButton {
         
       label.tag = 100
       self.addSubview(label)
-     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction(timer:)), userInfo: label, repeats: true)
+      timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction(timer:)), userInfo: label, repeats: true)
     }
     
     @objc func timerAction(timer:Timer) -> Void {

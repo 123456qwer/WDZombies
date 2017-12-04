@@ -46,15 +46,15 @@ class WDSkillBlockView: UIView {
         let skillModel:WDSkillModel = WDSkillModel.init()
         skillModel.skillName = name
         
-        if WDDataManager.shareInstance().openDB() {
+        //if WDDataManager.shareInstance().openDB() {
             if skillModel.searchToDB(){
                 print("查询成功")
             }else{
                 print("查询失败")
             }
             
-            WDDataManager.shareInstance().closeDB()
-        }
+          //  WDDataManager.shareInstance().closeDB()
+        //}
         
         _model = skillModel
         if _model.haveLearn == 1{
@@ -68,15 +68,15 @@ class WDSkillBlockView: UIView {
     func userModel()  {
         _userModel = WDUserModel.init()
         
-        if WDDataManager.shareInstance().openDB(){
+        //if WDDataManager.shareInstance().openDB(){
             if _userModel.searchToDB(){
                 print("人物信息查询成功")
             }else{
                 print("人物信息查询失败")
             }
-        }
+       // }
         
-        WDDataManager.shareInstance().closeDB()
+        //WDDataManager.shareInstance().closeDB()
 
     }
     
@@ -90,29 +90,29 @@ class WDSkillBlockView: UIView {
         _model.skillLevel2Str = skillLevel2Str
    
         
-        if WDDataManager.shareInstance().openDB() {
+        //if WDDataManager.shareInstance().openDB() {
             if _model.changeSkillToSqlite(){
                 print("修改完毕")
             }else{
                 print("修改出错")
             }
-        }
+       // }
         
-        WDDataManager.shareInstance().closeDB()
+        //WDDataManager.shareInstance().closeDB()
     }
     
     func changeUserModel()  {
         _userModel.skillCount -= 1
         WDDataManager.shareInstance().canUseSkillPoint = _userModel.skillCount
-        if WDDataManager.shareInstance().openDB(){
+        //if WDDataManager.shareInstance().openDB(){
             if _userModel.changeSkillToSqlite(){
                 print("人物信息修改成功")
             }else{
                 print("人物信息修改失败")
             }
-        }
+        //}
         
-        WDDataManager.shareInstance().closeDB()
+       // WDDataManager.shareInstance().closeDB()
     }
     
 //***********************  界面  ******************************//

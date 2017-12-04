@@ -74,7 +74,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     
     
     @objc func canMove()  {
-        kulouNode.canMove = true
+        kulouNode?.canMove = true
     }
     
     override func diedAction() {

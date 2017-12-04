@@ -42,6 +42,16 @@ class WDSkillAndFireView: UIView {
         }
     }
     
+    func playAgain()  {
+        let swiftArray: Array<WDSkillView> = [skillBtn1!,skillBtn2!,skillBtn3!,skillBtn4!]
+        for skillBtn:WDSkillView in swiftArray {
+            if skillBtn.alpha != 0{
+                skillBtn.playAgain()
+                skillBtn.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
     //初始化
     func initWithFrame(frame:CGRect) -> Void {
         self.frame = frame
