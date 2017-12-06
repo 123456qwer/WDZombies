@@ -12,24 +12,71 @@ class WDZombieNode: WDBaseNode {
 
     var zombieBehavior:WDZombieBehavior! = nil
     var _zomType:zomType! = nil
+    var link:CADisplayLink!
+    typealias move = (_ zom:WDZombieNode) -> Void
+    typealias died = () -> Void
+    typealias redAttack = (_ zom:WDZombieNode) -> Void
+    
+    var redZomAttackCount:NSInteger = 0
+    var redZomTimer:Timer!
+    var moveAction:move!
+    var diedAction:died!
+    var redAttackAction:redAttack!
+    
+    func starMove()  {
+        link = CADisplayLink.init(target: self, selector: #selector(linkMove))
+        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+    }
+    
+    func removeLink()  {
+        if link != nil{
+            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+            link.invalidate()
+            link = nil
+        }
+    }
+    
+    func removeTimer()  {
+        if redZomTimer != nil {
+            redZomTimer.invalidate()
+            redZomTimer = nil
+        }
+    }
+    
+    func diedA()  {
+        diedAction()
+        self.clearAction()
+
+    }
+    
+    func clearAction()  {
+        
+        self.zombieBehavior = nil
+        self.removeLink()
+        self.removeTimer()
+    }
+    
+    @objc func linkMove()  {
+        if self.wdBlood <= 0 {
+           self.removeLink()
+            return
+        }
+        
+        moveAction(self)
+    }
+    
+    
     /// 设置物理碰撞
     func setPhy() -> Void {
-     
         self.physicsBody?.categoryBitMask = normal_zom;
         self.physicsBody?.contactTestBitMask = player_type;
         self.physicsBody?.collisionBitMask = normal_zom;
-        
     }
     
     deinit {
-        
-        self.moveDic.removeAllObjects()
-        self.attackDic.removeAllObjects()
-        self.diedArr.removeAllObjects()
-        
         self.moveDic = nil
-        self.attackDic = nil
         self.diedArr = nil
+        self.attackDic = nil
         print("怪物node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
     }
     
@@ -40,6 +87,21 @@ class WDZombieNode: WDBaseNode {
         self.physicsBody?.collisionBitMask = 0;
     }
     
+    
+    //远距离攻击，5秒出发一次
+    @objc func redMoveTime()  {
+      
+        if self.canMove {
+            redZomAttackCount += 1
+            if redZomAttackCount >= 5{
+                redAttackAction(self)
+                redZomAttackCount = 0
+            }
+        }
+       
+        
+    }
+    
     func initWithZomType(type:zomType) -> Void {
         
         zombieBehavior = WDZombieBehavior.init()
@@ -47,13 +109,14 @@ class WDZombieNode: WDBaseNode {
         _zomType = type
         
         if type == .Normal {
-            moveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalZom.png")!)
-            attackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalAttack.png")!)
-            diedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"NormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
+            moveDic = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomMove") as! NSMutableDictionary
+            attackDic = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomAttack") as! NSMutableDictionary
+            diedArr   = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomDied") as! NSMutableArray
         }else if type == .Red{
-            moveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalZom.png")!)
-            attackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalAttack.png")!)
-            diedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"RedNormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
+            moveDic = WDMapManager.sharedInstance.textureDic.object(forKey: "redNormalZomMove") as! NSMutableDictionary
+            attackDic = WDMapManager.sharedInstance.textureDic.object(forKey: "redNormalZomAttack") as! NSMutableDictionary
+            diedArr   = WDMapManager.sharedInstance.textureDic.object(forKey: "redNormalZomDied") as! NSMutableArray
+            redZomTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(redMoveTime), userInfo: nil, repeats: true)
         }
         
        

@@ -58,8 +58,10 @@ class WDMonsterView: UIView {
         self.createAttributeLabel()
     }
     
-    func setImage1(images:NSArray) {
+    func setImage1(images:NSArray,frame:CGRect) {
         if images.count > 0{
+            
+            imageView1.frame = frame
             imageView1.animationImages = images as? [UIImage]
             imageView1.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
             imageView1.animationRepeatCount = 0
@@ -67,8 +69,9 @@ class WDMonsterView: UIView {
         }
     }
     
-    func setImage2(images:NSArray) {
+    func setImage2(images:NSArray,frame:CGRect) {
         if images.count > 0{
+            imageView1.frame = frame
             imageView2.animationImages = images as? [UIImage]
             imageView2.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
             imageView2.animationRepeatCount = 0
@@ -116,7 +119,12 @@ class WDMonsterView: UIView {
             bloodLabel.text = "blood:   10"
             speedLabel.text = "speed:   2"
             attackLabel.text = "attack:   1"
+        }else if type == .kulou{
+            bloodLabel.text = "blood:   100"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   1"
         }
+        
     }
     
     

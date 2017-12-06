@@ -14,48 +14,29 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     static let ZOMCOUNT = 50
     
-    var createZomTimer:Timer! = nil
-    var linkArr:NSMutableArray! = nil
+    
+    var boomModel:WDSkillModel!        //技能model，用于查看炸弹伤害
+ 
+    
+    var normalZomArr:NSMutableArray!   //存储创建的zom
+    var createZomTimer:Timer!          //创建zom的timer
+    var mapLink:CADisplayLink!         //监测地图移动的link
+    var zomCount:NSInteger = 0         //创建的僵尸个数
+    var diedZomCount:NSInteger = 0     //击杀僵尸个数
     
     
-    var zomLink:UnsafePointer<Any> = UnsafePointer.init(bitPattern: 10)!
-    var kulouLink:UnsafePointer<Any> = UnsafePointer.init(bitPattern: 20)!
-    var zomCount:NSInteger = 0
-    var boss1Node:WDBossNode_1! = nil
-    var a = 0
-    var boomModel:WDSkillModel! = nil
     
-    func createKulou()  {
-        
-        let kulouNode = WDKulouNode.init()
-        kulouNode.size = CGSize(width:110 ,height:130)
-        kulouNode.initWithPersonNode(personNode: personNode)
-        bgNode.addChild(kulouNode)
-        
-        let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.kulouMove(link:)))
-        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-        objc_setAssociatedObject(link, self.kulouLink, kulouNode, objc_AssociationPolicy(rawValue: 0)!)
-        linkArr.add(link)
-        //骷髅死亡，可以升级加技能
-        weak var weakSelf = self
-        kulouNode.behavior.alreadyDied = {() -> Void in
-            weakSelf?.personNode.createLevelUpNode()
-        }
-        
-    }
-    
-    @objc func kulouMove(link:CADisplayLink) {
-        let kulou:WDKulouNode = objc_getAssociatedObject(link, self.kulouLink) as! WDKulouNode
-        if kulou.wdBlood <= 0 {
-            linkArr.remove(link)
-            link.invalidate()
-        }
-        
-        let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: personNode.position)
-        kulou.behavior.moveActionForKulou(direction: direction, personNode: personNode)
-    }
+    var kulouNode:WDKulouNode!         //骷髅boss
+    var boss1Node:WDBossNode_1!
+    var diedZomLabel:SKLabelNode!
     
     
+   
+    
+    
+
+    
+    /*
     func createBoss1() -> Void {
         
         let arr:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "BOSS1_move")!, line: 2, arrange: 5, size: CGSize(width:183,height:174))
@@ -68,14 +49,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.bossMove(link:)))
         link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
         objc_setAssociatedObject(link, self.zomLink, boss1Node, objc_AssociationPolicy(rawValue: 0)!)
-        linkArr.add(link)
+
     }
     
     //boss移动
     @objc func bossMove(link:CADisplayLink) {
         let boss:WDBossNode_1 = objc_getAssociatedObject(link, self.zomLink) as! WDBossNode_1
         if boss.wdBlood <= 0 {
-            linkArr.remove(link)
             link.invalidate()
             link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
         }
@@ -83,14 +63,101 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let direction = WDTool.calculateDirectionForZom(point1: boss.position, point2: personNode.position)
         boss.bossBehavior.moveActionForBoss(direction: direction, personNode: personNode)
     }
+    */
     
     
+    //进入方法
+    override func didMove(to view: SKView) {
+       
+        if !isCreateScene {
+           
+            normalZomArr = NSMutableArray.init()
+            //需要获取炸弹伤害
+            boomModel = WDSkillModel.init()
+            boomModel.skillName = BOOM
+            
+            if boomModel.searchToDB(){
+                print("炸弹Model伤害就位")
+            }
+            
+            self.createNodes()
+            self.physicsWorld.contactDelegate = self
+            
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+           
+            mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
+            mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+           
+            //self.createBoss1()
+            //测试新粒子效果
+            //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
+        }
+    }
+    
+    //初始化Nodes
+    func createNodes(){
+        
+        diedZomLabel = SKLabelNode.init(text: "\(self.diedZomCount)/\(WDMap_1Scene.ZOMCOUNT)")
+        diedZomLabel.fontName = "VCR OSD Mono"
+        diedZomLabel.fontColor = UIColor.red
+        diedZomLabel.fontSize = 30
+        diedZomLabel.verticalAlignmentMode = .center
+        diedZomLabel.alpha = 0.6
+        print(diedZomLabel.frame.size.width,diedZomLabel.frame.size.height)
+        
+        diedZomLabel.position = CGPoint(x:diedZomLabel.frame.size.width / 2.0 + 10,y:kScreenHeight)
+        diedZomLabel.color = UIColor.black
+        diedZomLabel.zPosition = 10000
+        self.addChild(diedZomLabel)
+        
+        
+        let perDic:NSMutableDictionary = WDTool.cutMoveImage(moveImage: UIImage(named:"person4.png")!)
+        let text:SKTexture = (perDic.object(forKey: kRight)!as! NSMutableArray).object(at: 0) as! SKTexture
+        
+        personNode = WDPersonNode.init(texture:text)
+        personNode.initWithPersonDic(dic: perDic)
+        
+        weak var weakSelf = self
+        personNode.ggAction = {() -> Void in
+            print("haha")
+            weakSelf?.gameOver()
+        }
+        
+        bgNode = self.childNode(withName: "landNode") as! SKSpriteNode
+        bgNode.position = CGPoint(x:0,y:0)
+        bgNode.addChild(personNode)
+    }
+    
+    //骷髅相关
+    func createKulou()  {
+        
+        kulouNode = WDKulouNode.init()
+        kulouNode.size = CGSize(width:110 ,height:130)
+        kulouNode.initWithPersonNode(personNode: personNode)
+        bgNode.addChild(kulouNode)
+        
+        //骷髅死亡，可以升级加技能
+        weak var weakSelf = self
+        kulouNode.behavior.alreadyDied = {() -> Void in
+            weakSelf?.personNode.createLevelUpNode()
+        }
+        
+        kulouNode.starMove()
+        
+        //骷髅移动
+        kulouNode.moveAction = {(kulou:WDKulouNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: (weakSelf?.personNode.position)!)
+            kulou.behavior.moveActionForKulou(direction: direction, personNode: (weakSelf?.personNode)!)
+        }
+    }
+    
+    
+    
+    //normal/red僵尸相关
     @objc override func createZombies(timer:Timer){
-     
         //50只僵尸
         self.zomCount += 1
         if self.zomCount == WDMap_1Scene.ZOMCOUNT {
-            self.createKulou()
             timer.invalidate()
         }
         
@@ -98,114 +165,77 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         var type:zomType = .Normal
         
         if zomCount % 5 == 0 {
-             arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
-            type = .Normal
+            arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+            type = .Red
         }else{
-             arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
-             type = .Normal
+            arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+            type = .Normal
         }
         
-       
         let zombieNode:WDZombieNode = WDZombieNode.init(texture:arr.object(at: 0) as? SKTexture)
         zombieNode.initWithZomType(type:type)
         bgNode.addChild(zombieNode)
         
+        normalZomArr.add(zombieNode)
+        
+        //僵尸移动
+        weak var weakSelf = self
+        zombieNode.moveAction = {(zom:WDZombieNode) -> Void in
+            let direction:NSString = WDTool.calculateDirectionForZom(point1: (zom.position), point2: weakSelf!.personNode.position)
+            zom.zombieBehavior.moveAction(direction: direction)
+        }
+        
+        //僵尸死亡
+        zombieNode.diedAction = {() -> Void in
+            weakSelf?.diedZomCount += 1
+            if (weakSelf?.diedZomCount)! >= WDMap_1Scene.ZOMCOUNT {
+                weakSelf?.createKulou()
+            }
+        }
+        
+        //红色僵尸发动攻击<之前造成循环引用 -> 直接使用 zombieNode 来调用方法，如下注释>
+        //zombieNode.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!
+        zombieNode.redAttackAction = {(zom:WDZombieNode) -> Void in
+            zom.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!)
+        }
+        
         
         let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
-    
         zombieNode.run(bornAction) {
-            let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.zomMove(link:)))
-            link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-            objc_setAssociatedObject(link, self.zomLink, zombieNode, objc_AssociationPolicy(rawValue: 0)!)
-            self.linkArr.add(link)
-        }
-    }
-    
- 
-    
-    //僵尸移动
-    @objc func zomMove(link:CADisplayLink){
-        
-        var zom:WDZombieNode? = objc_getAssociatedObject(link, self.zomLink) as? WDZombieNode
-     
-        if zom!.wdBlood <= 0 {
-            zom = nil
-            linkArr.remove(link)
-            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-            link.invalidate()
-            return
-        }
-        
-        let direction:NSString = WDTool.calculateDirectionForZom(point1: (zom?.position)!, point2: personNode.position)
-        zom?.zombieBehavior.moveAction(direction: direction)
- 
-    }
-    
-    
-    
-    //进入方法
-    override func didMove(to view: SKView) {
-        if !isCreateScene {
-           
-            linkArr = NSMutableArray.init()
-            
-            //需要获取炸弹伤害
-            boomModel = WDSkillModel.init()
-            boomModel.skillName = BOOM
-            
-            //if WDDataManager.shareInstance().openDB(){
-                if boomModel.searchToDB(){
-                    print("炸弹Model伤害就位")
-                }
-            //}
-            
-            //WDDataManager.shareInstance().closeDB()
-            
-            self.createNodes()
-            self.physicsWorld.contactDelegate = self
-            
-            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
-           
-            let link = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
-            link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-           
-            linkArr.add(link)
-    
-       
-            //self.createBoss1()
-            //测试新粒子效果
-            //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
+            zombieNode.starMove()
         }
     }
  
+    
+    
     
     @objc func testEmitter(timer:Timer) {
-        a+=1
     }
     
     //开火方法
     override func fireAction(direction: NSString) {
         personNode?.personBehavior.attackAction(node: personNode)
-        //print(personNode.wdAttack)
     }
     
     //移动
     override func moveAction(direction: NSString) {
-        
         if personNode != nil{
             personNode.personBehavior.moveAction(direction: direction)
             self.mapMoveAction()
         }
-        
     }
     
     
     //监视移动事件
     @objc func mapMoveAction(){
+        if personNode != nil {
+            personNode.position = WDTool.overStepTest(point: personNode.position)
+            personNode.zPosition = 3 * 667 - personNode.position.y;
+            WDMapManager.sharedInstance.setMapPosition(point: personNode.position, mapNode: bgNode)
+            //击杀个数
+            diedZomLabel.text = "\(self.diedZomCount)/\(WDMap_1Scene.ZOMCOUNT)"
+        }
         
-          personNode.position = WDTool.overStepTest(point: personNode.position)
-          personNode.zPosition = 3 * 667 - personNode.position.y;
-          WDMapManager.sharedInstance.setMapPosition(point: personNode.position, mapNode: bgNode)
     }
     
     
@@ -216,37 +246,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
     }
     
-    
-    //初始化Nodes
-    func createNodes(){
-        
-        let perDic:NSMutableDictionary = WDTool.cutMoveImage(moveImage: UIImage(named:"person4.png")!)
-        
-        
-        let text:SKTexture = (perDic.object(forKey: kRight)!as! NSMutableArray).object(at: 0) as! SKTexture
-        personNode = WDPersonNode.init(texture:text)
-        personNode.initWithPersonDic(dic: perDic)
-        
-        weak var weakSelf = self
-        personNode.ggAction = {() -> Void in
-            weakSelf?.gameOver()
-        }
-        
-        
-        bgNode = self.childNode(withName: "landNode") as! SKSpriteNode
-        bgNode.position = CGPoint(x:0,y:0)
-        bgNode.addChild(personNode)
-        
-//        let emitter:SKEmitterNode = WDAnimationTool.createEmitterNode(name:"Rain")
-//        emitter.name = "Rain"
-//        emitter.zPosition = 5
-//        emitter.position = CGPoint(x:2001 / 2.0,y:1125 )
-//
-//        bgNode.addChild(emitter)
-
-    }
-    
-   
     
     //代理
     func didBegin(_ contact: SKPhysicsContact) {
@@ -319,7 +318,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             personNode.wdAttack += CGFloat(boomModel.skillLevel2)
             zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
             personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
-
+           
         }
         
         if magicNode != nil && pNode != nil {
@@ -368,68 +367,52 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     func didEnd(_ contact: SKPhysicsContact) {
-//        let A = contact.bodyA.node;
-//        let B = contact.bodyB.node;
+
     }
     
     
     @objc override func gameOver() {
         
         createZomTimer.invalidate()
-        if linkArr.count - 1 > 0 {
-            for index:NSInteger in 0...linkArr.count - 1 {
-                let link:CADisplayLink = linkArr.object(at: index) as! CADisplayLink
-                if objc_getAssociatedObject(link, self.zomLink) != nil{
-                    var zom:WDZombieNode? = objc_getAssociatedObject(link, self.zomLink) as? WDZombieNode
-                    
-                    zom?.zombieBehavior = nil
-                    zom?.removeAllChildren()
-                    zom?.removeAllActions()
-                    zom?.removeFromParent()
-                    
-                    zom = nil
-                }
-                
-                if objc_getAssociatedObject(link, self.kulouLink) != nil{
-                    var kulou:WDKulouNode? = objc_getAssociatedObject(link, self.kulouLink) as? WDKulouNode
-                    kulou?.behavior = nil
-                    
-                    kulou?.removeAllChildren()
-                    kulou?.removeAllActions()
-                    kulou?.removeFromParent()
-                    
-                    kulou = nil
-                }
-                
-                link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-                link.invalidate()
-                
-            }
+        if mapLink != nil {
+            mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+            mapLink.invalidate()
+            mapLink = nil
         }
-       
+        
+        boomModel = nil
+        
+        //删除所有僵尸
+        if normalZomArr != nil{
+            for index:NSInteger in 0...normalZomArr.count - 1 {
+                var zom:WDZombieNode? = normalZomArr.object(at: index) as? WDZombieNode
+                
+                zom?.clearAction()
+                zom?.removeAllActions()
+                zom?.removeAllChildren()
+                zom?.removeFromParent()
+                zom = nil
+            }
+            
+            normalZomArr.removeAllObjects()
+            normalZomArr = nil
+        }
         
         
-        linkArr.removeAllObjects()
+        //删除僵尸
+        if kulouNode != nil{
+            kulouNode.removeLink()
+            kulouNode.behavior = nil
+            kulouNode.removeAllActions()
+            kulouNode.removeAllChildren()
+            kulouNode.removeFromParent()
+        }
         
-        personNode.removeAllActions()
-        personNode.removeFromParent()
-        
-        bgNode.removeAllActions()
-        bgNode.removeAllChildren()
-        
- 
-        self.removeAllActions()
-        self.removeAllChildren()
-        
-        bgNode = nil
-        personNode = nil
         
         self.isCreateScene = false
         self.ggAction()
-    
-        self.removeFromParent()
-        
     }
+    
     
     deinit {
         print("地图1被释放了！！！！！！！！！")

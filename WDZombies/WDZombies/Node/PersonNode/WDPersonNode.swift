@@ -17,16 +17,7 @@ class WDPersonNode: WDBaseNode {
     var ggAction:gameOverAction!
     
     deinit {
-        self.removeObserver(personBehavior, forKeyPath: "position")
-        self.moveDic.removeAllObjects()
-        self.fireDic.removeAllObjects()
-        self.boomBoomArr.removeAllObjects()
-        
-        self.moveDic = nil
-        self.fireDic = nil
-        self.boomBoomArr = nil
         print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
-        
     }
     
     func setPhy() -> Void {

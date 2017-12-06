@@ -14,6 +14,32 @@ class WDKulouNode: WDBaseNode {
     var attackArr:NSMutableArray! = nil
     var beAttackTexture:SKTexture! = nil
     var behavior:WDKulouBehavior! = nil
+    var link:CADisplayLink!
+    
+    typealias move = (_ kulou:WDKulouNode) -> Void
+    
+    var moveAction:move!
+    
+    func starMove()  {
+        link = CADisplayLink.init(target: self, selector: #selector(linkMove))
+        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+    }
+    
+    func removeLink()  {
+        link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+        link.invalidate()
+        link = nil
+    }
+    
+    
+    @objc func linkMove()  {
+        if self.wdBlood <= 0 {
+            self.removeLink()
+            return
+        }
+        
+        moveAction(self)
+    }
     
     
     func setPhy() -> Void {

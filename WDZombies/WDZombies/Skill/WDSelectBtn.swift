@@ -24,7 +24,8 @@ class WDSelectBtn: UIButton {
        
 
         
-        self.backgroundColor = UIColor.yellow
+        self.backgroundColor = UIColor.white
+        WDTool.masksToSize(View: self, cornerRadius: 5)
 //        self.layer.masksToBounds = true
 //        self.layer.cornerRadius = 20
         

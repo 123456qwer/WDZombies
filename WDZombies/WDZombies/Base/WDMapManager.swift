@@ -13,6 +13,9 @@ class WDMapManager: NSObject {
 
     var x_arr:NSMutableArray! = nil
     var y_arr:NSMutableArray! = nil
+    var mapDic:NSMutableDictionary!
+    var textureDic:NSMutableDictionary!
+
     
     static let sharedInstance = WDMapManager.init()
     private override init() {}

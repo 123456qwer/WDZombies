@@ -12,6 +12,7 @@ import SpriteKit
 class WDZombieBehavior: WDBaseNodeBehavior {
 
     weak var zombieNode:WDZombieNode! = nil
+  
     
     override func moveAction(direction: NSString) {
         
@@ -34,27 +35,24 @@ class WDZombieBehavior: WDBaseNodeBehavior {
     override func attackAction(node: WDBaseNode) {
         
         let personNode:WDPersonNode = node as! WDPersonNode
-   
-        if zombieNode._zomType == .Normal {
-            WDAnimationTool.zomAttackAnimation(zombieNode: zombieNode, personNode: personNode)
-        }else if zombieNode._zomType == .Red{
-            if arc4random() % 2 == 0{
-                WDAnimationTool.magicAnimation(zom: zombieNode, person: personNode)
-            }else{
-                 WDAnimationTool.zomAttackAnimation(zombieNode: zombieNode, personNode: personNode)
-            }
-        }
-    
+        WDAnimationTool.zomAttackAnimation(zombieNode: zombieNode, personNode: personNode)
+      
     }
     
+    func redAttackAction(node: WDBaseNode)  {
+        let personNode:WDPersonNode = node as! WDPersonNode
+        WDAnimationTool.magicAnimation(zom: zombieNode, person: personNode)
+    }
     
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
         zombieNode.wdBlood -= attackNode.wdAttack
         if zombieNode.wdBlood <= 0 {
             self.diedAction()
+            zombieNode.diedA()
         }
         WDAnimationTool.bloodAnimation(node:beAttackNode)
         WDAnimationTool.beAttackAnimationForZom(attackNode: attackNode as! WDPersonNode, beAttackNode: beAttackNode as! WDZombieNode)
+        
     }
     
     override func stopMoveAction(direction: NSString) {

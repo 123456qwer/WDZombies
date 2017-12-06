@@ -12,6 +12,7 @@ import SpriteKit
 class WDPersonBehavior: WDBaseNodeBehavior {
 
     weak var personNode:WDPersonNode! = nil
+    var isGameOver = false
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "position" {
@@ -24,10 +25,13 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     /// - Parameter direction: 方向
     override func stopMoveAction(direction:NSString) -> Void {
         
-        self.personNode.texture = (self.personNode.moveDic.object(forKey: direction)as! NSMutableArray).object(at: 0) as? SKTexture
-        self.personNode.direction = direction
-        self.personNode.removeAction(forKey: "move")
-        self.personNode.isMove = false
+        if direction != "" {
+            self.personNode.texture = (self.personNode.moveDic.object(forKey: direction)as! NSMutableArray).object(at: 0) as? SKTexture
+            self.personNode.direction = direction
+            self.personNode.removeAction(forKey: "move")
+            self.personNode.isMove = false
+        }
+        
         
     }
     
@@ -58,12 +62,13 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     
     func reduceBlood(number:CGFloat)  {
         personNode.wdBlood -= number
-        if personNode.wdBlood <= 0 {
+        if personNode.wdBlood <= 0 && isGameOver == false{
             let diedAction = SKAction.fadeAlpha(to: 0, duration: 0.5)
             personNode.removePhy()
             personNode.run(diedAction, completion: {
                 self.personNode.ggAction()
             })
+            isGameOver = true
             return
         }
         

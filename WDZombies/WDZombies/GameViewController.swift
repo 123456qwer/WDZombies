@@ -58,6 +58,25 @@ class GameViewController: UIViewController {
         
         //初始化地图
         let manager:WDMapManager = WDMapManager.sharedInstance
+        manager.mapDic = NSMutableDictionary.init()
+        manager.textureDic = NSMutableDictionary.init()
+        
+        let moveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalZom.png")!)
+        let attackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalAttack.png")!)
+        let diedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"NormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
+        
+        let redMoveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalZom.png")!)
+        let redAttackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalAttack.png")!)
+        let redDiedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"RedNormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
+        
+        manager.textureDic.setObject(moveDic, forKey: "normalZomMove" as NSCopying)
+        manager.textureDic.setObject(attackDic, forKey: "normalZomAttack" as NSCopying)
+        manager.textureDic.setObject(diedArr, forKey: "normalZomDied" as NSCopying)
+        
+        manager.textureDic.setObject(redMoveDic, forKey: "redNormalZomMove" as NSCopying)
+        manager.textureDic.setObject(redAttackDic, forKey: "redNormalZomAttack" as NSCopying)
+        manager.textureDic.setObject(redDiedArr, forKey: "redNormalZomDied" as NSCopying)
+        
         manager.createX_Y(x: 2001, y: 1125)
         
         //技能按钮界面
@@ -82,13 +101,13 @@ class GameViewController: UIViewController {
         let btn = self.view.viewWithTag(SKILL_LABEL_TAG)
         if btn != nil{
     
-           // _ = WDDataManager.shareInstance().openDB()
-            let userModel:WDUserModel = WDUserModel.init()
-            _ = userModel.searchToDB()
-           // WDDataManager.shareInstance().closeDB()
-            
-            let button:UIButton = btn as! UIButton
-            button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
+//           // _ = WDDataManager.shareInstance().openDB()
+//            let userModel:WDUserModel = WDUserModel.init()
+//            _ = userModel.searchToDB()
+//           // WDDataManager.shareInstance().closeDB()
+//
+//            let button:UIButton = btn as! UIButton
+//            button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
         }
  
     }
@@ -105,11 +124,17 @@ class GameViewController: UIViewController {
         self.view.addSubview(bgImageView)
         
         
+        //
+        let width:CGFloat = 120
+        let height:CGFloat = 80
+        let page:CGFloat = (kScreenWidth - 120 * 3) / 4.0
+        let y:CGFloat = kScreenHeight / 2.0 - height / 2.0
+        
         //开始游戏选择技能
         let selectMapBtn:UIButton = UIButton(type:.custom)
-        selectMapBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:kScreenHeight / 3.0 - 80 / 2.0,width:120,height:80)
+        selectMapBtn.frame = CGRect(x:page,y:y,width:width,height:height)
         selectMapBtn.addTarget(self, action: #selector(selectMap), for:.touchUpInside)
-        selectMapBtn.setImage(UIImage(named:"starGame.png"), for: .normal)
+        selectMapBtn.setImage(UIImage(named:"play.png"), for: .normal)
         bgImageView.addSubview(selectMapBtn)
       
         
@@ -121,22 +146,18 @@ class GameViewController: UIViewController {
         
         //学习技能
         let learnSkillBtn:UIButton = UIButton(type:.custom)
-        learnSkillBtn.frame = CGRect(x:kScreenWidth / 2.0 - 120 / 2.0,y:WDTool.bottom(View: selectMapBtn) + 10,width:120,height:80)
+        learnSkillBtn.frame = CGRect(x:WDTool.right(View: selectMapBtn) + page,y:y,width:width,height:height)
         learnSkillBtn.addTarget(self, action: #selector(learnSkill), for: .touchUpInside)
-        learnSkillBtn.backgroundColor = UIColor.orange
-        learnSkillBtn.titleLabel?.numberOfLines = 0
         learnSkillBtn.tag = SKILL_LABEL_TAG
-        learnSkillBtn.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
+        learnSkillBtn.setImage(UIImage(named:"learnSkill"), for: .normal)
         bgImageView.addSubview(learnSkillBtn)
         
         //怪物图鉴
         let monseterBtn:UIButton = UIButton(type:.custom)
-        monseterBtn.frame = CGRect(x:20,y:WDTool.bottom(View: selectMapBtn) + 10,width:120,height:80)
+        monseterBtn.frame = CGRect(x:WDTool.right(View: learnSkillBtn) + page,y:y,width:width,height:height)
         monseterBtn.addTarget(self, action: #selector(showMonster), for: .touchUpInside)
-        monseterBtn.backgroundColor = UIColor.orange
-        monseterBtn.titleLabel?.numberOfLines = 0
         monseterBtn.tag = SKILL_LABEL_TAG
-        monseterBtn.setTitle("Monster", for: .normal)
+        monseterBtn.setImage(UIImage(named:"monster.png"), for: .normal)
         bgImageView.addSubview(monseterBtn)
     }
     
@@ -332,10 +353,22 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             
                 if sceneName == "WDMap_1Scene" {
-                    let scene:WDMap_1Scene = WDMap_1Scene(fileNamed:sceneName as String)!
-                    scene.scaleMode = .aspectFill
-                    view.presentScene(scene)
-                    showScene = scene
+                    
+                    //存储一下地图，不至于重复创建
+//                    let scene = WDMapManager.sharedInstance.mapDic.object(forKey: sceneName) as? WDMap_1Scene
+//                    if scene != nil{
+//                        scene?.scaleMode = .aspectFill
+//                        view.presentScene(scene)
+//                        showScene = scene
+//                    }else{
+                        let scene:WDMap_1Scene = WDMap_1Scene(fileNamed:sceneName as String)!
+                        scene.scaleMode = .aspectFill
+                        view.presentScene(scene)
+                        showScene = scene
+                        //WDMapManager.sharedInstance.mapDic.setObject(scene, forKey: sceneName as NSCopying)
+                    //}
+                    
+                    
                 }
             
             weak var weakSelf = self

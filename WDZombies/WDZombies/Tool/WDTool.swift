@@ -16,7 +16,7 @@ enum  personSkillType{
 
 enum  zomType{
     
-    case Normal,Red
+    case Normal,Red,kulou
 };
 
 typealias selectSkill = (_ Bool:Bool, _ skillType:personSkillType, _ skillCount:NSInteger) -> Void

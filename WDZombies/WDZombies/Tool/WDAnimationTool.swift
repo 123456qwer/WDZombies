@@ -91,6 +91,7 @@ class WDAnimationTool: NSObject {
     /// - Parameter node:
     static func bloodAnimation(node:SKSpriteNode) -> Void {
        
+        
         let blood:NSInteger = NSInteger(arc4random() % 8) + 1;
         let bloodName:NSString = "blood\(blood)" as NSString
         let image:UIImage = UIImage.init(named: bloodName as String)!
@@ -106,7 +107,7 @@ class WDAnimationTool: NSObject {
         bloodNode.run(alphaAction) {
             bloodNode.removeFromParent()
         }
-
+ 
     }
     
     
@@ -252,6 +253,7 @@ class WDAnimationTool: NSObject {
                     let alphaAction = SKAction.fadeAlpha(to: 1, duration: 0.3)
                     zom.run(alphaAction, completion: {
                           zom.canMove = true
+                          zom.redZomAttackCount = 0
                     })
                 })
             })

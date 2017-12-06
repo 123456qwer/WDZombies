@@ -13,7 +13,6 @@ import SQLite3
 class WDDataManager: NSObject {
 
     var canUseSkillPoint:NSInteger = 0
-  
     
     static func initData(){
         
