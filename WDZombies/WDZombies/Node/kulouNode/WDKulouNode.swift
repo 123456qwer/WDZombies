@@ -14,6 +14,7 @@ class WDKulouNode: WDBaseNode {
     var attackArr:NSMutableArray! = nil
     var beAttackTexture:SKTexture! = nil
     var behavior:WDKulouBehavior! = nil
+    
     var link:CADisplayLink!
     
     typealias move = (_ kulou:WDKulouNode) -> Void
@@ -64,7 +65,7 @@ class WDKulouNode: WDBaseNode {
         
         
         let textures = SKTextureAtlas.init(named: "kulouPic")
-        for index:NSInteger in 0...textures.textureNames.count - 1 {
+        for index:NSInteger in 0...4 {
            
             if index < 4{
                 let name = "skull_move_\(index + 1)"

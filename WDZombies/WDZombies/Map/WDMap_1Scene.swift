@@ -84,12 +84,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             //self.createBoss1()
+            self.level_4_BossAction()
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -326,6 +327,31 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
     }
     
+    //绿色僵尸
+    func level_4_BossAction()  {
+        
+        let greenZom = WDGreenZomNode.init()
+        greenZom.size = CGSize(width:125,height:125)
+        greenZom.initWithPersonNode(personNode: personNode)
+        bgNode.addChild(greenZom)
+        greenZom.isBoss = true
+        greenZom.starMove()
+        
+        //绿色僵尸移动
+        weak var weakSelf = self
+        greenZom.moveAction = {(greenNode:WDGreenZomNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: greenNode.position, point2: (weakSelf?.personNode.position)!)
+            greenNode.behavior.moveActionForGreen(direction: direction, personNode: (weakSelf?.personNode)!)
+        }
+        
+        //绿色僵尸吐雾攻击
+        greenZom.attack2Action = {(greenNode:WDGreenZomNode) -> Void in
+            greenZom.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
+        }
+        
+        
+    }
+    
     @objc func testEmitter(timer:Timer) {
     }
     
@@ -376,7 +402,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         var magicNode:SKEmitterNode?
         var boss1Node:WDBossNode_1?
         var kulouNode:WDKulouNode?
+        var greenSmoke:SKSpriteNode?
 
+        greenSmoke = (A?.name?.isEqual(GREEN_SMOKE_NAME))! ? (A as? SKSpriteNode):nil;
+        if greenSmoke == nil {
+            greenSmoke = (B?.name?.isEqual(GREEN_SMOKE_NAME))! ? (B as? SKSpriteNode):nil;
+        }
         
         kulouNode = (A?.name?.isEqual(KULOU))! ? (A as? WDKulouNode):nil;
         if kulouNode == nil {
@@ -446,6 +477,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
 //        if magicNode != nil && zomNode != nil {
 //            print("僵尸魔法撞到僵尸了！！！")
 //        }
+        
+        
+        if greenSmoke != nil && pNode != nil {
+            print("收到毒气烟雾的攻击")
+        }
         
         if zomNode != nil && fireNode != nil{
             

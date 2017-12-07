@@ -190,6 +190,54 @@ class WDAnimationTool: NSObject {
     
     
     
+    /// 蓝色僵尸攻击动画2
+    ///
+    /// - Parameters:
+    ///   - greenZom:
+    ///   - personNode:
+    static func greenAttack2Animation(greenZom:WDGreenZomNode,personNode:WDPersonNode){
+        if greenZom.wdBlood <= 0{
+            return
+        }
+        
+        greenZom.canMove = false
+        greenZom.isMove  = false
+        
+        let attackAction = SKAction.animate(with: greenZom.attack2Arr as! [SKTexture], timePerFrame: 0.2)
+        
+        let dic = ["greenZom":greenZom,"personNode":personNode]
+        self.perform(#selector(createSmokeNode(dic:)), with: dic, afterDelay: 0.2 * 5)
+        
+        greenZom.run(attackAction) {
+            greenZom.canMove = true
+        }
+        
+    }
+    
+    @objc static func setSmokePhy(smokeNode:SKSpriteNode){
+        
+    }
+    
+    @objc static func createSmokeNode(dic:NSDictionary){
+        let personNode:WDPersonNode = dic.object(forKey: "personNode") as! WDPersonNode
+        let greenZom:WDGreenZomNode = dic.object(forKey: "greenZom") as! WDGreenZomNode
+        
+        let smokeNode = SKSpriteNode.init()
+        smokeNode.position = personNode.position
+        smokeNode.zPosition = 1000
+        smokeNode.name = GREEN_SMOKE_NAME
+        smokeNode.size = CGSize(width:75,height:75)
+        let action = SKAction.animate(with: greenZom.smokeArr as! [SKTexture], timePerFrame: 0.1)
+        let action2 = SKAction.repeat(action, count: 4)
+        self.perform(#selector(setSmokePhy(smokeNode:)), with: smokeNode, afterDelay: 1.0)
+        personNode.parent?.addChild(smokeNode)
+        
+        smokeNode.run(action2) {
+            smokeNode.removeFromParent()
+        }
+        
+    }
+    
     /// 魔法攻击动画
     ///
     /// - Parameters:

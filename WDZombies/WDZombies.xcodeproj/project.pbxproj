@@ -15,6 +15,12 @@
 		4307E3711FA1DF0D00E1AD38 /* blood6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4307E3691FA1DF0C00E1AD38 /* blood6.png */; };
 		4307E3721FA1DF0D00E1AD38 /* blood3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4307E36A1FA1DF0C00E1AD38 /* blood3.png */; };
 		4307E3731FA1DF0D00E1AD38 /* blood1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4307E36B1FA1DF0C00E1AD38 /* blood1.png */; };
+		430B1BCA1FD92FE6006A9809 /* greenZomPic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 430B1BC91FD92FE6006A9809 /* greenZomPic.atlas */; };
+		430B1BCD1FD9349B006A9809 /* monster_1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 430B1BCB1FD9349B006A9809 /* monster_1_move.png */; };
+		430B1BCE1FD9349B006A9809 /* monster_2_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 430B1BCC1FD9349B006A9809 /* monster_2_move.png */; };
+		430B1BD01FD93696006A9809 /* WDConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B1BCF1FD93696006A9809 /* WDConstant.swift */; };
+		430B1BD21FD937BE006A9809 /* WDGreenBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B1BD11FD937BE006A9809 /* WDGreenBehavior.swift */; };
+		430B1BD41FD937D2006A9809 /* WDGreenZomNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B1BD31FD937D2006A9809 /* WDGreenZomNode.swift */; };
 		432F84B21F998A5B00F51146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F84B11F998A5B00F51146 /* AppDelegate.swift */; };
 		432F84B41F998A5B00F51146 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 432F84B31F998A5B00F51146 /* GameScene.sks */; };
 		432F84B61F998A5B00F51146 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 432F84B51F998A5B00F51146 /* Actions.sks */; };
@@ -77,8 +83,6 @@
 		434D58751FD547BF00253903 /* monster_2_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58711FD547BE00253903 /* monster_2_attack.png */; };
 		434D58761FD547BF00253903 /* monster_3_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58721FD547BE00253903 /* monster_3_attack.png */; };
 		434D58771FD547BF00253903 /* monster_4_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58731FD547BF00253903 /* monster_4_attack.png */; };
-		434D587A1FD54AEC00253903 /* monster_1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58781FD54AEC00253903 /* monster_1_move.png */; };
-		434D587B1FD54AEC00253903 /* monster_2_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58791FD54AEC00253903 /* monster_2_move.png */; };
 		434D587E1FD54C4900253903 /* monster_2_move_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D587C1FD54C4900253903 /* monster_2_move_red.png */; };
 		434D587F1FD54C4900253903 /* monster_1_move_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D587D1FD54C4900253903 /* monster_1_move_red.png */; };
 		434D58841FD54D4F00253903 /* monster_1_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58801FD54D4E00253903 /* monster_1_attack_red.png */; };
@@ -163,6 +167,12 @@
 		4307E3691FA1DF0C00E1AD38 /* blood6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood6.png; sourceTree = "<group>"; };
 		4307E36A1FA1DF0C00E1AD38 /* blood3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood3.png; sourceTree = "<group>"; };
 		4307E36B1FA1DF0C00E1AD38 /* blood1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood1.png; sourceTree = "<group>"; };
+		430B1BC91FD92FE6006A9809 /* greenZomPic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = greenZomPic.atlas; sourceTree = "<group>"; };
+		430B1BCB1FD9349B006A9809 /* monster_1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_move.png; sourceTree = "<group>"; };
+		430B1BCC1FD9349B006A9809 /* monster_2_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_move.png; sourceTree = "<group>"; };
+		430B1BCF1FD93696006A9809 /* WDConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDConstant.swift; sourceTree = "<group>"; };
+		430B1BD11FD937BE006A9809 /* WDGreenBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDGreenBehavior.swift; sourceTree = "<group>"; };
+		430B1BD31FD937D2006A9809 /* WDGreenZomNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDGreenZomNode.swift; sourceTree = "<group>"; };
 		432F84AE1F998A5B00F51146 /* WDZombies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WDZombies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		432F84B11F998A5B00F51146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		432F84B31F998A5B00F51146 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -227,8 +237,6 @@
 		434D58711FD547BE00253903 /* monster_2_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_attack.png; sourceTree = "<group>"; };
 		434D58721FD547BE00253903 /* monster_3_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_3_attack.png; sourceTree = "<group>"; };
 		434D58731FD547BF00253903 /* monster_4_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_4_attack.png; sourceTree = "<group>"; };
-		434D58781FD54AEC00253903 /* monster_1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster_1_move.png; path = "../../../../../Desktop/素材/绿色僵尸/monster_1_move.png"; sourceTree = "<group>"; };
-		434D58791FD54AEC00253903 /* monster_2_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster_2_move.png; path = "../../../../../Desktop/素材/绿色僵尸/monster_2_move.png"; sourceTree = "<group>"; };
 		434D587C1FD54C4900253903 /* monster_2_move_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_move_red.png; sourceTree = "<group>"; };
 		434D587D1FD54C4900253903 /* monster_1_move_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_move_red.png; sourceTree = "<group>"; };
 		434D58801FD54D4E00253903 /* monster_1_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_attack_red.png; sourceTree = "<group>"; };
@@ -332,6 +340,16 @@
 			path = BloodPic;
 			sourceTree = "<group>";
 		};
+		430B1BC81FD92EFC006A9809 /* GreenZomNode */ = {
+			isa = PBXGroup;
+			children = (
+				430B1BC91FD92FE6006A9809 /* greenZomPic.atlas */,
+				430B1BD11FD937BE006A9809 /* WDGreenBehavior.swift */,
+				430B1BD31FD937D2006A9809 /* WDGreenZomNode.swift */,
+			);
+			path = GreenZomNode;
+			sourceTree = "<group>";
+		};
 		432F84A51F998A5B00F51146 = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +399,7 @@
 				432F84D91F99DA0800F51146 /* WDTool.swift */,
 				4355897F1FA06DEF00C80CA8 /* WDPhysicalAttribute.swift */,
 				43625F821FA1C7FB00910ED0 /* WDAnimationTool.swift */,
+				430B1BCF1FD93696006A9809 /* WDConstant.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -554,6 +573,7 @@
 		434C5A8F1FD1309E00C921AF /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				430B1BC81FD92EFC006A9809 /* GreenZomNode */,
 				434C5AA11FD130FA00C921AF /* BossNode */,
 				434C5A901FD130D400C921AF /* kulouNode */,
 				434C5A941FD130D400C921AF /* PersonNode */,
@@ -610,14 +630,14 @@
 		435589861FA0752700C80CA8 /* ZombiesPic */ = {
 			isa = PBXGroup;
 			children = (
+				430B1BCB1FD9349B006A9809 /* monster_1_move.png */,
+				430B1BCC1FD9349B006A9809 /* monster_2_move.png */,
 				434D58801FD54D4E00253903 /* monster_1_attack_red.png */,
 				434D58831FD54D4F00253903 /* monster_2_attack_red.png */,
 				434D58811FD54D4E00253903 /* monster_3_attack_red.png */,
 				434D58821FD54D4F00253903 /* monster_4_attack_red.png */,
 				434D587D1FD54C4900253903 /* monster_1_move_red.png */,
 				434D587C1FD54C4900253903 /* monster_2_move_red.png */,
-				434D58781FD54AEC00253903 /* monster_1_move.png */,
-				434D58791FD54AEC00253903 /* monster_2_move.png */,
 				434D58701FD547BE00253903 /* monster_1_attack.png */,
 				434D58711FD547BE00253903 /* monster_2_attack.png */,
 				434D58721FD547BE00253903 /* monster_3_attack.png */,
@@ -758,7 +778,6 @@
 				432F84D41F99A70C00F51146 /* fire.png in Resources */,
 				43765FC91FBAE53E006E37D2 /* boss1Att2_left6.png in Resources */,
 				43765FD71FBAE6F5006E37D2 /* boss1Att2_right3.png in Resources */,
-				434D587A1FD54AEC00253903 /* monster_1_move.png in Resources */,
 				43765FA91FBAD65D006E37D2 /* boss1_att2_star5.png in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
@@ -766,6 +785,7 @@
 				43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */,
 				4307E3701FA1DF0D00E1AD38 /* blood5.png in Resources */,
 				43551B101FCE61C300B86587 /* sun.jpg in Resources */,
+				430B1BCA1FD92FE6006A9809 /* greenZomPic.atlas in Resources */,
 				433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */,
 				43563FA51FB3DB9F00D4BD46 /* RedNormalAttack.png in Resources */,
 				43765FD81FBAE6F5006E37D2 /* boss1Att2_right4.png in Resources */,
@@ -776,6 +796,7 @@
 				43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */,
 				43765F9F1FBACF61006E37D2 /* boss1_att2_4.png in Resources */,
 				434C5A831FD12FAA00C921AF /* Snow.sks in Resources */,
+				430B1BCD1FD9349B006A9809 /* monster_1_move.png in Resources */,
 				43765FCD1FBAE53E006E37D2 /* boss1Att2_left2.png in Resources */,
 				434C5A871FD12FAA00C921AF /* Smoke.sks in Resources */,
 				43563FA31FB3DB5800D4BD46 /* RedNormalDied.png in Resources */,
@@ -818,13 +839,13 @@
 				4307E36C1FA1DF0C00E1AD38 /* blood7.png in Resources */,
 				434D58761FD547BF00253903 /* monster_3_attack.png in Resources */,
 				43551B0C1FCE3AF800B86587 /* lock.png in Resources */,
+				430B1BCE1FD9349B006A9809 /* monster_2_move.png in Resources */,
 				43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */,
 				43551B141FCE7FC600B86587 /* increaseDistance.png in Resources */,
 				434C5A9A1FD130D400C921AF /* kulouPic.atlas in Resources */,
 				4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */,
 				43765FDA1FBAE6F5006E37D2 /* boss1Att2_right7.png in Resources */,
 				4307E36D1FA1DF0C00E1AD38 /* blood2.png in Resources */,
-				434D587B1FD54AEC00253903 /* monster_2_move.png in Resources */,
 				43563FA11FB3DB5800D4BD46 /* RedNormalBorn.png in Resources */,
 				4307E36E1FA1DF0C00E1AD38 /* blood4.png in Resources */,
 				43765FD91FBAE6F5006E37D2 /* boss1Att2_right6.png in Resources */,
@@ -878,7 +899,9 @@
 				43656BBF1F9F1D9C001EFDA5 /* WDBaseScene.swift in Sources */,
 				434C5AA71FD131A000C921AF /* WDMonsterView.swift in Sources */,
 				434C5A8E1FD1307200C921AF /* WDSelectSkillVC.swift in Sources */,
+				430B1BD01FD93696006A9809 /* WDConstant.swift in Sources */,
 				43551B1A1FCE969F00B86587 /* WDUserModel.swift in Sources */,
+				430B1BD21FD937BE006A9809 /* WDGreenBehavior.swift in Sources */,
 				4376D1C31F9F2A47004E6188 /* WDMapManager.swift in Sources */,
 				43656BB91F9EDE47001EFDA5 /* WDMoveView.swift in Sources */,
 				434C5A9E1FD130D400C921AF /* WDPersonNode.swift in Sources */,
@@ -895,6 +918,7 @@
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
 				435983641FC7A77700894AAD /* WDSkillModel.swift in Sources */,
+				430B1BD41FD937D2006A9809 /* WDGreenZomNode.swift in Sources */,
 				43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */,
 				434C5A9C1FD130D400C921AF /* WDKulouNode.swift in Sources */,
 				434C5AA01FD130D400C921AF /* WDZombieNode.swift in Sources */,

@@ -20,6 +20,82 @@ class WDMapManager: NSObject {
     static let sharedInstance = WDMapManager.init()
     private override init() {}
     
+    func setZom()  {
+        let moveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalZom.png")!)
+        let attackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalAttack.png")!)
+        let diedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"NormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
+        
+        let redMoveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalZom.png")!)
+        let redAttackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalAttack.png")!)
+        let redDiedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"RedNormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
+        
+        self.textureDic.setObject(moveDic, forKey: "normalZomMove" as NSCopying)
+        self.textureDic.setObject(attackDic, forKey: "normalZomAttack" as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: "normalZomDied" as NSCopying)
+        
+        self.textureDic.setObject(redMoveDic, forKey: "redNormalZomMove" as NSCopying)
+        self.textureDic.setObject(redAttackDic, forKey: "redNormalZomAttack" as NSCopying)
+        self.textureDic.setObject(redDiedArr, forKey: "redNormalZomDied" as NSCopying)
+    }
+    
+    func setGreenZom() {
+        let textures = SKTextureAtlas.init(named: "greenZomPic")
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let attack2Arr:NSMutableArray = NSMutableArray.init()
+        let diedArr:NSMutableArray = NSMutableArray.init()
+        let smokeArr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...11 {
+            
+            if index < 3{
+                let name = "green_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+                
+                let name2 = "green_attack1_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                attack1Arr.add(temp2)
+            }
+            
+            if index < 12 {
+                let name = "green_attack2_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                attack2Arr.add(temp)
+            }
+            
+            if index < 5 {
+                let name = "green_smoke\(index + 1)"
+                let temp = textures.textureNamed(name)
+                smokeArr.add(temp)
+            }
+            
+            if index < 10{
+                let name = "green_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+            }
+        }
+        
+        self.textureDic.setObject(moveArr, forKey: GREEN_MOVE as NSCopying)
+        self.textureDic.setObject(attack1Arr, forKey: GREEN_ATTACK1 as NSCopying)
+        self.textureDic.setObject(attack2Arr, forKey: GREEN_ATTACK2 as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: GREEN_DIED as NSCopying)
+        self.textureDic.setObject(smokeArr, forKey: GREEN_SMOKE as NSCopying)
+        
+    }
+    
+    func setPic()  {
+        
+        self.mapDic = NSMutableDictionary.init()
+        self.textureDic = NSMutableDictionary.init()
+        
+        self.setZom()
+        self.setGreenZom()
+       
+    }
+    
     func createX_Y(x:NSInteger,y:NSInteger) -> Void {
        
         x_arr = NSMutableArray()

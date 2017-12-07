@@ -67,6 +67,8 @@ class WDDataManager: NSObject {
  
     var db:OpaquePointer? = nil
     
+   
+    
     func createUserModel() -> WDUserModel {
         let model:WDUserModel = WDUserModel.init()
         _ = model.searchToDB()

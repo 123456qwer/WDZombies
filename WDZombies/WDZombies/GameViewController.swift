@@ -60,24 +60,12 @@ class GameViewController: UIViewController {
         
         //初始化地图
         let manager:WDMapManager = WDMapManager.sharedInstance
-        manager.mapDic = NSMutableDictionary.init()
-        manager.textureDic = NSMutableDictionary.init()
+    
+        //初始化地图所有纹理
+        manager.setPic()
         
-        let moveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalZom.png")!)
-        let attackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalAttack.png")!)
-        let diedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"NormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
         
-        let redMoveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalZom.png")!)
-        let redAttackDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "RedNormalAttack.png")!)
-        let redDiedArr   = WDTool.cutCustomImage(image: UIImage.init(named:"RedNormalDied.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:50))
         
-        manager.textureDic.setObject(moveDic, forKey: "normalZomMove" as NSCopying)
-        manager.textureDic.setObject(attackDic, forKey: "normalZomAttack" as NSCopying)
-        manager.textureDic.setObject(diedArr, forKey: "normalZomDied" as NSCopying)
-        
-        manager.textureDic.setObject(redMoveDic, forKey: "redNormalZomMove" as NSCopying)
-        manager.textureDic.setObject(redAttackDic, forKey: "redNormalZomAttack" as NSCopying)
-        manager.textureDic.setObject(redDiedArr, forKey: "redNormalZomDied" as NSCopying)
         
         manager.createX_Y(x: 2001, y: 1125)
         
