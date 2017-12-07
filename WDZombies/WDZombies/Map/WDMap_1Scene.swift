@@ -13,7 +13,8 @@ import SpriteKit
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     static let ZOMCOUNT = 50
-    
+    let BOSS_BLOOD:CGFloat = 50.0
+    let BOSS_ATTACK:CGFloat = 3.0
     
     var boomModel:WDSkillModel!        //技能model，用于查看炸弹伤害
  
@@ -31,7 +32,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var diedZomLabel:SKLabelNode!
     
     
-   
+    var level:NSInteger!
     
     
 
@@ -128,28 +129,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         bgNode.addChild(personNode)
     }
     
-    //骷髅相关
-    func createKulou()  {
-        
-        kulouNode = WDKulouNode.init()
-        kulouNode.size = CGSize(width:110 ,height:130)
-        kulouNode.initWithPersonNode(personNode: personNode)
-        bgNode.addChild(kulouNode)
-        
-        //骷髅死亡，可以升级加技能
-        weak var weakSelf = self
-        kulouNode.behavior.alreadyDied = {() -> Void in
-            weakSelf?.personNode.createLevelUpNode()
-        }
-        
-        kulouNode.starMove()
-        
-        //骷髅移动
-        kulouNode.moveAction = {(kulou:WDKulouNode) -> Void in
-            let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: (weakSelf?.personNode.position)!)
-            kulou.behavior.moveActionForKulou(direction: direction, personNode: (weakSelf?.personNode)!)
-        }
-    }
+   
     
     
     
@@ -164,13 +144,20 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         var arr:NSMutableArray! = nil
         var type:zomType = .Normal
         
-        if zomCount % 5 == 0 {
-            arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
-            type = .Red
-        }else{
-            arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
-            type = .Normal
+        if level == 1 {
+           arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+           type = .Normal
+            
+        }else if level >= 2{
+            if zomCount % 5 == 0 {
+                arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+                type = .Red
+            }else{
+                arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+                type = .Normal
+            }
         }
+       
         
         let zombieNode:WDZombieNode = WDZombieNode.init(texture:arr.object(at: 0) as? SKTexture)
         zombieNode.initWithZomType(type:type)
@@ -189,9 +176,19 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         zombieNode.diedAction = {() -> Void in
             weakSelf?.diedZomCount += 1
             if (weakSelf?.diedZomCount)! >= WDMap_1Scene.ZOMCOUNT {
-                weakSelf?.createKulou()
+               
+                //根据等级召唤boss
+                if weakSelf?.level == 1{
+                    weakSelf?.level_1_BossAction()
+                }else if weakSelf?.level == 2{
+                    weakSelf?.level_2_BossAction()
+                }else if weakSelf?.level == 3{
+                    weakSelf?.level_3_BossAction()
+                }
+                
             }
         }
+        
         
         //红色僵尸发动攻击<之前造成循环引用 -> 直接使用 zombieNode 来调用方法，如下注释>
         //zombieNode.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!
@@ -207,7 +204,127 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     }
  
     
+    func level_1_BossAction()  {
+        
+        let arr:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+        let type:zomType = .Normal
+        let zombieNode:WDZombieNode = WDZombieNode.init(texture:arr.object(at: 0) as? SKTexture)
+        zombieNode.initWithZomType(type:type)
+        zombieNode.xScale = 2.0
+        zombieNode.yScale = 2.0
+        bgNode.addChild(zombieNode)
+        
+        normalZomArr.add(zombieNode)
+        
+        //僵尸移动
+        weak var weakSelf = self
+        zombieNode.moveAction = {(zom:WDZombieNode) -> Void in
+            let direction:NSString = WDTool.calculateDirectionForZom(point1: (zom.position), point2: weakSelf!.personNode.position)
+            zom.zombieBehavior.moveAction(direction: direction)
+        }
+        
+        //僵尸死亡
+        zombieNode.diedAction = {() -> Void in
+            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+            if model.monsterCount <= 1{
+                model.monsterCount = 1
+                _ = model.changeSkillToSqlite()
+                weakSelf?.personNode.createLevelUpNode()
+            }
+            weakSelf?.playNext()
+        }
+        
+        let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
+        zombieNode.position = personNode.position
+        zombieNode.removePhy()
+        zombieNode.run(bornAction) {
+            zombieNode.starMove()
+            zombieNode.wdBlood = self.BOSS_BLOOD
+            zombieNode.wdAttack = self.BOSS_ATTACK
+            zombieNode.isBoss = true
+            zombieNode.bossPhy()
+
+        }
+    }
     
+    func level_2_BossAction()  {
+        let arr:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+        let type:zomType = .Red
+        let zombieNode:WDZombieNode = WDZombieNode.init(texture:arr.object(at: 0) as? SKTexture)
+        zombieNode.initWithZomType(type:type)
+        zombieNode.xScale = 2.0
+        zombieNode.yScale = 2.0
+        bgNode.addChild(zombieNode)
+        
+        normalZomArr.add(zombieNode)
+        
+        //僵尸移动
+        weak var weakSelf = self
+        zombieNode.moveAction = {(zom:WDZombieNode) -> Void in
+            let direction:NSString = WDTool.calculateDirectionForZom(point1: (zom.position), point2: weakSelf!.personNode.position)
+            zom.zombieBehavior.moveAction(direction: direction)
+        }
+        
+        //僵尸死亡
+        zombieNode.diedAction = {() -> Void in
+            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+            if model.monsterCount <= 2{
+                model.monsterCount = 2
+                _ = model.changeSkillToSqlite()
+                weakSelf?.personNode.createLevelUpNode()
+            }
+            
+            weakSelf?.playNext()
+        }
+        
+        //红色僵尸发动攻击<之前造成循环引用 -> 直接使用 zombieNode 来调用方法，如下注释>
+        //zombieNode.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!
+        zombieNode.redAttackAction = {(zom:WDZombieNode) -> Void in
+            zom.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!)
+        }
+        
+        let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
+        zombieNode.position = personNode.position
+        zombieNode.removePhy()
+        zombieNode.run(bornAction) {
+            zombieNode.starMove()
+            zombieNode.wdBlood = self.BOSS_BLOOD
+            zombieNode.wdAttack = self.BOSS_ATTACK
+            zombieNode.isBoss = true
+            zombieNode.bossPhy()
+
+        }
+    }
+    
+    
+    //骷髅相关
+    func level_3_BossAction()  {
+        
+        kulouNode = WDKulouNode.init()
+        kulouNode.size = CGSize(width:110 ,height:130)
+        kulouNode.initWithPersonNode(personNode: personNode)
+        bgNode.addChild(kulouNode)
+        
+        //骷髅死亡，可以升级加技能
+        weak var weakSelf = self
+        kulouNode.behavior.alreadyDied = {() -> Void in
+            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+            if model.monsterCount <= 3{
+                model.monsterCount = 3
+                _ = model.changeSkillToSqlite()
+                weakSelf?.personNode.createLevelUpNode()
+            }
+            
+        }
+        
+        kulouNode.starMove()
+        
+        //骷髅移动
+        kulouNode.moveAction = {(kulou:WDKulouNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: (weakSelf?.personNode.position)!)
+            kulou.behavior.moveActionForKulou(direction: direction, personNode: (weakSelf?.personNode)!)
+        }
+    }
     
     @objc func testEmitter(timer:Timer) {
     }
@@ -370,9 +487,19 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
 
     }
     
+    func playNext()  {
+        
+        self.removeNode()
+        self.nextAction()
+    }
     
     @objc override func gameOver() {
         
+        self.removeNode()
+        self.ggAction()
+    }
+    
+    func removeNode()  {
         createZomTimer.invalidate()
         if mapLink != nil {
             mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
@@ -410,7 +537,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         
         self.isCreateScene = false
-        self.ggAction()
     }
     
     

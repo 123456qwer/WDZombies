@@ -18,10 +18,11 @@ class WDUserModel: NSObject {
     @objc var fire_impact:CGFloat = 0  //人物攻击击飞怪物的最远距离
     @objc var attackDistance:CGFloat = 0 //攻击距离,子弹飞行距离
     @objc var mapLevel:NSInteger = 0
+    @objc var monsterCount:NSInteger = 0
     
     func insertSelfToDB() -> Bool {
         //插入SQL语句
-        let insertSQL = "INSERT INTO 't_User' (blood,attack,speed,level,skillCount,fire_impact,attackDistance,mapLevel) VALUES ('\(blood)','\(attack)','\(speed)','\(level)','\(skillCount)','\(fire_impact)','\(attackDistance)','\(mapLevel)');"
+        let insertSQL = "INSERT INTO 't_User' (blood,attack,speed,level,skillCount,fire_impact,attackDistance,mapLevel,monsterCount) VALUES ('\(blood)','\(attack)','\(speed)','\(level)','\(skillCount)','\(fire_impact)','\(attackDistance)','\(mapLevel)','\(monsterCount)');"
         if WDDataManager.shareInstance().execSQL(SQL: insertSQL) {
             print("插入数据成功")
             return true
@@ -37,7 +38,7 @@ class WDUserModel: NSObject {
     
     func changeSkillToSqlite() -> Bool {
         //更改
-        let changeSQL = "UPDATE 't_User' set blood = '\(blood)',attack = '\(attack)',speed = '\(speed)',level = '\(level)',skillCount = '\(skillCount)',fire_impact = '\(fire_impact)',attackDistance = '\(attackDistance)', mapLevel = '\(mapLevel)'"
+        let changeSQL = "UPDATE 't_User' set blood = '\(blood)',attack = '\(attack)',speed = '\(speed)',level = '\(level)',skillCount = '\(skillCount)',fire_impact = '\(fire_impact)',attackDistance = '\(attackDistance)', mapLevel = '\(mapLevel)',monsterCount = '\(monsterCount)'"
         if WDDataManager.shareInstance().execSQL(SQL: changeSQL) {
             
             print("修改数据成功")

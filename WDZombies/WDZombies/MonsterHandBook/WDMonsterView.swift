@@ -46,7 +46,6 @@ class WDMonsterView: UIView {
         WDTool.masksToSize(View: bgView2, cornerRadius: 10)
 
         //163 / 197
-        
         let page1 = (width - 163 / 2.0) / 2.0
         let page2 = (height - 197 / 2.0) / 2.0
         imageView1 = UIImageView.init(frame: CGRect(x:page1,y:page2,width:163 / 2.0,height:197 / 2.0))
@@ -93,17 +92,17 @@ class WDMonsterView: UIView {
         let page:CGFloat = 15
         
         bloodLabel = UILabel.init(frame: CGRect(x:x,y:page,width:width,height:height))
-        bloodLabel.backgroundColor = UIColor.orange
+        bloodLabel.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         bloodLabel.textAlignment = .center
         self.addSubview(bloodLabel)
         
         speedLabel = UILabel.init(frame: CGRect(x:x,y:WDTool.bottom(View: bloodLabel) + page,width:width,height:height))
-        speedLabel.backgroundColor = UIColor.orange
+        speedLabel.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         speedLabel.textAlignment = .center
         self.addSubview(speedLabel)
         
         attackLabel = UILabel.init(frame: CGRect(x:x,y:WDTool.bottom(View: speedLabel) + page,width:width,height:height))
-        attackLabel.backgroundColor = UIColor.orange
+        attackLabel.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         attackLabel.textAlignment = .center
         self.addSubview(attackLabel)
     }
@@ -127,7 +126,14 @@ class WDMonsterView: UIView {
         
     }
     
-    
+    func setLock(isLock:Bool)  {
+        if isLock {
+            let imageView:UIImageView = UIImageView.init(frame: CGRect(x:0,y:0,width:self.frame.size.width,height:self.frame.size.height))
+            imageView.backgroundColor = UIColor.black
+            imageView.image = UIImage.init(named: "lock.png")
+            self.addSubview(imageView)
+        }
+    }
     
     
     

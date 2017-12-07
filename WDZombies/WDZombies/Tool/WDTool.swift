@@ -22,6 +22,7 @@ enum  zomType{
 typealias selectSkill = (_ Bool:Bool, _ skillType:personSkillType, _ skillCount:NSInteger) -> Void
 typealias tapAction = (_ view:WDSkillView) -> Void
 typealias gameOverAction = () -> Void
+typealias gameNextAction = () -> Void
 
 //适配
 public let kScreenWidth = UIScreen.main.bounds.size.width

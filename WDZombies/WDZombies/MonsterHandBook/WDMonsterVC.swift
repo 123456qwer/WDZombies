@@ -12,17 +12,19 @@ import SpriteKit
 class WDMonsterVC: WDBaseViewController {
 
     var bgScrollView:UIScrollView! = nil
+    var viewArr:NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewArr = NSMutableArray.init()
         self.createBG()
-
+        
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 5,height:0)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 2,height:0)
         
     
         //monster1
@@ -31,7 +33,19 @@ class WDMonsterVC: WDBaseViewController {
         //kulou
         self.createKulou()
         
+        let model:WDUserModel = WDUserModel.init()
+        _ = model.searchToDB()
         
+        //怪物个数
+        for index:NSInteger in 0...viewArr.count - 1 {
+            
+            let view:WDMonsterView = viewArr.object(at: index) as! WDMonsterView
+            if model.monsterCount >= index + 1{
+                view.setLock(isLock: false)
+            }else{
+                view.setLock(isLock: true)
+            }
+        }
         
         self.createBackBtn()
     }
@@ -96,12 +110,17 @@ class WDMonsterVC: WDBaseViewController {
         let arrType:NSArray = [zomType.kulou,zomType.Red]
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
         
+   
+        
         for index:NSInteger in 0...arr.count - 1 {
             let view:WDMonsterView = arr.object(at: index) as! WDMonsterView
             view.setImage1(images: move.object(at: index) as! NSArray,frame:view.imageView1.frame)
             view.setImage2(images: attack.object(at: index) as! NSArray,frame:view.imageView2.frame)
             view.createWithType(type: arrType.object(at: index) as! zomType)
             view.setDetail(str: strArr.object(at: index) as! String,font:fontArr.object(at: index) as! UIFont)
+            
+            viewArr.add(view)
+
         }
        
         
@@ -129,9 +148,8 @@ class WDMonsterVC: WDBaseViewController {
         }
         
         
+        
         let monsterAttack:NSArray = [monster1AttackArr,monster2AttackArr]
-        
-        
         for index:Int in 0...arr.count - 1 {
            
             let view:WDMonsterView = arr.object(at: index) as! WDMonsterView
@@ -139,7 +157,13 @@ class WDMonsterVC: WDBaseViewController {
             view.setImage2(images: monsterAttack.object(at: index) as! NSArray,frame:view.imageView2.frame)
             view.createWithType(type: arrType.object(at: index) as! zomType)
             view.setDetail(str: strArr.object(at: index) as! String,font:fontArr.object(at: index) as! UIFont)
+            
+            
+            viewArr.add(view)
+            
         }
+        
+        
     }
     
     deinit {

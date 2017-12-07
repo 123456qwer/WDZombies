@@ -169,8 +169,12 @@ class WDAnimationTool: NSObject {
 
         zombieNode.run(attackAction) {
             let distance:CGFloat = WDTool.calculateNodesDistance(point1:zombieNode.position,point2:personNode.position)
+            var page:CGFloat = 30
+            if zombieNode.isBoss {
+                page = 50
+            }
             
-            if distance < 30{
+            if distance < page{
                 zombieNode.zombieBehavior.attackAction(node: personNode)
                 //闪现中不被攻击
                 if personNode.isBlink == false{

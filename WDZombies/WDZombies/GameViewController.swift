@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     let PLAY_BTN_TAG     = 160
     let BG_IAMGEVIEW_TAG = 150
     let SKILL_LABEL_TAG  = 170
+    let LABEL_COUNT_TAG  = 210
     
     let PLAY_AGIAIN_TAG  = 180
     let DIED_LABEL_TAG   = 190
@@ -24,6 +25,7 @@ class GameViewController: UIViewController {
     var moveView:WDMoveView!                 = nil
     var showScene:WDBaseScene!               = nil
     var mapName:String!                    = nil
+    var _level:NSInteger = 1
     
 //********************生命周期*********************************//
     override func viewDidLoad() {
@@ -101,13 +103,16 @@ class GameViewController: UIViewController {
         let btn = self.view.viewWithTag(SKILL_LABEL_TAG)
         if btn != nil{
     
-//           // _ = WDDataManager.shareInstance().openDB()
-//            let userModel:WDUserModel = WDUserModel.init()
-//            _ = userModel.searchToDB()
-//           // WDDataManager.shareInstance().closeDB()
-//
-//            let button:UIButton = btn as! UIButton
-//            button.setTitle("LearnSkill\nSkillPoint:\(userModel.skillCount)", for: .normal)
+            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+            if model.skillCount > 0 {
+                let label:UILabel = btn?.viewWithTag(LABEL_COUNT_TAG) as! UILabel
+                label.text = "+\(model.skillCount)"
+                label.isHidden = false
+            }else{
+                let label:UILabel = btn?.viewWithTag(LABEL_COUNT_TAG) as! UILabel
+                label.isHidden = true
+                label.text = "+\(model.skillCount)"
+            }
         }
  
     }
@@ -152,6 +157,19 @@ class GameViewController: UIViewController {
         learnSkillBtn.setImage(UIImage(named:"learnSkill"), for: .normal)
         bgImageView.addSubview(learnSkillBtn)
         
+        let label:UILabel = UILabel.init(frame: CGRect(x:-10,y:0,width:learnSkillBtn.frame.size.width,height:20))
+        label.text = "+\(userModel.skillCount)"
+        label.textAlignment = .right
+        label.textColor = UIColor.orange
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.tag = LABEL_COUNT_TAG
+        learnSkillBtn.addSubview(label)
+        if userModel.skillCount > 0 {
+            label.isHidden = false
+        }else{
+            label.isHidden = true
+        }
+        
         //怪物图鉴
         let monseterBtn:UIButton = UIButton(type:.custom)
         monseterBtn.frame = CGRect(x:WDTool.right(View: learnSkillBtn) + page,y:y,width:width,height:height)
@@ -175,8 +193,9 @@ class GameViewController: UIViewController {
         self.present(mapVC, animated: true) {}
         
         weak var weakSelf = self
-        mapVC.disMiss = {(mapName:String) -> Void in
+        mapVC.disMiss = {(mapName:String,level:NSInteger) -> Void in
             weakSelf?.mapName = mapName
+            weakSelf?._level = level
             weakSelf?.selectSkill()
         }
     }
@@ -259,7 +278,7 @@ class GameViewController: UIViewController {
         
         moveView.isHidden = false
         //显示场景
-        self.showScene(sceneName: mapName)
+        self.showScene(sceneName: mapName, level:_level)
     }
     
     //游戏结束
@@ -286,8 +305,19 @@ class GameViewController: UIViewController {
         skillAndFireView.playAgain()
         self.moveView.isHidden = false
         self.skillAndFireView.isHidden = false
-        self.showScene(sceneName: mapName)
+        self.showScene(sceneName: mapName,level:_level)
 
+    }
+    
+    //playNext
+    @objc func playNext(){
+        _level += 1
+        self.removeDiedView()
+    
+        skillAndFireView.playAgain()
+        self.moveView.isHidden = false
+        self.skillAndFireView.isHidden = false
+        self.showScene(sceneName: mapName,level:_level)
         
     }
     
@@ -303,7 +333,44 @@ class GameViewController: UIViewController {
         view1 = nil
         view2 = nil
         view3 = nil
-
+    }
+    
+    func createNextView()  {
+        let label:UILabel = UILabel.init(frame: CGRect(x:0,y:20,width:kScreenWidth,height:40))
+        label.text = "YOU WIN"
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.textAlignment = .center
+        label.textColor = UIColor.red
+        label.tag = DIED_LABEL_TAG
+        label.alpha = 0
+        self.view.addSubview(label)
+        
+        let page:CGFloat = 20
+        let width:CGFloat = 150
+        let playAgainBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 - page - width,y:WDTool.bottom(View: label) + page,width:width,height:width))
+        playAgainBtn.setTitle("NEXT?", for: .normal)
+        playAgainBtn.backgroundColor = UIColor.orange
+        playAgainBtn.addTarget(self, action: #selector(playNext), for: .touchUpInside)
+        playAgainBtn.tag = PLAY_AGIAIN_TAG
+        playAgainBtn.alpha = 0
+        self.view.addSubview(playAgainBtn)
+        
+        let gameOverBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 + page,y:WDTool.bottom(View: label) + page,width:width,height:width))
+        gameOverBtn.setTitle("Back Home Page", for: .normal)
+        gameOverBtn.backgroundColor = UIColor.orange
+        gameOverBtn.addTarget(self, action: #selector(gameOver), for: .touchUpInside)
+        gameOverBtn.tag = GAME_OVER_TAG
+        gameOverBtn.alpha = 0
+        self.view.addSubview(gameOverBtn)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            label.alpha = 1
+        }) { (true) in
+            UIView.animate(withDuration: 0.5, animations: {
+                playAgainBtn.alpha = 1
+                gameOverBtn.alpha = 1
+            })
+        }
     }
     
     func createDiedView()  {
@@ -349,7 +416,7 @@ class GameViewController: UIViewController {
     /// 跳转到场景
     ///
     /// - Parameter sceneName: 场景名字
-    func showScene(sceneName:String) -> Void {
+    func showScene(sceneName:String,level:NSInteger) -> Void {
         if let view = self.view as! SKView? {
             
                 if sceneName == "WDMap_1Scene" {
@@ -363,6 +430,7 @@ class GameViewController: UIViewController {
 //                    }else{
                         let scene:WDMap_1Scene = WDMap_1Scene(fileNamed:sceneName as String)!
                         scene.scaleMode = .aspectFill
+                        scene.level = level
                         view.presentScene(scene)
                         showScene = scene
                         //WDMapManager.sharedInstance.mapDic.setObject(scene, forKey: sceneName as NSCopying)
@@ -371,11 +439,18 @@ class GameViewController: UIViewController {
                     
                 }
             
+            
             weak var weakSelf = self
             showScene.ggAction = {() -> Void in
                 weakSelf?.moveView.isHidden = true
                 weakSelf?.skillAndFireView.isHidden = true
                 weakSelf?.createDiedView()
+            }
+            
+            showScene.nextAction = {() -> Void in
+                weakSelf?.moveView.isHidden = true
+                weakSelf?.skillAndFireView.isHidden = true
+                weakSelf?.createNextView()
             }
             
             view.ignoresSiblingOrder = true

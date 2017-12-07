@@ -22,6 +22,7 @@ class WDZombieNode: WDBaseNode {
     var moveAction:move!
     var diedAction:died!
     var redAttackAction:redAttack!
+    var isBoss:Bool!
     
     func starMove()  {
         link = CADisplayLink.init(target: self, selector: #selector(linkMove))
@@ -107,6 +108,7 @@ class WDZombieNode: WDBaseNode {
         zombieBehavior = WDZombieBehavior.init()
         zombieBehavior.zombieNode = self
         _zomType = type
+        isBoss = false
         
         if type == .Normal {
             moveDic = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomMove") as! NSMutableDictionary
@@ -146,6 +148,18 @@ class WDZombieNode: WDBaseNode {
         self.attribute()
     }
     
+    func bossPhy(){
+        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:40,height:40))
+        physicsBody.affectedByGravity = false;
+        physicsBody.allowsRotation = false;
+        
+        physicsBody.categoryBitMask = normal_zom;
+        physicsBody.contactTestBitMask = player_type;
+        physicsBody.collisionBitMask = normal_zom;
+        physicsBody.isDynamic = true;
+        
+        self.physicsBody = physicsBody
+    }
     
     //属性
     func attribute() -> Void {

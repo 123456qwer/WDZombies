@@ -15,6 +15,7 @@ class WDBaseScene: SKScene {
     var personNode:WDPersonNode! = nil
     var bgNode:SKSpriteNode! = nil
     var ggAction:gameOverAction!
+    var nextAction:gameNextAction!
 
     override func didMove(to view: SKView) {
         

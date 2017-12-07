@@ -51,6 +51,10 @@ class WDZombieBehavior: WDBaseNodeBehavior {
             zombieNode.diedA()
         }
         WDAnimationTool.bloodAnimation(node:beAttackNode)
+        if zombieNode.isBoss {
+            return
+        }
+        
         WDAnimationTool.beAttackAnimationForZom(attackNode: attackNode as! WDPersonNode, beAttackNode: beAttackNode as! WDZombieNode)
         
     }

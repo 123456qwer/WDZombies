@@ -102,7 +102,7 @@ class WDSkillViewController: UIViewController {
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
         self.view.addSubview(bgScrollView)
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 5,height:0)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth,height:0)
         bgScrollView.bounces = false
 
        
