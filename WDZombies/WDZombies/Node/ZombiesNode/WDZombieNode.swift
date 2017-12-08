@@ -69,9 +69,9 @@ class WDZombieNode: WDBaseNode {
     
     /// 设置物理碰撞
     func setPhy() -> Void {
-        self.physicsBody?.categoryBitMask = normal_zom;
-        self.physicsBody?.contactTestBitMask = player_type;
-        self.physicsBody?.collisionBitMask = normal_zom;
+        self.physicsBody?.categoryBitMask = NORMAL_ZOM_CATEGORY;
+        self.physicsBody?.contactTestBitMask = NORMAL_ZOM_CONTACT;
+        self.physicsBody?.collisionBitMask = NORMAL_ZOM_COLLISION;
     }
     
     deinit {
@@ -129,16 +129,16 @@ class WDZombieNode: WDBaseNode {
         let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
         let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
         
-        self.position = CGPoint(x:x, y:y);
+        self.position = CGPoint(x:200, y:200);
         self.zPosition = 3 * 667 - y;
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:20,height:20))
         physicsBody.affectedByGravity = false;
         physicsBody.allowsRotation = false;
         
-        physicsBody.categoryBitMask = normal_zom;
-        physicsBody.contactTestBitMask = player_type;
-        physicsBody.collisionBitMask = normal_zom;
+        physicsBody.categoryBitMask = NORMAL_ZOM_CATEGORY;
+        physicsBody.contactTestBitMask = NORMAL_ZOM_CONTACT;
+        physicsBody.collisionBitMask = NORMAL_ZOM_COLLISION;
         physicsBody.isDynamic = true;
         
         self.physicsBody = physicsBody
@@ -153,9 +153,9 @@ class WDZombieNode: WDBaseNode {
         physicsBody.affectedByGravity = false;
         physicsBody.allowsRotation = false;
         
-        physicsBody.categoryBitMask = normal_zom;
-        physicsBody.contactTestBitMask = player_type;
-        physicsBody.collisionBitMask = normal_zom;
+        physicsBody.categoryBitMask = NORMAL_ZOM_CATEGORY;
+        physicsBody.contactTestBitMask = NORMAL_ZOM_CONTACT;
+        physicsBody.collisionBitMask = NORMAL_ZOM_COLLISION;
         physicsBody.isDynamic = true;
         
         self.physicsBody = physicsBody

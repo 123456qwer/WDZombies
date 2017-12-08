@@ -12,7 +12,7 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 50
+    static let ZOMCOUNT = 1
     let BOSS_BLOOD:CGFloat = 50.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -84,13 +84,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             //self.createBoss1()
-            self.level_4_BossAction()
+            //self.level_4_BossAction()
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -185,6 +185,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                     weakSelf?.level_2_BossAction()
                 }else if weakSelf?.level == 3{
                     weakSelf?.level_3_BossAction()
+                }else if weakSelf?.level == 4{
+                    weakSelf?.level_4_BossAction()
                 }
                 
             }
@@ -316,7 +318,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 weakSelf?.personNode.createLevelUpNode()
             }
             
+            weakSelf?.playNext()
         }
+        
         
         kulouNode.starMove()
         
@@ -349,8 +353,23 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             greenZom.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
         }
         
+        //绿色僵尸攻击1
+        greenZom.attack1Action = {(greenNode:WDGreenZomNode) -> Void in
+            greenZom.behavior.attack1Action(personNode: (weakSelf?.personNode)!)
+        }
+        
+        //绿色僵尸死亡
+        greenZom.behavior.alreadyDied = {() -> Void in
+            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+            if model.monsterCount <= 4{
+                model.monsterCount = 4
+                _ = model.changeSkillToSqlite()
+                weakSelf?.personNode.createLevelUpNode()
+            }
+        }
         
     }
+    
     
     @objc func testEmitter(timer:Timer) {
     }
@@ -403,7 +422,19 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         var boss1Node:WDBossNode_1?
         var kulouNode:WDKulouNode?
         var greenSmoke:SKSpriteNode?
+        var greenNode:WDGreenZomNode?
+        var greenClaw:SKSpriteNode?
 
+        greenClaw = (A?.name?.isEqual(GREEN_CLAW_NAME))! ? (A as? SKSpriteNode):nil;
+        if greenClaw == nil {
+            greenClaw = (B?.name?.isEqual(GREEN_CLAW_NAME))! ? (B as? SKSpriteNode):nil;
+        }
+        
+        greenNode = (A?.name?.isEqual(GREEN_ZOM_NAME))! ? (A as? WDGreenZomNode):nil;
+        if greenNode == nil {
+            greenNode = (B?.name?.isEqual(GREEN_ZOM_NAME))! ? (B as? WDGreenZomNode):nil;
+        }
+        
         greenSmoke = (A?.name?.isEqual(GREEN_SMOKE_NAME))! ? (A as? SKSpriteNode):nil;
         if greenSmoke == nil {
             greenSmoke = (B?.name?.isEqual(GREEN_SMOKE_NAME))! ? (B as? SKSpriteNode):nil;
@@ -447,14 +478,14 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         
         if pNode != nil && boss1Node != nil {
-           
             boss1Node?.bossBehavior.stopMoveAction(direction: "")
             boss1Node?.bossBehavior.attackAction(node: personNode)
         }
         
         
+        
         if pNode != nil && zomNode != nil{
-            
+    
             let direction:NSString = WDTool.calculateDirectionForZom(point1: zomNode!.position, point2: pNode!.position)
             zomNode?.zombieBehavior.stopMoveAction(direction: direction)
             zomNode?.zombieBehavior.attackAction(node: pNode!)
@@ -473,16 +504,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             WDAnimationTool.bloodAnimation(node:personNode)
             personNode.personBehavior.reduceBlood(number:3)
         }
-        
-//        if magicNode != nil && zomNode != nil {
-//            print("僵尸魔法撞到僵尸了！！！")
-//        }
-        
-        
-        if greenSmoke != nil && pNode != nil {
-            print("收到毒气烟雾的攻击")
-        }
-        
+
         if zomNode != nil && fireNode != nil{
             
             fireNode?.removeFromParent()
@@ -506,6 +528,28 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         if kulouNode != nil && pNode != nil {
             kulouNode?.behavior.attackAction(node: personNode)
         }
+        
+        if greenClaw != nil && pNode != nil {
+            print("受到绿僵尸爪子攻击")
+            WDAnimationTool.bloodAnimation(node:personNode)
+            personNode.personBehavior.reduceBlood(number:2)
+        }
+        
+        if greenSmoke != nil && pNode != nil {
+            print("受到毒气烟雾的攻击")
+            WDAnimationTool.bloodAnimation(node:personNode)
+            personNode.personBehavior.reduceBlood(number:2)
+        }
+        
+        if greenNode != nil && fireNode != nil {
+            greenNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: greenNode!)
+            WDAnimationTool.bloodAnimation(node: greenNode!)
+            fireNode?.removeFromParent()
+        }
+        
+        if greenNode != nil && pNode != nil {
+            greenNode?.attack1Action(greenNode!)
+        }
   
          pNode = nil
          zomNode = nil
@@ -514,8 +558,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
          magicNode = nil
          boss1Node = nil
          kulouNode = nil
-        
+         greenSmoke = nil
+         greenNode = nil
+         greenClaw = nil
     }
+    
     
     
     

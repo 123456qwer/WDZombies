@@ -27,9 +27,11 @@ class WDKulouNode: WDBaseNode {
     }
     
     func removeLink()  {
-        link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-        link.invalidate()
-        link = nil
+        if link != nil{
+            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+            link.invalidate()
+            link = nil
+        }
     }
     
     
@@ -45,9 +47,9 @@ class WDKulouNode: WDBaseNode {
     
     func setPhy() -> Void {
         
-        self.physicsBody?.categoryBitMask = normal_zom;
-        self.physicsBody?.contactTestBitMask = player_type;
-        self.physicsBody?.collisionBitMask = normal_zom;
+        self.physicsBody?.categoryBitMask = KULOU_CATEGORY
+        self.physicsBody?.contactTestBitMask = KULOU_CONTACT
+        self.physicsBody?.collisionBitMask = KULOU_COLLISION
         
     }
     
@@ -95,9 +97,9 @@ class WDKulouNode: WDBaseNode {
         physicsBody.affectedByGravity = false;
         physicsBody.allowsRotation = false;
         
-        physicsBody.categoryBitMask = normal_zom;
-        physicsBody.contactTestBitMask = player_type;
-        physicsBody.collisionBitMask = normal_zom;
+        physicsBody.categoryBitMask = KULOU_CATEGORY;
+        physicsBody.contactTestBitMask = KULOU_CONTACT;
+        physicsBody.collisionBitMask = KULOU_COLLISION;
         physicsBody.isDynamic = true;
         
         let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
@@ -111,19 +113,15 @@ class WDKulouNode: WDBaseNode {
         self.wdFire_impact = 100
         self.texture = moveArr.object(at: 0) as? SKTexture
         self.position = CGPoint(x:600,y:600)
-        self.wdBlood = 100
+        self.wdBlood = 20
     }
     
     func setPhysicsBody(isSet:Bool) -> Void {
  
         if isSet {
-            self.physicsBody?.categoryBitMask = normal_zom
-            self.physicsBody?.contactTestBitMask = player_type
-            self.physicsBody?.collisionBitMask = normal_zom
+            self.setPhy()
         }else{
-            self.physicsBody?.categoryBitMask = 0
-            self.physicsBody?.contactTestBitMask = 0
-            self.physicsBody?.collisionBitMask = 0
+            self.removePhy()
         }
     }
 }

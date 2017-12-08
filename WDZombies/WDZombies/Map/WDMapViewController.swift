@@ -16,6 +16,8 @@ class WDMapViewController: UIViewController {
     let MAP_1 = 10
     let MAP_2 = 20
     let MAP_3 = 30
+    let MAP_4 = 40
+
     var bgScrollView:UIScrollView!
     
     var disMiss:dismissAction!
@@ -29,7 +31,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 3.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 4.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -38,6 +40,7 @@ class WDMapViewController: UIViewController {
         self.setMap1(model: model)
         self.setMap2(model: model)
         self.setMap3(model: model)
+        self.setMap4(model: model)
         
         
         
@@ -61,6 +64,10 @@ class WDMapViewController: UIViewController {
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",3)
             })
+        }else if sender.tag == MAP_4{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",4)
+            })
         }
     }
 
@@ -72,74 +79,20 @@ class WDMapViewController: UIViewController {
 
     
     func setMap1(model:WDUserModel)  {
-        //167 / 197
-        let button:UIButton = UIButton.init(frame: CGRect(x:20,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
-        button.setImage(UIImage.init(named: "map1.png"), for: .normal)
-        button.tag = MAP_1
-        button.addTarget(self, action: #selector(selectMapName(sender:)), for: .touchUpInside)
-        bgScrollView.addSubview(button)
-        
-        let width:CGFloat = 167 / 2.0
-        let height:CGFloat = 197 / 2.0
-        let imageV:UIImageView = UIImageView.init(frame: CGRect(x:button.frame.size.width / 2.0 - width / 2.0,y:button.frame.size.height / 2.0 - height / 2.0,width:width,height:height))
-        //imageV.backgroundColor = UIColor.orange
-        button.addSubview(imageV)
-        
-        
-        let images:NSArray = [UIImage.init(named: "monster_1_move")!,UIImage.init(named: "monster_2_move")!]
-        imageV.animationImages = images as? [UIImage]
-        imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 2.0))
-        imageV.animationRepeatCount = 0
-        imageV.startAnimating()
-        
-        WDTool.masksToSize(View: button, cornerRadius: 10)
+     
+        let images:NSMutableArray = [UIImage.init(named: "monster_1_move")!,UIImage.init(named: "monster_2_move")!]
+        self.setView(tag: MAP_2, width: 167 / 2.0, height: 197 / 2.0, imageArr: images , count: 0, model: model ,x:20)
     }
     
     func setMap2(model:WDUserModel)  {
-        let button:UIButton = UIButton.init(frame: CGRect(x:20 + kScreenWidth,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
-        button.setImage(UIImage.init(named: "map1.png"), for: .normal)
-        button.tag = MAP_2
-        button.isUserInteractionEnabled = false
-        button.addTarget(self, action: #selector(selectMapName(sender:)), for: .touchUpInside)
-        bgScrollView.addSubview(button)
-        
-        let width:CGFloat = 167 / 2.0
-        let height:CGFloat = 197 / 2.0
-        let imageV:UIImageView = UIImageView.init(frame: CGRect(x:button.frame.size.width / 2.0 - width / 2.0,y:button.frame.size.height / 2.0 - height / 2.0,width:width,height:height))
-        //imageV.backgroundColor = UIColor.orange
-        button.addSubview(imageV)
-        
-        if model.monsterCount >= 1 {
-            button.isUserInteractionEnabled = true
-            let images:NSArray = [UIImage.init(named: "monster_1_move_red")!,UIImage.init(named: "monster_2_move_red")!]
-            imageV.animationImages = images as? [UIImage]
-            imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 2.0))
-            imageV.animationRepeatCount = 0
-            imageV.startAnimating()
-        }else{
-            button.isUserInteractionEnabled = false
-            imageV.image = UIImage.init(named: "lock")
-        }
-        
-        WDTool.masksToSize(View: button, cornerRadius: 10)
-
+      
+        let images:NSMutableArray = [UIImage.init(named: "monster_1_move_red")!,UIImage.init(named: "monster_2_move_red")!]
+        self.setView(tag: MAP_2, width: 167 / 2.0, height: 197 / 2.0, imageArr: images, count: 1, model: model ,x:20 + kScreenWidth )
     }
     
     
     func setMap3(model:WDUserModel)  {
-        //167 / 197
-        let button:UIButton = UIButton.init(frame: CGRect(x:20 + kScreenWidth * 2,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
-        button.setImage(UIImage.init(named: "map1.png"), for: .normal)
-        button.tag = MAP_3
-        button.addTarget(self, action: #selector(selectMapName(sender:)), for: .touchUpInside)
-        bgScrollView.addSubview(button)
-        
-        let width:CGFloat = 167 / 2.0
-        let height:CGFloat = 197 / 2.0
-        let imageV:UIImageView = UIImageView.init(frame: CGRect(x:button.frame.size.width / 2.0 - width / 2.0,y:button.frame.size.height / 2.0 - height / 2.0,width:width,height:height))
-        //imageV.backgroundColor = UIColor.orange
-        button.addSubview(imageV)
-        
+      
         let textures = SKTextureAtlas.init(named: "kulouPic")
         let moveArr:NSMutableArray = NSMutableArray.init()
         for index:NSInteger in 0...textures.textureNames.count - 1 {
@@ -151,10 +104,51 @@ class WDMapViewController: UIViewController {
             }
         }
         
-        if model.monsterCount >= 2 {
+        self.setView(tag: MAP_3, width: 167 / 2.0, height: 197 / 2.0, imageArr: moveArr, count: 2, model: model ,x :20 + kScreenWidth * 2)
+    }
+    
+   
+    
+    func setMap4(model:WDUserModel) {
+       
+        let textures = SKTextureAtlas.init(named: "greenZomPic")
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...textures.textureNames.count - 1 {
+            if index < 3{
+                
+                let name = "green_move_\(index + 1)"
+                let temp:UIImage = UIImage.init(named: name)!
+                moveArr.add(temp)
+            }
+            
+            if index > 3{
+                break
+            }
+        }
+        
+        self.setView(tag: MAP_4, width: 125 * 0.8, height: 125 * 0.8, imageArr: moveArr, count: 3, model: model,x:20 + 3 * kScreenWidth)
+        
+    }
+    
+    func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat)  {
+        
+        let button:UIButton = UIButton.init(frame: CGRect(x:x,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
+        button.setImage(UIImage.init(named: "map1.png"), for: .normal)
+        button.tag = tag
+        button.addTarget(self, action: #selector(selectMapName(sender:)), for: .touchUpInside)
+        bgScrollView.addSubview(button)
+        
+        
+        let imageV:UIImageView = UIImageView.init(frame: CGRect(x:button.frame.size.width / 2.0 - width / 2.0,y:button.frame.size.height / 2.0 - height / 2.0,width:width,height:height))
+        //imageV.backgroundColor = UIColor.orange
+        button.addSubview(imageV)
+        
+        
+        
+        if model.monsterCount >= count {
             
             button.isUserInteractionEnabled = true
-            let images:NSArray = moveArr
+            let images:NSArray = imageArr
             imageV.animationImages = images as? [UIImage]
             imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 2.0))
             imageV.animationRepeatCount = 0
@@ -164,7 +158,6 @@ class WDMapViewController: UIViewController {
             imageV.image = UIImage.init(named: "lock")
         }
         
-      
         
         WDTool.masksToSize(View: button, cornerRadius: 10)
     }

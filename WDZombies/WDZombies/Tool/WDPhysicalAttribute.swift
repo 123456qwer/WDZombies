@@ -21,6 +21,26 @@ let connonFire_type:UInt32  = 0x02;
 let connon_type: UInt32  = 0x08;
 
 
+//player
+let PLAYER_CATEGORY:UInt32     = 0x01    //0000  0001
+let PLAYER_CONTACT:UInt32      = 0x02    //0000  0010
+let PLAYER_COLLISION:UInt32    = 0x04    //0000  0100
+
+//normalZom
+let NORMAL_ZOM_CATEGORY:UInt32 = 0x0c    //0000  1100
+let NORMAL_ZOM_CONTACT:UInt32  = 0x11    //0001  0001
+let NORMAL_ZOM_COLLISION:UInt32 = 0x21   //0010  0001
+
+//骷髅
+let KULOU_CATEGORY:UInt32      = 0x04    //0000  0100
+let KULOU_CONTACT:UInt32       = 0x01    //0000  0001
+let KULOU_COLLISION:UInt32     = 0x01    //0000  0001
+
+//greenZom
+let GREEN_ZOM_CATEGORY:UInt32      = 0x04    //0000  0100
+let GREEN_ZOM_CONTACT:UInt32       = 0x01    //0000  0001
+let GREEN_ZOM_COLLISION:UInt32     = 0x01    //0000  0001
+
 let ZOMBIE:NSString = "zombie"
 let PERSON:NSString = "person"
 let FIRE:NSString   = "fire"

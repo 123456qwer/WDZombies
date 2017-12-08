@@ -52,9 +52,9 @@ class WDPersonNode: WDBaseNode {
         physicsBody.affectedByGravity = false;
         physicsBody.allowsRotation = false;
         
-        physicsBody.categoryBitMask = player_type;
-        physicsBody.contactTestBitMask = normal_zom;
-        physicsBody.collisionBitMask = player_type;
+        physicsBody.categoryBitMask = PLAYER_CATEGORY;
+        physicsBody.contactTestBitMask = PLAYER_CONTACT;
+        physicsBody.collisionBitMask = PLAYER_COLLISION;
         physicsBody.isDynamic = true;
         
         

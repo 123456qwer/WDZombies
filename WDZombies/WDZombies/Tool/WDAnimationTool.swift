@@ -140,9 +140,9 @@ class WDAnimationTool: NSObject {
         body.allowsRotation = false;
         
         body.isDynamic = false;
-        body.categoryBitMask = 0;
-        body.contactTestBitMask = normal_zom;
-        body.collisionBitMask = fire_type ;
+        body.contactTestBitMask = NORMAL_ZOM_CATEGORY;
+        body.categoryBitMask = 0
+        body.collisionBitMask = 0
         firNode.physicsBody = body
         
         if node.wdAttack == 3 {
@@ -211,11 +211,36 @@ class WDAnimationTool: NSObject {
         greenZom.run(attackAction) {
             greenZom.canMove = true
         }
+    }
+    
+    
+    static func greenAttack1Animation(greenZom:WDGreenZomNode,personNode:WDPersonNode){
+        if greenZom.wdBlood <= 0{
+            return
+        }
         
+        greenZom.canMove = false
+        greenZom.isMove  = false
+        
+        let attackAction = SKAction.animate(with: greenZom.attack1Arr as! [SKTexture], timePerFrame: 0.2)
+        
+        let dic = ["greenZom":greenZom,"personNode":personNode]
+        self.perform(#selector(createSmokeNode(dic:)), with: dic, afterDelay: 0.2 * 5)
+        
+        greenZom.run(attackAction) {
+            greenZom.canMove = true
+        }
     }
     
     @objc static func setSmokePhy(smokeNode:SKSpriteNode){
-        
+        smokeNode.alpha = 1
+        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:smokeNode.frame.size.width,height:smokeNode.frame.size.height))
+        physicsBody.affectedByGravity = false;
+        physicsBody.allowsRotation = false;
+        physicsBody.contactTestBitMask = PLAYER_CATEGORY;
+        physicsBody.categoryBitMask = 0
+        physicsBody.collisionBitMask = 0
+        smokeNode.physicsBody = physicsBody
     }
     
     @objc static func createSmokeNode(dic:NSDictionary){
@@ -227,8 +252,9 @@ class WDAnimationTool: NSObject {
         smokeNode.zPosition = 1000
         smokeNode.name = GREEN_SMOKE_NAME
         smokeNode.size = CGSize(width:75,height:75)
+        smokeNode.alpha = 0.3
         let action = SKAction.animate(with: greenZom.smokeArr as! [SKTexture], timePerFrame: 0.1)
-        let action2 = SKAction.repeat(action, count: 4)
+        let action2 = SKAction.repeat(action, count: 10)
         self.perform(#selector(setSmokePhy(smokeNode:)), with: smokeNode, afterDelay: 1.0)
         personNode.parent?.addChild(smokeNode)
         

@@ -17,7 +17,8 @@ public let GREEN_DIED    = "GREEN_DIED"
 public let GREEN_SMOKE   = "GREEN_SMOKE"
 
 public let GREEN_SMOKE_NAME = "GREEN_SMOKE_NAME"
-
+public let GREEN_ZOM_NAME = "GREEN_ZOM_NAME"
+public let GREEN_CLAW_NAME = "GREEN_CLAW_NAME"
 
 
 class WDConstant: NSObject {

@@ -46,6 +46,7 @@ class WDMapManager: NSObject {
         let attack2Arr:NSMutableArray = NSMutableArray.init()
         let diedArr:NSMutableArray = NSMutableArray.init()
         let smokeArr:NSMutableArray = NSMutableArray.init()
+        let clawArr:NSMutableArray = NSMutableArray.init()
         
         for index:NSInteger in 0...11 {
             
@@ -71,6 +72,12 @@ class WDMapManager: NSObject {
                 smokeArr.add(temp)
             }
             
+            if index < 5 {
+                let name = "green_claw_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                clawArr.add(temp)
+            }
+            
             if index < 10{
                 let name = "green_died_\(index + 1)"
                 let temp = textures.textureNamed(name)
@@ -83,7 +90,7 @@ class WDMapManager: NSObject {
         self.textureDic.setObject(attack2Arr, forKey: GREEN_ATTACK2 as NSCopying)
         self.textureDic.setObject(diedArr, forKey: GREEN_DIED as NSCopying)
         self.textureDic.setObject(smokeArr, forKey: GREEN_SMOKE as NSCopying)
-        
+        self.textureDic.setObject(clawArr, forKey: GREEN_CLAW_NAME as NSCopying)
     }
     
     func setPic()  {
