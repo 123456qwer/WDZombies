@@ -147,6 +147,6 @@ class WDGreenZomNode: WDBaseNode {
         self.wdFire_impact = 100
         self.texture = moveArr.object(at: 0) as? SKTexture
         self.position = CGPoint(x:600,y:600)
-        self.wdBlood = 20
+        self.wdBlood = 50
     }
 }
