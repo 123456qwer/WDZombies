@@ -12,7 +12,7 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 1
+    static let ZOMCOUNT = 50
     let BOSS_BLOOD:CGFloat = 50.0
     let BOSS_ATTACK:CGFloat = 3.0
     
