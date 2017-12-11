@@ -44,6 +44,11 @@ class WDKulouNode: WDBaseNode {
         moveAction(self)
     }
     
+    func clearAction()  {
+        
+        self.behavior = nil
+        self.removeLink()
+    }
     
     func setPhy() -> Void {
         
@@ -114,6 +119,15 @@ class WDKulouNode: WDBaseNode {
         self.texture = moveArr.object(at: 0) as? SKTexture
         self.position = CGPoint(x:600,y:600)
         self.wdBlood = 20
+        self.wdAttack = 3
+    }
+    
+    func setAttribute(isBoss:Bool)  {
+        if isBoss{
+            self.wdBlood = 100
+        }else{
+            self.wdBlood = 20
+        }
     }
     
     func setPhysicsBody(isSet:Bool) -> Void {

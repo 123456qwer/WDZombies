@@ -70,7 +70,7 @@ class WDMonsterView: UIView {
     
     func setImage2(images:NSArray,frame:CGRect) {
         if images.count > 0{
-            imageView1.frame = frame
+            imageView2.frame = frame
             imageView2.animationImages = images as? [UIImage]
             imageView2.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
             imageView2.animationRepeatCount = 0
@@ -109,19 +109,21 @@ class WDMonsterView: UIView {
     
     func createWithType(type:zomType)  {
         if type == .Normal{
-            
             bloodLabel.text = "blood:   5"
             speedLabel.text = "speed:   1"
             attackLabel.text = "attack:   1"
-            
         }else if type == .Red{
             bloodLabel.text = "blood:   10"
             speedLabel.text = "speed:   2"
             attackLabel.text = "attack:   1"
         }else if type == .kulou{
-            bloodLabel.text = "blood:   100"
+            bloodLabel.text = "blood:   50"
             speedLabel.text = "speed:   1"
-            attackLabel.text = "attack:   1"
+            attackLabel.text = "attack:   2"
+        }else if type == .GreenZom{
+            bloodLabel.text = "blood:   50"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   3"
         }
         
     }

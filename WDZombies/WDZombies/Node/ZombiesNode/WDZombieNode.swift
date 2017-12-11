@@ -20,9 +20,7 @@ class WDZombieNode: WDBaseNode {
     var redZomAttackCount:NSInteger = 0
     var redZomTimer:Timer!
     var moveAction:move!
-    var diedAction:died!
     var redAttackAction:redAttack!
-    var isBoss:Bool!
     
     func starMove()  {
         link = CADisplayLink.init(target: self, selector: #selector(linkMove))
@@ -45,9 +43,7 @@ class WDZombieNode: WDBaseNode {
     }
     
     func diedA()  {
-        diedAction()
         self.clearAction()
-
     }
     
     func clearAction()  {
@@ -129,7 +125,7 @@ class WDZombieNode: WDBaseNode {
         let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
         let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
         
-        self.position = CGPoint(x:200, y:200);
+        self.position = CGPoint(x:x, y:y);
         self.zPosition = 3 * 667 - y;
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:20,height:20))

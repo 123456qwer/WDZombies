@@ -12,7 +12,7 @@ import SpriteKit
 class WDBaseNodeBehavior: NSObject {
 
     
-    typealias diedReturn = () -> Void
+    typealias diedReturn = (_ node:WDBaseNode) -> Void
   
     var alreadyDied:diedReturn?
     

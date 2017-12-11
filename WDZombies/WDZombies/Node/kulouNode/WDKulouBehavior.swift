@@ -54,7 +54,6 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         blood += NSInteger(attackNode.wdAttack)
         
         if kulouNode.wdBlood <= 0 {
-            kulouNode.removePhy()
             self.diedAction()
             kulouNode.setPhysicsBody(isSet: false)
             return
@@ -83,7 +82,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         
         let diedAction = SKAction.animate(with: kulouNode.diedArr as! [SKTexture], timePerFrame: 0.2)
         kulouNode.run(diedAction) {
-            self.alreadyDied!()
+            self.alreadyDied?(self.kulouNode)
             self.kulouNode.removeFromParent()
         }
         

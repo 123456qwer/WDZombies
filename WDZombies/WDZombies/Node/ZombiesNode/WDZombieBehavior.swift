@@ -48,8 +48,7 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         zombieNode.wdBlood -= attackNode.wdAttack
         if zombieNode.wdBlood <= 0 {
             self.diedAction()
-            zombieNode.diedA()
-        }
+         }
         WDAnimationTool.bloodAnimation(node:beAttackNode)
         if zombieNode.isBoss {
             return
@@ -68,7 +67,16 @@ class WDZombieBehavior: WDBaseNodeBehavior {
     
     override func diedAction() -> Void {
         
-        WDAnimationTool.zomDiedAnimation(node:zombieNode)
+        zombieNode.removeAllActions()
+        zombieNode.canMove = false
+        zombieNode.physicsBody = nil
+        zombieNode.zPosition = 1
+        let diedAction = SKAction.animate(with: zombieNode.diedArr as! [SKTexture], timePerFrame: 0.2)
+        zombieNode.run(diedAction) {
+            self.alreadyDied?(self.zombieNode)
+            self.zombieNode.removeFromParent()
+        }
+    
     }
 
     

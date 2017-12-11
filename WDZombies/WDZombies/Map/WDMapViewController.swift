@@ -81,7 +81,7 @@ class WDMapViewController: UIViewController {
     func setMap1(model:WDUserModel)  {
      
         let images:NSMutableArray = [UIImage.init(named: "monster_1_move")!,UIImage.init(named: "monster_2_move")!]
-        self.setView(tag: MAP_2, width: 167 / 2.0, height: 197 / 2.0, imageArr: images , count: 0, model: model ,x:20)
+        self.setView(tag: MAP_1, width: 167 / 2.0, height: 197 / 2.0, imageArr: images , count: 0, model: model ,x:20)
     }
     
     func setMap2(model:WDUserModel)  {

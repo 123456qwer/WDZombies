@@ -22,7 +22,8 @@ class WDBaseNode: SKSpriteNode {
     var canMove:Bool! = true
     var isBlink:Bool! = false
     var isAttack:Bool! = false
-    
+    var isBoss:Bool!
+
     
     var wdLevel:NSInteger = 0
     var wdSkillCount:NSInteger = 0

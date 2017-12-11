@@ -31,7 +31,7 @@ class WDMonsterVC: WDBaseViewController {
         self.createMonster1()
        
         //kulou
-        self.createKulou()
+        self.createMonster2()
         
         let model:WDUserModel = WDUserModel.init()
         _ = model.searchToDB()
@@ -82,7 +82,7 @@ class WDMonsterVC: WDBaseViewController {
     }
     
     
-    func createKulou()  {
+    func createMonster2()  {
         
         let arr:NSMutableArray = self.createView(frame: CGRect(x:kScreenWidth,y:0,width:kScreenWidth,height:kScreenHeight), bgImage: UIImage.init(named: "sun.jpg")!)
 
@@ -103,19 +103,48 @@ class WDMonsterVC: WDBaseViewController {
             }
         }
         
+        let moveArr2:NSMutableArray = NSMutableArray.init()
+        let attack2Arr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...11 {
+            
+            if index < 3{
+                let name = "green_move_\(index + 1)"
+                let temp:UIImage = UIImage.init(named: name)!
+                moveArr2.add(temp)
+              
+            }
+            
+            if index < 12 {
+                let name = "green_attack2_\(index + 1)"
+                let temp:UIImage = UIImage.init(named: name)!
+                attack2Arr.add(temp)
+            }
+            
         
-        let move:NSArray = [moveArr,[]]
-        let attack:NSArray = [attackArr,[]]
-        let strArr:NSArray = ["I am the BOSS!","Stronger than left :("]
-        let arrType:NSArray = [zomType.kulou,zomType.Red]
+        }
+        
+        let move:NSArray = [moveArr,moveArr2]
+        let attack:NSArray = [attackArr,attack2Arr]
+        let strArr:NSArray = ["I am the BOSS!","I am Slow"]
+        let arrType:NSArray = [zomType.kulou,zomType.GreenZom]
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
         
    
         
         for index:NSInteger in 0...arr.count - 1 {
             let view:WDMonsterView = arr.object(at: index) as! WDMonsterView
-            view.setImage1(images: move.object(at: index) as! NSArray,frame:view.imageView1.frame)
-            view.setImage2(images: attack.object(at: index) as! NSArray,frame:view.imageView2.frame)
+
+            if index == 0{
+                view.setImage1(images: move.object(at: index) as! NSArray,frame:view.imageView1.frame)
+                view.setImage2(images: attack.object(at: index) as! NSArray,frame:view.imageView2.frame)
+            }else{
+                let width:CGFloat = 100
+            
+                view.setImage1(images: move.object(at: index) as! NSArray,frame:CGRect(x:-5,y:10,width:width,height:width))
+                view.setImage2(images: attack.object(at: index) as! NSArray,frame:CGRect(x:0,y:10,width:width,height:width))
+            }
+     
+            
             view.createWithType(type: arrType.object(at: index) as! zomType)
             view.setDetail(str: strArr.object(at: index) as! String,font:fontArr.object(at: index) as! UIFont)
             
