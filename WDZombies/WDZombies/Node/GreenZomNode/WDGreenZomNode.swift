@@ -17,7 +17,6 @@ class WDGreenZomNode: WDBaseNode {
     var behavior:WDGreenBehavior! = nil
     var smokeArr:NSMutableArray!
     var clawArr:NSMutableArray!
-    var isBoss:Bool!
 
     
     
@@ -67,7 +66,7 @@ class WDGreenZomNode: WDBaseNode {
     @objc func attack2ActionTimer()  {
         if self.canMove {
             attack2Count += 1
-            if attack2Count >= 10{
+            if attack2Count >= 6{
                 
                 let random = arc4random() % 2
                 
@@ -148,5 +147,13 @@ class WDGreenZomNode: WDBaseNode {
         self.texture = moveArr.object(at: 0) as? SKTexture
         self.position = CGPoint(x:600,y:600)
         self.wdBlood = 50
+    }
+    
+    func setAttribute(isBoss:Bool)  {
+        if isBoss{
+            self.wdBlood = 100
+        }else{
+            self.wdBlood = 20
+        }
     }
 }

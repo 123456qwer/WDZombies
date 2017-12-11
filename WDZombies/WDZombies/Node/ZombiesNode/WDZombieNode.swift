@@ -20,9 +20,7 @@ class WDZombieNode: WDBaseNode {
     var redZomAttackCount:NSInteger = 0
     var redZomTimer:Timer!
     var moveAction:move!
-    var diedAction:died!
     var redAttackAction:redAttack!
-    var isBoss:Bool!
     
     func starMove()  {
         link = CADisplayLink.init(target: self, selector: #selector(linkMove))
@@ -45,9 +43,7 @@ class WDZombieNode: WDBaseNode {
     }
     
     func diedA()  {
-        diedAction()
         self.clearAction()
-
     }
     
     func clearAction()  {

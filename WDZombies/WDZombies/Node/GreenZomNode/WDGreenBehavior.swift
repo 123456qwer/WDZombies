@@ -73,7 +73,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         
         let diedAction = SKAction.animate(with: greenZom.diedArr as! [SKTexture], timePerFrame: 0.2)
         greenZom.run(diedAction) {
-            self.alreadyDied!()
+            self.alreadyDied!(self.greenZom)
             self.greenZom.removeFromParent()
         }
         

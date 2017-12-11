@@ -38,7 +38,6 @@
 		432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F84DE1F99F2CF00F51146 /* WDSkillSelectView.swift */; };
 		43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43365B711FC266ED00356D64 /* WDSkillViewController.swift */; };
 		43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43365B731FC2674C00356D64 /* WDSkillBlockView.swift */; };
-		43365B761FC2789000356D64 /* launchgifpic.gif in Resources */ = {isa = PBXBuildFile; fileRef = 43365B751FC2788F00356D64 /* launchgifpic.gif */; };
 		433B050A1FB19CCB006210B2 /* boomAnimation.png in Resources */ = {isa = PBXBuildFile; fileRef = 433B05081FB19CCB006210B2 /* boomAnimation.png */; };
 		433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */ = {isa = PBXBuildFile; fileRef = 433B05091FB19CCB006210B2 /* boomBegin.png */; };
 		433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D18451FA017E900A283E0 /* WDSkillManager.swift */; };
@@ -192,7 +191,6 @@
 		432F84DE1F99F2CF00F51146 /* WDSkillSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillSelectView.swift; sourceTree = "<group>"; };
 		43365B711FC266ED00356D64 /* WDSkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillViewController.swift; sourceTree = "<group>"; };
 		43365B731FC2674C00356D64 /* WDSkillBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillBlockView.swift; sourceTree = "<group>"; };
-		43365B751FC2788F00356D64 /* launchgifpic.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchgifpic.gif; sourceTree = "<group>"; };
 		433B05081FB19CCB006210B2 /* boomAnimation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomAnimation.png; sourceTree = "<group>"; };
 		433B05091FB19CCB006210B2 /* boomBegin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomBegin.png; sourceTree = "<group>"; };
 		433D18451FA017E900A283E0 /* WDSkillManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillManager.swift; sourceTree = "<group>"; };
@@ -439,7 +437,6 @@
 				433F10D41FC3078500DECFBF /* boom.gif */,
 				433F10D21FC3045A00DECFBF /* speed.gif */,
 				433F10D01FC2FFB700DECFBF /* blink.gif */,
-				43365B751FC2788F00356D64 /* launchgifpic.gif */,
 				432F84CD1F9993E600F51146 /* starBG.jpg */,
 			);
 			path = BGPic;
@@ -883,7 +880,6 @@
 				43551B121FCE7F1900B86587 /* reduceTime.png in Resources */,
 				432F84B61F998A5B00F51146 /* Actions.sks in Resources */,
 				4348DC381F9DE7DA0072D030 /* starGame.png in Resources */,
-				43365B761FC2789000356D64 /* launchgifpic.gif in Resources */,
 				434D58861FD54D4F00253903 /* monster_4_attack_red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
