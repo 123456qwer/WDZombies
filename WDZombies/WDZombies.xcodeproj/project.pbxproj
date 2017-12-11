@@ -190,16 +190,6 @@
 		9B0560221FDE7A8D00EE5F41 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B055FFE1FDE7A8D00EE5F41 /* LayoutConstraintItem.swift */; };
 		9B0560231FDE7A8D00EE5F41 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560001FDE7A8D00EE5F41 /* Typealiases.swift */; };
 		9B0560241FDE7A8D00EE5F41 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560011FDE7A8D00EE5F41 /* UILayoutSupport+Extensions.swift */; };
-		9B0560401FDE802A00EE5F41 /* FMDatabase+FTS3.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560291FDE802A00EE5F41 /* FMDatabase+FTS3.m */; };
-		9B0560411FDE802A00EE5F41 /* FMTokenizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B05602B1FDE802A00EE5F41 /* FMTokenizers.m */; };
-		9B0560421FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B05602F1FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.m */; };
-		9B0560431FDE802A00EE5F41 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560321FDE802A00EE5F41 /* FMDatabase.m */; };
-		9B0560441FDE802A00EE5F41 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560341FDE802A00EE5F41 /* FMDatabaseAdditions.m */; };
-		9B0560451FDE802A00EE5F41 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560361FDE802A00EE5F41 /* FMDatabasePool.m */; };
-		9B0560461FDE802A00EE5F41 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0560381FDE802A00EE5F41 /* FMDatabaseQueue.m */; };
-		9B0560471FDE802A00EE5F41 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B05603B1FDE802A00EE5F41 /* FMResultSet.m */; };
-		9B0560481FDE802A00EE5F41 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B05603C1FDE802A00EE5F41 /* Info.plist */; };
-		9B0560491FDE802A00EE5F41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B05603F1FDE802A00EE5F41 /* main.m */; };
 		9BB042A11FDA92DF00E674DB /* JWStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB042A01FDA92DF00E674DB /* JWStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -391,27 +381,6 @@
 		9B055FFF1FDE7A8D00EE5F41 /* SnapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapKit.h; sourceTree = "<group>"; };
 		9B0560001FDE7A8D00EE5F41 /* Typealiases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		9B0560011FDE7A8D00EE5F41 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
-		9B0560281FDE802A00EE5F41 /* FMDatabase+FTS3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+FTS3.h"; sourceTree = "<group>"; };
-		9B0560291FDE802A00EE5F41 /* FMDatabase+FTS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+FTS3.m"; sourceTree = "<group>"; };
-		9B05602A1FDE802A00EE5F41 /* FMTokenizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMTokenizers.h; sourceTree = "<group>"; };
-		9B05602B1FDE802A00EE5F41 /* FMTokenizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMTokenizers.m; sourceTree = "<group>"; };
-		9B05602C1FDE802A00EE5F41 /* fts3_tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fts3_tokenizer.h; sourceTree = "<group>"; };
-		9B05602E1FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+InMemoryOnDiskIO.h"; sourceTree = "<group>"; };
-		9B05602F1FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+InMemoryOnDiskIO.m"; sourceTree = "<group>"; };
-		9B0560311FDE802A00EE5F41 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		9B0560321FDE802A00EE5F41 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		9B0560331FDE802A00EE5F41 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		9B0560341FDE802A00EE5F41 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		9B0560351FDE802A00EE5F41 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		9B0560361FDE802A00EE5F41 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		9B0560371FDE802A00EE5F41 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		9B0560381FDE802A00EE5F41 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		9B0560391FDE802A00EE5F41 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		9B05603A1FDE802A00EE5F41 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		9B05603B1FDE802A00EE5F41 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		9B05603C1FDE802A00EE5F41 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9B05603E1FDE802A00EE5F41 /* fmdb_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmdb_Prefix.pch; sourceTree = "<group>"; };
-		9B05603F1FDE802A00EE5F41 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9BB042A01FDA92DF00E674DB /* JWStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -821,7 +790,6 @@
 		9B055FDC1FDE7A4100EE5F41 /* OpenSDK */ = {
 			isa = PBXGroup;
 			children = (
-				9B0560251FDE802A00EE5F41 /* FMDB */,
 				9B055FDD1FDE7A8D00EE5F41 /* SnapKit */,
 			);
 			path = OpenSDK;
@@ -868,74 +836,6 @@
 				9B0560011FDE7A8D00EE5F41 /* UILayoutSupport+Extensions.swift */,
 			);
 			path = SnapKit;
-			sourceTree = "<group>";
-		};
-		9B0560251FDE802A00EE5F41 /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				9B0560261FDE802A00EE5F41 /* extra */,
-				9B0560301FDE802A00EE5F41 /* fmdb */,
-				9B05603D1FDE802A00EE5F41 /* sample */,
-			);
-			path = FMDB;
-			sourceTree = "<group>";
-		};
-		9B0560261FDE802A00EE5F41 /* extra */ = {
-			isa = PBXGroup;
-			children = (
-				9B0560271FDE802A00EE5F41 /* fts3 */,
-				9B05602D1FDE802A00EE5F41 /* InMemoryOnDiskIO */,
-			);
-			path = extra;
-			sourceTree = "<group>";
-		};
-		9B0560271FDE802A00EE5F41 /* fts3 */ = {
-			isa = PBXGroup;
-			children = (
-				9B0560281FDE802A00EE5F41 /* FMDatabase+FTS3.h */,
-				9B0560291FDE802A00EE5F41 /* FMDatabase+FTS3.m */,
-				9B05602A1FDE802A00EE5F41 /* FMTokenizers.h */,
-				9B05602B1FDE802A00EE5F41 /* FMTokenizers.m */,
-				9B05602C1FDE802A00EE5F41 /* fts3_tokenizer.h */,
-			);
-			path = fts3;
-			sourceTree = "<group>";
-		};
-		9B05602D1FDE802A00EE5F41 /* InMemoryOnDiskIO */ = {
-			isa = PBXGroup;
-			children = (
-				9B05602E1FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.h */,
-				9B05602F1FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.m */,
-			);
-			path = InMemoryOnDiskIO;
-			sourceTree = "<group>";
-		};
-		9B0560301FDE802A00EE5F41 /* fmdb */ = {
-			isa = PBXGroup;
-			children = (
-				9B0560311FDE802A00EE5F41 /* FMDatabase.h */,
-				9B0560321FDE802A00EE5F41 /* FMDatabase.m */,
-				9B0560331FDE802A00EE5F41 /* FMDatabaseAdditions.h */,
-				9B0560341FDE802A00EE5F41 /* FMDatabaseAdditions.m */,
-				9B0560351FDE802A00EE5F41 /* FMDatabasePool.h */,
-				9B0560361FDE802A00EE5F41 /* FMDatabasePool.m */,
-				9B0560371FDE802A00EE5F41 /* FMDatabaseQueue.h */,
-				9B0560381FDE802A00EE5F41 /* FMDatabaseQueue.m */,
-				9B0560391FDE802A00EE5F41 /* FMDB.h */,
-				9B05603A1FDE802A00EE5F41 /* FMResultSet.h */,
-				9B05603B1FDE802A00EE5F41 /* FMResultSet.m */,
-				9B05603C1FDE802A00EE5F41 /* Info.plist */,
-			);
-			path = fmdb;
-			sourceTree = "<group>";
-		};
-		9B05603D1FDE802A00EE5F41 /* sample */ = {
-			isa = PBXGroup;
-			children = (
-				9B05603E1FDE802A00EE5F41 /* fmdb_Prefix.pch */,
-				9B05603F1FDE802A00EE5F41 /* main.m */,
-			);
-			path = sample;
 			sourceTree = "<group>";
 		};
 		9BB0429F1FDA926400E674DB /* Store */ = {
@@ -1026,7 +926,6 @@
 				435589881FA0753500C80CA8 /* NormalZom.png in Resources */,
 				43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */,
 				43765F9F1FBACF61006E37D2 /* boss1_att2_4.png in Resources */,
-				9B0560481FDE802A00EE5F41 /* Info.plist in Resources */,
 				9B0560201FDE7A8D00EE5F41 /* Info.plist in Resources */,
 				434C5A831FD12FAA00C921AF /* Snow.sks in Resources */,
 				430B1BCD1FD9349B006A9809 /* monster_1_move.png in Resources */,
@@ -1152,17 +1051,14 @@
 				9B05601A1FDE7A8D00EE5F41 /* ConstraintRelatableTarget.swift in Sources */,
 				434C5A8C1FD1303000C921AF /* WDMapViewController.swift in Sources */,
 				9B0560141FDE7A8D00EE5F41 /* ConstraintMakerPriortizable.swift in Sources */,
-				9B0560461FDE802A00EE5F41 /* FMDatabaseQueue.m in Sources */,
 				432F84B81F998A5B00F51146 /* GameScene.swift in Sources */,
 				9B05601C1FDE7A8D00EE5F41 /* ConstraintView+Extensions.swift in Sources */,
 				43656BC21F9F1EBA001EFDA5 /* WDMap_1Scene.swift in Sources */,
 				434C5A771FD12F2200C921AF /* WDMonsterVC.swift in Sources */,
 				434C5A741FD12B4F00C921AF /* WDBaseViewController.swift in Sources */,
 				43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */,
-				9B0560431FDE802A00EE5F41 /* FMDatabase.m in Sources */,
 				9B0560161FDE7A8D00EE5F41 /* ConstraintMultiplierTarget.swift in Sources */,
 				432F84D11F9999E800F51146 /* WDSkillAndFireView.swift in Sources */,
-				9B0560401FDE802A00EE5F41 /* FMDatabase+FTS3.m in Sources */,
 				9B0560231FDE7A8D00EE5F41 /* Typealiases.swift in Sources */,
 				434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */,
 				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
@@ -1173,21 +1069,16 @@
 				9B05601D1FDE7A8D00EE5F41 /* ConstraintView.swift in Sources */,
 				430B1BD41FD937D2006A9809 /* WDGreenZomNode.swift in Sources */,
 				9B0560211FDE7A8D00EE5F41 /* LayoutConstraint.swift in Sources */,
-				9B0560451FDE802A00EE5F41 /* FMDatabasePool.m in Sources */,
 				9B0560101FDE7A8D00EE5F41 /* ConstraintMaker.swift in Sources */,
 				43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */,
-				9B0560441FDE802A00EE5F41 /* FMDatabaseAdditions.m in Sources */,
 				9B05600C1FDE7A8D00EE5F41 /* ConstraintLayoutGuide.swift in Sources */,
 				9B0560071FDE7A8D00EE5F41 /* ConstraintDSL.swift in Sources */,
 				9B05600E1FDE7A8D00EE5F41 /* ConstraintLayoutSupport.swift in Sources */,
-				9B0560411FDE802A00EE5F41 /* FMTokenizers.m in Sources */,
 				434C5A9C1FD130D400C921AF /* WDKulouNode.swift in Sources */,
 				434C5AA01FD130D400C921AF /* WDZombieNode.swift in Sources */,
-				9B0560491FDE802A00EE5F41 /* main.m in Sources */,
 				433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */,
 				9B0560221FDE7A8D00EE5F41 /* LayoutConstraintItem.swift in Sources */,
 				434C5A9D1FD130D400C921AF /* WDPersonBehavior.swift in Sources */,
-				9B0560421FDE802A00EE5F41 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				434C5A9B1FD130D400C921AF /* WDKulouBehavior.swift in Sources */,
 				9B05600A1FDE7A8D00EE5F41 /* ConstraintItem.swift in Sources */,
 				432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */,
@@ -1197,7 +1088,6 @@
 				9B05600B1FDE7A8D00EE5F41 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */,
 				432F84D61F99A85300F51146 /* WDSkillView.swift in Sources */,
-				9B0560471FDE802A00EE5F41 /* FMResultSet.m in Sources */,
 				9B0560191FDE7A8D00EE5F41 /* ConstraintPriorityTarget.swift in Sources */,
 				4376D1BF1F9F28BC004E6188 /* WDBaseNodeBehavior.swift in Sources */,
 				9B0560151FDE7A8D00EE5F41 /* ConstraintMakerRelatable.swift in Sources */,
@@ -1349,7 +1239,6 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9728B43SWE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WDZombies/WDPCH.pch;
 				INFOPLIST_FILE = WDZombies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1370,7 +1259,6 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9728B43SWE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WDZombies/WDPCH.pch;
 				INFOPLIST_FILE = WDZombies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

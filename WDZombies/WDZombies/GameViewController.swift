@@ -118,9 +118,9 @@ class GameViewController: UIViewController {
         
         
         //
-        let width:CGFloat = 120
+        let width:CGFloat = 100
         let height:CGFloat = 80
-        let page:CGFloat = (kScreenWidth - 120 * 3) / 4.0
+        let page:CGFloat = (kScreenWidth - 100 * 4) / 5.0
         let y:CGFloat = kScreenHeight / 2.0 - height / 2.0
         
         //开始游戏选择技能
@@ -170,6 +170,8 @@ class GameViewController: UIViewController {
         //商城
         let shoppintMallBtn = UIButton(type:.custom);
         shoppintMallBtn.addTarget(self, action: #selector(openShoppingMall), for: .touchUpInside)
+        shoppintMallBtn.setImage(UIImage(named:"shop.png"), for: .normal)
+        shoppintMallBtn.frame = CGRect(x:WDTool.right(View: monseterBtn) + page,y:y,width:width,height:height)
         bgImageView.addSubview(shoppintMallBtn)
 
     }
