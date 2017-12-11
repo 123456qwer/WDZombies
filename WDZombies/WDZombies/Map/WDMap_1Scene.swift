@@ -642,7 +642,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         
         //删除所有僵尸
-        if normalZomArr != nil{
+        if normalZomArr != nil && normalZomArr.count > 0{
             for index:NSInteger in 0...normalZomArr.count - 1 {
                 var zom:WDZombieNode? = normalZomArr.object(at: index) as? WDZombieNode
                 
@@ -658,7 +658,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
         
         //删除所有骷髅
-        if kulouZomArr != nil{
+        if kulouZomArr != nil && kulouZomArr.count > 0{
             for index:NSInteger in 0...kulouZomArr.count - 1 {
                 var kulou:WDKulouNode? = kulouZomArr.object(at: index) as? WDKulouNode
                 
