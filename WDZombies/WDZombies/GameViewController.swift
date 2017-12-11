@@ -165,6 +165,13 @@ class GameViewController: UIViewController {
         monseterBtn.tag = SKILL_LABEL_TAG
         monseterBtn.setImage(UIImage(named:"monster.png"), for: .normal)
         bgImageView.addSubview(monseterBtn)
+        
+        
+        //商城
+        let shoppintMallBtn = UIButton(type:.custom);
+        shoppintMallBtn.addTarget(self, action: #selector(openShoppingMall), for: .touchUpInside)
+        bgImageView.addSubview(shoppintMallBtn)
+
     }
     
     //技能学习
@@ -225,6 +232,12 @@ class GameViewController: UIViewController {
         let monsterVC = WDMonsterVC.init()
         self.present(monsterVC, animated: true) {}
     }
+    
+    //打开商城
+    @objc func openShoppingMall()  {
+        
+    }
+    
  
     //开始游戏
     @objc func starGame() -> Void {
