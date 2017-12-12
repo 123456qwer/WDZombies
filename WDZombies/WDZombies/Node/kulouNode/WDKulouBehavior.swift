@@ -53,13 +53,16 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         kulouNode.wdBlood -= attackNode.wdAttack
         blood += NSInteger(attackNode.wdAttack)
         
+        
+        self.reduceBloodLabel(node: kulouNode, attackNode: attackNode)
+        
         if kulouNode.wdBlood <= 0 {
             self.diedAction()
             kulouNode.setPhysicsBody(isSet: false)
             return
         }
         
-        if blood >= 10 {
+        if blood >= 10 && kulouNode.canMove == true{
             
             kulouNode.removeAllActions()
             kulouNode.canMove = false

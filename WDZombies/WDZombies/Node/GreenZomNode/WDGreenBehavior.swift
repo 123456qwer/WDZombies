@@ -46,13 +46,15 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         greenZom.wdBlood -= attackNode.wdAttack
         blood += NSInteger(attackNode.wdAttack)
         
+        self.reduceBloodLabel(node: greenZom, attackNode: attackNode)
+        
         if greenZom.wdBlood <= 0 {
             self.diedAction()
             greenZom.setPhysicsBody(isSet: false)
             return
         }
         
-        if blood >= 10 {
+        if blood >= 10 && greenZom.canMove == true{
             
             greenZom.removeAllActions()
             greenZom.canMove = false

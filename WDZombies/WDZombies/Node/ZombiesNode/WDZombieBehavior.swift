@@ -45,6 +45,9 @@ class WDZombieBehavior: WDBaseNodeBehavior {
     }
     
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
+        
+        self.reduceBloodLabel(node: zombieNode, attackNode: attackNode)
+        
         zombieNode.wdBlood -= attackNode.wdAttack
         if zombieNode.wdBlood <= 0 {
             self.diedAction()
@@ -74,6 +77,7 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         let diedAction = SKAction.animate(with: zombieNode.diedArr as! [SKTexture], timePerFrame: 0.2)
         zombieNode.run(diedAction) {
             self.alreadyDied?(self.zombieNode)
+            self.zombieNode.removeAllChildren()
             self.zombieNode.removeFromParent()
         }
     
