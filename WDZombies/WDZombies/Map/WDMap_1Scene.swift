@@ -30,10 +30,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     
-  
     var diedZomLabel:SKLabelNode!
-    
-    
     var level:NSInteger!
     
     
@@ -94,7 +91,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             //self.createBoss1()
-            //self.level_4_BossAction()
+            //self.level_5_BossAction(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -154,7 +151,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
            type = .Normal
             
         }else if level == 2{
-            arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+            arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
             type = .Normal
          
         }else if level == 3{
@@ -163,7 +160,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
                 type = .Red
             }else{
-                arr = WDTool.cutCustomImage(image: UIImage.init(named: "RedNormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
+                arr = WDTool.cutCustomImage(image: UIImage.init(named: "NormalBorn.png")!, line: 1, arrange: 4, size: CGSize(width:50,height:59))
                 type = .Normal
             }
         }else if level == 4{
@@ -215,6 +212,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
     }
  
+    
     func createBoss()  {
         self.diedZomCount += 1
         if self.diedZomCount >= WDMap_1Scene.ZOMCOUNT {
@@ -333,8 +331,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
         
     }
-    
-    
+
     //骷髅相关
     func level_3_BossAction(isBoss:Bool)  {
         
@@ -419,6 +416,26 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
     }
     
+    //雾骑士
+    func level_5_BossAction(isBoss:Bool)  {
+        let kNight:WDSmokeKnightNode = WDSmokeKnightNode.init()
+        kNight.size = CGSize(width:165,height:165)
+        kNight.initWithPersonNode(personNode: personNode)
+        bgNode.addChild(kNight)
+        kNight.isBoss = true
+        kNight.starMove()
+       
+        weak var weakSelf = self
+        kNight.moveAction = {(knightNode:WDSmokeKnightNode) -> Void in
+            
+            let direction = WDTool.calculateDirectionForZom(point1: knightNode.position, point2: (weakSelf?.personNode.position)!)
+            knightNode.behavior.moveActionForKnight(direction: direction, personNode: (weakSelf?.personNode)!)
+        }
+        
+        kNight.attack2Action = {(knightNode:WDSmokeKnightNode) -> Void in
+            knightNode.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
+        }
+    }
     
     @objc func testEmitter(timer:Timer) {
     }
@@ -640,7 +657,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         }
         
         
-        
         //删除所有僵尸
         if normalZomArr != nil && normalZomArr.count > 0{
             for index:NSInteger in 0...normalZomArr.count - 1 {
@@ -661,7 +677,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         if kulouZomArr != nil && kulouZomArr.count > 0{
             for index:NSInteger in 0...kulouZomArr.count - 1 {
                 var kulou:WDKulouNode? = kulouZomArr.object(at: index) as? WDKulouNode
-                
                 kulou?.clearAction()
                 kulou?.removeAllActions()
                 kulou?.removeAllChildren()
@@ -669,7 +684,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 kulou = nil
             }
         }
-    
         self.isCreateScene = false
     }
     

@@ -93,6 +93,52 @@ class WDMapManager: NSObject {
         self.textureDic.setObject(clawArr, forKey: GREEN_CLAW_NAME as NSCopying)
     }
     
+    func setKnightZom() {
+        
+        let textures = SKTextureAtlas.init(named: "knightNodePic")
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let attack2Arr:NSMutableArray = NSMutableArray.init()
+        let diedArr:NSMutableArray = NSMutableArray.init()
+      
+        for index:NSInteger in 0...11 {
+            
+            if index < 8{
+             
+                let name2 = "wuqishi_attack1_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                attack1Arr.add(temp2)
+            }
+            
+            if index < 11 {
+                let name = "wuqishi_attack2_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                attack2Arr.add(temp)
+            }
+            
+            if index < 5 {
+                let name = "wuqishi_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+            }
+            
+         
+            
+            if index < 7{
+                let name = "wuqishi_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+            }
+        }
+        
+        self.textureDic.setObject(moveArr, forKey: KNIGHT_MOVE as NSCopying)
+        self.textureDic.setObject(attack1Arr, forKey: KNIGHT_ATTACK1 as NSCopying)
+        self.textureDic.setObject(attack2Arr, forKey: KNIGHT_ATTACK2 as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: KNIGHT_DIED as NSCopying)
+    
+    }
+    
     func setPic()  {
         
         self.mapDic = NSMutableDictionary.init()
@@ -100,6 +146,7 @@ class WDMapManager: NSObject {
         
         self.setZom()
         self.setGreenZom()
+        self.setKnightZom()
        
     }
     

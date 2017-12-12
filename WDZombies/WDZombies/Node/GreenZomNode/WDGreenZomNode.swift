@@ -71,7 +71,7 @@ class WDGreenZomNode: WDBaseNode {
                 let random = arc4random() % 2
                 
                 if random == 1{
-                    attack2Action(self)
+                    attack1Action(self)
                 }else{
                     attack2Action(self)
                 }

@@ -121,6 +121,9 @@
 		43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 43656BC81F9F2055001EFDA5 /* railing_right.png */; };
 		43656BCD1F9F2055001EFDA5 /* railing_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 43656BC91F9F2055001EFDA5 /* railing_left.png */; };
 		43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 43656BCE1F9F215D001EFDA5 /* railing_down.png */; };
+		43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43691BAF1FDF822800D4772E /* knightNodePic.atlas */; };
+		43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */; };
+		43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */; };
 		43765F911FBAA627006E37D2 /* BOSS1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8E1FBAA627006E37D2 /* BOSS1_move.png */; };
 		43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */; };
 		43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F941FBAA91A006E37D2 /* boss1_attRight.png */; };
@@ -311,6 +314,9 @@
 		43656BC81F9F2055001EFDA5 /* railing_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = railing_right.png; sourceTree = "<group>"; };
 		43656BC91F9F2055001EFDA5 /* railing_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = railing_left.png; sourceTree = "<group>"; };
 		43656BCE1F9F215D001EFDA5 /* railing_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = railing_down.png; sourceTree = "<group>"; };
+		43691BAF1FDF822800D4772E /* knightNodePic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = knightNodePic.atlas; sourceTree = "<group>"; };
+		43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSmokeKnightNode.swift; sourceTree = "<group>"; };
+		43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKnightBehavior.swift; sourceTree = "<group>"; };
 		43765F8E1FBAA627006E37D2 /* BOSS1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_move.png; sourceTree = "<group>"; };
 		43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_attack.png; sourceTree = "<group>"; };
 		43765F941FBAA91A006E37D2 /* boss1_attRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boss1_attRight.png; sourceTree = "<group>"; };
@@ -645,6 +651,7 @@
 		434C5A8F1FD1309E00C921AF /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				43691BAE1FDF821500D4772E /* SmokeKnightNode */,
 				430B1BC81FD92EFC006A9809 /* GreenZomNode */,
 				434C5AA11FD130FA00C921AF /* BossNode */,
 				434C5A901FD130D400C921AF /* kulouNode */,
@@ -779,6 +786,16 @@
 			path = Map1;
 			sourceTree = "<group>";
 		};
+		43691BAE1FDF821500D4772E /* SmokeKnightNode */ = {
+			isa = PBXGroup;
+			children = (
+				43691BAF1FDF822800D4772E /* knightNodePic.atlas */,
+				43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */,
+				43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */,
+			);
+			path = SmokeKnightNode;
+			sourceTree = "<group>";
+		};
 		4392CE221FA6BBF400A52D12 /* FirePic */ = {
 			isa = PBXGroup;
 			children = (
@@ -909,6 +926,7 @@
 				432F84D41F99A70C00F51146 /* fire.png in Resources */,
 				43765FC91FBAE53E006E37D2 /* boss1Att2_left6.png in Resources */,
 				43765FD71FBAE6F5006E37D2 /* boss1Att2_right3.png in Resources */,
+				43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */,
 				43765FA91FBAD65D006E37D2 /* boss1_att2_star5.png in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
@@ -1082,6 +1100,7 @@
 				434C5A9B1FD130D400C921AF /* WDKulouBehavior.swift in Sources */,
 				9B05600A1FDE7A8D00EE5F41 /* ConstraintItem.swift in Sources */,
 				432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */,
+				43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */,
 				9B0560081FDE7A8D00EE5F41 /* ConstraintInsets.swift in Sources */,
 				9B05600F1FDE7A8D00EE5F41 /* ConstraintLayoutSupportDSL.swift in Sources */,
 				9B0560051FDE7A8D00EE5F41 /* ConstraintConstantTarget.swift in Sources */,
@@ -1095,6 +1114,7 @@
 				432F84BA1F998A5B00F51146 /* GameViewController.swift in Sources */,
 				435589801FA06DEF00C80CA8 /* WDPhysicalAttribute.swift in Sources */,
 				434C5AA41FD130FA00C921AF /* WDBossBehavior_1.swift in Sources */,
+				43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */,
 				9B0560111FDE7A8D00EE5F41 /* ConstraintMakerEditable.swift in Sources */,
 				9B0560091FDE7A8D00EE5F41 /* ConstraintInsetTarget.swift in Sources */,
 				432F84B21F998A5B00F51146 /* AppDelegate.swift in Sources */,
