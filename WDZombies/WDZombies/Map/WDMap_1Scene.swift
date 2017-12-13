@@ -28,8 +28,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var zomCount:NSInteger = 0         //创建的僵尸个数
     var diedZomCount:NSInteger = 0     //击杀僵尸个数
     
-    
-    
     var diedZomLabel:SKLabelNode!
     var level:NSInteger!
     
@@ -49,7 +47,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.bossMove(link:)))
         link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
         objc_setAssociatedObject(link, self.zomLink, boss1Node, objc_AssociationPolicy(rawValue: 0)!)
-
     }
     
     //boss移动

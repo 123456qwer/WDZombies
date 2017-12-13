@@ -18,6 +18,7 @@ class WDPersonNode: WDBaseNode {
     
     deinit {
         print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
+        self.removeObserver(personBehavior, forKeyPath: "position")
     }
     
     func setPhy() -> Void {
