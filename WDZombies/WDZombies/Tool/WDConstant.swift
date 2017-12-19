@@ -8,6 +8,11 @@
 
 import UIKit
 
+//骷髅僵尸
+public let KULOU_MOVE       = "KULOU_MOVE"
+public let KULOU_DIED       = "KULOU_DIED"
+public let KULOU_ATTACK     = "KULOU_ATTACK"
+public let KULOU_NAME       = "KULOU_NAME"
 
 //绿色僵尸
 public let GREEN_MOVE       = "GREEN_MOVE"

@@ -12,7 +12,6 @@ import SpriteKit
 class WDKulouBehavior: WDBaseNodeBehavior {
 
     weak var kulouNode:WDKulouNode! = nil
-    
 
     var blood = 0
 
@@ -36,7 +35,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         kulouNode.canMove = false
         kulouNode.isMove  = false
         
-        let attackAction = SKAction.animate(with: kulouNode.attackArr as! [SKTexture], timePerFrame: 0.15)
+        let attackAction = SKAction.animate(with: kulouNode.model.attack1Arr, timePerFrame: 0.15)
 
    
         self.perform(#selector(hitTheTarget(personNode:)), with: node, afterDelay: 0.25)
@@ -68,7 +67,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
             kulouNode.canMove = false
             kulouNode.isMove = false
             blood = 0
-            kulouNode.texture = kulouNode.beAttackTexture
+            kulouNode.texture = kulouNode.model.beAttackTexture
             self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
         }
    
@@ -104,12 +103,14 @@ class WDKulouBehavior: WDBaseNodeBehavior {
                 
                 kulouNode.removeAction(forKey: "move")
                 
-                let moveAction = SKAction.animate(with: kulouNode.moveArr as! [SKTexture], timePerFrame: 0.2)
+                let moveAction = SKAction.animate(with: kulouNode.model.moveArr, timePerFrame: 0.2)
                 let repeatAction = SKAction.repeatForever(moveAction)
                 if bossDirection.isEqual(to: kLeft as String){
-                    kulouNode.xScale = 1
+                    kulouNode.xScale = xScale
+                    kulouNode.yScale = yScale
                 }else{
-                    kulouNode.xScale = -1
+                    kulouNode.xScale = -1 * xScale
+                    kulouNode.yScale = yScale
                 }
                 
                 kulouNode.run(repeatAction, withKey: "move")

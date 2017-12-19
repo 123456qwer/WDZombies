@@ -17,6 +17,7 @@ class WDMapViewController: UIViewController {
     let MAP_2 = 20
     let MAP_3 = 30
     let MAP_4 = 40
+    let MAP_5 = 50
 
     var bgScrollView:UIScrollView!
     
@@ -31,7 +32,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 4.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 5.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -41,7 +42,7 @@ class WDMapViewController: UIViewController {
         self.setMap2(model: model)
         self.setMap3(model: model)
         self.setMap4(model: model)
-        
+        self.setMap5(model: model)
         
         
         
@@ -67,6 +68,10 @@ class WDMapViewController: UIViewController {
         }else if sender.tag == MAP_4{
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",4)
+            })
+        }else if sender.tag == MAP_5{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",5)
             })
         }
     }
@@ -115,8 +120,7 @@ class WDMapViewController: UIViewController {
         let moveArr:NSMutableArray = NSMutableArray.init()
         for index:NSInteger in 0...textures.textureNames.count - 1 {
             if index < 3{
-                
-                let name = "green_move_\(index + 1)"
+                let name = "green_move_\(index + 1)_\(index + 1)"
                 let temp:UIImage = UIImage.init(named: name)!
                 moveArr.add(temp)
             }
@@ -127,8 +131,27 @@ class WDMapViewController: UIViewController {
         }
         
         self.setView(tag: MAP_4, width: 125 * 0.8, height: 125 * 0.8, imageArr: moveArr, count: 3, model: model,x:20 + 3 * kScreenWidth)
-        
     }
+    
+    func setMap5(model:WDUserModel) {
+        
+        let textures = SKTextureAtlas.init(named: "greenZomPic")
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...textures.textureNames.count - 1 {
+            if index < 5{
+                let name = "wuqishi_move_\(index + 1)"
+                let temp:UIImage = UIImage.init(named: name)!
+                moveArr.add(temp)
+            }
+            
+            if index > 5{
+                break
+            }
+        }
+        
+        self.setView(tag: MAP_5, width: 165 * 0.8, height: 165 * 0.8, imageArr: moveArr, count: 4, model: model,x:20 + 4 * kScreenWidth)
+    }
+    
     
     func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat)  {
         

@@ -78,6 +78,11 @@
 		434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5AA31FD130FA00C921AF /* WDBossNode_1.swift */; };
 		434C5AA71FD131A000C921AF /* WDMonsterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5AA61FD131A000C921AF /* WDMonsterView.swift */; };
 		434C5AA91FD13F4B00C921AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 434C5AA81FD13F4B00C921AF /* Assets.xcassets */; };
+		434CDE191FE8A2BE00E46199 /* WDBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE181FE8A2BE00E46199 /* WDBaseViewModel.swift */; };
+		434CDE1D1FE90BD100E46199 /* WDBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE1C1FE90BD100E46199 /* WDBaseModel.swift */; };
+		434CDE1F1FE910C600E46199 /* WDGreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE1E1FE910C600E46199 /* WDGreenModel.swift */; };
+		434CDE211FE9137B00E46199 /* WDKnightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE201FE9137B00E46199 /* WDKnightModel.swift */; };
+		434CDE231FE9183300E46199 /* WDKulouModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE221FE9183300E46199 /* WDKulouModel.swift */; };
 		434D58741FD547BF00253903 /* monster_1_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58701FD547BE00253903 /* monster_1_attack.png */; };
 		434D58751FD547BF00253903 /* monster_2_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58711FD547BE00253903 /* monster_2_attack.png */; };
 		434D58761FD547BF00253903 /* monster_3_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58721FD547BE00253903 /* monster_3_attack.png */; };
@@ -270,6 +275,11 @@
 		434C5AA31FD130FA00C921AF /* WDBossNode_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WDBossNode_1.swift; sourceTree = "<group>"; };
 		434C5AA61FD131A000C921AF /* WDMonsterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMonsterView.swift; sourceTree = "<group>"; };
 		434C5AA81FD13F4B00C921AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		434CDE181FE8A2BE00E46199 /* WDBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBaseViewModel.swift; sourceTree = "<group>"; };
+		434CDE1C1FE90BD100E46199 /* WDBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBaseModel.swift; sourceTree = "<group>"; };
+		434CDE1E1FE910C600E46199 /* WDGreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDGreenModel.swift; sourceTree = "<group>"; };
+		434CDE201FE9137B00E46199 /* WDKnightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKnightModel.swift; sourceTree = "<group>"; };
+		434CDE221FE9183300E46199 /* WDKulouModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouModel.swift; sourceTree = "<group>"; };
 		434D58701FD547BE00253903 /* monster_1_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_1_attack.png; sourceTree = "<group>"; };
 		434D58711FD547BE00253903 /* monster_2_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_attack.png; sourceTree = "<group>"; };
 		434D58721FD547BE00253903 /* monster_3_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_3_attack.png; sourceTree = "<group>"; };
@@ -423,6 +433,7 @@
 				430B1BC91FD92FE6006A9809 /* greenZomPic.atlas */,
 				430B1BD11FD937BE006A9809 /* WDGreenBehavior.swift */,
 				430B1BD31FD937D2006A9809 /* WDGreenZomNode.swift */,
+				434CDE1E1FE910C600E46199 /* WDGreenModel.swift */,
 			);
 			path = GreenZomNode;
 			sourceTree = "<group>";
@@ -667,6 +678,7 @@
 				434C5A911FD130D400C921AF /* kulouPic.atlas */,
 				434C5A921FD130D400C921AF /* WDKulouBehavior.swift */,
 				434C5A931FD130D400C921AF /* WDKulouNode.swift */,
+				434CDE221FE9183300E46199 /* WDKulouModel.swift */,
 			);
 			path = kulouNode;
 			sourceTree = "<group>";
@@ -760,6 +772,8 @@
 				4376D1BE1F9F28BC004E6188 /* WDBaseNodeBehavior.swift */,
 				4376D1C21F9F2A47004E6188 /* WDMapManager.swift */,
 				434C5A731FD12B4F00C921AF /* WDBaseViewController.swift */,
+				434CDE181FE8A2BE00E46199 /* WDBaseViewModel.swift */,
+				434CDE1C1FE90BD100E46199 /* WDBaseModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -792,6 +806,7 @@
 				43691BAF1FDF822800D4772E /* knightNodePic.atlas */,
 				43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */,
 				43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */,
+				434CDE201FE9137B00E46199 /* WDKnightModel.swift */,
 			);
 			path = SmokeKnightNode;
 			sourceTree = "<group>";
@@ -1053,6 +1068,7 @@
 				434C5AA71FD131A000C921AF /* WDMonsterView.swift in Sources */,
 				9B0560041FDE7A8D00EE5F41 /* ConstraintConfig.swift in Sources */,
 				9B0560181FDE7A8D00EE5F41 /* ConstraintPriority.swift in Sources */,
+				434CDE231FE9183300E46199 /* WDKulouModel.swift in Sources */,
 				434C5A8E1FD1307200C921AF /* WDSelectSkillVC.swift in Sources */,
 				430B1BD01FD93696006A9809 /* WDConstant.swift in Sources */,
 				9B05601F1FDE7A8D00EE5F41 /* Debugging.swift in Sources */,
@@ -1084,6 +1100,7 @@
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
 				435983641FC7A77700894AAD /* WDSkillModel.swift in Sources */,
+				434CDE211FE9137B00E46199 /* WDKnightModel.swift in Sources */,
 				9B05601D1FDE7A8D00EE5F41 /* ConstraintView.swift in Sources */,
 				430B1BD41FD937D2006A9809 /* WDGreenZomNode.swift in Sources */,
 				9B0560211FDE7A8D00EE5F41 /* LayoutConstraint.swift in Sources */,
@@ -1106,6 +1123,7 @@
 				9B0560051FDE7A8D00EE5F41 /* ConstraintConstantTarget.swift in Sources */,
 				9B05600B1FDE7A8D00EE5F41 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */,
+				434CDE1F1FE910C600E46199 /* WDGreenModel.swift in Sources */,
 				432F84D61F99A85300F51146 /* WDSkillView.swift in Sources */,
 				9B0560191FDE7A8D00EE5F41 /* ConstraintPriorityTarget.swift in Sources */,
 				4376D1BF1F9F28BC004E6188 /* WDBaseNodeBehavior.swift in Sources */,
@@ -1116,6 +1134,8 @@
 				434C5AA41FD130FA00C921AF /* WDBossBehavior_1.swift in Sources */,
 				43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */,
 				9B0560111FDE7A8D00EE5F41 /* ConstraintMakerEditable.swift in Sources */,
+				434CDE1D1FE90BD100E46199 /* WDBaseModel.swift in Sources */,
+				434CDE191FE8A2BE00E46199 /* WDBaseViewModel.swift in Sources */,
 				9B0560091FDE7A8D00EE5F41 /* ConstraintInsetTarget.swift in Sources */,
 				432F84B21F998A5B00F51146 /* AppDelegate.swift in Sources */,
 				9B0560061FDE7A8D00EE5F41 /* ConstraintDescription.swift in Sources */,
@@ -1264,7 +1284,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "496011b0-3378-4cff-9d46-662c74decce7";
+				PROVISIONING_PROFILE = "3c4bd18d-22a7-47c5-90ff-9e727cf6d4e2";
 				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1284,7 +1304,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "496011b0-3378-4cff-9d46-662c74decce7";
+				PROVISIONING_PROFILE = "3c4bd18d-22a7-47c5-90ff-9e727cf6d4e2";
 				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

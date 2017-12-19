@@ -40,4 +40,6 @@ class WDBaseNode: SKSpriteNode {
     var wdFire_impact = 10   //人物攻击击飞怪物的最远距离
     var wdAttackDistance = 170
     
+    
+    func configureModel(){}
 }

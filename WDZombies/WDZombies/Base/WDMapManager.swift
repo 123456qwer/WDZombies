@@ -139,6 +139,36 @@ class WDMapManager: NSObject {
     
     }
     
+    func setKulouZom(){
+        let moveArr = NSMutableArray.init()
+        let diedArr = NSMutableArray.init()
+        let attackArr = NSMutableArray.init()
+        
+        let textures = SKTextureAtlas.init(named: "kulouPic")
+        for index:NSInteger in 0...4 {
+            
+            if index < 4{
+                let name = "skull_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+                
+                let attackName = "kulou_attack_\(index + 1)"
+                let temp1 = textures.textureNamed(attackName)
+                attackArr.add(temp1)
+            }
+            
+            if index < 5{
+                let name = "kulou_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+            }
+        }
+        
+        self.textureDic.setObject(moveArr, forKey: KULOU_MOVE as NSCopying)
+        self.textureDic.setObject(attackArr, forKey: KULOU_ATTACK as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: KULOU_DIED as NSCopying)
+    }
+    
     func setPic()  {
         
         self.mapDic = NSMutableDictionary.init()
@@ -147,7 +177,13 @@ class WDMapManager: NSObject {
         self.setZom()
         self.setGreenZom()
         self.setKnightZom()
-       
+        self.setKulouZom()
+    }
+    
+    
+    func beAttackTextureWithName(atlasName:String,textureName:String) -> SKTexture {
+        let textures = SKTextureAtlas.init(named: atlasName)
+        return textures.textureNamed(textureName)
     }
     
     func createX_Y(x:NSInteger,y:NSInteger) -> Void {

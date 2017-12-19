@@ -9,16 +9,11 @@
 import UIKit
 import SpriteKit
 
-class WDGreenZomNode: WDBaseNode {
-    var moveArr:NSMutableArray! = nil
-    var attack1Arr:NSMutableArray! = nil
-    var attack2Arr:NSMutableArray! = nil
-    var beAttackTexture:SKTexture! = nil
-    var behavior:WDGreenBehavior! = nil
-    var smokeArr:NSMutableArray!
-    var clawArr:NSMutableArray!
 
+class WDGreenZomNode: WDBaseNode{
     
+    var behavior:WDGreenBehavior! = nil
+    var model:WDGreenModel = WDGreenModel.init()
     
     var link:CADisplayLink!
     
@@ -34,6 +29,17 @@ class WDGreenZomNode: WDBaseNode {
     var attack2Count:NSInteger = 0
     var diedAction:died!
     
+    deinit {
+        print("绿色僵尸释放了！！！！")
+    }
+    
+    
+   
+    /// 设置基础属性、图片
+    override func configureModel(){
+        model.configureWithZomName(zomName: GREEN_ZOM_NAME)
+    }
+   
     func starMove()  {
         link = CADisplayLink.init(target: self, selector: #selector(linkMove))
         link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
@@ -52,6 +58,13 @@ class WDGreenZomNode: WDBaseNode {
             attack2Timer.invalidate()
             attack2Timer = nil
         }
+    }
+    
+    func clearAction()  {
+        
+        self.behavior = nil
+        self.removeLink()
+        self.removeTimer()
     }
     
     @objc func linkMove()  {
@@ -83,11 +96,9 @@ class WDGreenZomNode: WDBaseNode {
     
   
     func setPhy() -> Void {
-        
         self.physicsBody?.categoryBitMask = GREEN_ZOM_CATEGORY
         self.physicsBody?.contactTestBitMask = GREEN_ZOM_CONTACT
         self.physicsBody?.collisionBitMask = GREEN_ZOM_COLLISION
-        
     }
     
     func removePhy() -> Void {
@@ -97,7 +108,6 @@ class WDGreenZomNode: WDBaseNode {
     }
     
     func setPhysicsBody(isSet:Bool) -> Void {
-        
         if isSet {
             self.setPhy()
         }else{
@@ -108,23 +118,14 @@ class WDGreenZomNode: WDBaseNode {
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
         
         attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
-        
-        moveArr = WDMapManager.sharedInstance.textureDic.object(forKey: GREEN_MOVE) as! NSMutableArray
-        diedArr = WDMapManager.sharedInstance.textureDic.object(forKey: GREEN_DIED) as! NSMutableArray
-        attack1Arr = WDMapManager.sharedInstance.textureDic.object(forKey: GREEN_ATTACK1) as! NSMutableArray
-        attack2Arr = WDMapManager.sharedInstance.textureDic.object(forKey: GREEN_ATTACK2) as! NSMutableArray
-        smokeArr = WDMapManager.sharedInstance.textureDic.object(forKey: GREEN_SMOKE) as! NSMutableArray
-        clawArr = WDMapManager.sharedInstance.textureDic.object(forKey: GREEN_CLAW_NAME) as! NSMutableArray
-        
-        let textures = SKTextureAtlas.init(named: "greenZomPic")
-     
-        
-        beAttackTexture = textures.textureNamed("green_bAttack")
+
+    
         
         behavior = WDGreenBehavior.init()
         behavior.greenZom = self
         
         self.name = GREEN_ZOM_NAME
+        
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:40,height:40))
         physicsBody.affectedByGravity = false;
@@ -144,16 +145,21 @@ class WDGreenZomNode: WDBaseNode {
         self.physicsBody = physicsBody
         self.direction = kLeft
         self.wdFire_impact = 100
-        self.texture = moveArr.object(at: 0) as? SKTexture
         self.position = CGPoint(x:600,y:600)
         self.wdBlood = 50
+        
+        self.setAttribute(isBoss: self.isBoss)
     }
     
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
+            behavior.xScale = 1
+            behavior.yScale = 1
         }else{
             self.wdBlood = 20
+            behavior.xScale = 0.6
+            behavior.yScale = 0.6
         }
     }
 }

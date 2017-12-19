@@ -12,14 +12,15 @@ import SpriteKit
 class WDSmokeKnightNode: WDBaseNode {
 
     var behavior:WDKnightBehavior!
-    var moveArr:NSMutableArray! = nil
-    var attack1Arr:NSMutableArray! = nil
-    var attack2Arr:NSMutableArray! = nil
-    var beAttackTexture:SKTexture! = nil
+   
     
     var link:CADisplayLink!
     var attack2Timer:Timer!
     var attack2Count:NSInteger = 0
+   
+    
+    var model:WDKnightModel = WDKnightModel.init()
+
 
     
     typealias move = (_ knightNode:WDSmokeKnightNode) -> Void
@@ -32,6 +33,7 @@ class WDSmokeKnightNode: WDBaseNode {
     var attack1Action:attack1!
     var diedAction:died!
 
+    
     func removeTimer()  {
         if attack2Timer != nil {
             attack2Timer.invalidate()
@@ -65,38 +67,51 @@ class WDSmokeKnightNode: WDBaseNode {
         if self.canMove {
             attack2Count += 1
             if attack2Count >= 6{
-                
-                let random = arc4random() % 2
-                
-                if random == 1{
-                    attack2Action(self)
-                }else{
-                    attack2Action(self)
-                }
-                
+                                
+                attack2Action(self)
                 attack2Count = 0
             }
         }
+    }
+    
+    func setPhy() -> Void {
+        
+        self.physicsBody?.categoryBitMask = GREEN_ZOM_CATEGORY
+        self.physicsBody?.contactTestBitMask = GREEN_ZOM_CONTACT
+        self.physicsBody?.collisionBitMask = GREEN_ZOM_COLLISION
+        
+    }
+    
+    func removePhy() -> Void {
+        self.physicsBody?.categoryBitMask = 0;
+        self.physicsBody?.contactTestBitMask = 0;
+        self.physicsBody?.collisionBitMask = 0;
+    }
+    
+    func setPhysicsBody(isSet:Bool) -> Void {
+        
+        if isSet {
+            self.setPhy()
+        }else{
+            self.removePhy()
+        }
+    }
+    
+    
+    override func configureModel() {
+        model.configureWithZomName(zomName: KNIGHT_NAME)
     }
     
     func initWithPersonNode(personNode:WDPersonNode) {
         
         attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
         
-        moveArr = WDMapManager.sharedInstance.textureDic.object(forKey: KNIGHT_MOVE) as! NSMutableArray
-        attack1Arr = WDMapManager.sharedInstance.textureDic.object(forKey: KNIGHT_ATTACK1) as! NSMutableArray
-        attack2Arr = WDMapManager.sharedInstance.textureDic.object(forKey: KNIGHT_ATTACK2) as! NSMutableArray
-        diedArr = WDMapManager.sharedInstance.textureDic.object(forKey: KNIGHT_DIED) as! NSMutableArray
-        
-        
         behavior = WDKnightBehavior.init()
         behavior.kNight = self
         
+        
         self.name = KNIGHT_NAME
-        
-        let textures = SKTextureAtlas.init(named: "knightNodePic")
-        beAttackTexture = textures.textureNamed("wuqishi_bAttack")
-        
+       
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:40,height:40))
         physicsBody.affectedByGravity = false;
@@ -115,10 +130,25 @@ class WDSmokeKnightNode: WDBaseNode {
         
         self.physicsBody = physicsBody
         self.direction = kLeft
-        self.wdFire_impact = 100
-        self.texture = moveArr.object(at: 0) as? SKTexture
+        self.wdFire_impact = 200
         self.position = CGPoint(x:600,y:600)
-        self.wdBlood = 50
+        self.wdBlood = 100
+        self.wdAttack = 3
         
+        self.setAttribute(isBoss: self.isBoss)
+
+    }
+    
+    
+    func setAttribute(isBoss:Bool)  {
+        if isBoss{
+            self.wdBlood = 100
+            behavior.xScale = 1
+            behavior.yScale = 1
+        }else{
+            self.wdBlood = 20
+            behavior.xScale = 0.6
+            behavior.yScale = 0.6
+        }
     }
 }
