@@ -74,6 +74,8 @@ class WDKulouNode: WDBaseNode {
     
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
         
+        self.configureModel()
+        
         behavior = WDKulouBehavior.init()
         behavior.kulouNode = self
         

@@ -12,7 +12,7 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 50
+    static let ZOMCOUNT = 1
     let BOSS_BLOOD:CGFloat = 50.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -84,13 +84,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             //self.createBoss1()
-            self.level_4_BossAction(isBoss: true)
+            //self.level_4_BossAction(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -401,9 +401,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let greenZom = WDGreenZomNode.init()
         greenZom.size = CGSize(width:125,height:125)
         
-    
-        greenZom.configureModel()
-       
         greenZom.isBoss = isBoss
         greenZom.initWithPersonNode(personNode: personNode)
         bgNode.addChild(greenZom)
@@ -452,7 +449,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     func level_5_BossAction(isBoss:Bool)  {
         let kNight:WDSmokeKnightNode = WDSmokeKnightNode.init()
         kNight.size = CGSize(width:165,height:165)
-        kNight.configureModel()
         kNight.isBoss = true
         kNight.initWithPersonNode(personNode: personNode)
         bgNode.addChild(kNight)
