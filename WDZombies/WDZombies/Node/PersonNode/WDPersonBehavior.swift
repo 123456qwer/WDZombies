@@ -108,6 +108,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
        
         self.reduceBlood(number: attackNode.wdAttack)
+        self.reduceBloodLabel(node: personNode, attackNode: attackNode)
         
         WDAnimationTool.bloodAnimation(node:personNode)
         WDAnimationTool.beAttackAnimationForPerson(attackNode: attackNode, beAttackNode: beAttackNode as! WDPersonNode)

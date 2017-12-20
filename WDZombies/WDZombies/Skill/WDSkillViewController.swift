@@ -66,7 +66,11 @@ class WDSkillViewController: UIViewController {
     
     
     @objc func confirmAction(sender:UIButton)  {
-        self.dismiss(animated: true) {}
+        print("确认退出")
+            self.dismiss(animated: true) {
+                print("走dismissBlock")
+        }
+   
     }
     
     @objc func notificationAction(notification:NSNotification)  {

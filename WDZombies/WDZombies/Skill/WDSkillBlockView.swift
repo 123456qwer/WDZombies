@@ -48,9 +48,9 @@ class WDSkillBlockView: UIView {
         
         //if WDDataManager.shareInstance().openDB() {
             if skillModel.searchToDB(){
-                print("查询成功")
+                //print("查询成功")
             }else{
-                print("查询失败")
+                //print("查询失败")
             }
             
           //  WDDataManager.shareInstance().closeDB()

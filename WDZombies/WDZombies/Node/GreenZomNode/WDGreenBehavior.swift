@@ -26,12 +26,15 @@ class WDGreenBehavior: WDBaseNodeBehavior {
                 
                 greenZom.removeAction(forKey: "move")
                 
-                let moveAction = SKAction.animate(with: greenZom.moveArr as! [SKTexture], timePerFrame: 0.2)
+
+                let moveAction = SKAction.animate(with: greenZom.model.moveArr, timePerFrame: 0.2)
                 let repeatAction = SKAction.repeatForever(moveAction)
                 if bossDirection.isEqual(to: kLeft as String){
-                    greenZom.xScale = 1
+                    greenZom.xScale = xScale
+                    greenZom.yScale = yScale
                 }else{
-                    greenZom.xScale = -1
+                    greenZom.xScale = -1 * xScale
+                    greenZom.yScale = yScale
                 }
                 
                 greenZom.run(repeatAction, withKey: "move")
@@ -46,19 +49,21 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         greenZom.wdBlood -= attackNode.wdAttack
         blood += NSInteger(attackNode.wdAttack)
         
+        self.reduceBloodLabel(node: greenZom, attackNode: attackNode)
+        
         if greenZom.wdBlood <= 0 {
             self.diedAction()
             greenZom.setPhysicsBody(isSet: false)
             return
         }
         
-        if blood >= 10 {
+        if blood >= 10 && greenZom.canMove == true{
             
             greenZom.removeAllActions()
             greenZom.canMove = false
             greenZom.isMove = false
             blood = 0
-            greenZom.texture = greenZom.beAttackTexture
+            greenZom.texture = greenZom.model.beAttackTexture
             self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
         }
     }
@@ -71,7 +76,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         
         greenZom.removeAllActions()
         
-        let diedAction = SKAction.animate(with: greenZom.diedArr as! [SKTexture], timePerFrame: 0.2)
+        let diedAction = SKAction.animate(with: greenZom.model.diedArr, timePerFrame: 0.2)
         greenZom.run(diedAction) {
             self.alreadyDied!(self.greenZom)
             self.greenZom.removeFromParent()
@@ -98,7 +103,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         greenZom.canMove = false
         greenZom.isMove  = false
         
-        let attackAction = SKAction.animate(with: greenZom.attack2Arr as! [SKTexture], timePerFrame: 0.2)
+        let attackAction = SKAction.animate(with: greenZom.model.attack1Arr, timePerFrame: 0.2)
         
         let dic = ["greenZom":greenZom,"personNode":personNode]
         self.perform(#selector(createSmokeNode(dic:)), with: dic, afterDelay: 0.2 * 5)
@@ -119,7 +124,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         smokeNode.name = GREEN_SMOKE_NAME
         smokeNode.size = CGSize(width:75,height:75)
         smokeNode.alpha = 0.3
-        let action = SKAction.animate(with: greenZom.smokeArr as! [SKTexture], timePerFrame: 0.1)
+        let action = SKAction.animate(with: greenZom.model.smokeArr, timePerFrame: 0.1)
         let action2 = SKAction.repeat(action, count: 10)
         self.perform(#selector(setSmokePhy(smokeNode:)), with: smokeNode, afterDelay: 1.0)
         personNode.parent?.addChild(smokeNode)
@@ -153,7 +158,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         greenZom.canMove = false
         greenZom.isMove  = false
         
-        let attackAction = SKAction.animate(with: greenZom.attack1Arr as! [SKTexture], timePerFrame: 0.2)
+        let attackAction = SKAction.animate(with: greenZom.model.attack1Arr, timePerFrame: 0.2)
         
         let dic = ["greenZom":greenZom,"personNode":personNode]
         self.perform(#selector(createClawNode(dic:)), with: dic, afterDelay: 0.2 * 3)
@@ -184,7 +189,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         clawNode.name = GREEN_CLAW_NAME
         clawNode.size = CGSize(width:100,height:100)
         clawNode.alpha = 0.6
-        let action = SKAction.animate(with: greenZom.clawArr as! [SKTexture], timePerFrame: 0.1)
+        let action = SKAction.animate(with: greenZom.model.clawArr, timePerFrame: 0.1)
         let action2 = SKAction.repeat(action, count: 4)
         personNode.parent?.addChild(clawNode)
         

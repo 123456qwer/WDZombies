@@ -10,16 +10,24 @@ import UIKit
 import SpriteKit
 class WDKulouNode: WDBaseNode {
 
-    var moveArr:NSMutableArray! = nil
-    var attackArr:NSMutableArray! = nil
-    var beAttackTexture:SKTexture! = nil
+   
     var behavior:WDKulouBehavior! = nil
     
     var link:CADisplayLink!
     
+    var model:WDKulouModel = WDKulouModel.init()
+    
     typealias move = (_ kulou:WDKulouNode) -> Void
     
     var moveAction:move!
+    
+    deinit {
+        print("骷髅释放了！！")
+    }
+    
+    override func configureModel() {
+        model.configureWithZomName(zomName: KULOU_NAME)
+    }
     
     func starMove()  {
         link = CADisplayLink.init(target: self, selector: #selector(linkMove))
@@ -66,33 +74,6 @@ class WDKulouNode: WDBaseNode {
     
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
         
-        moveArr = NSMutableArray.init()
-        diedArr = NSMutableArray.init()
-        attackArr = NSMutableArray.init()
-        
-        
-        let textures = SKTextureAtlas.init(named: "kulouPic")
-        for index:NSInteger in 0...4 {
-           
-            if index < 4{
-                let name = "skull_move_\(index + 1)"
-                let temp = textures.textureNamed(name)
-                moveArr.add(temp)
-    
-                let attackName = "kulou_attack_\(index + 1)"
-                let temp1 = textures.textureNamed(attackName)
-                attackArr.add(temp1)
-            }
-            
-            if index < 5{
-                let name = "kulou_died_\(index + 1)"
-                let temp = textures.textureNamed(name)
-                diedArr.add(temp)
-            }
-        }
-        
-        beAttackTexture = textures.textureNamed("kulou_battack")
-        
         behavior = WDKulouBehavior.init()
         behavior.kulouNode = self
         
@@ -116,17 +97,22 @@ class WDKulouNode: WDBaseNode {
         self.physicsBody = physicsBody
         self.direction = kLeft
         self.wdFire_impact = 100
-        self.texture = moveArr.object(at: 0) as? SKTexture
         self.position = CGPoint(x:600,y:600)
         self.wdBlood = 20
         self.wdAttack = 3
+        
+        self.setAttribute(isBoss: self.isBoss)
     }
     
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
+            behavior.xScale = 1
+            behavior.yScale = 1
         }else{
             self.wdBlood = 20
+            behavior.xScale = 0.6
+            behavior.yScale = 0.6
         }
     }
     

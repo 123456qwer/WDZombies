@@ -63,6 +63,7 @@ class WDMonsterView: UIView {
             imageView1.frame = frame
             imageView1.animationImages = images as? [UIImage]
             imageView1.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
+            imageView1.backgroundColor = UIColor.orange
             imageView1.animationRepeatCount = 0
             imageView1.startAnimating()
         }
@@ -73,6 +74,7 @@ class WDMonsterView: UIView {
             imageView2.frame = frame
             imageView2.animationImages = images as? [UIImage]
             imageView2.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
+            imageView2.backgroundColor = UIColor.orange
             imageView2.animationRepeatCount = 0
             imageView2.startAnimating()
         }
