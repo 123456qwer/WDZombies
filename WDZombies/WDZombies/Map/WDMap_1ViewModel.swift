@@ -11,6 +11,17 @@ import SpriteKit
 
 class WDMap_1ViewModel: NSObject {
 
+    //人物&普通僵尸碰撞
+    func personAndNormalZom(pNode:WDPersonNode,zomNode:WDZombieNode){
+        let direction:NSString = WDTool.calculateDirectionForZom(point1: zomNode.position, point2: pNode.position)
+        zomNode.zombieBehavior.stopMoveAction(direction: direction)
+        zomNode.zombieBehavior.attackAction(node: pNode)
+    }
+    
+    
+    
+    
+    //碰撞逻辑
     func phyContact(contact: SKPhysicsContact,personNode:WDPersonNode,boomModel:WDSkillModel){
         
         let A = contact.bodyA.node;
@@ -29,12 +40,10 @@ class WDMap_1ViewModel: NSObject {
         var knightNode:WDSmokeKnightNode?
         var meteoriteNode:SKSpriteNode?
         
-        
         meteoriteNode = (A?.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (A as? SKSpriteNode):nil;
         if meteoriteNode == nil {
             meteoriteNode = (B?.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (B as? SKSpriteNode):nil;
         }
-        
         
         knightNode = (A?.name?.isEqual(KNIGHT_NAME))! ? (A as? WDSmokeKnightNode):nil;
         if knightNode == nil {
@@ -81,7 +90,6 @@ class WDMap_1ViewModel: NSObject {
             zomNode = (B?.name?.isEqual(ZOMBIE))! ? (B as? WDZombieNode):nil;
         }
         
-        
         fireNode = (A?.name?.isEqual(FIRE))! ? (A as? SKSpriteNode):nil;
         if fireNode == nil {
             fireNode = (B?.name?.isEqual(FIRE))! ? (B as? SKSpriteNode):nil;
@@ -92,19 +100,14 @@ class WDMap_1ViewModel: NSObject {
             boomNode = (B?.name?.isEqual(BOOM))! ? (B as? SKSpriteNode):nil;
         }
         
-        
         if pNode != nil && boss1Node != nil {
             boss1Node?.bossBehavior.stopMoveAction(direction: "")
             boss1Node?.bossBehavior.attackAction(node: pNode!)
         }
         
         
-        
         if pNode != nil && zomNode != nil{
-            
-            let direction:NSString = WDTool.calculateDirectionForZom(point1: zomNode!.position, point2: pNode!.position)
-            zomNode?.zombieBehavior.stopMoveAction(direction: direction)
-            zomNode?.zombieBehavior.attackAction(node: pNode!)
+            self.personAndNormalZom(pNode: pNode!, zomNode: zomNode!)
         }
         
         
@@ -112,7 +115,6 @@ class WDMap_1ViewModel: NSObject {
             personNode.wdAttack += CGFloat(boomModel.skillLevel2)
             zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
             personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
-            
         }
         
         if magicNode != nil && pNode != nil {
@@ -129,9 +131,7 @@ class WDMap_1ViewModel: NSObject {
             kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
             WDAnimationTool.bloodAnimation(node: kulouNode!)
             fireNode?.removeFromParent()
-            
         }
-        
         
         if kulouNode != nil && boomNode != nil {
             personNode.wdAttack += CGFloat(boomModel.skillLevel2)
@@ -161,7 +161,6 @@ class WDMap_1ViewModel: NSObject {
             fireNode?.removeFromParent()
         }
         
-        
         if knightNode != nil && fireNode != nil {
             //print("雾骑士被打了")
             knightNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: knightNode!)
@@ -182,7 +181,10 @@ class WDMap_1ViewModel: NSObject {
         if greenNode != nil && pNode != nil {
             greenNode?.attack1Action(greenNode!)
         }
-        
     }
+    
+    
+    
+    
     
 }

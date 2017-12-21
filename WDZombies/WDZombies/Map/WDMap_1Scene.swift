@@ -526,6 +526,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     }
     
     func removeNode()  {
+        
         createZomTimer.invalidate()
         if mapLink != nil {
             mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
