@@ -43,9 +43,32 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         
             self.kulouNode.canMove = true
         }
+    }
+    
+    func attack2Action(personNode:WDPersonNode) {
+        
+        kulouNode.canMove = false
+        kulouNode.alpha = 0.5
+        var page:CGFloat = 80 / 2.0 + 20 / 2.0
+        if kulouNode.position.x < personNode.position.x {
+            page *= -1
+        }
+        
+        let position = CGPoint(x:personNode.position.x + page,y:personNode.position.y)
+        
+        let moveA = SKAction.move(to: position, duration: 0.5)
+        kulouNode.removePhy()
+        self.perform(#selector(setPhy), with: nil, afterDelay: 0.7)
+        kulouNode.run(moveA) {
+            self.kulouNode.canMove = true
+            self.kulouNode.alpha = 1
+        }
         
     }
     
+    @objc func setPhy()  {
+        kulouNode.setPhy()
+    }
     
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
         
@@ -75,7 +98,10 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     
     
     @objc func canMove()  {
-        kulouNode?.canMove = true
+        kulouNode.canMove = true
+        kulouNode.timerCount = 0
+        kulouNode.texture = kulouNode.model.moveArr[0]
+        kulouNode.attack2(kulouNode)
     }
     
     override func diedAction() {

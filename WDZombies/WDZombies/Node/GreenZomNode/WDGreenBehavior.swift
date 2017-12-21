@@ -103,7 +103,7 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         greenZom.canMove = false
         greenZom.isMove  = false
         
-        let attackAction = SKAction.animate(with: greenZom.model.attack1Arr, timePerFrame: 0.2)
+        let attackAction = SKAction.animate(with: greenZom.model.attack2Arr, timePerFrame: 0.2)
         
         let dic = ["greenZom":greenZom,"personNode":personNode]
         self.perform(#selector(createSmokeNode(dic:)), with: dic, afterDelay: 0.2 * 5)

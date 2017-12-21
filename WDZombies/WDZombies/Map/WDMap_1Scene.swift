@@ -12,8 +12,8 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 1
-    let BOSS_BLOOD:CGFloat = 50.0
+    static let ZOMCOUNT = 20
+    let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
     var boomModel:WDSkillModel!        //技能model，用于查看炸弹伤害
@@ -32,36 +32,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var diedZomLabel:SKLabelNode!
     var level:NSInteger!
     
-    
+    let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init()
 
-    
-    /*
-    func createBoss1() -> Void {
-        
-        let arr:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "BOSS1_move")!, line: 2, arrange: 5, size: CGSize(width:183,height:174))
-        boss1Node = WDBossNode_1.init(texture:arr.object(at: 0) as? SKTexture)
-        boss1Node.position = CGPoint(x:200,y:200)
-        boss1Node.initWithPersonNode(personNode: personNode)
-        boss1Node.zPosition = 100
-        bgNode.addChild(boss1Node)
-        
-        let link:CADisplayLink = CADisplayLink.init(target: self, selector: #selector(self.bossMove(link:)))
-        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-        objc_setAssociatedObject(link, self.zomLink, boss1Node, objc_AssociationPolicy(rawValue: 0)!)
-    }
-    
-    //boss移动
-    @objc func bossMove(link:CADisplayLink) {
-        let boss:WDBossNode_1 = objc_getAssociatedObject(link, self.zomLink) as! WDBossNode_1
-        if boss.wdBlood <= 0 {
-            link.invalidate()
-            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-        }
-        
-        let direction = WDTool.calculateDirectionForZom(point1: boss.position, point2: personNode.position)
-        boss.bossBehavior.moveActionForBoss(direction: direction, personNode: personNode)
-    }
-    */
     
     
     //进入方法
@@ -90,7 +62,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             //self.createBoss1()
-            //self.level_4_BossAction(isBoss: true)
+            //self.level_5_BossAction(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -380,16 +352,20 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             }else {
                 weakSelf?.createBoss()
             }
-            
         }
         
         
-        kulouNode.starMove()
         
         //骷髅移动
+        kulouNode.starMove()
         kulouNode.moveAction = {(kulou:WDKulouNode) -> Void in
             let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: (weakSelf?.personNode.position)!)
             kulou.behavior.moveActionForKulou(direction: direction, personNode: (weakSelf?.personNode)!)
+        }
+        
+        //骷髅攻击
+        kulouNode.attack2 = {(kulou:WDKulouNode) -> Void in
+            kulou.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
         }
         
         kulouZomArr.add(kulouNode)
@@ -526,164 +502,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //代理
     func didBegin(_ contact: SKPhysicsContact) {
-        let A = contact.bodyA.node;
-        let B = contact.bodyB.node;
-        
-        var pNode:WDPersonNode?
-        var zomNode:WDZombieNode?
-        var fireNode:SKSpriteNode?
-        var boomNode:SKSpriteNode?
-        var magicNode:SKEmitterNode?
-        var boss1Node:WDBossNode_1?
-        var kulouNode:WDKulouNode?
-        var greenSmoke:SKSpriteNode?
-        var greenNode:WDGreenZomNode?
-        var greenClaw:SKSpriteNode?
-        var knightNode:WDSmokeKnightNode?
-        
-        
-        knightNode = (A?.name?.isEqual(KNIGHT_NAME))! ? (A as? WDSmokeKnightNode):nil;
-        if knightNode == nil {
-            knightNode = (B?.name?.isEqual(KNIGHT_NAME))! ? (B as? WDSmokeKnightNode):nil;
-        }
-        
-        greenClaw = (A?.name?.isEqual(GREEN_CLAW_NAME))! ? (A as? SKSpriteNode):nil;
-        if greenClaw == nil {
-            greenClaw = (B?.name?.isEqual(GREEN_CLAW_NAME))! ? (B as? SKSpriteNode):nil;
-        }
-        
-        greenNode = (A?.name?.isEqual(GREEN_ZOM_NAME))! ? (A as? WDGreenZomNode):nil;
-        if greenNode == nil {
-            greenNode = (B?.name?.isEqual(GREEN_ZOM_NAME))! ? (B as? WDGreenZomNode):nil;
-        }
-        
-        greenSmoke = (A?.name?.isEqual(GREEN_SMOKE_NAME))! ? (A as? SKSpriteNode):nil;
-        if greenSmoke == nil {
-            greenSmoke = (B?.name?.isEqual(GREEN_SMOKE_NAME))! ? (B as? SKSpriteNode):nil;
-        }
-        
-        kulouNode = (A?.name?.isEqual(KULOU))! ? (A as? WDKulouNode):nil;
-        if kulouNode == nil {
-            kulouNode = (B?.name?.isEqual(KULOU))! ? (B as? WDKulouNode):nil;
-        }
-      
-        boss1Node = (A?.name?.isEqual(BOSS1))! ? (A as? WDBossNode_1):nil;
-        if boss1Node == nil {
-            boss1Node = (B?.name?.isEqual(BOSS1))! ? (B as? WDBossNode_1):nil;
-        }
-        
-        magicNode = (A?.name?.isEqual(MAGIC))! ? (A as? SKEmitterNode):nil;
-        if magicNode == nil {
-            magicNode = (B?.name?.isEqual(MAGIC))! ? (B as? SKEmitterNode):nil;
-        }
-        
-        pNode = (A?.name?.isEqual(PERSON))! ? (A as? WDPersonNode):nil;
-        if pNode == nil {
-            pNode = (B?.name?.isEqual(PERSON))! ? (B as? WDPersonNode):nil;
-        }
-
-        zomNode = (A?.name?.isEqual(ZOMBIE))! ? (A as? WDZombieNode):nil;
-        if zomNode == nil {
-            zomNode = (B?.name?.isEqual(ZOMBIE))! ? (B as? WDZombieNode):nil;
-        }
-        
-
-        fireNode = (A?.name?.isEqual(FIRE))! ? (A as? SKSpriteNode):nil;
-        if fireNode == nil {
-            fireNode = (B?.name?.isEqual(FIRE))! ? (B as? SKSpriteNode):nil;
-        }
-
-        boomNode = (A?.name?.isEqual(BOOM))! ? (A as? SKSpriteNode):nil;
-        if boomNode == nil {
-            boomNode = (B?.name?.isEqual(BOOM))! ? (B as? SKSpriteNode):nil;
-        }
-        
-        
-        if pNode != nil && boss1Node != nil {
-            boss1Node?.bossBehavior.stopMoveAction(direction: "")
-            boss1Node?.bossBehavior.attackAction(node: personNode)
-        }
-        
-        
-        
-        if pNode != nil && zomNode != nil{
-    
-            let direction:NSString = WDTool.calculateDirectionForZom(point1: zomNode!.position, point2: pNode!.position)
-            zomNode?.zombieBehavior.stopMoveAction(direction: direction)
-            zomNode?.zombieBehavior.attackAction(node: pNode!)
-        }
-        
-        
-        if boomNode != nil && zomNode != nil {
-            personNode.wdAttack += CGFloat(boomModel.skillLevel2)
-            zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
-            personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
-           
-        }
-        
-        if magicNode != nil && pNode != nil {
-            WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:1)
-        }
-
-        if zomNode != nil && fireNode != nil{
-            fireNode?.removeFromParent()
-            zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
-        }
-        
-        if kulouNode != nil && fireNode != nil {
-            kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
-            WDAnimationTool.bloodAnimation(node: kulouNode!)
-            fireNode?.removeFromParent()
-
-        }
-        
-        
-        if kulouNode != nil && boomNode != nil {
-            personNode.wdAttack += CGFloat(boomModel.skillLevel2)
-            kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: personNode)
-            personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
-        }
-        
-        if kulouNode != nil && pNode != nil {
-            kulouNode?.behavior.attackAction(node: personNode)
-        }
-        
-        if greenClaw != nil && pNode != nil {
-           // print("受到绿僵尸爪子攻击")
-            WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:2)
-        }
-        
-        if greenSmoke != nil && pNode != nil {
-           // print("受到毒气烟雾的攻击")
-            WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:2)
-        }
-        
-        if greenNode != nil && fireNode != nil {
-            greenNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: greenNode!)
-            WDAnimationTool.bloodAnimation(node: greenNode!)
-            fireNode?.removeFromParent()
-        }
-        
-       
-        if knightNode != nil && fireNode != nil {
-            //print("雾骑士被打了")
-            knightNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: knightNode!)
-            WDAnimationTool.bloodAnimation(node: knightNode!)
-            fireNode?.removeFromParent()
-        }
-        
-        if knightNode != nil && pNode != nil {
-            knightNode?.behavior.attack1Animation(personNode: pNode!)
-        }
-        
-        if greenNode != nil && pNode != nil {
-            greenNode?.attack1Action(greenNode!)
-        }
-  
-    
+        mapViewModel.phyContact(contact:contact, personNode: personNode, boomModel: boomModel)
     }
     
     

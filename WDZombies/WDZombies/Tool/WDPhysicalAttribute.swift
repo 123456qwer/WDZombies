@@ -41,6 +41,12 @@ let GREEN_ZOM_CATEGORY:UInt32      = 0x04    //0000  0100
 let GREEN_ZOM_CONTACT:UInt32       = 0x01    //0000  0001
 let GREEN_ZOM_COLLISION:UInt32     = 0x01    //0000  0001
 
+//knightZom
+let KNIGHT_METEORITE_CONTACT:UInt32 = 0x01 //0000 0001
+let KNIGHT_METEORITE_NAME = "KNIGHT_METEORITE_NAME"
+
+
+
 let ZOMBIE:NSString = "zombie"
 let PERSON:NSString = "person"
 let FIRE:NSString   = "fire"

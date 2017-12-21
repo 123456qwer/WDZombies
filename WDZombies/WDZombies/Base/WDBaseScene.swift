@@ -32,6 +32,7 @@ class WDBaseScene: SKScene {
     
     func skillAction(skillType:personSkillType) -> Void {
     }
+    
     func createZombies(timer:Timer) -> Void {
     }
     

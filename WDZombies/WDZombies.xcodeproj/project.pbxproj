@@ -94,6 +94,7 @@
 		434D58861FD54D4F00253903 /* monster_4_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58821FD54D4F00253903 /* monster_4_attack_red.png */; };
 		434D58871FD54D4F00253903 /* monster_2_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58831FD54D4F00253903 /* monster_2_attack_red.png */; };
 		43524CD01FCFE78100326EFF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 43524CCF1FCFE78000326EFF /* back.png */; };
+		4353DABB1FEBB18B0092BD28 /* WDMap_1ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */; };
 		43551B0C1FCE3AF800B86587 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0B1FCE3AF800B86587 /* lock.png */; };
 		43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0D1FCE3F0D00B86587 /* skill_1.png */; };
 		43551B101FCE61C300B86587 /* sun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43551B0F1FCE61C300B86587 /* sun.jpg */; };
@@ -291,6 +292,7 @@
 		434D58821FD54D4F00253903 /* monster_4_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_4_attack_red.png; sourceTree = "<group>"; };
 		434D58831FD54D4F00253903 /* monster_2_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_attack_red.png; sourceTree = "<group>"; };
 		43524CCF1FCFE78000326EFF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMap_1ViewModel.swift; sourceTree = "<group>"; };
 		43551B0B1FCE3AF800B86587 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		43551B0D1FCE3F0D00B86587 /* skill_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skill_1.png; sourceTree = "<group>"; };
 		43551B0F1FCE61C300B86587 /* sun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sun.jpg; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 				434C5A8B1FD1303000C921AF /* WDMapViewController.swift */,
 				43656BC11F9F1EBA001EFDA5 /* WDMap_1Scene.swift */,
 				43656BC31F9F1FCE001EFDA5 /* WDMap_1Scene.sks */,
+				4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1116,6 +1119,7 @@
 				434C5A9D1FD130D400C921AF /* WDPersonBehavior.swift in Sources */,
 				434C5A9B1FD130D400C921AF /* WDKulouBehavior.swift in Sources */,
 				9B05600A1FDE7A8D00EE5F41 /* ConstraintItem.swift in Sources */,
+				4353DABB1FEBB18B0092BD28 /* WDMap_1ViewModel.swift in Sources */,
 				432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */,
 				43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */,
 				9B0560081FDE7A8D00EE5F41 /* ConstraintInsets.swift in Sources */,

@@ -66,7 +66,7 @@ class WDSmokeKnightNode: WDBaseNode {
     @objc func attack2ActionTimer()  {
         if self.canMove {
             attack2Count += 1
-            if attack2Count >= 6{
+            if attack2Count >= 3{
                                 
                 attack2Action(self)
                 attack2Count = 0
