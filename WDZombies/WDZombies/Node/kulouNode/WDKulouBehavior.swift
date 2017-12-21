@@ -82,7 +82,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         
         kulouNode.removeAllActions()
         
-        let diedAction = SKAction.animate(with: kulouNode.diedArr as! [SKTexture], timePerFrame: 0.2)
+        let diedAction = SKAction.animate(with: kulouNode.model.diedArr , timePerFrame: 0.2)
         kulouNode.run(diedAction) {
             self.alreadyDied?(self.kulouNode)
             self.kulouNode.removeFromParent()

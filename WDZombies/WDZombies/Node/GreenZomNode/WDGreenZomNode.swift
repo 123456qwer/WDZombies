@@ -117,6 +117,8 @@ class WDGreenZomNode: WDBaseNode{
     
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
         
+        self.configureModel()
+        
         attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
 
     

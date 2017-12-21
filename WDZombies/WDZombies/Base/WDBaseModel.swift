@@ -30,7 +30,7 @@ class WDBaseModel: NSObject {
         }else if zomName == KNIGHT_NAME{
             self.configureKnightZom()
         }else if zomName == KULOU_NAME{
-            
+            self.configureKulouZom()
         }
     }
     

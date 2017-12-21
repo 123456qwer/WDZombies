@@ -104,6 +104,8 @@ class WDSmokeKnightNode: WDBaseNode {
     
     func initWithPersonNode(personNode:WDPersonNode) {
         
+        self.configureModel()
+        
         attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
         
         behavior = WDKnightBehavior.init()
