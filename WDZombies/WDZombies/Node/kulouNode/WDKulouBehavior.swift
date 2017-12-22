@@ -16,7 +16,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     var blood = 0
 
     @objc func hitTheTarget(personNode:WDPersonNode)  {
-        if personNode.isBlink == false{
+        if personNode.isBlink == false && kulouNode != nil{
             let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
             
             let dis = personNode.size.width / 2.0 + kulouNode.size.width / 2.0
@@ -67,7 +67,9 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     }
     
     @objc func setPhy()  {
-        kulouNode.setPhy()
+        if kulouNode != nil{
+            kulouNode.setPhy()
+        }
     }
     
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
@@ -98,10 +100,13 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     
     
     @objc func canMove()  {
-        kulouNode.canMove = true
-        kulouNode.timerCount = 0
-        kulouNode.texture = kulouNode.model.moveArr[0]
-        kulouNode.attack2(kulouNode)
+        if kulouNode != nil {
+            kulouNode.canMove = true
+            kulouNode.timerCount = 0
+            kulouNode.texture = kulouNode.model.moveArr[0]
+            kulouNode.attack2(kulouNode)
+        }
+       
     }
     
     override func diedAction() {

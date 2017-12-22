@@ -29,11 +29,10 @@ class WDGreenZomNode: WDBaseNode{
     var attack2Count:NSInteger = 0
     var diedAction:died!
     
+    
     deinit {
         print("绿色僵尸释放了！！！！")
     }
-    
-    
    
     /// 设置基础属性、图片
     override func configureModel(){
@@ -121,37 +120,25 @@ class WDGreenZomNode: WDBaseNode{
         
         attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
 
-    
-        
         behavior = WDGreenBehavior.init()
         behavior.greenZom = self
         
+        
         self.name = GREEN_ZOM_NAME
+       
+        
+        self.position = model.randomBornPosition()
+        self.zPosition = 3 * 667 - self.position.y
         
         
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:40,height:40))
-        physicsBody.affectedByGravity = false;
-        physicsBody.allowsRotation = false;
-        
-        physicsBody.categoryBitMask = GREEN_ZOM_CATEGORY;
-        physicsBody.contactTestBitMask = GREEN_ZOM_CONTACT;
-        physicsBody.collisionBitMask = GREEN_ZOM_COLLISION;
-        physicsBody.isDynamic = true;
-        
-        let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
-        let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
-        
-        self.position = CGPoint(x:x, y:y);
-        self.zPosition = 3 * 667 - y;
-        
-        self.physicsBody = physicsBody
+        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 100
-        self.position = CGPoint(x:600,y:600)
         self.wdBlood = 50
         
         self.setAttribute(isBoss: self.isBoss)
     }
+    
     
     func setAttribute(isBoss:Bool)  {
         if isBoss{

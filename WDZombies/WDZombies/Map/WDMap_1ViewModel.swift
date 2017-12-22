@@ -11,6 +11,11 @@ import SpriteKit
 
 class WDMap_1ViewModel: NSObject {
 
+    var normalZomArr:NSMutableArray = NSMutableArray.init()   //存储创建的zom
+    var kulouZomArr:NSMutableArray  = NSMutableArray.init()   //存储骷髅
+    var greenZomArr:NSMutableArray  = NSMutableArray.init()   //存储绿色僵尸
+    var knightZomArr:NSMutableArray = NSMutableArray.init()   //雾骑士
+    
     //人物&普通僵尸碰撞
     func personAndNormalZom(pNode:WDPersonNode,zomNode:WDZombieNode){
         let direction:NSString = WDTool.calculateDirectionForZom(point1: zomNode.position, point2: pNode.position)
@@ -184,6 +189,51 @@ class WDMap_1ViewModel: NSObject {
     }
     
     
+    
+    /// 删除所有僵尸
+    func removeNode() {
+        //删除所有僵尸
+        if  normalZomArr.count > 0{
+            for index:NSInteger in 0...normalZomArr.count - 1 {
+                var zom:WDZombieNode? = normalZomArr.object(at: index) as? WDZombieNode
+                
+                zom?.clearAction()
+                zom?.removeAllActions()
+                zom?.removeAllChildren()
+                zom?.removeFromParent()
+                zom = nil
+            }
+            
+            normalZomArr.removeAllObjects()
+        }
+        
+        //删除所有骷髅
+        if kulouZomArr.count > 0{
+            for index:NSInteger in 0...kulouZomArr.count - 1 {
+                var kulou:WDKulouNode? = kulouZomArr.object(at: index) as? WDKulouNode
+                kulou?.clearAction()
+                kulou?.removeAllActions()
+                kulou?.removeAllChildren()
+                kulou?.removeFromParent()
+                kulou = nil
+            }
+            
+            kulouZomArr.removeAllObjects()
+        }
+        
+        if greenZomArr.count > 0{
+            for index:NSInteger in 0...greenZomArr.count - 1 {
+                var greenZom:WDGreenZomNode? = greenZomArr.object(at: index) as? WDGreenZomNode
+                greenZom?.clearAction()
+                greenZom?.removeAllActions()
+                greenZom?.removeAllChildren()
+                greenZom?.removeFromParent()
+                greenZom = nil
+            }
+            
+            greenZomArr.removeAllObjects()
+        }
+    }
     
     
     

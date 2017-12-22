@@ -133,7 +133,6 @@ class WDSmokeKnightNode: WDBaseNode {
         self.physicsBody = physicsBody
         self.direction = kLeft
         self.wdFire_impact = 200
-        self.position = CGPoint(x:600,y:600)
         self.wdBlood = 100
         self.wdAttack = 3
         

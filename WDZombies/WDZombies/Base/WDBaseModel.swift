@@ -24,6 +24,12 @@ class WDBaseModel: NSObject {
     var wdBlood: CGFloat = 20
     
     
+    func randomBornPosition() -> CGPoint {
+        let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
+        let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
+        return CGPoint(x:x, y:y)
+    }
+    
     func configureWithZomName(zomName:String){
         if zomName == GREEN_ZOM_NAME{
             self.configureGreenZom()

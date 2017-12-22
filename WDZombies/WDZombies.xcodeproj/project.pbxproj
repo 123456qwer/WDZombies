@@ -130,6 +130,7 @@
 		43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43691BAF1FDF822800D4772E /* knightNodePic.atlas */; };
 		43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */; };
 		43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */; };
+		436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */; };
 		43765F911FBAA627006E37D2 /* BOSS1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8E1FBAA627006E37D2 /* BOSS1_move.png */; };
 		43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */; };
 		43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F941FBAA91A006E37D2 /* boss1_attRight.png */; };
@@ -329,6 +330,7 @@
 		43691BAF1FDF822800D4772E /* knightNodePic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = knightNodePic.atlas; sourceTree = "<group>"; };
 		43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSmokeKnightNode.swift; sourceTree = "<group>"; };
 		43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKnightBehavior.swift; sourceTree = "<group>"; };
+		436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMap_1ZomModel.swift; sourceTree = "<group>"; };
 		43765F8E1FBAA627006E37D2 /* BOSS1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_move.png; sourceTree = "<group>"; };
 		43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_attack.png; sourceTree = "<group>"; };
 		43765F941FBAA91A006E37D2 /* boss1_attRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boss1_attRight.png; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 				43656BC11F9F1EBA001EFDA5 /* WDMap_1Scene.swift */,
 				43656BC31F9F1FCE001EFDA5 /* WDMap_1Scene.sks */,
 				4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */,
+				436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1134,6 +1137,7 @@
 				9B0560151FDE7A8D00EE5F41 /* ConstraintMakerRelatable.swift in Sources */,
 				9B0560171FDE7A8D00EE5F41 /* ConstraintOffsetTarget.swift in Sources */,
 				432F84BA1F998A5B00F51146 /* GameViewController.swift in Sources */,
+				436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */,
 				435589801FA06DEF00C80CA8 /* WDPhysicalAttribute.swift in Sources */,
 				434C5AA41FD130FA00C921AF /* WDBossBehavior_1.swift in Sources */,
 				43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */,

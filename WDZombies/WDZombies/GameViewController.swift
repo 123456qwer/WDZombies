@@ -30,7 +30,9 @@ class GameViewController: UIViewController {
 //********************生命周期*********************************//
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        
+        self.navigationController?.navigationBar.isHidden = true
+        
         print(kScreenWidth,kScreenHeight)
         
         let defaults:UserDefaults = UserDefaults.standard
@@ -63,11 +65,8 @@ class GameViewController: UIViewController {
     
         //初始化地图所有纹理
         manager.setPic()
-        
-        
-        
-        
         manager.createX_Y(x: 2001, y: 1125)
+        
         
         //技能按钮界面
         let rect2 = CGRect(x:kScreenWidth / 2.0,y:0,width:kScreenWidth / 2.0,height:kScreenHeight)
@@ -180,6 +179,7 @@ class GameViewController: UIViewController {
     @objc func learnSkill() {
         
         let skillVC = WDSkillViewController.init()
+        skillVC.modalTransitionStyle = .partialCurl
         self.present(skillVC, animated: true) {}
     }
     
@@ -187,6 +187,8 @@ class GameViewController: UIViewController {
     @objc func selectMap() -> Void {
         
         let mapVC = WDMapViewController.init()
+        mapVC.modalTransitionStyle = .crossDissolve
+        //self.navigationController?.pushViewController(mapVC, animated: true)
         self.present(mapVC, animated: true) {}
         
         weak var weakSelf = self
@@ -201,6 +203,7 @@ class GameViewController: UIViewController {
     @objc func selectSkill() {
         
         var selectSkillVC:WDSelectSkillVC? = WDSelectSkillVC.init()
+        selectSkillVC?.modalTransitionStyle = .crossDissolve
         self.present(selectSkillVC!, animated: true) {}
         
         skillAndFireView.setSelectFrame()
@@ -232,6 +235,7 @@ class GameViewController: UIViewController {
     @objc func showMonster(){
         
         let monsterVC = WDMonsterVC.init()
+        monsterVC.modalTransitionStyle = .partialCurl
         self.present(monsterVC, animated: true) {}
     }
     

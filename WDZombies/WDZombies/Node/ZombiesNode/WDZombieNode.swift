@@ -104,7 +104,6 @@ class WDZombieNode: WDBaseNode {
         zombieBehavior = WDZombieBehavior.init()
         zombieBehavior.zombieNode = self
         _zomType = type
-        isBoss = false
         
         if type == .Normal {
             moveDic = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomMove") as! NSMutableDictionary
@@ -141,7 +140,7 @@ class WDZombieNode: WDBaseNode {
         self.name = ZOMBIE as String
         self.wdFire_impact = 30
         
-        self.attribute()
+        self.attribute(isBoss: isBoss)
     }
     
     func bossPhy(){
@@ -157,8 +156,10 @@ class WDZombieNode: WDBaseNode {
         self.physicsBody = physicsBody
     }
     
+
+    
     //属性
-    func attribute() -> Void {
+    func attribute(isBoss:Bool) -> Void {
         
         if _zomType == .Normal {
             self.wdBlood = 5
@@ -168,6 +169,12 @@ class WDZombieNode: WDBaseNode {
             self.speed = 2
         }
         
+        if isBoss {
+            self.wdBlood = 100
+            self.xScale = 1.5
+            self.yScale = 1.5
+            self.bossPhy()
+        }
     }
     
     

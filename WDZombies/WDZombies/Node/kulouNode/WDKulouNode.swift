@@ -126,7 +126,6 @@ class WDKulouNode: WDBaseNode {
         self.physicsBody = physicsBody
         self.direction = kLeft
         self.wdFire_impact = 100
-        self.position = CGPoint(x:600,y:600)
         self.wdBlood = 20
         self.wdAttack = 3
         
