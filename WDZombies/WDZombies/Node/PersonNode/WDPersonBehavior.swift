@@ -66,7 +66,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             let diedAction = SKAction.fadeAlpha(to: 0, duration: 0.5)
             personNode.removePhy()
             personNode.run(diedAction, completion: {
-                self.personNode.ggAction()
+            self.personNode.ggAction()
             })
             isGameOver = true
             return

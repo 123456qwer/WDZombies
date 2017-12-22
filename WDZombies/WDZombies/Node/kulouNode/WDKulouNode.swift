@@ -61,9 +61,8 @@ class WDKulouNode: WDBaseNode {
         moveAction(self)
     }
     
-    func clearAction()  {
+    override func clearAction()  {
         
-        self.behavior = nil
         self.removeLink()
         self.removeTimer()
     }

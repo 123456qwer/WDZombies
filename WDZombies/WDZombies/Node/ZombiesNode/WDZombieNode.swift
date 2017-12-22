@@ -46,7 +46,7 @@ class WDZombieNode: WDBaseNode {
         self.clearAction()
     }
     
-    func clearAction()  {
+    override func clearAction()  {
         
         self.zombieBehavior = nil
         self.removeLink()

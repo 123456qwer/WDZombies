@@ -195,13 +195,8 @@ class WDMap_1ViewModel: NSObject {
         //删除所有僵尸
         if  normalZomArr.count > 0{
             for index:NSInteger in 0...normalZomArr.count - 1 {
-                var zom:WDZombieNode? = normalZomArr.object(at: index) as? WDZombieNode
-                
-                zom?.clearAction()
-                zom?.removeAllActions()
-                zom?.removeAllChildren()
-                zom?.removeFromParent()
-                zom = nil
+                let zom:WDZombieNode? = normalZomArr.object(at: index) as? WDZombieNode
+                self.removeNode(zomNode: zom!)
             }
             
             normalZomArr.removeAllObjects()
@@ -210,12 +205,8 @@ class WDMap_1ViewModel: NSObject {
         //删除所有骷髅
         if kulouZomArr.count > 0{
             for index:NSInteger in 0...kulouZomArr.count - 1 {
-                var kulou:WDKulouNode? = kulouZomArr.object(at: index) as? WDKulouNode
-                kulou?.clearAction()
-                kulou?.removeAllActions()
-                kulou?.removeAllChildren()
-                kulou?.removeFromParent()
-                kulou = nil
+                let kulou:WDKulouNode? = kulouZomArr.object(at: index) as? WDKulouNode
+                self.removeNode(zomNode: kulou!)
             }
             
             kulouZomArr.removeAllObjects()
@@ -223,18 +214,31 @@ class WDMap_1ViewModel: NSObject {
         
         if greenZomArr.count > 0{
             for index:NSInteger in 0...greenZomArr.count - 1 {
-                var greenZom:WDGreenZomNode? = greenZomArr.object(at: index) as? WDGreenZomNode
+                let greenZom:WDGreenZomNode? = greenZomArr.object(at: index) as? WDGreenZomNode
                 greenZom?.clearAction()
-                greenZom?.removeAllActions()
-                greenZom?.removeAllChildren()
-                greenZom?.removeFromParent()
-                greenZom = nil
+                self.removeNode(zomNode: greenZom!)
             }
             
             greenZomArr.removeAllObjects()
         }
+        
+        if knightZomArr.count > 0{
+            for index:NSInteger in 0...knightZomArr.count - 1 {
+                let knightZom:WDSmokeKnightNode? = knightZomArr.object(at: index) as? WDSmokeKnightNode
+                self.removeNode(zomNode: knightZom!)
+            }
+            
+            knightZomArr.removeAllObjects()
+        }
     }
     
     
+    func removeNode(zomNode:WDBaseNode){
+        zomNode.clearAction()
+        zomNode.removeAllActions()
+        zomNode.removeAllChildren()
+        zomNode.removeFromParent()
+    }
+   
     
 }

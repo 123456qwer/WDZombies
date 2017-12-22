@@ -34,6 +34,10 @@ class WDSmokeKnightNode: WDBaseNode {
     var diedAction:died!
 
     
+    deinit {
+        print("雾骑士释放了！！！！！！！")
+    }
+    
     func removeTimer()  {
         if attack2Timer != nil {
             attack2Timer.invalidate()
@@ -61,6 +65,12 @@ class WDSmokeKnightNode: WDBaseNode {
             link.invalidate()
             link = nil
         }
+    }
+    
+    override func clearAction()  {
+
+        self.removeLink()
+        self.removeTimer()
     }
     
     @objc func attack2ActionTimer()  {
@@ -114,23 +124,12 @@ class WDSmokeKnightNode: WDBaseNode {
         
         self.name = KNIGHT_NAME
        
+      
+      
+        self.position = model.randomBornPosition()
+        self.zPosition = 3 * 667 - self.position.y
         
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:40,height:40))
-        physicsBody.affectedByGravity = false;
-        physicsBody.allowsRotation = false;
-        
-        physicsBody.categoryBitMask = GREEN_ZOM_CATEGORY;
-        physicsBody.contactTestBitMask = GREEN_ZOM_CONTACT;
-        physicsBody.collisionBitMask = GREEN_ZOM_COLLISION;
-        physicsBody.isDynamic = true;
-        
-        let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
-        let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
-        
-        self.position = CGPoint(x:x, y:y);
-        self.zPosition = 3 * 667 - y;
-        
-        self.physicsBody = physicsBody
+        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 200
         self.wdBlood = 100
@@ -143,7 +142,7 @@ class WDSmokeKnightNode: WDBaseNode {
     
     func setAttribute(isBoss:Bool)  {
         if isBoss{
-            self.wdBlood = 100
+            self.wdBlood = 10
             behavior.xScale = 1
             behavior.yScale = 1
         }else{

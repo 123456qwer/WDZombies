@@ -12,15 +12,12 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 30
+    static let ZOMCOUNT = 1
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
     var boomModel:WDSkillModel!        //技能model，用于查看炸弹伤害
  
-    
-  
-    
     
     var createZomTimer:Timer!          //创建zom的timer
     var mapLink:CADisplayLink!         //监测地图移动的link
@@ -158,17 +155,29 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let zombieNode:WDZombieNode = mapZomModel.createNormalZom(isBoss: isBoss)
         mapViewModel.normalZomArr.add(zombieNode)
     }
+    //普通僵尸死亡
+    func removeNormalZom(normalZom:WDZombieNode){
+        mapViewModel.removeNode(zomNode: normalZom)
+        mapViewModel.normalZomArr.remove(normalZom)
+    }
     
     //红色僵尸
     func level_2_RedZom(isBoss:Bool)  {
         let zombieNode:WDZombieNode = mapZomModel.createRedZom(isBoss: isBoss)
         mapViewModel.normalZomArr.add(zombieNode)
     }
+    func removeRedZom(redZom:WDZombieNode){
+        mapViewModel.removeNode(zomNode: redZom)
+        mapViewModel.normalZomArr.remove(redZom)
+    }
+    
     
     //骷髅相关
     func level_3_KulouZom(isBoss:Bool)  {
         let kulouNode:WDKulouNode = mapZomModel.createKulouZom(isBoss: isBoss)
         mapViewModel.kulouZomArr.add(kulouNode)
+    }
+    func removeKulouZom(kulouZom:WDKulouNode){
     }
     
     //绿色僵尸
@@ -182,6 +191,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let kNight:WDSmokeKnightNode = mapZomModel.createKnightZom(isBoss: isBoss)
         mapViewModel.knightZomArr.add(kNight)
     }
+    
+    
+    
     
     
     func createBoss()  {
@@ -216,7 +228,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     }
     
     //MARK:操作相关方法
-
     //**************************************************************//
     //开火方法
     override func fireAction(direction: NSString) {
@@ -263,17 +274,18 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     func playNext()  {
-        self.removeNode()
+        self.perform(#selector(removeNode), with: nil, afterDelay: 1)
         self.nextAction()
     }
     
     @objc override func gameOver() {
-        self.removeNode()
+        self.perform(#selector(removeNode), with: nil, afterDelay: 1)
         self.ggAction()
     }
     
     
-    func removeNode()  {
+    //结束
+    @objc func removeNode()  {
         
         createZomTimer.invalidate()
         if mapLink != nil {

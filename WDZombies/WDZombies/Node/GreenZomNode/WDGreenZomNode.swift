@@ -59,9 +59,8 @@ class WDGreenZomNode: WDBaseNode{
         }
     }
     
-    func clearAction()  {
+    override func clearAction()  {
         
-        self.behavior = nil
         self.removeLink()
         self.removeTimer()
     }

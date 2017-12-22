@@ -126,6 +126,9 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             return
         }else{
             
+            if kNight == nil {
+                return
+            }
             let meteoriteShadowNode = SKSpriteNode.init(texture: kNight.model.meteoriteTexture)
             meteoriteShadowNode.zPosition = 2
             let y = personNode.position.y - personNode.size.width / 2.0
@@ -138,7 +141,7 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             })
             
             
-            let fireNode = WDBaseNode.init(texture: SKTexture.init(image: UIImage.init(named: "boss1_att2_star1")!))
+            let fireNode = WDBaseNode.init(texture: kNight.model.meteoriteArr1[0])
             fireNode.position = CGPoint(x:personNode.position.x + 200,y:personNode.position.y + 200)
             fireNode.wdAttack = 3
           
@@ -146,10 +149,10 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             fireNode.name = KNIGHT_METEORITE_NAME
             personNode.parent?.addChild(fireNode)
             
-            let fireAction = SKAction.animate(with: kNight.model.meteoriteArr1, timePerFrame: 0.1)
+            let fireAction = SKAction.animate(with: kNight.model.meteoriteArr2, timePerFrame: 0.1)
             let posi = CGPoint(x:personNode.position.x + personNode.size.width / 2.0,y:personNode.position.y + personNode.size.height / 2.0 + 5)
             let flyAction = SKAction.move(to: posi, duration: 0.5)
-            let flyAction1 = SKAction.animate(with: kNight.model.meteoriteArr2, timePerFrame: 0.1)
+            let flyAction1 = SKAction.animate(with: kNight.model.meteoriteArr1, timePerFrame: 0.1)
             let groupAction = SKAction.group([flyAction,flyAction1])
             
             

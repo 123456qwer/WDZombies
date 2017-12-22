@@ -179,7 +179,9 @@ class WDMap_1ZomModel: NSObject {
                 weakSelf?.playNext()
             }else {
                 weakSelf?.createBoss()
+                weakSelf?.removeNormalZom(normalZom: node as! WDZombieNode)
             }
+            
         }
         
         let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
@@ -222,6 +224,7 @@ class WDMap_1ZomModel: NSObject {
                 weakSelf?.playNext()
             }else{
                 weakSelf?.createBoss()
+                weakSelf?.removeRedZom(redZom: node as! WDZombieNode)
             }
         }
         

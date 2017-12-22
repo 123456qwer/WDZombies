@@ -101,7 +101,9 @@ class WDMapManager: NSObject {
         let attack1Arr:NSMutableArray = NSMutableArray.init()
         let attack2Arr:NSMutableArray = NSMutableArray.init()
         let diedArr:NSMutableArray = NSMutableArray.init()
-      
+        let meteoriteArr1:NSMutableArray = NSMutableArray.init()
+        let meteoriteArr2:NSMutableArray = NSMutableArray.init()
+
         for index:NSInteger in 0...11 {
             
             if index < 8{
@@ -121,9 +123,17 @@ class WDMapManager: NSObject {
                 let name = "wuqishi_move_\(index + 1)"
                 let temp = textures.textureNamed(name)
                 moveArr.add(temp)
+                
+                let meteor = "wuqishi_mete_star\(index + 1)"
+                let temp1 = textures.textureNamed(meteor)
+                meteoriteArr1.add(temp1)
             }
             
-         
+            if index < 6{
+                let name = "wuqishi_mete2_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                meteoriteArr2.add(temp)
+            }
             
             if index < 7{
                 let name = "wuqishi_died_\(index + 1)"
@@ -132,11 +142,14 @@ class WDMapManager: NSObject {
             }
         }
         
+        
+        self.textureDic.setObject(meteoriteArr1, forKey: KNIGHT_METEORITE1 as NSCopying)
+        self.textureDic.setObject(meteoriteArr2, forKey: KNIGHT_METEORITE2 as NSCopying)
         self.textureDic.setObject(moveArr, forKey: KNIGHT_MOVE as NSCopying)
         self.textureDic.setObject(attack1Arr, forKey: KNIGHT_ATTACK1 as NSCopying)
         self.textureDic.setObject(attack2Arr, forKey: KNIGHT_ATTACK2 as NSCopying)
         self.textureDic.setObject(diedArr, forKey: KNIGHT_DIED as NSCopying)
-    
+        
     }
     
     func setKulouZom(){

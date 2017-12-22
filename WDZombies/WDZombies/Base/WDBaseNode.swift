@@ -41,5 +41,6 @@ class WDBaseNode: SKSpriteNode {
     var wdAttackDistance = 170
     
     
-    func configureModel(){}
+    func configureModel(){} //设置属性
+    func clearAction(){}      //清理
 }
