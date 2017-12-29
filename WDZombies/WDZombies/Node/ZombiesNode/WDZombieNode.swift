@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 class WDZombieNode: WDBaseNode {
 
-    var zombieBehavior:WDZombieBehavior! = nil
+    var behavior:WDZombieBehavior! = nil
     var _zomType:zomType! = nil
     var link:CADisplayLink!
     typealias move = (_ zom:WDZombieNode) -> Void
@@ -48,7 +48,7 @@ class WDZombieNode: WDBaseNode {
     
     override func clearAction()  {
         
-        self.zombieBehavior = nil
+        self.behavior = nil
         self.removeLink()
         self.removeTimer()
     }
@@ -101,8 +101,8 @@ class WDZombieNode: WDBaseNode {
     
     func initWithZomType(type:zomType) -> Void {
         
-        zombieBehavior = WDZombieBehavior.init()
-        zombieBehavior.zombieNode = self
+        behavior = WDZombieBehavior.init()
+        behavior.zombieNode = self
         _zomType = type
         
         if type == .Normal {

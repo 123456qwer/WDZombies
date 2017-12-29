@@ -131,6 +131,10 @@
 		43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */; };
 		43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */; };
 		436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */; };
+		436FF4021FF23BAC00C40357 /* squidNodePic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 436FF4011FF23BAC00C40357 /* squidNodePic.atlas */; };
+		436FF4041FF23BF900C40357 /* WDSquidNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4031FF23BF900C40357 /* WDSquidNode.swift */; };
+		436FF4061FF23C1D00C40357 /* WDSquidBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4051FF23C1D00C40357 /* WDSquidBehavior.swift */; };
+		436FF4081FF23C3E00C40357 /* WDSquidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4071FF23C3E00C40357 /* WDSquidModel.swift */; };
 		43765F911FBAA627006E37D2 /* BOSS1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8E1FBAA627006E37D2 /* BOSS1_move.png */; };
 		43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */; };
 		43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F941FBAA91A006E37D2 /* boss1_attRight.png */; };
@@ -320,6 +324,10 @@
 		43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSmokeKnightNode.swift; sourceTree = "<group>"; };
 		43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKnightBehavior.swift; sourceTree = "<group>"; };
 		436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMap_1ZomModel.swift; sourceTree = "<group>"; };
+		436FF4011FF23BAC00C40357 /* squidNodePic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squidNodePic.atlas; sourceTree = "<group>"; };
+		436FF4031FF23BF900C40357 /* WDSquidNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidNode.swift; sourceTree = "<group>"; };
+		436FF4051FF23C1D00C40357 /* WDSquidBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidBehavior.swift; sourceTree = "<group>"; };
+		436FF4071FF23C3E00C40357 /* WDSquidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidModel.swift; sourceTree = "<group>"; };
 		43765F8E1FBAA627006E37D2 /* BOSS1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_move.png; sourceTree = "<group>"; };
 		43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_attack.png; sourceTree = "<group>"; };
 		43765F941FBAA91A006E37D2 /* boss1_attRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boss1_attRight.png; sourceTree = "<group>"; };
@@ -633,6 +641,7 @@
 		434C5A8F1FD1309E00C921AF /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				436FF4001FF23B9300C40357 /* SquidNode */,
 				43691BAE1FDF821500D4772E /* SmokeKnightNode */,
 				430B1BC81FD92EFC006A9809 /* GreenZomNode */,
 				434C5AA11FD130FA00C921AF /* BossNode */,
@@ -782,6 +791,17 @@
 				434CDE201FE9137B00E46199 /* WDKnightModel.swift */,
 			);
 			path = SmokeKnightNode;
+			sourceTree = "<group>";
+		};
+		436FF4001FF23B9300C40357 /* SquidNode */ = {
+			isa = PBXGroup;
+			children = (
+				436FF4011FF23BAC00C40357 /* squidNodePic.atlas */,
+				436FF4051FF23C1D00C40357 /* WDSquidBehavior.swift */,
+				436FF4031FF23BF900C40357 /* WDSquidNode.swift */,
+				436FF4071FF23C3E00C40357 /* WDSquidModel.swift */,
+			);
+			path = SquidNode;
 			sourceTree = "<group>";
 		};
 		4392CE221FA6BBF400A52D12 /* FirePic */ = {
@@ -957,6 +977,7 @@
 				433D184C1FA0303500A283E0 /* person4.png in Resources */,
 				4348DC351F9D99790072D030 /* boomIcon.png in Resources */,
 				434C5A881FD12FAA00C921AF /* Magic.sks in Resources */,
+				436FF4021FF23BAC00C40357 /* squidNodePic.atlas in Resources */,
 				4355898A1FA075D200C80CA8 /* NormalBorn.png in Resources */,
 				4307E3721FA1DF0D00E1AD38 /* blood3.png in Resources */,
 				432F84B41F998A5B00F51146 /* GameScene.sks in Resources */,
@@ -1054,7 +1075,9 @@
 				434C5A741FD12B4F00C921AF /* WDBaseViewController.swift in Sources */,
 				43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */,
 				9B0560161FDE7A8D00EE5F41 /* ConstraintMultiplierTarget.swift in Sources */,
+				436FF4061FF23C1D00C40357 /* WDSquidBehavior.swift in Sources */,
 				432F84D11F9999E800F51146 /* WDSkillAndFireView.swift in Sources */,
+				436FF4081FF23C3E00C40357 /* WDSquidModel.swift in Sources */,
 				9B0560231FDE7A8D00EE5F41 /* Typealiases.swift in Sources */,
 				434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */,
 				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
@@ -1086,6 +1109,7 @@
 				9B0560051FDE7A8D00EE5F41 /* ConstraintConstantTarget.swift in Sources */,
 				9B05600B1FDE7A8D00EE5F41 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */,
+				436FF4041FF23BF900C40357 /* WDSquidNode.swift in Sources */,
 				434CDE1F1FE910C600E46199 /* WDGreenModel.swift in Sources */,
 				432F84D61F99A85300F51146 /* WDSkillView.swift in Sources */,
 				9B0560191FDE7A8D00EE5F41 /* ConstraintPriorityTarget.swift in Sources */,

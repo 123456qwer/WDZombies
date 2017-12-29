@@ -67,24 +67,21 @@ class WDMap_1ZomModel: NSObject {
         greenZom.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(greenZom)
         
-        greenZom.starMove()
+     
         
         //绿色僵尸移动
         weak var weakSelf = map1_scene
-        greenZom.moveAction = {(greenNode:WDGreenZomNode) -> Void in
-            let direction = WDTool.calculateDirectionForZom(point1: greenNode.position, point2: (weakSelf?.personNode.position)!)
-            greenNode.behavior.moveActionForGreen(direction: direction, personNode: (weakSelf?.personNode)!)
-        }
         
         //绿色僵尸吐雾攻击
-        greenZom.attack2Action = {(greenNode:WDGreenZomNode) -> Void in
-            greenNode.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
+        greenZom.behavior.smokeAttackBlock = {(greenNode:WDGreenZomNode) -> Void in
+            greenNode.behavior.smokeAttack(personNode: (weakSelf?.personNode)!)
         }
         
-        //绿色僵尸攻击1
-        greenZom.attack1Action = {(greenNode:WDGreenZomNode) -> Void in
-            greenNode.behavior.attack1Action(personNode: (weakSelf?.personNode)!)
+        //绿色僵尸爪子攻击
+        greenZom.behavior.clawAttackBlock = {(greenNode:WDGreenZomNode) -> Void in
+            greenNode.behavior.clawAttack(personNode: (weakSelf?.personNode)!)
         }
+        
         
         //绿色僵尸死亡
         greenZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
@@ -103,6 +100,14 @@ class WDMap_1ZomModel: NSObject {
         }
         
         
+        //僵尸移动
+        greenZom.behavior.starMove()
+        greenZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let greenN:WDGreenZomNode = node as! WDGreenZomNode
+            greenN.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
         return greenZom
     }
     
@@ -117,8 +122,23 @@ class WDMap_1ZomModel: NSObject {
         kulouNode.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kulouNode)
         
-        //骷髅死亡，可以升级加技能
+        
         weak var weakSelf = map1_scene
+
+        //骷髅开始移动
+        kulouNode.behavior.starMove()
+        kulouNode.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let kulouN:WDKulouNode = node as! WDKulouNode
+            kulouN.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        //骷髅攻击
+        kulouNode.behavior.blinkMoveBlock = {(kulou:WDKulouNode) -> Void in
+            kulou.behavior.blinkAction(personNode:(weakSelf?.personNode)!)
+        }
+        
+        //骷髅死亡，可以升级加技能
         kulouNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
             
@@ -132,18 +152,6 @@ class WDMap_1ZomModel: NSObject {
             }else {
                 weakSelf?.createBoss()
             }
-        }
-        
-        //骷髅移动
-        kulouNode.starMove()
-        kulouNode.moveAction = {(kulou:WDKulouNode) -> Void in
-            let direction = WDTool.calculateDirectionForZom(point1: kulou.position, point2: (weakSelf?.personNode.position)!)
-            kulou.behavior.moveActionForKulou(direction: direction, personNode: (weakSelf?.personNode)!)
-        }
-        
-        //骷髅攻击
-        kulouNode.attack2 = {(kulou:WDKulouNode) -> Void in
-            kulou.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
         }
         
         return kulouNode
@@ -164,11 +172,11 @@ class WDMap_1ZomModel: NSObject {
         weak var weakSelf = map1_scene
         zombieNode.moveAction = {(zom:WDZombieNode) -> Void in
             let direction:NSString = WDTool.calculateDirectionForZom(point1: (zom.position), point2: weakSelf!.personNode.position)
-            zom.zombieBehavior.moveAction(direction: direction)
+            zom.behavior.moveAction(direction: direction)
         }
         
         //僵尸死亡
-        zombieNode.zombieBehavior.alreadyDied = {(node:WDBaseNode) -> Void in
+        zombieNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
             if  node.isBoss && model.monsterCount < 1{
                 model.monsterCount = 1
@@ -209,11 +217,11 @@ class WDMap_1ZomModel: NSObject {
         weak var weakSelf = map1_scene
         zombieNode.moveAction = {(zom:WDZombieNode) -> Void in
             let direction:NSString = WDTool.calculateDirectionForZom(point1: (zom.position), point2: weakSelf!.personNode.position)
-            zom.zombieBehavior.moveAction(direction: direction)
+            zom.behavior.moveAction(direction: direction)
         }
         
         //僵尸死亡
-        zombieNode.zombieBehavior.alreadyDied = {(node:WDBaseNode) -> Void in
+        zombieNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
             if node.isBoss && model.monsterCount < 2{
                 model.monsterCount = 2
@@ -231,7 +239,7 @@ class WDMap_1ZomModel: NSObject {
         //红色僵尸发动攻击<之前造成循环引用 -> 直接使用 zombieNode 来调用方法，如下注释>
         //zombieNode.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!
         zombieNode.redAttackAction = {(zom:WDZombieNode) -> Void in
-            zom.zombieBehavior.redAttackAction(node: (weakSelf?.personNode)!)
+            zom.behavior.redAttackAction(node: (weakSelf?.personNode)!)
         }
         
         let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)

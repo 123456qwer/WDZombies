@@ -10,92 +10,66 @@ import UIKit
 import SpriteKit
 
 class WDGreenBehavior: WDBaseNodeBehavior {
+   
     weak var greenZom:WDGreenZomNode! = nil
-    var blood = 0
 
-    func moveActionForGreen(direction:NSString,personNode:WDPersonNode)  {
-        
-        if greenZom.canMove == true {
-            
-            let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: greenZom.speed, node: greenZom)
-            greenZom.position = point
-            greenZom.zPosition = 3 * 667 - greenZom.position.y;
-            let bossDirection = WDTool.calculateDirectionForBoss1(bossPoint: greenZom.position, personPoint: personNode.position)
-            
-            if !bossDirection.isEqual(to: greenZom.direction as String) || !greenZom.isMove {
-                
-                greenZom.removeAction(forKey: "move")
-                
+    typealias _claw = (_ greenNode:WDGreenZomNode) -> Void
+    typealias _smoke = (_ greenNode:WDGreenZomNode) -> Void
+    
+    var clawAttackBlock:_claw!
+    var smokeAttackBlock:_smoke!
+    var timeCount:NSInteger = 0
+    var attackTimer:Timer! = nil
 
-                let moveAction = SKAction.animate(with: greenZom.model.moveArr, timePerFrame: 0.2)
-                let repeatAction = SKAction.repeatForever(moveAction)
-                if bossDirection.isEqual(to: kLeft as String){
-                    greenZom.xScale = xScale
-                    greenZom.yScale = yScale
-                }else{
-                    greenZom.xScale = -1 * xScale
-                    greenZom.yScale = yScale
-                }
-                
-                greenZom.run(repeatAction, withKey: "move")
-                greenZom.direction = bossDirection
-                greenZom.isMove = true
-                
-            }
+    
+    func clearTimer(){
+        if (attackTimer != nil) {
+            attackTimer.invalidate();
+            attackTimer = nil
         }
     }
     
-    override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
-        greenZom.wdBlood -= attackNode.wdAttack
-        blood += NSInteger(attackNode.wdAttack)
-        
-        self.reduceBloodLabel(node: greenZom, attackNode: attackNode)
-        
-        if greenZom.wdBlood <= 0 {
-            self.diedAction()
-            greenZom.setPhysicsBody(isSet: false)
-            return
-        }
-        
-        if blood >= 10 && greenZom.canMove == true{
-            
-            greenZom.removeAllActions()
-            greenZom.canMove = false
-            greenZom.isMove = false
-            blood = 0
-            greenZom.texture = greenZom.model.beAttackTexture
-            self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
-        }
-    }
     
     @objc func canMove()  {
         greenZom?.canMove = true
     }
     
-    override func diedAction() {
-        
-        greenZom.removeAllActions()
-        
-        let diedAction = SKAction.animate(with: greenZom.model.diedArr, timePerFrame: 0.2)
-        greenZom.run(diedAction) {
-            self.alreadyDied!(self.greenZom)
-            self.greenZom.removeFromParent()
+    @objc func attackTimerAction(){
+     
+        if greenZom.canMove {
+            if greenZom.wdBlood <= 0{
+                self.clearTimer()
+            }
+            
+            timeCount += 1
+            if timeCount >= 6{
+    
+                let random = arc4random() % 2
+                
+                if random == 1{
+                    clawAttackBlock(greenZom)
+                }else{
+                    smokeAttackBlock(greenZom)
+                }
+                timeCount = 0
+            }
         }
-        
     }
     
-    func attack2Action(personNode:WDPersonNode)  {
-        self.greenAttack2Animation(greenZom: greenZom, personNode: personNode)
+    //烟雾攻击
+    func smokeAttack(personNode:WDPersonNode)  {
+        self.smokeAttackAnimation(greenZom: greenZom, personNode: personNode)
     }
     
-    func attack1Action(personNode:WDPersonNode)  {
-        self.greenAttack1Animation(greenZom: greenZom, personNode: personNode)
+    //爪子攻击
+    func clawAttack(personNode:WDPersonNode)  {
+        self.clawAttackAnimation(greenZom: greenZom, personNode: personNode)
     }
     
 //***********************动画方法**********************************//
     
     //**********攻击2动画**********//
-     func greenAttack2Animation(greenZom:WDGreenZomNode,personNode:WDPersonNode){
+     func smokeAttackAnimation(greenZom:WDGreenZomNode,personNode:WDPersonNode){
         if greenZom.wdBlood <= 0{
             return
         }
@@ -146,11 +120,10 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         smokeNode.physicsBody = physicsBody
     }
     
-   
     
     
     //************攻击1动画***************//
-    func greenAttack1Animation(greenZom:WDGreenZomNode,personNode:WDPersonNode){
+    func clawAttackAnimation(greenZom:WDGreenZomNode,personNode:WDPersonNode){
         if greenZom.wdBlood <= 0{
             return
         }
@@ -201,4 +174,22 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         }
         
     }
+    
+    
+    
+    //MARK:复写的方法
+    override func setNode(node: WDBaseNode) {
+        greenZom = node as! WDGreenZomNode
+        attackTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attackTimerAction), userInfo: nil, repeats: true)
+    }
+    
+    override func beAttack(attackNode: WDBaseNode, beAttackNode: WDBaseNode) -> Bool {
+        let isBreak = super.beAttack(attackNode: attackNode, beAttackNode: beAttackNode)
+        if isBreak{
+            self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
+        }
+        
+        return isBreak
+    }
+    
 }

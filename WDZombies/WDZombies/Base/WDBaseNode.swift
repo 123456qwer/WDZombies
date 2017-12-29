@@ -43,4 +43,17 @@ class WDBaseNode: SKSpriteNode {
     
     func configureModel(){} //设置属性
     func clearAction(){}      //清理
+    
+///////////////////////----共有---/////////////////////////
+    
+    var nodeBehavior:WDBaseNodeBehavior!
+    var nodeModel:WDBaseModel!
+    
+    
+    
+    
+    
+    
+    
+    
 }

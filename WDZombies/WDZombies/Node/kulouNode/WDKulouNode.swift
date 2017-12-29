@@ -11,17 +11,9 @@ import SpriteKit
 class WDKulouNode: WDBaseNode {
 
    
-    var behavior:WDKulouBehavior! = nil
-    var link:CADisplayLink!
+    var behavior:WDKulouBehavior! = WDKulouBehavior.init()
     var model:WDKulouModel = WDKulouModel.init()
-    var timer:Timer! = nil
     
-    typealias move = (_ kulou:WDKulouNode) -> Void
-    typealias attack2Action = (_ kulou:WDKulouNode) -> Void
-    
-    var attack2:attack2Action!
-    var moveAction:move!
-    var timerCount:NSInteger = 0
     
     deinit {
         print("骷髅释放了！！")
@@ -30,80 +22,20 @@ class WDKulouNode: WDBaseNode {
     override func configureModel() {
         model.configureWithZomName(zomName: KULOU_NAME)
     }
-    
-    func starMove()  {
-        link = CADisplayLink.init(target: self, selector: #selector(linkMove))
-        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-    }
-    
-    func removeLink()  {
-        if link != nil{
 
-            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-            link.invalidate()
-            link = nil
-        }
-    }
-    
-    func removeTimer() {
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-    }
-    
-    @objc func linkMove()  {
-        if self.wdBlood <= 0 {
-            self.removeLink()
-            return
-        }
-        
-        moveAction(self)
-    }
-    
     override func clearAction()  {
-        
-        self.removeLink()
-        self.removeTimer()
+        self.behavior.clearTimer()
     }
     
-    func setPhy() -> Void {
-        
-        self.physicsBody?.categoryBitMask = KULOU_CATEGORY
-        self.physicsBody?.contactTestBitMask = KULOU_CONTACT
-        self.physicsBody?.collisionBitMask = KULOU_COLLISION
-        
-    }
-    
-    func removePhy() -> Void {
-        self.physicsBody?.categoryBitMask = 0;
-        self.physicsBody?.contactTestBitMask = 0;
-        self.physicsBody?.collisionBitMask = 0;
-    }
-    
-    
-    @objc func attack2A() {
-        if self.canMove {
-            if self.wdBlood <= 0{
-                self.removeTimer()
-                return
-            }
-            timerCount += 1
-            if timerCount == 5{
-                self.attack2(self)
-                timerCount = 0
-            }
-        }
-    }
     
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
-        
+       
+        //设置图片
         self.configureModel()
+        nodeModel = model
         
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(attack2A), userInfo: nil, repeats: true)
-        
-        behavior = WDKulouBehavior.init()
-        behavior.kulouNode = self
+        behavior.setNode(node:self)
+        behavior.node = self
         
         self.name = "KULOU"
         
@@ -131,6 +63,7 @@ class WDKulouNode: WDBaseNode {
         self.setAttribute(isBoss: self.isBoss)
     }
     
+    
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
@@ -151,4 +84,18 @@ class WDKulouNode: WDBaseNode {
             self.removePhy()
         }
     }
+    
+    func setPhy() -> Void {
+        self.physicsBody?.categoryBitMask = KULOU_CATEGORY
+        self.physicsBody?.contactTestBitMask = KULOU_CONTACT
+        self.physicsBody?.collisionBitMask = KULOU_COLLISION
+    }
+    
+    
+    func removePhy() -> Void {
+        self.physicsBody?.categoryBitMask = 0;
+        self.physicsBody?.contactTestBitMask = 0;
+        self.physicsBody?.collisionBitMask = 0;
+    }
+
 }

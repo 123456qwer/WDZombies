@@ -12,23 +12,9 @@ import SpriteKit
 
 class WDGreenZomNode: WDBaseNode{
     
-    var behavior:WDGreenBehavior! = nil
+    var behavior:WDGreenBehavior! = WDGreenBehavior.init()
     var model:WDGreenModel = WDGreenModel.init()
-    
-    var link:CADisplayLink!
-    
-    typealias move = (_ greenNode:WDGreenZomNode) -> Void
-    typealias attack2 = (_ greenNode:WDGreenZomNode) -> Void
-    typealias attack1 = (_ greenNode:WDGreenZomNode) -> Void
-    typealias died = (_ greenNode:WDGreenZomNode) -> Void
 
-    var moveAction:move!
-    var attack2Action:attack2!
-    var attack1Action:attack1!
-    var attack2Timer:Timer!
-    var attack2Count:NSInteger = 0
-    var diedAction:died!
-    
     
     deinit {
         print("绿色僵尸释放了！！！！")
@@ -38,60 +24,11 @@ class WDGreenZomNode: WDBaseNode{
     override func configureModel(){
         model.configureWithZomName(zomName: GREEN_ZOM_NAME)
     }
-   
-    func starMove()  {
-        link = CADisplayLink.init(target: self, selector: #selector(linkMove))
-        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-    }
-    
-    func removeLink()  {
-        if link != nil{
-            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-            link.invalidate()
-            link = nil
-        }
-    }
-    
-    func removeTimer()  {
-        if attack2Timer != nil {
-            attack2Timer.invalidate()
-            attack2Timer = nil
-        }
-    }
-    
+ 
     override func clearAction()  {
-        
-        self.removeLink()
-        self.removeTimer()
+        self.behavior.clearTimer()
     }
-    
-    @objc func linkMove()  {
-        if self.wdBlood <= 0 {
-            self.removeLink()
-            return
-        }
-        
-        moveAction(self)
-    }
-    
-    @objc func attack2ActionTimer()  {
-        if self.canMove {
-            attack2Count += 1
-            if attack2Count >= 6{
-                
-                let random = arc4random() % 2
-                
-                if random == 1{
-                    attack1Action(self)
-                }else{
-                    attack2Action(self)
-                }
-            
-                attack2Count = 0
-            }
-        }
-    }
-    
+
   
     func setPhy() -> Void {
         self.physicsBody?.categoryBitMask = GREEN_ZOM_CATEGORY
@@ -116,11 +53,10 @@ class WDGreenZomNode: WDBaseNode{
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
         
         self.configureModel()
+        nodeModel = model
         
-        attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
-
-        behavior = WDGreenBehavior.init()
-        behavior.greenZom = self
+        behavior.setNode(node: self)
+        behavior.node = self
         
         
         self.name = GREEN_ZOM_NAME

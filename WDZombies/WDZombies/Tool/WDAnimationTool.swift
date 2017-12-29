@@ -175,7 +175,7 @@ class WDAnimationTool: NSObject {
             }
             
             if distance < page{
-                zombieNode.zombieBehavior.attackAction(node: personNode)
+                zombieNode.behavior.attackAction(node: personNode)
                 //闪现中不被攻击
                 if personNode.isBlink == false{
                     //重新调用攻击方法(避免触碰后不在触发攻击的状态)
@@ -227,7 +227,7 @@ class WDAnimationTool: NSObject {
                 //避免碰撞过后距离近，不在攻击
                 let distance1:CGFloat = WDTool.calculateNodesDistance(point1:zom.position,point2:person.position)
                 if distance1 < 30{
-                    zom.zombieBehavior.attackAction(node: person)
+                    zom.behavior.attackAction(node: person)
                 }
                 
                 let distance = WDTool.calculateNodesDistance(point1: magic.position, point2: person.position)

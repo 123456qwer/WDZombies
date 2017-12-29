@@ -344,8 +344,8 @@ class WDSkillBlockView: UIView {
             return true
         }else{
             
-            let alertView = UIAlertView(title: "", message: "Lack of skill points", delegate: nil, cancelButtonTitle: "confirm")
-            alertView.show()
+//            let alertView = UIAlertView(title: "", message: "Lack of skill points", delegate: nil, cancelButtonTitle: "confirm")
+//            alertView.show()
             return false
         }
     }
@@ -522,8 +522,8 @@ class WDSkillBlockView: UIView {
     @objc func initiativeAction(sender:UIButton)  {
         
         if _model.haveLearn == 1{
-            let alertView = UIAlertView(title: "", message: "Finished learning", delegate: nil, cancelButtonTitle: "confirm")
-            alertView.show()
+//            let alertView = UIAlertView(title: "", message: "Finished learning", delegate: nil, cancelButtonTitle: "confirm")
+//            alertView.show()
             return
         }
         

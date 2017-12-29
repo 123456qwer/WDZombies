@@ -19,8 +19,8 @@ class WDMap_1ViewModel: NSObject {
     //人物&普通僵尸碰撞
     func personAndNormalZom(pNode:WDPersonNode,zomNode:WDZombieNode){
         let direction:NSString = WDTool.calculateDirectionForZom(point1: zomNode.position, point2: pNode.position)
-        zomNode.zombieBehavior.stopMoveAction(direction: direction)
-        zomNode.zombieBehavior.attackAction(node: pNode)
+        zomNode.behavior.stopMoveAction(direction: direction)
+        zomNode.behavior.attackAction(node: pNode)
     }
     
     
@@ -118,7 +118,7 @@ class WDMap_1ViewModel: NSObject {
         
         if boomNode != nil && zomNode != nil {
             personNode.wdAttack += CGFloat(boomModel.skillLevel2)
-            zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
+            zomNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
             personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
         }
         
@@ -129,11 +129,11 @@ class WDMap_1ViewModel: NSObject {
         
         if zomNode != nil && fireNode != nil{
             fireNode?.removeFromParent()
-            zomNode?.zombieBehavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
+            zomNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
         }
         
         if kulouNode != nil && fireNode != nil {
-            kulouNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: kulouNode!)
+           _ = kulouNode?.behavior.beAttack(attackNode: personNode, beAttackNode: kulouNode!)
             WDAnimationTool.bloodAnimation(node: kulouNode!)
             fireNode?.removeFromParent()
         }
@@ -145,7 +145,7 @@ class WDMap_1ViewModel: NSObject {
         }
         
         if kulouNode != nil && pNode != nil {
-            kulouNode?.behavior.attackAction(node: personNode)
+            kulouNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
         }
         
         if greenClaw != nil && pNode != nil {
@@ -161,7 +161,7 @@ class WDMap_1ViewModel: NSObject {
         }
         
         if greenNode != nil && fireNode != nil {
-            greenNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: greenNode!)
+           _ = greenNode?.behavior.beAttack(attackNode: personNode, beAttackNode: greenNode!)
             WDAnimationTool.bloodAnimation(node: greenNode!)
             fireNode?.removeFromParent()
         }
@@ -184,7 +184,7 @@ class WDMap_1ViewModel: NSObject {
         }
         
         if greenNode != nil && pNode != nil {
-            greenNode?.attack1Action(greenNode!)
+            greenNode?.behavior.clawAttack(personNode: personNode)
         }
     }
     

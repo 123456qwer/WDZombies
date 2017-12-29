@@ -12,40 +12,41 @@ import SpriteKit
 class WDKulouBehavior: WDBaseNodeBehavior {
 
     weak var kulouNode:WDKulouNode! = nil
-
-    var blood = 0
-
-    @objc func hitTheTarget(personNode:WDPersonNode)  {
-        if personNode.isBlink == false && kulouNode != nil{
-            let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
-            
-            let dis = personNode.size.width / 2.0 + kulouNode.size.width / 2.0
-            print(dis,distance)
-            
-            if distance < dis {
-                personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: personNode)
+    
+    
+    //独有方法<被攻击多次||5秒钟闪现一次>
+    typealias _blinkMove = (_ kulou:WDKulouNode) -> Void
+    var blinkMoveBlock:_blinkMove!
+    var timerCount:NSInteger = 0
+    var blinkTimer:Timer! = nil
+    
+    @objc func blinkTimerAction(){
+        if kulouNode == nil {
+            return
+        }
+        if kulouNode.canMove {
+            if kulouNode.wdBlood <= 0{
+                self.clearTimer()
+                return
+            }
+            timerCount += 1
+            if timerCount == 5{
+                self.blinkMoveBlock(kulouNode)
+                timerCount = 0
             }
         }
     }
     
     
-    override func attackAction(node: WDBaseNode) {
-        
-        kulouNode.removeAction(forKey: "move")
-        kulouNode.canMove = false
-        kulouNode.isMove  = false
-        
-        let attackAction = SKAction.animate(with: kulouNode.model.attack1Arr, timePerFrame: 0.15)
-
-   
-        self.perform(#selector(hitTheTarget(personNode:)), with: node, afterDelay: 0.25)
-        kulouNode.run(attackAction) {
-        
-            self.kulouNode.canMove = true
+    func clearTimer(){
+        if (blinkTimer != nil) {
+            blinkTimer.invalidate();
+            blinkTimer = nil
         }
     }
     
-    func attack2Action(personNode:WDPersonNode) {
+    
+    func blinkAction(personNode:WDPersonNode) {
         
         kulouNode.canMove = false
         kulouNode.alpha = 0.5
@@ -63,7 +64,65 @@ class WDKulouBehavior: WDBaseNodeBehavior {
             self.kulouNode.canMove = true
             self.kulouNode.alpha = 1
         }
+    }
+    
+
+
+    
+  
+    
+    
+    
+    //MARK:继承方法
+    //被攻击
+    override func beAttack(attackNode: WDBaseNode, beAttackNode: WDBaseNode) -> Bool{
+       
+        let isBreak = super.beAttack(attackNode: attackNode, beAttackNode: beAttackNode)
+        if isBreak {
+            self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
+        }
+        return isBreak
+    }
+    
+    //攻击
+    override func attack(direction: NSString, nodeDic: NSDictionary) {
+       
+        let personNode = nodeDic.object(forKey: "personNode")
         
+        kulouNode.removeAction(forKey: "move")
+        kulouNode.canMove = false
+        kulouNode.isMove  = false
+        
+        let attackAction = SKAction.animate(with: kulouNode.model.attack1Arr, timePerFrame: 0.15)
+        self.perform(#selector(hitTheTarget(personNode:)), with: personNode, afterDelay: 0.25)
+        kulouNode.run(attackAction) {
+            self.kulouNode.canMove = true
+        }
+    }
+    
+    override func setNode(node: WDBaseNode) {
+        kulouNode = node as! WDKulouNode
+        blinkTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(blinkTimerAction), userInfo: nil, repeats: true)
+    }
+    
+    
+    
+    
+    
+    
+    //MARK:私有
+    /// 监测人物是否被击中
+    @objc func hitTheTarget(personNode:WDPersonNode)  {
+        if personNode.isBlink == false && kulouNode != nil{
+            let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
+            
+            let dis = personNode.size.width / 2.0 + kulouNode.size.width / 2.0
+            print(dis,distance)
+            
+            if distance < dis {
+                personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: personNode)
+            }
+        }
     }
     
     @objc func setPhy()  {
@@ -72,85 +131,12 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         }
     }
     
-    override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
-        
-        kulouNode.wdBlood -= attackNode.wdAttack
-        blood += NSInteger(attackNode.wdAttack)
-        
-        
-        self.reduceBloodLabel(node: kulouNode, attackNode: attackNode)
-        
-        if kulouNode.wdBlood <= 0 {
-            self.diedAction()
-            kulouNode.setPhysicsBody(isSet: false)
-            return
-        }
-        
-        if blood >= 10 && kulouNode.canMove == true{
-            
-            kulouNode.removeAllActions()
-            kulouNode.canMove = false
-            kulouNode.isMove = false
-            blood = 0
-            kulouNode.texture = kulouNode.model.beAttackTexture
-            self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
-        }
-   
-    }
-    
-    
     @objc func canMove()  {
         if kulouNode != nil {
             kulouNode.canMove = true
-            kulouNode.timerCount = 0
+            timerCount = 0
             kulouNode.texture = kulouNode.model.moveArr[0]
-            kulouNode.attack2(kulouNode)
+            self.blinkMoveBlock(kulouNode)
         }
-       
-    }
-    
-    override func diedAction() {
-        
-        kulouNode.removeAllActions()
-        
-        let diedAction = SKAction.animate(with: kulouNode.model.diedArr , timePerFrame: 0.2)
-        kulouNode.run(diedAction) {
-            self.alreadyDied?(self.kulouNode)
-            self.kulouNode.removeFromParent()
-        }
-        
-    }
-    
-    func moveActionForKulou(direction:NSString,personNode:WDPersonNode) -> Void {
-        
-        if kulouNode.canMove == true {
-          
-            let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: kulouNode.speed, node: kulouNode)
-            kulouNode.position = point
-            kulouNode.zPosition = 3 * 667 - kulouNode.position.y;
-            let bossDirection = WDTool.calculateDirectionForBoss1(bossPoint: kulouNode.position, personPoint: personNode.position)
-            
-            if !bossDirection.isEqual(to: kulouNode.direction as String) || !kulouNode.isMove {
-                
-                kulouNode.removeAction(forKey: "move")
-                
-                let moveAction = SKAction.animate(with: kulouNode.model.moveArr, timePerFrame: 0.2)
-                let repeatAction = SKAction.repeatForever(moveAction)
-                if bossDirection.isEqual(to: kLeft as String){
-                    kulouNode.xScale = xScale
-                    kulouNode.yScale = yScale
-                }else{
-                    kulouNode.xScale = -1 * xScale
-                    kulouNode.yScale = yScale
-                }
-                
-                kulouNode.run(repeatAction, withKey: "move")
-                kulouNode.direction = bossDirection
-                kulouNode.isMove = true
-                
-            }
-        }
-        
-     
     }
 }

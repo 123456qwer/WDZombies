@@ -213,8 +213,6 @@ class WDTool: NSObject {
         var x:CGFloat = node.position.x;
         var y:CGFloat = node.position.y;
         
-        
-        
         var speed1:CGFloat = sqrt((speed * speed)/2.0);
         
         //相反方向

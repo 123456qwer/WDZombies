@@ -51,13 +51,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
             //self.createBoss1()
-            //self.level_3_BossAction(isBoss: true)
+            self.level_4_GreenZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
