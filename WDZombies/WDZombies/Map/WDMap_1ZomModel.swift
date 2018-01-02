@@ -18,7 +18,7 @@ class WDMap_1ZomModel: NSObject {
     func createKnightZom(isBoss:Bool) -> WDSmokeKnightNode {
         let kNight:WDSmokeKnightNode = WDSmokeKnightNode.init()
         kNight.size = CGSize(width:165,height:165)
-        kNight.isBoss = true
+        kNight.isBoss = isBoss
         kNight.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kNight)
         
