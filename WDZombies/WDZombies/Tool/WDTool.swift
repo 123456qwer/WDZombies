@@ -16,7 +16,7 @@ enum  personSkillType{
 
 enum  zomType{
     
-    case Normal,Red,kulou,GreenZom,kNight
+    case Normal,Red,kulou,GreenZom,kNight,Squid
 };
 
 typealias selectSkill = (_ Bool:Bool, _ skillType:personSkillType, _ skillCount:NSInteger) -> Void
@@ -332,6 +332,8 @@ class WDTool: NSObject {
         
         return direction!;
     }
+    
+    
     
     
     /// 人物朝向

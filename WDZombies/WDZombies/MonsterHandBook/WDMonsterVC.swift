@@ -33,7 +33,7 @@ class WDMonsterVC: WDBaseViewController {
         //kulou & greenZom
         self.createMonster2()
         
-        //雾骑士
+        //雾骑士 & 鱿鱼
         self.createMonster3()
 
         let model:WDUserModel = WDUserModel.init()
@@ -187,6 +187,21 @@ class WDMonsterVC: WDBaseViewController {
         
         let moveArr:NSMutableArray = NSMutableArray.init()
         let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let moveArr2:NSMutableArray = NSMutableArray.init()
+        let attack2Arr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...7{
+            let moveName = "squid_move_\(index + 1)"
+            let moveTemp:UIImage = UIImage.init(named: moveName)!
+            moveArr2.add(moveTemp)
+            
+            if index < 6{
+                let attack = "squid_attack_\(index + 1)"
+                let attackTemp:UIImage = UIImage.init(named: attack)!
+                attack2Arr.add(attackTemp)
+            }
+        }
+        
         
         for index:NSInteger in 0...10 {
         
@@ -203,10 +218,10 @@ class WDMonsterVC: WDBaseViewController {
             }
         }
         
-        let move:NSArray = [moveArr,[]]
-        let attack:NSArray = [attack1Arr,[]]
-        let strArr:NSArray = ["KNIGHT!!","I am Slow"]
-        let arrType:NSArray = [zomType.kNight,zomType.GreenZom]
+        let move:NSArray = [moveArr,moveArr2]
+        let attack:NSArray = [attack1Arr,attack2Arr]
+        let strArr:NSArray = ["KNIGHT!!","I am a Squid~"]
+        let arrType:NSArray = [zomType.kNight,zomType.Squid]
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
         
         for index:NSInteger in 0...arr.count - 1 {

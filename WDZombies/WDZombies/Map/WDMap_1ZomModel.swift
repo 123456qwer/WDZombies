@@ -21,36 +21,29 @@ class WDMap_1ZomModel: NSObject {
         kNight.isBoss = true
         kNight.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kNight)
-        kNight.starMove()
+        
         
         weak var weakSelf = map1_scene
-        kNight.moveAction = {(knightNode:WDSmokeKnightNode) -> Void in
-            
-            let direction = WDTool.calculateDirectionForZom(point1: knightNode.position, point2: (weakSelf?.personNode.position)!)
-            knightNode.behavior.moveActionForKnight(direction: direction, personNode: (weakSelf?.personNode)!)
+        kNight.behavior.starMove()
+        kNight.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let kNode:WDSmokeKnightNode = node as! WDSmokeKnightNode
+            kNode.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+       
+        
+        kNight.behavior.blackCircleAttackBlock = {(kNightNode:WDSmokeKnightNode) -> Void in
+            kNightNode.behavior.blackCircleAttackAction(personNode: (weakSelf?.personNode)!)
         }
         
-        kNight.attack1Action = {(kNightNode:WDSmokeKnightNode) -> Void in
-            kNightNode.behavior.attack1Action(personNode: (weakSelf?.personNode)!)
+        kNight.behavior.meteoriteAttackBlock = {(knightNode:WDSmokeKnightNode) -> Void in
+            knightNode.behavior.meteoriteAttackAction(personNode: (weakSelf?.personNode)!)
         }
         
-        kNight.attack2Action = {(knightNode:WDSmokeKnightNode) -> Void in
-            knightNode.behavior.attack2Action(personNode: (weakSelf?.personNode)!)
-        }
-        
-        kNight.diedAction = {(knightNode:WDSmokeKnightNode) -> Void in
-            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
-            
-            if knightNode.isBoss && model.monsterCount < 5{
-                model.monsterCount = 5
-                weakSelf?.levelUp(model: model)
-                weakSelf?.personNode.createLevelUpNode()
-                weakSelf?.playNext()
-            }else if knightNode.isBoss{
-                weakSelf?.playNext()
-            }else {
-                weakSelf?.createBoss()
-            }
+        weak var wSelf = self
+
+        kNight.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 5)
         }
         
         return kNight
@@ -84,19 +77,9 @@ class WDMap_1ZomModel: NSObject {
         
         
         //绿色僵尸死亡
+        weak var wSelf = self
         greenZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
-            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
-            
-            if node.isBoss && model.monsterCount < 4{
-                model.monsterCount = 4
-                weakSelf?.levelUp(model: model)
-                weakSelf?.personNode.createLevelUpNode()
-                weakSelf?.playNext()
-            }else if node.isBoss{
-                weakSelf?.playNext()
-            }else {
-                weakSelf?.createBoss()
-            }
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 4)
         }
         
         
@@ -139,19 +122,9 @@ class WDMap_1ZomModel: NSObject {
         }
         
         //骷髅死亡，可以升级加技能
+        weak var wSelf = self
         kulouNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
-            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
-            
-            if node.isBoss && model.monsterCount < 3 {
-                weakSelf?.playNext()
-                model.monsterCount = 3
-                weakSelf?.levelUp(model: model)
-                weakSelf?.personNode.createLevelUpNode()
-            }else if node.isBoss {
-                weakSelf?.playNext()
-            }else {
-                weakSelf?.createBoss()
-            }
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 3)
         }
         
         return kulouNode
@@ -176,20 +149,9 @@ class WDMap_1ZomModel: NSObject {
         }
         
         //僵尸死亡
+        weak var wSelf = self
         zombieNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
-            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
-            if  node.isBoss && model.monsterCount < 1{
-                model.monsterCount = 1
-                weakSelf?.levelUp(model: model)
-                weakSelf?.personNode.createLevelUpNode()
-                weakSelf?.playNext()
-            }else if node.isBoss {
-                weakSelf?.playNext()
-            }else {
-                weakSelf?.createBoss()
-                weakSelf?.removeNormalZom(normalZom: node as! WDZombieNode)
-            }
-            
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 1)
         }
         
         let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
@@ -199,6 +161,8 @@ class WDMap_1ZomModel: NSObject {
         
         return zombieNode
     }
+    
+    
     
     
     //MARK:创建红色僵尸
@@ -221,19 +185,9 @@ class WDMap_1ZomModel: NSObject {
         }
         
         //僵尸死亡
+        weak var wSelf = self
         zombieNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
-            let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
-            if node.isBoss && model.monsterCount < 2{
-                model.monsterCount = 2
-                weakSelf?.levelUp(model: model)
-                weakSelf?.personNode.createLevelUpNode()
-                weakSelf?.playNext()
-            }else if node.isBoss {
-                weakSelf?.playNext()
-            }else{
-                weakSelf?.createBoss()
-                weakSelf?.removeRedZom(redZom: node as! WDZombieNode)
-            }
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 2)
         }
         
         //红色僵尸发动攻击<之前造成循环引用 -> 直接使用 zombieNode 来调用方法，如下注释>
@@ -248,6 +202,53 @@ class WDMap_1ZomModel: NSObject {
         }
         
         return zombieNode
+    }
+    
+    //MARK:创建鱿鱼僵尸
+    func createSquidZom(isBoss:Bool) -> WDSquidNode {
+        let squidNode:WDSquidNode = WDSquidNode.init()
+        squidNode.size = CGSize(width:140 ,height:100)
+        squidNode.isBoss = isBoss
+        squidNode.initWithPerson(personNode: map1_scene.personNode)
+        map1_scene.bgNode.addChild(squidNode)
+       
+        weak var weakSelf = map1_scene
+        squidNode.behavior.starMove()
+        squidNode.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let squidN:WDSquidNode = node as! WDSquidNode
+            squidN.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        squidNode.behavior.inkAttackBlock = {(squidN:WDSquidNode) -> Void in
+            squidNode.behavior.attack(direction: "", nodeDic:["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        weak var wSelf = self
+        squidNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 6)
+        }
+        
+        return squidNode
+    }
+    
+    
+///////////////////////////公用////////////////
+    /// 僵尸死亡调用方法
+    func diedNextAction(map:WDMap_1Scene,node:WDBaseNode,count:NSInteger) {
+        let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+        if node.isBoss && model.monsterCount < count{
+            model.monsterCount = count
+            map.levelUp(model: model)
+            map.personNode.createLevelUpNode()
+            map.playNext()
+        }else if node.isBoss {
+            map.playNext()
+        }else{
+            map.createBoss()
+            map.removeNodeFromArr(node:node)
+        }
+        
     }
     
 }

@@ -24,7 +24,7 @@ class WDKulouNode: WDBaseNode {
     }
 
     override func clearAction()  {
-        self.behavior.clearTimer()
+        self.behavior.clearAction()
     }
     
     

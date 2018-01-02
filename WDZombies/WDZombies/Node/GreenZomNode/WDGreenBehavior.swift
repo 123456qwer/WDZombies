@@ -19,42 +19,14 @@ class WDGreenBehavior: WDBaseNodeBehavior {
     var clawAttackBlock:_claw!
     var smokeAttackBlock:_smoke!
     var timeCount:NSInteger = 0
-    var attackTimer:Timer! = nil
-
-    
-    func clearTimer(){
-        if (attackTimer != nil) {
-            attackTimer.invalidate();
-            attackTimer = nil
-        }
-    }
+  
     
     
     @objc func canMove()  {
         greenZom?.canMove = true
     }
     
-    @objc func attackTimerAction(){
-     
-        if greenZom.canMove {
-            if greenZom.wdBlood <= 0{
-                self.clearTimer()
-            }
-            
-            timeCount += 1
-            if timeCount >= 6{
-    
-                let random = arc4random() % 2
-                
-                if random == 1{
-                    clawAttackBlock(greenZom)
-                }else{
-                    smokeAttackBlock(greenZom)
-                }
-                timeCount = 0
-            }
-        }
-    }
+  
     
     //烟雾攻击
     func smokeAttack(personNode:WDPersonNode)  {
@@ -192,4 +164,24 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         return isBreak
     }
     
+    
+   //timer
+    @objc func attackTimerAction(){
+        
+        if greenZom.canMove {
+            
+            timeCount += 1
+            if timeCount >= attackAllCount{
+                
+                let random = arc4random() % 2
+                
+                if random == 1{
+                    clawAttackBlock(greenZom)
+                }else{
+                    smokeAttackBlock(greenZom)
+                }
+                timeCount = 0
+            }
+        }
+    }
 }

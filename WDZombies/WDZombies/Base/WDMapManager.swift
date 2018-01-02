@@ -11,11 +11,16 @@ import SpriteKit
 
 class WDMapManager: NSObject {
 
+    var inkTexture:SKTexture? //鱿鱼哥专属
+    
+    
+    
     var x_arr:NSMutableArray! = nil
     var y_arr:NSMutableArray! = nil
     var mapDic:NSMutableDictionary!
     var textureDic:NSMutableDictionary!
 
+    
     
     static let sharedInstance = WDMapManager.init()
     private override init() {}
@@ -91,6 +96,43 @@ class WDMapManager: NSObject {
         self.textureDic.setObject(diedArr, forKey: GREEN_DIED as NSCopying)
         self.textureDic.setObject(smokeArr, forKey: GREEN_SMOKE as NSCopying)
         self.textureDic.setObject(clawArr, forKey: GREEN_CLAW_NAME as NSCopying)
+    }
+    
+    func setSquidZom() {
+        let textures = SKTextureAtlas.init(named: "squidNodePic")
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let inkArr:NSMutableArray = NSMutableArray.init()
+        let diedArr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...7 {
+            if index < 8 {
+                let name = "squid_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+            }
+            
+            if index < 6 {
+                let name = "squid_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+                
+                let name1 = "squid_attack_\(index + 1)"
+                let temp1 = textures.textureNamed(name1)
+                attack1Arr.add(temp1)
+                
+                let name2 = "squid_ink_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                inkArr.add(temp2)
+            }
+        }
+        
+        self.textureDic.setObject(moveArr, forKey: SQUID_MOVE as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: SQUID_DIED as NSCopying)
+        self.textureDic.setObject(attack1Arr, forKey: SQUID_ATTACK1 as NSCopying)
+        self.textureDic.setObject(inkArr, forKey: SQUID_INK as NSCopying)
+        self.inkTexture = textures.textureNamed("squid_ink_6")
     }
     
     func setKnightZom() {
@@ -191,6 +233,7 @@ class WDMapManager: NSObject {
         self.setGreenZom()
         self.setKnightZom()
         self.setKulouZom()
+        self.setSquidZom()
     }
     
     

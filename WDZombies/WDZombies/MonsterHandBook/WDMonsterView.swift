@@ -126,7 +126,16 @@ class WDMonsterView: UIView {
             bloodLabel.text = "blood:   50"
             speedLabel.text = "speed:   1"
             attackLabel.text = "attack:   3"
+        }else if type == .kNight{
+            bloodLabel.text = "blood:   50"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   3"
+        }else if type == .Squid{
+            bloodLabel.text = "blood:   50"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   3"
         }
+        
         
     }
     

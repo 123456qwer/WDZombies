@@ -11,77 +11,17 @@ import SpriteKit
 
 class WDSmokeKnightNode: WDBaseNode {
 
-    var behavior:WDKnightBehavior!
-   
-    
-    var link:CADisplayLink!
-    var attack2Timer:Timer!
-    var attack2Count:NSInteger = 0
-   
-    
+    var behavior:WDKnightBehavior! = WDKnightBehavior.init()
     var model:WDKnightModel = WDKnightModel.init()
-
-
-    
-    typealias move = (_ knightNode:WDSmokeKnightNode) -> Void
-    typealias attack2 = (_ knightNode:WDSmokeKnightNode) -> Void
-    typealias attack1 = (_ knightNode:WDSmokeKnightNode) -> Void
-    typealias died = (_ knightNode:WDSmokeKnightNode) -> Void
-    
-    var moveAction:move!
-    var attack2Action:attack2!
-    var attack1Action:attack1!
-    var diedAction:died!
-
     
     deinit {
         print("雾骑士释放了！！！！！！！")
     }
     
-    func removeTimer()  {
-        if attack2Timer != nil {
-            attack2Timer.invalidate()
-            attack2Timer = nil
-        }
-    }
     
-    @objc func linkMove()  {
-        if self.wdBlood <= 0 {
-            self.removeLink()
-            return
-        }
-        
-        moveAction(self)
-    }
-    
-    func starMove()  {
-        link = CADisplayLink.init(target: self, selector: #selector(linkMove))
-        link.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-    }
-    
-    func removeLink()  {
-        if link != nil{
-            link.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
-            link.invalidate()
-            link = nil
-        }
-    }
     
     override func clearAction()  {
-
-        self.removeLink()
-        self.removeTimer()
-    }
-    
-    @objc func attack2ActionTimer()  {
-        if self.canMove {
-            attack2Count += 1
-            if attack2Count >= 3{
-                                
-                attack2Action(self)
-                attack2Count = 0
-            }
-        }
+        self.behavior.clearAction()
     }
     
     func setPhy() -> Void {
@@ -115,12 +55,10 @@ class WDSmokeKnightNode: WDBaseNode {
     func initWithPersonNode(personNode:WDPersonNode) {
         
         self.configureModel()
-        
-        attack2Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attack2ActionTimer), userInfo: nil, repeats: true)
-        
-        behavior = WDKnightBehavior.init()
-        behavior.kNight = self
-        
+        nodeModel = model
+        behavior.setNode(node: self)
+        behavior.node = self
+    
         
         self.name = KNIGHT_NAME
        
@@ -142,13 +80,15 @@ class WDSmokeKnightNode: WDBaseNode {
     
     func setAttribute(isBoss:Bool)  {
         if isBoss{
-            self.wdBlood = 10
+            self.wdBlood = 100
             behavior.xScale = 1
             behavior.yScale = 1
+            self.behavior.attackAllCount = 5
         }else{
             self.wdBlood = 20
             behavior.xScale = 0.6
             behavior.yScale = 0.6
+            self.behavior.attackAllCount = 20
         }
     }
 }

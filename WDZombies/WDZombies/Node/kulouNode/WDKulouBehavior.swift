@@ -18,17 +18,11 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     typealias _blinkMove = (_ kulou:WDKulouNode) -> Void
     var blinkMoveBlock:_blinkMove!
     var timerCount:NSInteger = 0
-    var blinkTimer:Timer! = nil
     
     @objc func blinkTimerAction(){
-        if kulouNode == nil {
-            return
-        }
+       
         if kulouNode.canMove {
-            if kulouNode.wdBlood <= 0{
-                self.clearTimer()
-                return
-            }
+           
             timerCount += 1
             if timerCount == 5{
                 self.blinkMoveBlock(kulouNode)
@@ -38,14 +32,8 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     }
     
     
-    func clearTimer(){
-        if (blinkTimer != nil) {
-            blinkTimer.invalidate();
-            blinkTimer = nil
-        }
-    }
-    
-    
+
+ 
     func blinkAction(personNode:WDPersonNode) {
         
         kulouNode.canMove = false
@@ -102,7 +90,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     
     override func setNode(node: WDBaseNode) {
         kulouNode = node as! WDKulouNode
-        blinkTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(blinkTimerAction), userInfo: nil, repeats: true)
+        attackTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(blinkTimerAction), userInfo: nil, repeats: true)
     }
     
     

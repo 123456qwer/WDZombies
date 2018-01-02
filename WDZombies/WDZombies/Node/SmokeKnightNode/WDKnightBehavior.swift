@@ -10,98 +10,35 @@ import UIKit
 import SpriteKit
 
 class WDKnightBehavior: WDBaseNodeBehavior {
+   
+    typealias attack2 = (_ knightNode:WDSmokeKnightNode) -> Void
+    typealias attack1 = (_ knightNode:WDSmokeKnightNode) -> Void
+    
+    
+    var blackCircleAttackBlock:attack1!
+    var meteoriteAttackBlock:attack2!
+    
+    var attackTimeCount:NSInteger = 0
+
     weak var kNight:WDSmokeKnightNode!
     var blood = 0
+   
     
-    func moveActionForKnight(direction:NSString,personNode:WDPersonNode)  {
-        
-        if kNight.canMove == true {
-            
-            let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: kNight.speed, node: kNight)
-            kNight.position = point
-            kNight.zPosition = 3 * 667 - kNight.position.y;
-            let bossDirection = WDTool.calculateDirectionForBoss1(bossPoint: kNight.position, personPoint: personNode.position)
-            
-            if !bossDirection.isEqual(to: kNight.direction as String) || !kNight.isMove {
-                
-                kNight.removeAction(forKey: "move")
-                
-                let moveAction = SKAction.animate(with: kNight.model.moveArr, timePerFrame: 0.2)
-                let repeatAction = SKAction.repeatForever(moveAction)
-                if bossDirection.isEqual(to: kLeft as String){
-                    kNight.xScale = xScale
-                    kNight.yScale = yScale
-                }else{
-                    kNight.xScale = -1 * xScale
-                    kNight.yScale = yScale
-                }
-                
-                kNight.run(repeatAction, withKey: "move")
-                kNight.direction = bossDirection
-                kNight.isMove = true
-                
-            }
-        }
+    
+    func blackCircleAttackAction(personNode:WDPersonNode){
+        self.blackCircleAnimation(personNode: personNode)
     }
     
     
-    func attack1Action(personNode:WDPersonNode){
-        self.attack1Animation(personNode: personNode)
+    func meteoriteAttackAction(personNode:WDPersonNode){
+        self.meteoriteAttackAnimation(personNode: personNode)
     }
     
-    func attack2Action(personNode:WDPersonNode){
-        self.attack2Animation(personNode: personNode)
-    }
     
-    override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
-        kNight.wdBlood -= attackNode.wdAttack
-        blood += NSInteger(attackNode.wdAttack)
-        
-        self.reduceBloodLabel(node: kNight, attackNode: attackNode)
-        
-        if kNight.wdBlood <= 0 {
-            self.diedAction()
-            kNight.diedAction(kNight)
-            kNight.setPhysicsBody(isSet: false)
-            return
-        }
-        
-        if blood >= 10 && kNight.canMove == true{
-            
-            kNight.removeAllActions()
-            kNight.canMove = false
-            kNight.isMove = false
-            kNight.setPhysicsBody(isSet: false)
-            blood = 0
-            kNight.texture = kNight.model.beAttackTexture
-            self.perform(#selector(moveTexture), with: nil, afterDelay: 0.5)
-            var page:CGFloat = 40 / 2.0 + 20 / 2.0
-            if kNight.position.x < attackNode.position.x {
-                page *= -1
-            }
-            let position = CGPoint(x:attackNode.position.x + page,y:attackNode.position.y)
-
-            let action1 = SKAction.fadeAlpha(to: 0, duration: 0.5)
-            let action2 = SKAction.move(to: position, duration: 0.5)
-            let action3 = SKAction.fadeAlpha(to: 1, duration: 0.3)
-            
-            let seq = SKAction.sequence([action1,action2,action3])
-            kNight.run(seq, completion: {
-                
-                self.kNight.canMove = true
-                self.kNight.setPhysicsBody(isSet: true)
-            })
-            
-        }
-    }
-    
-    @objc func moveTexture() {
-        kNight.texture = kNight.model.moveArr[0]
-    }
     
 //*************************动画相关******************************************//
     //释放黑色漩涡
-    func attack1Animation(personNode:WDPersonNode) {
+    func blackCircleAnimation(personNode:WDPersonNode) {
        
         if kNight.wdBlood <= 0 || kNight.canMove == false{
             return
@@ -118,6 +55,7 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             self.kNight.canMove = true
         }
     }
+    
     
     //meteorite
     func createMeteoriteAnimation(personNode:WDPersonNode,count:NSInteger){
@@ -185,6 +123,7 @@ class WDKnightBehavior: WDBaseNodeBehavior {
        
     }
     
+    
     @objc func attackPerson(personNode:WDPersonNode)  {
         let distance:CGFloat = WDTool.calculateNodesDistance(point1: self.kNight.position, point2: personNode.position)
         let dis = personNode.size.width / 2.0 + self.kNight.size.width / 2.0
@@ -195,8 +134,9 @@ class WDKnightBehavior: WDBaseNodeBehavior {
         }
     }
     
-    //吸引玩家到当前位置，攻击2
-    func attack2Animation(personNode:WDPersonNode) {
+    
+    //陨石攻击
+    func meteoriteAttackAnimation(personNode:WDPersonNode) {
         
         if kNight.wdBlood <= 0 || kNight.canMove == false{
             return
@@ -217,8 +157,8 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             self.createMeteoriteAnimation(personNode: personNode, count: count)
         }
         
+        
         kNight.run(action1) {
-            
             self.kNight.canMove = true
             
             /*
@@ -252,15 +192,62 @@ class WDKnightBehavior: WDBaseNodeBehavior {
         self.kNight.canMove = true
     }
     
-    override func diedAction() {
+    
+  
+    
+    override func beAttack(attackNode: WDBaseNode, beAttackNode: WDBaseNode) -> Bool {
+        let isBreak:Bool = super.beAttack(attackNode: attackNode, beAttackNode: beAttackNode)
+        if isBreak   {
+            print("雾骑士被打瘫痪了")
+            self.blinkAction(personNode: attackNode as! WDPersonNode)
+        }
+        return isBreak
+    }
+    
+    override func setNode(node: WDBaseNode) {
+        kNight = node as! WDSmokeKnightNode
+        attackTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(attackTimerAction), userInfo: nil, repeats: true)
+    }
+    
+    func blinkAction(personNode:WDPersonNode) {
         
-        kNight.removeAllActions()
-        
-        let diedAction = SKAction.animate(with: kNight.model.diedArr, timePerFrame: 0.2)
-        kNight.run(diedAction) {
-            self.kNight.removeFromParent()
+        kNight.texture = kNight.model.moveArr[0]
+        kNight.canMove = false
+        kNight.alpha = 0.5
+        var page:CGFloat = 80 / 2.0 + 20 / 2.0
+        if kNight.position.x < personNode.position.x {
+            page *= -1
         }
         
+        let position = CGPoint(x:personNode.position.x + page,y:personNode.position.y)
+        
+        let moveA = SKAction.move(to: position, duration: 0.5)
+        kNight.removePhy()
+        self.perform(#selector(setPhy), with: nil, afterDelay: 0.7)
+        kNight.run(moveA) {
+            self.kNight.canMove = true
+            self.kNight.alpha = 1
+        }
     }
+    
+    @objc func setPhy()  {
+        if kNight != nil{
+            kNight.setPhy()
+        }
+    }
+    
+    @objc func attackTimerAction(){
+       
+        if kNight.canMove {
+            attackTimeCount += 1
+            
+            if attackTimeCount == attackAllCount{
+                attackTimeCount = 0
+                self.meteoriteAttackBlock(kNight)
+            }
+        }
+    }
+    
+  
     
 }

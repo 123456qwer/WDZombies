@@ -34,10 +34,12 @@ class WDBaseNodeBehavior: NSObject {
     
     typealias _moveBlock = (_ node:WDBaseNode) -> Void
     var addUpToBlood = 0
+    var attackAllCount = 0
+    
     
     var moveBlock:_moveBlock!
     var moveLink:CADisplayLink!
-    
+    var attackTimer:Timer!
   
     //MARK:对外
     /// 创建link，开始移动
@@ -48,6 +50,13 @@ class WDBaseNodeBehavior: NSObject {
     
     /// 僵尸移动
     func move(direction:NSString,nodeDic:NSDictionary){
+        
+        if node.wdBlood <= 0 {
+            self.node.canMove = false
+            self.clearAction()
+            return
+        }
+        
         if node.canMove == true {
             
             let personNode:WDPersonNode = nodeDic.object(forKey: "personNode") as! WDPersonNode
@@ -164,6 +173,11 @@ class WDBaseNodeBehavior: NSObject {
         
     }
     
+    func clearAction(){
+        self._removeLink()
+        self._removeTimer()
+    }
+    
 ////////////////////////////
     
     //MARK:私有
@@ -174,6 +188,14 @@ class WDBaseNodeBehavior: NSObject {
             moveLink = nil
         }
     }
+    
+    func _removeTimer() {
+        if attackTimer != nil {
+            attackTimer.invalidate()
+            attackTimer = nil
+        }
+    }
+    
     
     @objc func _linkMove(){
         if node.wdBlood<=0{

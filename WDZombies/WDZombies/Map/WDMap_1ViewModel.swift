@@ -15,6 +15,8 @@ class WDMap_1ViewModel: NSObject {
     var kulouZomArr:NSMutableArray  = NSMutableArray.init()   //存储骷髅
     var greenZomArr:NSMutableArray  = NSMutableArray.init()   //存储绿色僵尸
     var knightZomArr:NSMutableArray = NSMutableArray.init()   //雾骑士
+    var squidZomArr:NSMutableArray  = NSMutableArray.init()   //鱿鱼哥
+    var zomArr:NSMutableArray = NSMutableArray.init()         //全部僵尸
     
     //人物&普通僵尸碰撞
     func personAndNormalZom(pNode:WDPersonNode,zomNode:WDZombieNode){
@@ -44,6 +46,18 @@ class WDMap_1ViewModel: NSObject {
         var greenClaw:SKSpriteNode?
         var knightNode:WDSmokeKnightNode?
         var meteoriteNode:SKSpriteNode?
+        var squidNode:WDSquidNode?
+        var inkNode:SKSpriteNode?
+        
+        inkNode = (A?.name?.isEqual(SQUID_INK))! ? (A as? SKSpriteNode):nil;
+        if inkNode == nil {
+            inkNode = (B?.name?.isEqual(SQUID_INK))! ? (B as? SKSpriteNode):nil;
+        }
+        
+        squidNode = (A?.name?.isEqual(SQUID_NAME))! ? (A as? WDSquidNode):nil;
+        if squidNode == nil {
+            squidNode = (B?.name?.isEqual(SQUID_NAME))! ? (B as? WDSquidNode):nil;
+        }
         
         meteoriteNode = (A?.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (A as? SKSpriteNode):nil;
         if meteoriteNode == nil {
@@ -168,13 +182,13 @@ class WDMap_1ViewModel: NSObject {
         
         if knightNode != nil && fireNode != nil {
             //print("雾骑士被打了")
-            knightNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: knightNode!)
+            _ = knightNode?.behavior.beAttack(attackNode: personNode, beAttackNode: knightNode!)
             WDAnimationTool.bloodAnimation(node: knightNode!)
             fireNode?.removeFromParent()
         }
         
         if knightNode != nil && pNode != nil {
-            knightNode?.behavior.attack1Animation(personNode: pNode!)
+            knightNode?.behavior.blackCircleAttackAction(personNode: pNode!)
         }
         
         if pNode != nil && meteoriteNode != nil{
@@ -186,49 +200,42 @@ class WDMap_1ViewModel: NSObject {
         if greenNode != nil && pNode != nil {
             greenNode?.behavior.clawAttack(personNode: personNode)
         }
+        
+        if pNode != nil && squidNode != nil{
+            squidNode?.behavior.attackTimeCount = 0
+            squidNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
+        }
+        
+        if pNode != nil && inkNode != nil {
+            inkNode?.removeAllActions()
+            inkNode?.texture = WDMapManager.sharedInstance.inkTexture
+            let alphaA = SKAction.fadeAlpha(to: 0, duration: 1)
+            inkNode?.run(alphaA, completion: {
+                inkNode?.removeFromParent()
+            })
+            WDAnimationTool.bloodAnimation(node:personNode)
+            personNode.personBehavior.reduceBlood(number:1)
+        }
+        
+        if squidNode != nil && fireNode != nil {
+            _ = squidNode?.behavior.beAttack(attackNode: personNode, beAttackNode: squidNode!)
+            WDAnimationTool.bloodAnimation(node: squidNode!)
+            fireNode?.removeFromParent()
+        }
     }
     
     
     
     /// 删除所有僵尸
     func removeNode() {
-        //删除所有僵尸
-        if  normalZomArr.count > 0{
-            for index:NSInteger in 0...normalZomArr.count - 1 {
-                let zom:WDZombieNode? = normalZomArr.object(at: index) as? WDZombieNode
-                self.removeNode(zomNode: zom!)
-            }
-            
-            normalZomArr.removeAllObjects()
-        }
         
-        //删除所有骷髅
-        if kulouZomArr.count > 0{
-            for index:NSInteger in 0...kulouZomArr.count - 1 {
-                let kulou:WDKulouNode? = kulouZomArr.object(at: index) as? WDKulouNode
-                self.removeNode(zomNode: kulou!)
+        if zomArr.count > 0 {
+            for index:NSInteger in 0...zomArr.count - 1 {
+                let zom:WDBaseNode! = zomArr.object(at: index) as! WDBaseNode
+                self.removeNode(zomNode: zom)
             }
             
-            kulouZomArr.removeAllObjects()
-        }
-        
-        if greenZomArr.count > 0{
-            for index:NSInteger in 0...greenZomArr.count - 1 {
-                let greenZom:WDGreenZomNode? = greenZomArr.object(at: index) as? WDGreenZomNode
-                greenZom?.clearAction()
-                self.removeNode(zomNode: greenZom!)
-            }
-            
-            greenZomArr.removeAllObjects()
-        }
-        
-        if knightZomArr.count > 0{
-            for index:NSInteger in 0...knightZomArr.count - 1 {
-                let knightZom:WDSmokeKnightNode? = knightZomArr.object(at: index) as? WDSmokeKnightNode
-                self.removeNode(zomNode: knightZom!)
-            }
-            
-            knightZomArr.removeAllObjects()
+            zomArr.removeAllObjects()
         }
     }
     

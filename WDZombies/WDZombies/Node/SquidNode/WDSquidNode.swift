@@ -10,19 +10,47 @@ import UIKit
 
 class WDSquidNode: WDBaseNode {
 
+    var behavior:WDSquidBehavior = WDSquidBehavior.init()
+    var model:WDSquidModel = WDSquidModel.init()
+    
+    override func configureModel() {
+        model.configureWithZomName(zomName: SQUID_NAME)
+    }
+    
+    func initWithPerson(personNode:WDPersonNode) {
+        self.configureModel()
+        nodeModel = model
+        behavior.setNode(node: self)
+        behavior.node = self
+        
+        
+        self.name = SQUID_NAME
+        
+        
+        self.position = model.randomBornPosition()
+        self.zPosition = 3 * 667 - self.position.y
+        
+        self.physicsBody = model.physics()
+        self.direction = kLeft
+        self.wdFire_impact = 200
+        self.wdBlood = 100
+        self.wdAttack = 3
+        
+        self.setAttribute(isBoss: self.isBoss)
+        
+    }
     
     
-    var link:CADisplayLink!
+    func setAttribute(isBoss:Bool)  {
+        if isBoss{
+            self.wdBlood = 100
+            behavior.xScale = 1
+            behavior.yScale = 1
+        }else{
+            self.wdBlood = 20
+            behavior.xScale = 0.6
+            behavior.yScale = 0.6
+        }
     
-//    typealias move = (_ knightNode:WDSmokeKnightNode) -> Void
-//    typealias attack2 = (_ knightNode:WDSmokeKnightNode) -> Void
-//    typealias attack1 = (_ knightNode:WDSmokeKnightNode) -> Void
-//    typealias died = (_ knightNode:WDSmokeKnightNode) -> Void
-//    
-//    var moveAction:move!
-//    var attack2Action:attack2!
-//    var attack1Action:attack1!
-//    var diedAction:died!
-    
-    
+    }
 }

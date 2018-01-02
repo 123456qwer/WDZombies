@@ -12,7 +12,7 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 30
+    static let ZOMCOUNT = 10
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -26,7 +26,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     var diedZomLabel:SKLabelNode!
     var level:NSInteger!
-    
     
     
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
@@ -51,18 +50,24 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
            
+         
+            
             //self.createBoss1()
-            self.level_4_GreenZom(isBoss: true)
+            //self.level_6_SquidZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       print("hahaha")
+       
+    }
     //初始化Nodes
     func createNodes(){
         
@@ -142,6 +147,18 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             }else {
                 self.level_1_NormalZom(isBoss: false)
             }
+        }else if level == 6{
+            if chance == 7{
+                self.level_3_KulouZom(isBoss: false)
+            }else if chance == 8 {
+                self.level_2_RedZom(isBoss: false)
+            }else if chance == 9{
+                self.level_4_GreenZom(isBoss: false)
+            }else if chance == 0{
+                self.level_5_KnightZom(isBoss: false)
+            }else{
+                self.level_1_NormalZom(isBoss: false)
+            }
         }
  
     }
@@ -153,48 +170,49 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //普通僵尸
     func level_1_NormalZom(isBoss:Bool)  {
         let zombieNode:WDZombieNode = mapZomModel.createNormalZom(isBoss: isBoss)
-        mapViewModel.normalZomArr.add(zombieNode)
+        mapViewModel.zomArr.add(zombieNode)
     }
-    //普通僵尸死亡
-    func removeNormalZom(normalZom:WDZombieNode){
-        mapViewModel.removeNode(zomNode: normalZom)
-        mapViewModel.normalZomArr.remove(normalZom)
-    }
+ 
     
     //红色僵尸
     func level_2_RedZom(isBoss:Bool)  {
         let zombieNode:WDZombieNode = mapZomModel.createRedZom(isBoss: isBoss)
-        mapViewModel.normalZomArr.add(zombieNode)
+        mapViewModel.zomArr.add(zombieNode)
     }
-    func removeRedZom(redZom:WDZombieNode){
-        mapViewModel.removeNode(zomNode: redZom)
-        mapViewModel.normalZomArr.remove(redZom)
-    }
-    
+ 
     
     //骷髅相关
     func level_3_KulouZom(isBoss:Bool)  {
         let kulouNode:WDKulouNode = mapZomModel.createKulouZom(isBoss: isBoss)
-        mapViewModel.kulouZomArr.add(kulouNode)
+        mapViewModel.zomArr.add(kulouNode)
     }
-    func removeKulouZom(kulouZom:WDKulouNode){
-    }
+
     
     //绿色僵尸
     func level_4_GreenZom(isBoss:Bool)  {
         let greenZom = mapZomModel.createGreenZom(isBoss: isBoss)
-        mapViewModel.greenZomArr.add(greenZom)
+        mapViewModel.zomArr.add(greenZom)
     }
+    
     
     //雾骑士
     func level_5_KnightZom(isBoss:Bool)  {
         let kNight:WDSmokeKnightNode = mapZomModel.createKnightZom(isBoss: isBoss)
-        mapViewModel.knightZomArr.add(kNight)
+        mapViewModel.zomArr.add(kNight)
+    }
+    
+    //鱿鱼
+    func level_6_SquidZom(isBoss:Bool)  {
+        let squid:WDSquidNode = mapZomModel.createSquidZom(isBoss:isBoss)
+        mapViewModel.zomArr.add(squid)
     }
     
     
-    
-    
+    //从数组中删除Node方法
+    func removeNodeFromArr(node:WDBaseNode){
+        mapViewModel.removeNode(zomNode: node)
+        mapViewModel.zomArr.remove(node)
+    }
     
     func createBoss()  {
         self.diedZomCount += 1
@@ -210,6 +228,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_4_GreenZom(isBoss: true)
             }else if self.level == 5{
                 self.level_5_KnightZom(isBoss: true)
+            }else if self.level == 6{
+                self.level_6_SquidZom(isBoss: true)
             }
         }
         
@@ -252,6 +272,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             //击杀个数
             diedZomLabel.text = "\(self.diedZomCount)/\(WDMap_1Scene.ZOMCOUNT)"
         }
+        
+    
     }
     
     

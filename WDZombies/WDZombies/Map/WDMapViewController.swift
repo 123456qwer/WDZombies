@@ -18,6 +18,7 @@ class WDMapViewController: UIViewController {
     let MAP_3 = 30
     let MAP_4 = 40
     let MAP_5 = 50
+    let MAP_6 = 60
 
     var bgScrollView:UIScrollView!
     
@@ -32,7 +33,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 5.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 6.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -43,7 +44,7 @@ class WDMapViewController: UIViewController {
         self.setMap3(model: model)
         self.setMap4(model: model)
         self.setMap5(model: model)
-        
+        self.setMap6(model: model)
         
         
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
@@ -72,6 +73,10 @@ class WDMapViewController: UIViewController {
         }else if sender.tag == MAP_5{
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",5)
+            })
+        }else if sender.tag == MAP_6{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",6)
             })
         }
     }
@@ -152,7 +157,18 @@ class WDMapViewController: UIViewController {
         self.setView(tag: MAP_5, width: 165 * 0.8, height: 165 * 0.8, imageArr: moveArr, count: 4, model: model,x:20 + 4 * kScreenWidth)
     }
     
+    func setMap6(model:WDUserModel) {
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...7 {
+            let name = "squid_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
+        }
+        
+        self.setView(tag: MAP_6, width: 140 * 0.8, height: 100 * 0.8, imageArr: moveArr, count: 5, model: model, x: 20 + 5 * kScreenWidth)
+    }
     
+    //count 是当前怪物数量
     func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat)  {
         
         let button:UIButton = UIButton.init(frame: CGRect(x:x,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
@@ -165,7 +181,6 @@ class WDMapViewController: UIViewController {
         let imageV:UIImageView = UIImageView.init(frame: CGRect(x:button.frame.size.width / 2.0 - width / 2.0,y:button.frame.size.height / 2.0 - height / 2.0,width:width,height:height))
         //imageV.backgroundColor = UIColor.orange
         button.addSubview(imageV)
-        
         
         
         if model.monsterCount >= count {

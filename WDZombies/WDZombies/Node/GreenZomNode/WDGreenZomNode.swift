@@ -26,7 +26,8 @@ class WDGreenZomNode: WDBaseNode{
     }
  
     override func clearAction()  {
-        self.behavior.clearTimer()
+        self.behavior.clearAction()
+
     }
 
   
@@ -80,10 +81,14 @@ class WDGreenZomNode: WDBaseNode{
             self.wdBlood = 100
             behavior.xScale = 1
             behavior.yScale = 1
+            behavior.attackAllCount = 6
+
         }else{
             self.wdBlood = 20
             behavior.xScale = 0.6
             behavior.yScale = 0.6
+            behavior.attackAllCount = 15
+
         }
     }
 }

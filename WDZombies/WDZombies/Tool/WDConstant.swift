@@ -34,6 +34,13 @@ public let KNIGHT_METEORITE1 = "KNIGHT_METEORITE1"
 public let KNIGHT_METEORITE2 = "KNIGHT_METEORITE2"
 
 
+//鱿鱼
+public let SQUID_MOVE    = "SQUID_MOVE"
+public let SQUID_ATTACK1 = "SQUID_ATTACK1"
+public let SQUID_ATTACK2 = "SQUID_ATTACK2"
+public let SQUID_DIED    = "SQUID_DIED"
+public let SQUID_NAME    = "SQUID_NAME"
+public let SQUID_INK     = "SQUID_INK"
 
 
 class WDConstant: NSObject {
