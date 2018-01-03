@@ -33,8 +33,8 @@ class WDMoveView: UIView {
         
         let smallWidth:CGFloat = 50 / 1334.0 * (kScreenWidth * 2)
         let bigWidth:CGFloat = 150 / 1334.0 * (kScreenWidth * 2)
-        
-        _location = CGPoint(x:100,y:kScreenHeight - 100)
+        let page:CGFloat     = 100 / 1334.0 * (kScreenWidth * 2)
+        _location = CGPoint(x:page,y:kScreenHeight - page)
         
         smallCircle = UIImageView()
         smallCircle.image = UIImage(named:"smallCircle.png")

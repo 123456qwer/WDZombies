@@ -355,16 +355,18 @@ class GameViewController: UIViewController {
         let page:CGFloat = 20
         let width:CGFloat = 150
         let playAgainBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 - page - width,y:WDTool.bottom(View: label) + page,width:width,height:width))
-        playAgainBtn.setTitle("NEXT?", for: .normal)
-        playAgainBtn.backgroundColor = UIColor.orange
+//        playAgainBtn.setTitle("NEXT?", for: .normal)
+//        playAgainBtn.backgroundColor = UIColor.orange
+        playAgainBtn.setImage(UIImage.init(named: "next"), for: .normal)
         playAgainBtn.addTarget(self, action: #selector(playNext), for: .touchUpInside)
         playAgainBtn.tag = PLAY_AGIAIN_TAG
         playAgainBtn.alpha = 0
         self.view.addSubview(playAgainBtn)
         
         let gameOverBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 + page,y:WDTool.bottom(View: label) + page,width:width,height:width))
-        gameOverBtn.setTitle("Back Home Page", for: .normal)
-        gameOverBtn.backgroundColor = UIColor.orange
+        //gameOverBtn.setTitle("Back Home Page", for: .normal)
+        //gameOverBtn.backgroundColor = UIColor.orange
+        gameOverBtn.setImage(UIImage.init(named: "backHomePage"), for: .normal)
         gameOverBtn.addTarget(self, action: #selector(gameOver), for: .touchUpInside)
         gameOverBtn.tag = GAME_OVER_TAG
         gameOverBtn.alpha = 0
@@ -394,18 +396,20 @@ class GameViewController: UIViewController {
         let page:CGFloat = 20
         let width:CGFloat = 150
         let playAgainBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 - page - width,y:WDTool.bottom(View: label) + page,width:width,height:width))
-        playAgainBtn.setTitle("Play Again?", for: .normal)
-        playAgainBtn.backgroundColor = UIColor.orange
+        //playAgainBtn.setTitle("Play Again?", for: .normal)
+        //playAgainBtn.backgroundColor = UIColor.orange
+        playAgainBtn.setImage(UIImage.init(named: "playAgain"), for: .normal)
         playAgainBtn.addTarget(self, action: #selector(playAgain), for: .touchUpInside)
         playAgainBtn.tag = PLAY_AGIAIN_TAG
         playAgainBtn.alpha = 0
         self.view.addSubview(playAgainBtn)
         
         let gameOverBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth / 2.0 + page,y:WDTool.bottom(View: label) + page,width:width,height:width))
-        gameOverBtn.setTitle("Back Home Page", for: .normal)
-        gameOverBtn.backgroundColor = UIColor.orange
+        //gameOverBtn.setTitle("Back Home Page", for: .normal)
+        //gameOverBtn.backgroundColor = UIColor.orange
         gameOverBtn.addTarget(self, action: #selector(gameOver), for: .touchUpInside)
         gameOverBtn.tag = GAME_OVER_TAG
+        gameOverBtn.setImage(UIImage.init(named: "backHomePage"), for: .normal)
         gameOverBtn.alpha = 0
         self.view.addSubview(gameOverBtn)
         

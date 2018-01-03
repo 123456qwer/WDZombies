@@ -139,6 +139,9 @@
 		437174201FFC7D690000CB7D /* 乌云2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4371741F1FFC7D690000CB7D /* 乌云2.png */; };
 		437174221FFC7D710000CB7D /* 乌云3.png in Resources */ = {isa = PBXBuildFile; fileRef = 437174211FFC7D710000CB7D /* 乌云3.png */; };
 		437174241FFC7D790000CB7D /* 乌云4.png in Resources */ = {isa = PBXBuildFile; fileRef = 437174231FFC7D790000CB7D /* 乌云4.png */; };
+		4371742A1FFCB2600000CB7D /* backHomePage.png in Resources */ = {isa = PBXBuildFile; fileRef = 437174291FFCB2600000CB7D /* backHomePage.png */; };
+		437174301FFCB3290000CB7D /* playAgain.png in Resources */ = {isa = PBXBuildFile; fileRef = 4371742F1FFCB3280000CB7D /* playAgain.png */; };
+		437174321FFCB3AD0000CB7D /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 437174311FFCB3AD0000CB7D /* next.png */; };
 		43765F911FBAA627006E37D2 /* BOSS1_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8E1FBAA627006E37D2 /* BOSS1_move.png */; };
 		43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */; };
 		43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 43765F941FBAA91A006E37D2 /* boss1_attRight.png */; };
@@ -336,6 +339,9 @@
 		4371741F1FFC7D690000CB7D /* 乌云2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "乌云2.png"; sourceTree = "<group>"; };
 		437174211FFC7D710000CB7D /* 乌云3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "乌云3.png"; sourceTree = "<group>"; };
 		437174231FFC7D790000CB7D /* 乌云4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "乌云4.png"; sourceTree = "<group>"; };
+		437174291FFCB2600000CB7D /* backHomePage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backHomePage.png; sourceTree = "<group>"; };
+		4371742F1FFCB3280000CB7D /* playAgain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playAgain.png; sourceTree = "<group>"; };
+		437174311FFCB3AD0000CB7D /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		43765F8E1FBAA627006E37D2 /* BOSS1_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_move.png; sourceTree = "<group>"; };
 		43765F8F1FBAA627006E37D2 /* BOSS1_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BOSS1_attack.png; sourceTree = "<group>"; };
 		43765F941FBAA91A006E37D2 /* boss1_attRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boss1_attRight.png; sourceTree = "<group>"; };
@@ -589,6 +595,9 @@
 		4348DC361F9DE7CC0072D030 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				437174311FFCB3AD0000CB7D /* next.png */,
+				4371742F1FFCB3280000CB7D /* playAgain.png */,
+				437174291FFCB2600000CB7D /* backHomePage.png */,
 				43524CCF1FCFE78000326EFF /* back.png */,
 				4348DC371F9DE7DA0072D030 /* starGame.png */,
 			);
@@ -945,6 +954,7 @@
 			files = (
 				432F84D41F99A70C00F51146 /* fire.png in Resources */,
 				43765FC91FBAE53E006E37D2 /* boss1Att2_left6.png in Resources */,
+				437174321FFCB3AD0000CB7D /* next.png in Resources */,
 				43765FD71FBAE6F5006E37D2 /* boss1Att2_right3.png in Resources */,
 				43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
@@ -953,6 +963,7 @@
 				43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */,
 				4307E3701FA1DF0D00E1AD38 /* blood5.png in Resources */,
 				43551B101FCE61C300B86587 /* sun.jpg in Resources */,
+				4371742A1FFCB2600000CB7D /* backHomePage.png in Resources */,
 				430B1BCA1FD92FE6006A9809 /* greenZomPic.atlas in Resources */,
 				433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */,
 				43563FA51FB3DB9F00D4BD46 /* RedNormalAttack.png in Resources */,
@@ -993,6 +1004,7 @@
 				436FF4021FF23BAC00C40357 /* squidNodePic.atlas in Resources */,
 				4355898A1FA075D200C80CA8 /* NormalBorn.png in Resources */,
 				4371741E1FFC7D5E0000CB7D /* 乌云1.png in Resources */,
+				437174301FFCB3290000CB7D /* playAgain.png in Resources */,
 				4307E3721FA1DF0D00E1AD38 /* blood3.png in Resources */,
 				432F84B41F998A5B00F51146 /* GameScene.sks in Resources */,
 				43765FC71FBAE53E006E37D2 /* boss1Att2_left5.png in Resources */,

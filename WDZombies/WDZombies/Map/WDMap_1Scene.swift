@@ -65,7 +65,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       print("hahaha")
+      // print("hahaha")
        
     }
     //初始化Nodes
