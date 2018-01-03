@@ -46,7 +46,7 @@ class WDPersonNode: WDBaseNode {
         boomBoomArr.removeObject(at: 0)
         
         direction = kLeft
-        self.position = CGPoint(x:0,y:0)
+        self.position = CGPoint(x:kScreenWidth,y:kScreenHeight)
         self.zPosition = 10
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:20,height:20))

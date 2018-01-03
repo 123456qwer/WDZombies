@@ -24,20 +24,23 @@ class WDMoveView: UIView {
     var moveAction:moveAction!
     var stopAction:stopAction!
     
+    var _location:CGPoint!
     
     func initWithFrame(frame:CGRect) -> Void {
         self.frame = frame
         count = 0
         _direction = ""
         
-        let smallWidth:CGFloat = 50 / 750.0 * kScreenWidth
-        let bigWidth:CGFloat = 150 / 750.0 * kScreenWidth
+        let smallWidth:CGFloat = 50 / 1334.0 * (kScreenWidth * 2)
+        let bigWidth:CGFloat = 150 / 1334.0 * (kScreenWidth * 2)
+        
+        _location = CGPoint(x:100,y:kScreenHeight - 100)
         
         smallCircle = UIImageView()
         smallCircle.image = UIImage(named:"smallCircle.png")
         smallCircle.frame = CGRect(x:0,y:0,width:smallWidth,height:smallWidth)
         smallCircle.alpha = 0.3
-        smallCircle.isHidden = true
+       // smallCircle.isHidden = true
         
         self.addSubview(smallCircle)
         
@@ -46,39 +49,47 @@ class WDMoveView: UIView {
         bigCircle.image = UIImage(named:"bigCircle.png")
         bigCircle.frame = CGRect(x:0,y:0,width:bigWidth,height:bigWidth)
         bigCircle.alpha = 0.3
-        bigCircle.isHidden = true
+       // bigCircle.isHidden = true
         
+        bigCircle.center = _location
+        smallCircle.center = _location
+        
+        starPoint = _location
+        movePoint = _location
+            
         self.addSubview(bigCircle)
     }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        for touch:UITouch in touches {
-            let location:CGPoint = touch.location(in: self)
-            smallCircle.center = location;
-            bigCircle.center   = location;
-            
-            movePoint = location;
-            starPoint = location;
-            
-            smallCircle.isHidden = false;
-            bigCircle.isHidden = false;
-        }
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        for touch:UITouch in touches {
+//            let location:CGPoint = touch.location(in: self)
+//            smallCircle.center = location;
+//            bigCircle.center   = location;
+//
+//            movePoint = location;
+//            starPoint = location;
+//
+////            smallCircle.isHidden = false;
+////            bigCircle.isHidden = false;
+//        }
+//    }
     
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        smallCircle.isHidden = true
-        bigCircle.isHidden   = true
+//        smallCircle.isHidden = true
+//        bigCircle.isHidden   = true
         
         if (link != nil){
             link.invalidate()
             link = nil
         }
    
+        bigCircle.center = _location
+        smallCircle.center = _location
         
         count = 0
         

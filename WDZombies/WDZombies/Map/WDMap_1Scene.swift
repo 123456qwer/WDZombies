@@ -102,6 +102,21 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         bgNode = self.childNode(withName: "landNode") as! SKSpriteNode
         bgNode.position = CGPoint(x:0,y:0)
         bgNode.addChild(personNode)
+        
+        //边界，云层
+        let big1:SKSpriteNode = bgNode.childNode(withName: "big1") as! SKSpriteNode
+        let big2:SKSpriteNode = bgNode.childNode(withName: "big2") as! SKSpriteNode
+        let big3:SKSpriteNode = bgNode.childNode(withName: "big3") as! SKSpriteNode
+        let big4:SKSpriteNode = bgNode.childNode(withName: "big4") as! SKSpriteNode
+
+        let alpha1 = SKAction.fadeAlpha(to: 0.6, duration: 3)
+        let alpha2 = SKAction.fadeAlpha(to: 1, duration: 1)
+        let seq = SKAction.sequence([alpha1,alpha2])
+        let rep = SKAction.repeatForever(seq)
+        big1.run(rep)
+        big2.run(rep)
+        big3.run(rep)
+        big4.run(rep)
     }
     
    

@@ -263,20 +263,23 @@ class WDTool: NSObject {
     static func overStepTest(point:CGPoint) -> CGPoint {
         var x:CGFloat = point.x;
         var y:CGFloat = point.y;
-        if x > 2000 - 50{
-            x = 2000 - 50;
+        
+    
+        
+        if x > 2001 - kScreenWidth() / 2.0{
+            x = 2001 - kScreenWidth() / 2.0;
         }
         
-        if y > 1124 - 30{
-            y = 1124 - 30;
+        if y > 1124 - kScreenHeight / 2.0{
+            y = 1124 - kScreenHeight / 2.0;
         }
         
-        if x < 0 + 30{
-            x = 0 + 30;
+        if x < kScreenWidth() / 2.0{
+            x = kScreenWidth() / 2.0
         }
         
-        if y < 0 + 30{
-            y = 30;
+        if y < kScreenHeight / 2.0{
+            y = kScreenHeight / 2.0;
         }
         return CGPoint(x:x,y:y)
     }
