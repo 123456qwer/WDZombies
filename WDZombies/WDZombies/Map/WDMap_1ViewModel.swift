@@ -48,6 +48,12 @@ class WDMap_1ViewModel: NSObject {
         var meteoriteNode:SKSpriteNode?
         var squidNode:WDSquidNode?
         var inkNode:SKSpriteNode?
+        var oxNode:WDOXNode?
+        
+        oxNode = (A?.name?.isEqual(OX_NAME))! ? (A as? WDOXNode):nil;
+        if oxNode == nil {
+            oxNode = (B?.name?.isEqual(OX_NAME))! ? (B as? WDOXNode):nil;
+        }
         
         inkNode = (A?.name?.isEqual(SQUID_INK))! ? (A as? SKSpriteNode):nil;
         if inkNode == nil {
@@ -204,6 +210,10 @@ class WDMap_1ViewModel: NSObject {
         if pNode != nil && squidNode != nil{
             squidNode?.behavior.attackTimeCount = 0
             squidNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
+        }
+        
+        if pNode != nil && oxNode != nil{
+            oxNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
         }
         
         if pNode != nil && inkNode != nil {

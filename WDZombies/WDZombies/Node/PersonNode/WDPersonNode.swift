@@ -22,15 +22,16 @@ class WDPersonNode: WDBaseNode {
     }
     
     func setPhy() -> Void {
-        self.physicsBody?.categoryBitMask = player_type;
-        self.physicsBody?.contactTestBitMask = normal_zom;
-        self.physicsBody?.collisionBitMask = player_type;
+        self.physicsBody?.categoryBitMask = PLAYER_CATEGORY;
+        self.physicsBody?.contactTestBitMask = PLAYER_CONTACT;
+        self.physicsBody?.collisionBitMask = PLAYER_COLLISION;
     }
     
     func removePhy() -> Void {
         self.physicsBody?.categoryBitMask = 0;
         self.physicsBody?.contactTestBitMask = 0;
         self.physicsBody?.collisionBitMask = 0;
+    
     }
     
     func initWithPersonDic(dic:NSMutableDictionary) -> Void {
@@ -91,8 +92,16 @@ class WDPersonNode: WDBaseNode {
             self.wdSkillCount = model.skillCount
         }
         
+        
+       self.setPhyColor()
     }
     
+    func setPhyColor()  {
+        let phyColorNode:SKSpriteNode = SKSpriteNode.init(color: .blue, size: CGSize(width:20,height:20))
+        phyColorNode.position = CGPoint(x:0,y:0)
+        phyColorNode.zPosition = 10
+        self.addChild(phyColorNode)
+    }
     
     func createLevelUpNode()  {
         let arr:NSMutableArray = NSMutableArray.init()

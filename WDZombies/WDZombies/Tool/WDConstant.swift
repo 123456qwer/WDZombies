@@ -43,6 +43,15 @@ public let SQUID_NAME    = "SQUID_NAME"
 public let SQUID_INK     = "SQUID_INK"
 
 
+//公牛
+public let OX_MOVE       = "OX_MOVE"
+public let OX_STAY       = "OX_STAY"
+public let OX_ATTACK1    = "OX_ATTACK1"
+public let OX_NAME       = "OX_NAME"
+public let OX_DIED       = "OX_DIED"
+
+
+
 class WDConstant: NSObject {
 
 

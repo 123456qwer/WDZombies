@@ -224,6 +224,47 @@ class WDMapManager: NSObject {
         self.textureDic.setObject(diedArr, forKey: KULOU_DIED as NSCopying)
     }
     
+    func setOXZom() {
+        let textures = SKTextureAtlas.init(named: "OXNodePic")
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let stayArr:NSMutableArray = NSMutableArray.init()
+        let diedArr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...9 {
+            if index <= 9 {
+                let name = "ox_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+            }
+            
+            if index < 6 {
+              
+                let name = "ox_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+                
+                let name1 = "ox_attack_\(index + 1)"
+                let temp1 = textures.textureNamed(name1)
+                attack1Arr.add(temp1)
+                
+            }
+            
+            if index < 8{
+                let name2 = "ox_stay_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                stayArr.add(temp2)
+            }
+            
+        }
+        
+        self.textureDic.setObject(moveArr, forKey: OX_MOVE as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: OX_DIED as NSCopying)
+        self.textureDic.setObject(attack1Arr, forKey: OX_ATTACK1 as NSCopying)
+        self.textureDic.setObject(stayArr, forKey: OX_STAY as NSCopying)
+    }
+    
     func setPic()  {
         
         self.mapDic = NSMutableDictionary.init()
@@ -234,6 +275,7 @@ class WDMapManager: NSObject {
         self.setKnightZom()
         self.setKulouZom()
         self.setSquidZom()
+        self.setOXZom()
     }
     
     

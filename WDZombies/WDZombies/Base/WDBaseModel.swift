@@ -30,6 +30,9 @@ class WDBaseModel: NSObject {
         return CGPoint(x:x, y:y)
     }
     
+    
+    
+    /// 配置怪物属性:基本属性,move,died,attack,beAttack
     func configureWithZomName(zomName:String){
         if zomName == GREEN_ZOM_NAME{
             self.configureGreenZom()
@@ -39,7 +42,16 @@ class WDBaseModel: NSObject {
             self.configureKulouZom()
         }else if zomName == SQUID_NAME{
             self.configureSquidZom()
+        }else if zomName == OX_NAME{
+            self.configureOXZom()
         }
+    }
+    
+    
+    
+    func configureOXZom() {
+        self.setTextureWithString(moveName: OX_MOVE, diedName: OX_DIED, attack1Name: OX_ATTACK1, attack2Name: "none")
+        beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "OXNodePic", textureName: "ox_beAttack")
     }
     
     func configureSquidZom(){
@@ -61,6 +73,7 @@ class WDBaseModel: NSObject {
         self.setTextureWithString(moveName: KULOU_MOVE, diedName: KULOU_DIED, attack1Name: KULOU_ATTACK, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "kulouPic", textureName: "kulou_battack")
     }
+    
     
     
     func setTextureWithString(moveName:String,diedName:String,attack1Name:String,attack2Name:String)  {

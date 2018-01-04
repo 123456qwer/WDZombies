@@ -1,20 +1,20 @@
 //
-//  WDSquidNode.swift
+//  WDOXNode.swift
 //  WDZombies
 //
-//  Created by wudong on 2017/12/26.
-//  Copyright © 2017年 吴冬. All rights reserved.
+//  Created by wudong on 2018/1/4.
+//  Copyright © 2018年 吴冬. All rights reserved.
 //
 
 import UIKit
 
-class WDSquidNode: WDBaseNode {
-
-    var behavior:WDSquidBehavior = WDSquidBehavior.init()
-    var model:WDSquidModel = WDSquidModel.init()
+class WDOXNode: WDBaseNode {
+    
+    var behavior:WDOXBehavior = WDOXBehavior.init()
+    var model:WDOXModel = WDOXModel.init()
     
     override func configureModel() {
-        model.configureWithZomName(zomName: SQUID_NAME)
+        model.configureWithZomName(zomName: OX_NAME)
     }
     
     func initWithPerson(personNode:WDPersonNode) {
@@ -24,7 +24,7 @@ class WDSquidNode: WDBaseNode {
         behavior.node = self
         
         
-        self.name = SQUID_NAME
+        self.name = OX_NAME
         
         
         self.position = model.randomBornPosition()
@@ -37,6 +37,8 @@ class WDSquidNode: WDBaseNode {
         self.wdAttack = 3
         
         self.setAttribute(isBoss: self.isBoss)
+        
+        //self.addChild(model.phyColorNode())
         
     }
     
@@ -54,6 +56,7 @@ class WDSquidNode: WDBaseNode {
             behavior.xScale = 0.6
             behavior.yScale = 0.6
         }
-    
+        
     }
+    
 }

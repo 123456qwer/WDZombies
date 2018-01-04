@@ -232,6 +232,31 @@ class WDMap_1ZomModel: NSObject {
         return squidNode
     }
     
+    //MARK:创建公牛
+    func createOXZom(isBoss:Bool) -> WDOXNode {
+        let oxZom:WDOXNode = WDOXNode.init()
+        oxZom.size = CGSize(width:200 ,height:250)
+        oxZom.isBoss = isBoss
+        oxZom.initWithPerson(personNode: map1_scene.personNode)
+        map1_scene.bgNode.addChild(oxZom)
+        
+        weak var weakSelf = map1_scene
+        oxZom.behavior.starMove()
+        oxZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let oxZom:WDOXNode = node as! WDOXNode
+            oxZom.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        
+        weak var wSelf = self
+        oxZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 6)
+        }
+        
+        return oxZom
+    }
+    
     
 ///////////////////////////公用////////////////
     /// 僵尸死亡调用方法

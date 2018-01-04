@@ -309,15 +309,12 @@ class WDAnimationTool: NSObject {
    /// - Parameter node: <#node description#>
     static func blinkAnimation(node:WDPersonNode,model:WDSkillModel) -> Void {
     
-        node.removeAllActions()
-        node.canMove = false
-        node.isMove  = false
+    node.removeAllActions()
+    node.canMove = false
+    node.isMove  = false
     
 
-    
-        let point:CGPoint = WDTool.calculateMovePoint(direction: node.direction, speed: CGFloat(model.skillLevel2), node: node)
-    
-    
+    let point:CGPoint = WDTool.calculateMovePoint(direction: node.direction, speed: CGFloat(model.skillLevel2), node: node)
     
     let hide:SKAction = SKAction.fadeAlpha(to: 0, duration: 0.1)
     let moveAction:SKAction = SKAction.move(to: point, duration: 0.3)
@@ -336,10 +333,7 @@ class WDAnimationTool: NSObject {
     node.run(seq) {
         node.isBlink = false
         node.canMove = true
-        node.physicsBody?.contactTestBitMask = normal_zom
-        node.physicsBody?.categoryBitMask = player_type
-        node.physicsBody?.collisionBitMask = player_type
-        
+        node.setPhy()
     }
     
     
