@@ -170,6 +170,10 @@
 		4376D1C31F9F2A47004E6188 /* WDMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376D1C21F9F2A47004E6188 /* WDMapManager.swift */; };
 		4392CE211FA6B7AD00A52D12 /* NormalDied.png in Resources */ = {isa = PBXBuildFile; fileRef = 4392CE201FA6B7AD00A52D12 /* NormalDied.png */; };
 		4392CE241FA6BC0200A52D12 /* fireAc.png in Resources */ = {isa = PBXBuildFile; fileRef = 4392CE231FA6BC0200A52D12 /* fireAc.png */; };
+		43942E781FFF70B7003B728D /* kulouNightPic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43942E771FFF70B7003B728D /* kulouNightPic.atlas */; };
+		43942E7A1FFF70E6003B728D /* WDKulouNightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43942E791FFF70E6003B728D /* WDKulouNightModel.swift */; };
+		43942E7C1FFF7117003B728D /* WDKulouKnightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43942E7B1FFF7117003B728D /* WDKulouKnightNode.swift */; };
+		43942E801FFF713C003B728D /* WDKulouNightBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43942E7F1FFF713C003B728D /* WDKulouNightBehavior.swift */; };
 		9B0560021FDE7A8D00EE5F41 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B055FDE1FDE7A8D00EE5F41 /* Constraint.swift */; };
 		9B0560031FDE7A8D00EE5F41 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B055FDF1FDE7A8D00EE5F41 /* ConstraintAttributes.swift */; };
 		9B0560041FDE7A8D00EE5F41 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B055FE01FDE7A8D00EE5F41 /* ConstraintConfig.swift */; };
@@ -375,6 +379,10 @@
 		4376D1C21F9F2A47004E6188 /* WDMapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMapManager.swift; sourceTree = "<group>"; };
 		4392CE201FA6B7AD00A52D12 /* NormalDied.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NormalDied.png; sourceTree = "<group>"; };
 		4392CE231FA6BC0200A52D12 /* fireAc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireAc.png; sourceTree = "<group>"; };
+		43942E771FFF70B7003B728D /* kulouNightPic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = kulouNightPic.atlas; sourceTree = "<group>"; };
+		43942E791FFF70E6003B728D /* WDKulouNightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouNightModel.swift; sourceTree = "<group>"; };
+		43942E7B1FFF7117003B728D /* WDKulouKnightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouKnightNode.swift; sourceTree = "<group>"; };
+		43942E7F1FFF713C003B728D /* WDKulouNightBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouNightBehavior.swift; sourceTree = "<group>"; };
 		9B055FDE1FDE7A8D00EE5F41 /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		9B055FDF1FDE7A8D00EE5F41 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
 		9B055FE01FDE7A8D00EE5F41 /* ConstraintConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConfig.swift; sourceTree = "<group>"; };
@@ -668,6 +676,7 @@
 		434C5A8F1FD1309E00C921AF /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				43942E761FFF70A3003B728D /* kulouNightNode */,
 				43544F301FFE178400E82FD2 /* OXNode */,
 				436FF4001FF23B9300C40357 /* SquidNode */,
 				43691BAE1FDF821500D4772E /* SmokeKnightNode */,
@@ -856,6 +865,17 @@
 			path = FirePic;
 			sourceTree = "<group>";
 		};
+		43942E761FFF70A3003B728D /* kulouNightNode */ = {
+			isa = PBXGroup;
+			children = (
+				43942E771FFF70B7003B728D /* kulouNightPic.atlas */,
+				43942E7F1FFF713C003B728D /* WDKulouNightBehavior.swift */,
+				43942E7B1FFF7117003B728D /* WDKulouKnightNode.swift */,
+				43942E791FFF70E6003B728D /* WDKulouNightModel.swift */,
+			);
+			path = kulouNightNode;
+			sourceTree = "<group>";
+		};
 		9B055FDC1FDE7A4100EE5F41 /* OpenSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1008,6 +1028,7 @@
 				432F84CE1F9993E600F51146 /* starBG.jpg in Resources */,
 				43625F811FA1C62B00910ED0 /* NormalAttack.png in Resources */,
 				43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */,
+				43942E781FFF70B7003B728D /* kulouNightPic.atlas in Resources */,
 				434C5A861FD12FAA00C921AF /* Spark.sks in Resources */,
 				434C5A841FD12FAA00C921AF /* FireFlies.sks in Resources */,
 				434C5A821FD12FAA00C921AF /* Fire.sks in Resources */,
@@ -1147,6 +1168,7 @@
 				43365B721FC266ED00356D64 /* WDSkillViewController.swift in Sources */,
 				9B05600C1FDE7A8D00EE5F41 /* ConstraintLayoutGuide.swift in Sources */,
 				9B0560071FDE7A8D00EE5F41 /* ConstraintDSL.swift in Sources */,
+				43942E7A1FFF70E6003B728D /* WDKulouNightModel.swift in Sources */,
 				9B05600E1FDE7A8D00EE5F41 /* ConstraintLayoutSupport.swift in Sources */,
 				434C5A9C1FD130D400C921AF /* WDKulouNode.swift in Sources */,
 				43544F361FFE17FD00E82FD2 /* WDOXBehavior.swift in Sources */,
@@ -1162,6 +1184,7 @@
 				43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */,
 				9B0560081FDE7A8D00EE5F41 /* ConstraintInsets.swift in Sources */,
 				9B05600F1FDE7A8D00EE5F41 /* ConstraintLayoutSupportDSL.swift in Sources */,
+				43942E7C1FFF7117003B728D /* WDKulouKnightNode.swift in Sources */,
 				9B0560051FDE7A8D00EE5F41 /* ConstraintConstantTarget.swift in Sources */,
 				9B05600B1FDE7A8D00EE5F41 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */,
@@ -1173,6 +1196,7 @@
 				9B0560151FDE7A8D00EE5F41 /* ConstraintMakerRelatable.swift in Sources */,
 				9B0560171FDE7A8D00EE5F41 /* ConstraintOffsetTarget.swift in Sources */,
 				432F84BA1F998A5B00F51146 /* GameViewController.swift in Sources */,
+				43942E801FFF713C003B728D /* WDKulouNightBehavior.swift in Sources */,
 				436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */,
 				435589801FA06DEF00C80CA8 /* WDPhysicalAttribute.swift in Sources */,
 				434C5AA41FD130FA00C921AF /* WDBossBehavior_1.swift in Sources */,

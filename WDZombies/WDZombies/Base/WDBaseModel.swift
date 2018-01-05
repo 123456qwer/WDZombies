@@ -44,10 +44,15 @@ class WDBaseModel: NSObject {
             self.configureSquidZom()
         }else if zomName == OX_NAME{
             self.configureOXZom()
+        }else if zomName == KULOU_KNIGHT_NAME{
+            self.configureKulouKnightZom()
         }
     }
     
-    
+    func configureKulouKnightZom() {
+        self.setTextureWithString(moveName: KULOU_KNIGHT_MOVE, diedName: KULOU_KNIGHT_DIED, attack1Name: KULOU_KNIGHT_ATTACK1, attack2Name: "none")
+        beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "kulouNightPic", textureName: "kulou_knight_died_1")
+    }
     
     func configureOXZom() {
         self.setTextureWithString(moveName: OX_MOVE, diedName: OX_DIED, attack1Name: OX_ATTACK1, attack2Name: "none")

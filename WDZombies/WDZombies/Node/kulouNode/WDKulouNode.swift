@@ -13,7 +13,7 @@ class WDKulouNode: WDBaseNode {
    
     var behavior:WDKulouBehavior! = WDKulouBehavior.init()
     var model:WDKulouModel = WDKulouModel.init()
-    
+    var isCall:Bool = false //是否是骷髅骑士召唤出来的
     
     deinit {
         print("骷髅释放了！！")
@@ -29,7 +29,8 @@ class WDKulouNode: WDBaseNode {
     
     
     func initWithPersonNode(personNode:WDPersonNode) -> Void {
-       
+        self.setAttribute(isBoss: self.isBoss)
+
         //设置图片
         self.configureModel()
         nodeModel = model
@@ -60,7 +61,6 @@ class WDKulouNode: WDBaseNode {
         self.wdBlood = 20
         self.wdAttack = 3
         
-        self.setAttribute(isBoss: self.isBoss)
     }
     
     

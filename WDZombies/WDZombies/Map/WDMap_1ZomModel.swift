@@ -124,6 +124,10 @@ class WDMap_1ZomModel: NSObject {
         //骷髅死亡，可以升级加技能
         weak var wSelf = self
         kulouNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            let kulouNode:WDKulouNode = node as! WDKulouNode
+            if kulouNode.isCall {
+                return
+            }
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 3)
         }
         
@@ -251,7 +255,7 @@ class WDMap_1ZomModel: NSObject {
         
         weak var wSelf = self
         oxZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
-            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 6)
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 7)
         }
         
         oxZom.behavior.lightingAttackBlock = {(oxNode:WDOXNode) -> Void in
@@ -259,6 +263,57 @@ class WDMap_1ZomModel: NSObject {
         }
         
         return oxZom
+    }
+    
+    
+    //MARK:创建骷髅骑士
+    func createKulouKnightZom(isBoss:Bool) -> WDKulouKnightNode {
+        
+        let kulouKnightZom:WDKulouKnightNode = WDKulouKnightNode.init()
+        kulouKnightZom.size = CGSize(width:170 ,height:170)
+        kulouKnightZom.isBoss = isBoss
+        kulouKnightZom.initWithPerson(personNode: map1_scene.personNode)
+        map1_scene.bgNode.addChild(kulouKnightZom)
+        
+        weak var weakSelf = map1_scene
+        kulouKnightZom.behavior.starMove()
+        kulouKnightZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let knightNode:WDKulouKnightNode = node as! WDKulouKnightNode
+            knightNode.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        
+        weak var wSelf = self
+        kulouKnightZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
+        }
+    
+        kulouKnightZom.behavior.callAttackBlock = {(kulouKnightNode:WDKulouKnightNode) -> Void in
+            kulouKnightNode.behavior.attack(direction: "", nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        kulouKnightZom.behavior.callKulouBlock = {(kulouKnightNode:WDKulouKnightNode,personNode:WDPersonNode) -> Void in
+            wSelf?.kulouKnightCallKulou(point: CGPoint(x:(weakSelf?.personNode.position.x)! + 150,y:(weakSelf?.personNode.position.y)!))
+            wSelf?.kulouKnightCallKulou(point: CGPoint(x:(weakSelf?.personNode.position.x)! - 150,y:(weakSelf?.personNode.position.y)!))
+            wSelf?.kulouKnightCallKulou(point: CGPoint(x:(weakSelf?.personNode.position.x)!,y:(weakSelf?.personNode.position.y)! + 150))
+            wSelf?.kulouKnightCallKulou(point: CGPoint(x:(weakSelf?.personNode.position.x)!,y:(weakSelf?.personNode.position.y)! - 150))
+        }
+        
+        return kulouKnightZom
+    }
+    
+    func kulouKnightCallKulou(point:CGPoint) {
+        let kulou = self.createKulouZom(isBoss: false)
+        kulou.canMove = false
+        kulou.isMove  = false
+        kulou.position = point
+        kulou.alpha = 0
+        kulou.wdBlood = 5
+        let alphaA = SKAction.fadeAlpha(to: 1, duration: 0.5)
+        kulou.run(alphaA) {
+            kulou.canMove = true
+        }
     }
     
     

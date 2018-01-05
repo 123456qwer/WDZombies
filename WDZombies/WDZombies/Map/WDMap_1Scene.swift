@@ -55,7 +55,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
@@ -63,9 +63,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            //self.level_7_OXZom(isBoss: true)
-            //self.createBoss1()
-            //self.level_6_SquidZom(isBoss: true)
+            self.level_8_kulouKnightZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -261,6 +259,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     func level_7_OXZom(isBoss:Bool) {
         let ox:WDOXNode = mapZomModel.createOXZom(isBoss: isBoss)
         mapViewModel.zomArr.add(ox)
+    }
+    
+    //骷髅骑士
+    func level_8_kulouKnightZom(isBoss:Bool) {
+        let kulouKnight:WDKulouKnightNode = mapZomModel.createKulouKnightZom(isBoss: isBoss)
+        mapViewModel.zomArr.add(kulouKnight)
     }
     
     //从数组中删除Node方法

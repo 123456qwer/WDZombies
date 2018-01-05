@@ -51,6 +51,13 @@ public let OX_NAME       = "OX_NAME"
 public let OX_DIED       = "OX_DIED"
 public let OX_LIGHT      = "OX_LIGHT"
 
+//骷髅骑士
+public let KULOU_KNIGHT_MOVE    = "KULOU_KNIGHT_MOVE"
+public let KULOU_KNIGHT_DIED    = "KULOU_KNIGHT_DIED"
+public let KULOU_KNIGHT_ATTACK1 = "KULOU_KNIGHT_ATTACK1"
+public let KULOU_KNIGHT_NAME    = "KULOU_KNIGHT_NAME"
+public let KULOU_KNIGHT_STAY    = "KULOU_KNIGHT_STAY"
+
 
 class WDConstant: NSObject {
 

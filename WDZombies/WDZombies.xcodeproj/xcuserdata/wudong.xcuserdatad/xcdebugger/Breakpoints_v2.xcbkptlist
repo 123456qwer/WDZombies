@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WDZombies/Map/WDMap_1Scene.swift"
-            timestampString = "536831916.287568"
+            timestampString = "536837276.491181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "createZombies(timer:)"
             landmarkType = "7">
          </BreakpointContent>
