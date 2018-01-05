@@ -254,6 +254,10 @@ class WDMap_1ZomModel: NSObject {
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 6)
         }
         
+        oxZom.behavior.lightingAttackBlock = {(oxNode:WDOXNode) -> Void in
+            oxNode.behavior.lightingAttack(personNode: (weakSelf?.personNode)!)
+        }
+        
         return oxZom
     }
     

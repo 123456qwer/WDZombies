@@ -19,6 +19,7 @@ class WDMapViewController: UIViewController {
     let MAP_4 = 40
     let MAP_5 = 50
     let MAP_6 = 60
+    let MAP_7 = 70
 
     var bgScrollView:UIScrollView!
     
@@ -33,7 +34,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 6.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 7.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -45,7 +46,7 @@ class WDMapViewController: UIViewController {
         self.setMap4(model: model)
         self.setMap5(model: model)
         self.setMap6(model: model)
-        
+        self.setMap7(model: model)
         
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
         backBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
@@ -53,6 +54,9 @@ class WDMapViewController: UIViewController {
         self.view.addSubview(backBtn)
     }
     
+    
+    
+//MARK:选择地图
     @objc func selectMapName(sender:UIButton)  {
         if sender.tag == MAP_1{
             self.dismiss(animated: false, completion: {
@@ -78,8 +82,15 @@ class WDMapViewController: UIViewController {
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",6)
             })
+        }else if sender.tag == MAP_7{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",7)
+            })
         }
     }
+    
+    
+    
 
     
     @objc func backAction(sender:UIButton)  {
@@ -117,7 +128,6 @@ class WDMapViewController: UIViewController {
         self.setView(tag: MAP_3, width: 167 / 2.0, height: 197 / 2.0, imageArr: moveArr, count: 2, model: model ,x :20 + kScreenWidth * 2)
     }
     
-   
     
     func setMap4(model:WDUserModel) {
        
@@ -168,6 +178,17 @@ class WDMapViewController: UIViewController {
         self.setView(tag: MAP_6, width: 140 * 0.8, height: 100 * 0.8, imageArr: moveArr, count: 5, model: model, x: 20 + 5 * kScreenWidth)
     }
     
+    func setMap7(model:WDUserModel)  {
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...7 {
+            let name = "ox_stay_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
+        }
+        
+        self.setView(tag: MAP_7, width: 200 * 0.8, height: 250 * 0.8, imageArr: moveArr, count: 6, model: model, x: 20 + 6 * kScreenWidth)
+    }
+    
     //count 是当前怪物数量
     func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat)  {
         
@@ -188,7 +209,7 @@ class WDMapViewController: UIViewController {
             button.isUserInteractionEnabled = true
             let images:NSArray = imageArr
             imageV.animationImages = images as? [UIImage]
-            imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 2.0))
+            imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(0.1))
             imageV.animationRepeatCount = 0
             imageV.startAnimating()
         }else{

@@ -231,6 +231,7 @@ class WDMapManager: NSObject {
         let attack1Arr:NSMutableArray = NSMutableArray.init()
         let stayArr:NSMutableArray = NSMutableArray.init()
         let diedArr:NSMutableArray = NSMutableArray.init()
+        let lightArr:NSMutableArray = NSMutableArray.init()
         
         for index:NSInteger in 0...9 {
             if index <= 9 {
@@ -257,12 +258,19 @@ class WDMapManager: NSObject {
                 stayArr.add(temp2)
             }
             
+            if index < 3{
+                let name2 = "ox_light_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                lightArr.add(temp2)
+            }
+            
         }
         
         self.textureDic.setObject(moveArr, forKey: OX_MOVE as NSCopying)
         self.textureDic.setObject(diedArr, forKey: OX_DIED as NSCopying)
         self.textureDic.setObject(attack1Arr, forKey: OX_ATTACK1 as NSCopying)
         self.textureDic.setObject(stayArr, forKey: OX_STAY as NSCopying)
+        self.textureDic.setObject(lightArr, forKey: OX_LIGHT as NSCopying)
     }
     
     func setPic()  {

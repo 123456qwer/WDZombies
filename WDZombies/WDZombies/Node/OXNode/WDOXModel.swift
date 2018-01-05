@@ -12,6 +12,7 @@ import SpriteKit
 class WDOXModel: WDBaseModel {
 
     let stayArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: OX_STAY) as! Array<SKTexture>
+    let lightArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: OX_LIGHT) as! Array<SKTexture>
     
     func physics() -> SKPhysicsBody{
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:100,height:100), center: CGPoint(x:0,y:-50))

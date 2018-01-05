@@ -12,7 +12,7 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 30
+    static let ZOMCOUNT = 10
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -20,7 +20,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
  
     
     var createZomTimer:Timer!          //创建zom的timer
+    
     var mapLink:CADisplayLink!         //监测地图移动的link
+    var zomLink:CADisplayLink!         //监测僵尸移动的link
+    var nearZom:WDBaseNode!
+
+    
     var zomCount:NSInteger = 0         //创建的僵尸个数
     var diedZomCount:NSInteger = 0     //击杀僵尸个数
     
@@ -50,18 +55,37 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
-           
-         
-            self.level_7_OXZom(isBoss: true)
+            
+            zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
+            zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+            
+            //self.level_7_OXZom(isBoss: true)
             //self.createBoss1()
             //self.level_6_SquidZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
+    }
+    
+    //最近zom
+    @objc func zomMoveAction()  {
+        var distance:CGFloat = 1000
+        if mapViewModel.zomArr.count > 0 {
+            for index:NSInteger in 0...mapViewModel.zomArr.count - 1{
+                let zom:WDBaseNode = mapViewModel.zomArr[index] as! WDBaseNode
+                let nowDistance = WDTool.calculateNodesDistance(point1: zom.position, point2: personNode.position)
+                if nowDistance < distance{
+                    nearZom = zom
+                    distance = nowDistance
+                }
+            }
+        }
+      
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -121,8 +145,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
    
     
-    
-    
     //normal/red僵尸相关
     @objc override func createZombies(timer:Timer){
         //开始创建僵尸
@@ -174,6 +196,20 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             }else{
                 self.level_1_NormalZom(isBoss: false)
             }
+        }else if level == 7{
+            if chance == 7{
+                self.level_3_KulouZom(isBoss: false)
+            }else if chance == 8 {
+                self.level_2_RedZom(isBoss: false)
+            }else if chance == 9{
+                self.level_4_GreenZom(isBoss: false)
+            }else if chance == 0{
+                self.level_5_KnightZom(isBoss: false)
+            }else if chance == 6{
+                self.level_6_SquidZom(isBoss: false)
+            }else{
+                self.level_1_NormalZom(isBoss: false)
+            }
         }
  
     }
@@ -209,7 +245,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         mapViewModel.zomArr.add(greenZom)
     }
     
-    
     //雾骑士
     func level_5_KnightZom(isBoss:Bool)  {
         let kNight:WDSmokeKnightNode = mapZomModel.createKnightZom(isBoss: isBoss)
@@ -222,7 +257,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         mapViewModel.zomArr.add(squid)
     }
     
-    
     //公牛
     func level_7_OXZom(isBoss:Bool) {
         let ox:WDOXNode = mapZomModel.createOXZom(isBoss: isBoss)
@@ -234,6 +268,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         mapViewModel.removeNode(zomNode: node)
         mapViewModel.zomArr.remove(node)
     }
+    
     
     func createBoss()  {
         self.diedZomCount += 1
@@ -251,6 +286,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_5_KnightZom(isBoss: true)
             }else if self.level == 6{
                 self.level_6_SquidZom(isBoss: true)
+            }else if self.level == 7{
+                self.level_7_OXZom(isBoss: true)
             }
         }
         
@@ -272,7 +309,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //**************************************************************//
     //开火方法
     override func fireAction(direction: NSString) {
+       
         personNode?.personBehavior.attackAction(node: personNode)
+        //WDAnimationTool.fireAnimation(node: personNode,zomNode: nearZom)
     }
     
     //移动
@@ -335,6 +374,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
             mapLink.invalidate()
             mapLink = nil
+        }
+        
+        if zomLink != nil{
+            zomLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+            zomLink.invalidate()
+            zomLink = nil
         }
         
         mapViewModel.removeNode()

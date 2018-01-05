@@ -93,7 +93,7 @@ class WDPersonNode: WDBaseNode {
         }
         
         
-       self.setPhyColor()
+       //self.setPhyColor()
     }
     
     func setPhyColor()  {

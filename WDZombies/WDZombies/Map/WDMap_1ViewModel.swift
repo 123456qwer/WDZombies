@@ -49,6 +49,12 @@ class WDMap_1ViewModel: NSObject {
         var squidNode:WDSquidNode?
         var inkNode:SKSpriteNode?
         var oxNode:WDOXNode?
+        var oxLightNode:SKSpriteNode?
+        
+        oxLightNode = (A?.name?.isEqual(OX_LIGHT))! ? (A as? SKSpriteNode):nil;
+        if oxLightNode == nil {
+            oxLightNode = (B?.name?.isEqual(OX_LIGHT))! ? (B as? SKSpriteNode):nil;
+        }
         
         oxNode = (A?.name?.isEqual(OX_NAME))! ? (A as? WDOXNode):nil;
         if oxNode == nil {
@@ -232,7 +238,20 @@ class WDMap_1ViewModel: NSObject {
             WDAnimationTool.bloodAnimation(node: squidNode!)
             fireNode?.removeFromParent()
         }
+        
+        if pNode != nil && oxLightNode != nil{
+            WDAnimationTool.bloodAnimation(node: personNode)
+            personNode.personBehavior.reduceBlood(number: 1)
+        }
+        
+        if fireNode != nil && oxNode != nil{
+           _ = oxNode?.behavior.beAttack(attackNode: personNode, beAttackNode: oxNode!)
+            WDAnimationTool.bloodAnimation(node: oxNode!)
+            fireNode?.removeFromParent()
+        }
     }
+    
+    
     
     
     

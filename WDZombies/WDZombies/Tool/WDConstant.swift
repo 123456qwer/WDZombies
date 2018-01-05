@@ -49,7 +49,7 @@ public let OX_STAY       = "OX_STAY"
 public let OX_ATTACK1    = "OX_ATTACK1"
 public let OX_NAME       = "OX_NAME"
 public let OX_DIED       = "OX_DIED"
-
+public let OX_LIGHT      = "OX_LIGHT"
 
 
 class WDConstant: NSObject {

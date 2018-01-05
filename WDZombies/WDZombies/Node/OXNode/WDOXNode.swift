@@ -49,8 +49,8 @@ class WDOXNode: WDBaseNode {
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 1
-            behavior.yScale = 1
+            behavior.xScale = 0.8
+            behavior.yScale = 0.8
         }else{
             self.wdBlood = 20
             behavior.xScale = 0.6

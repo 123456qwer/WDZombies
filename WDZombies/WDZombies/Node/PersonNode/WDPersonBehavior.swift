@@ -63,7 +63,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     func reduceBlood(number:CGFloat)  {
         personNode.wdBlood -= number
         if personNode.wdBlood <= 0 && isGameOver == false{
-            let diedAction = SKAction.fadeAlpha(to: 0, duration: 0.5)
+            let diedAction = SKAction.fadeAlpha(to: 0, duration: 0.1)
             personNode.removePhy()
             personNode.run(diedAction, completion: {
             self.personNode.ggAction()
@@ -122,7 +122,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         personNode.fireNode.texture = personNode.fireDic.object(forKey: personNode.direction) as? SKTexture
         personNode.fireNode.isHidden = false
         self.perform(#selector(hiddenFireNode), with: nil, afterDelay: 0.1)
-        WDAnimationTool.fireAnimation(node: node as! WDPersonNode)
+        WDAnimationTool.fireAnimation(node: node as! WDPersonNode, zomNode: WDBaseNode.init())
     }
     
     @objc func hiddenFireNode() -> Void {

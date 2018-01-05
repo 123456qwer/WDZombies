@@ -114,7 +114,7 @@ class WDAnimationTool: NSObject {
     /// 玩家攻击动画
     ///
     /// - Parameter node:
-    static func fireAnimation(node:WDPersonNode) -> Void {
+    static func fireAnimation(node:WDPersonNode,zomNode:WDBaseNode) -> Void {
         
         let texture:SKTexture = SKTexture.init(image: UIImage.init(named: "smallCircle")!)
         let firNode:SKSpriteNode = SKSpriteNode.init(texture: texture)
@@ -123,6 +123,8 @@ class WDAnimationTool: NSObject {
         let x:CGFloat = fabs(node.position.x - p.x);
         let y:CGFloat = fabs(node.position.y - p.y);
         let distance:CGFloat = sqrt(fabs(x * x)+fabs(y * y));
+//        let distance:CGFloat = WDTool.calculateNodesDistance(point1: zomNode.position, point2: node.position)
+//        let p :CGPoint = zomNode.position
         firNode.position = node.position
         firNode.zPosition = 2.0;
         firNode.name = FIRE as String
