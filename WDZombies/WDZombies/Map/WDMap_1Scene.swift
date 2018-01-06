@@ -12,7 +12,7 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-    static let ZOMCOUNT = 20
+    static let ZOMCOUNT = 1
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -328,9 +328,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //**************************************************************//
     //开火方法
     override func fireAction(direction: NSString) {
+//        if nearZom != nil {
+//             personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
+       // }else{
+             personNode?.personBehavior.attackAction(node: personNode)
+       // }
        
-        personNode?.personBehavior.attackAction(node: personNode)
-        //WDAnimationTool.fireAnimation(node: personNode,zomNode: nearZom)
     }
     
     //移动

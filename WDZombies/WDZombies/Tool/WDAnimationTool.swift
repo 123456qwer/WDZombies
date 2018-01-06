@@ -110,6 +110,50 @@ class WDAnimationTool: NSObject {
  
     }
     
+    static func autoFireAnimation(node:WDPersonNode,zomNode:WDBaseNode) -> Void {
+        
+        let texture:SKTexture = SKTexture.init(image: UIImage.init(named: "smallCircle")!)
+        let firNode:SKSpriteNode = SKSpriteNode.init(texture: texture)
+        
+//        let p:CGPoint = WDTool.fireMovePoint(personNode: node)
+//        let x:CGFloat = fabs(node.position.x - p.x);
+//        let y:CGFloat = fabs(node.position.y - p.y);
+//        let distance:CGFloat = sqrt(fabs(x * x)+fabs(y * y));
+        let distance:CGFloat = WDTool.calculateNodesDistance(point1: zomNode.position, point2: node.position)
+        let p :CGPoint = zomNode.position
+        
+        let fireX:CGFloat = node.position.x + node.fireNode.position.x
+        let fireY:CGFloat = node.position.y + node.fireNode.position.y
+        firNode.position = CGPoint(x:fireX,y:fireY)
+        firNode.zPosition = 2.0;
+        firNode.name = FIRE as String
+        firNode.xScale = 0.1
+        firNode.yScale = 0.1
+        node.parent?.addChild(firNode)
+        let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 700.0))
+        firNode.run(action) {
+            firNode.removeFromParent()
+        }
+        
+        let body:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:20,height:29))
+        
+        body.affectedByGravity = false;
+        body.allowsRotation = false;
+        
+        body.isDynamic = false;
+        body.contactTestBitMask = NORMAL_ZOM_CATEGORY;
+        body.categoryBitMask = 0
+        body.collisionBitMask = 0
+        firNode.physicsBody = body
+        
+        if node.wdAttack == 3 {
+            let emitter:SKEmitterNode = WDAnimationTool.createEmitterNode(name:"Spark")
+            emitter.name = "addAttack"
+            emitter.position = CGPoint(x:0,y:0)
+            firNode.addChild(emitter)
+        }
+        
+    }
     
     /// 玩家攻击动画
     ///

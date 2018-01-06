@@ -162,7 +162,7 @@ class WDZombieNode: WDBaseNode {
     func attribute(isBoss:Bool) -> Void {
         
         if _zomType == .Normal {
-            self.wdBlood = 5
+            self.wdBlood = 50000
             self.speed = 1
         }else if _zomType == .Red{
             self.wdBlood = 10
