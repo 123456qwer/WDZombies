@@ -20,6 +20,7 @@ class WDMapViewController: UIViewController {
     let MAP_5 = 50
     let MAP_6 = 60
     let MAP_7 = 70
+    let MAP_8 = 80
 
     var bgScrollView:UIScrollView!
     
@@ -34,7 +35,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 7.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 8.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -47,6 +48,7 @@ class WDMapViewController: UIViewController {
         self.setMap5(model: model)
         self.setMap6(model: model)
         self.setMap7(model: model)
+        self.setMap8(model: model)
         
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
         backBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
@@ -85,6 +87,10 @@ class WDMapViewController: UIViewController {
         }else if sender.tag == MAP_7{
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",7)
+            })
+        }else if sender.tag == MAP_8{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",8)
             })
         }
     }
@@ -187,6 +193,17 @@ class WDMapViewController: UIViewController {
         }
         
         self.setView(tag: MAP_7, width: 200 * 0.8, height: 250 * 0.8, imageArr: moveArr, count: 6, model: model, x: 20 + 6 * kScreenWidth)
+    }
+    
+    func setMap8(model:WDUserModel)  {
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...3 {
+            let name = "kulou_knight_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
+        }
+        
+        self.setView(tag: MAP_8, width: 170, height: 170, imageArr: moveArr, count: 7, model: model, x: 20 + 7 * kScreenWidth)
     }
     
     //count 是当前怪物数量
