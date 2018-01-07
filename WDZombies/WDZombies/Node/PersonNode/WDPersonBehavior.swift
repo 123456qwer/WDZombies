@@ -41,6 +41,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     /// - Parameter direction: 方向
     override func moveAction(direction:NSString) -> Void {
       
+        
         if personNode.canMove {
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
             personNode.position = point
@@ -48,13 +49,15 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         }
       
         
-       
-     
+        
         if !direction.isEqual(to: personNode.direction as String) || !personNode.isMove {
            
+            
             WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
+            WDAnimationTool.fuzhujiRotateAnimation(direction: direction, fuzhuji: personNode.fuzhujiNode)
             personNode.direction = direction
             personNode.isMove = true
+            
         }
   
     }
@@ -116,25 +119,15 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     
 
     func autoAttackAction(node:WDBaseNode,zomNode:WDBaseNode) {
-       
-        personNode.direction = WDTool.calculateAutoDirection(point1: zomNode.position, point2:node.position )
-        let arr:NSMutableArray = personNode.moveDic.object(forKey: personNode.direction) as! NSMutableArray
-        personNode.texture = arr[0] as? SKTexture
-        personNode.fireNode.position = WDTool.firePosition(direction: personNode.direction)
-        
-       
-        
-        personNode.fireNode.texture = personNode.fireDic.object(forKey: kUp) as? SKTexture
+   
         let x1:CGFloat = node.position.x - zomNode.position.x
         let y1:CGFloat = node.position.y - zomNode.position.y
-        
+            
         let count:CGFloat = atan2(y1, x1)
-        let count1 = CGFloat(Double.pi / 2.0)
-        personNode.fireNode.zRotation = count + count1
+        let count1 = CGFloat(Double.pi)
+        let ran = SKAction.rotate(toAngle: count + count1 , duration: 0.1)
+            personNode.fuzhujiNode.run(ran)
         
-        personNode.fireNode.isHidden = false
-        self.perform(#selector(hiddenFireNode), with: nil, afterDelay: 0.1)
- 
         WDAnimationTool.autoFireAnimation(node: personNode, zomNode: zomNode)
     }
     

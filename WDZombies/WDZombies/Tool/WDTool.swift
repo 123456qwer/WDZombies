@@ -532,8 +532,9 @@ class WDTool: NSObject {
         return dic
     }
     
+   
     
-    
+    //
     /// 子弹走向
     ///
     /// - Parameter personNode: person

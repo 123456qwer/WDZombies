@@ -11,11 +11,12 @@ import SpriteKit
 
 class WDPersonNode: WDBaseNode {
   
+    var fuzhujiNode:SKSpriteNode = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "fuzhuji_1")!))
     var personBehavior:WDPersonBehavior! = nil
     var fireNode:SKSpriteNode! = nil
     var bloodNode:SKSpriteNode! = nil
     var ggAction:gameOverAction!
-    
+    var fuzhujiArr:NSMutableArray = NSMutableArray.init()
     deinit {
         print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
         self.removeObserver(personBehavior, forKeyPath: "position")
@@ -39,6 +40,12 @@ class WDPersonNode: WDBaseNode {
         personBehavior = WDPersonBehavior.init()
         personBehavior.personNode = self
         self.addObserver(personBehavior, forKeyPath: "position", options: .new , context: nil)
+        
+        for index:NSInteger in 0...2 {
+            let image = UIImage.init(named: "fuzhuji_\(index + 1)")
+            let texture = SKTexture.init(image: image!)
+            fuzhujiArr.add(texture)
+        }
         
         moveDic = dic
         fireDic = WDTool.cutFireImage()
@@ -91,10 +98,18 @@ class WDPersonNode: WDBaseNode {
             self.wdLevel = model.level
             self.wdSkillCount = model.skillCount
         }
-        
-        
-       //self.setPhyColor()
+      
+        fuzhujiNode.zPosition = 10
+        fuzhujiNode.xScale = 0.4
+        fuzhujiNode.yScale = 0.4
+        fuzhujiNode.position = CGPoint(x:self.size.width / 2.0,y:self.size.height / 2.0)
+        self.addChild(fuzhujiNode)
+        let ac = SKAction.animate(with: fuzhujiArr as! [SKTexture], timePerFrame: 0.15)
+        let rep = SKAction.repeatForever(ac)
+        fuzhujiNode.run(rep, withKey: "fushuji")
     }
+    
+ 
     
     func setPhyColor()  {
         let phyColorNode:SKSpriteNode = SKSpriteNode.init(color: .blue, size: CGSize(width:20,height:20))

@@ -106,7 +106,6 @@ class WDMap_1ZomModel: NSObject {
         kulouNode.isBoss = isBoss
         kulouNode.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kulouNode)
-    
         
         weak var weakSelf = map1_scene
 

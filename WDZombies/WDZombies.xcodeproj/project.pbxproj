@@ -174,6 +174,13 @@
 		43942E7A1FFF70E6003B728D /* WDKulouNightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43942E791FFF70E6003B728D /* WDKulouNightModel.swift */; };
 		43942E7C1FFF7117003B728D /* WDKulouKnightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43942E7B1FFF7117003B728D /* WDKulouKnightNode.swift */; };
 		43942E801FFF713C003B728D /* WDKulouNightBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43942E7F1FFF713C003B728D /* WDKulouNightBehavior.swift */; };
+		43CA55A72001CAB900707C2C /* person_move_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55A32001CAB800707C2C /* person_move_4.png */; };
+		43CA55A82001CAB900707C2C /* person_move_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55A42001CAB800707C2C /* person_move_3.png */; };
+		43CA55A92001CAB900707C2C /* person_move_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55A52001CAB900707C2C /* person_move_2.png */; };
+		43CA55AA2001CAB900707C2C /* person_move_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55A62001CAB900707C2C /* person_move_1.png */; };
+		43CA55AE2002021100707C2C /* fuzhuji_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55AB2002021000707C2C /* fuzhuji_1.png */; };
+		43CA55AF2002021100707C2C /* fuzhuji_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55AC2002021100707C2C /* fuzhuji_2.png */; };
+		43CA55B02002021100707C2C /* fuzhuji_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CA55AD2002021100707C2C /* fuzhuji_3.png */; };
 		9BB042A11FDA92DF00E674DB /* JWStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB042A01FDA92DF00E674DB /* JWStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -348,6 +355,13 @@
 		43942E791FFF70E6003B728D /* WDKulouNightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouNightModel.swift; sourceTree = "<group>"; };
 		43942E7B1FFF7117003B728D /* WDKulouKnightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouKnightNode.swift; sourceTree = "<group>"; };
 		43942E7F1FFF713C003B728D /* WDKulouNightBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKulouNightBehavior.swift; sourceTree = "<group>"; };
+		43CA55A32001CAB800707C2C /* person_move_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_move_4.png; sourceTree = "<group>"; };
+		43CA55A42001CAB800707C2C /* person_move_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_move_3.png; sourceTree = "<group>"; };
+		43CA55A52001CAB900707C2C /* person_move_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_move_2.png; sourceTree = "<group>"; };
+		43CA55A62001CAB900707C2C /* person_move_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_move_1.png; sourceTree = "<group>"; };
+		43CA55AB2002021000707C2C /* fuzhuji_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fuzhuji_1.png; sourceTree = "<group>"; };
+		43CA55AC2002021100707C2C /* fuzhuji_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fuzhuji_2.png; sourceTree = "<group>"; };
+		43CA55AD2002021100707C2C /* fuzhuji_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fuzhuji_3.png; sourceTree = "<group>"; };
 		9BB042A01FDA92DF00E674DB /* JWStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -511,6 +525,13 @@
 		433D184A1FA0300500A283E0 /* PersonPic */ = {
 			isa = PBXGroup;
 			children = (
+				43CA55AB2002021000707C2C /* fuzhuji_1.png */,
+				43CA55AC2002021100707C2C /* fuzhuji_2.png */,
+				43CA55AD2002021100707C2C /* fuzhuji_3.png */,
+				43CA55A62001CAB900707C2C /* person_move_1.png */,
+				43CA55A52001CAB900707C2C /* person_move_2.png */,
+				43CA55A42001CAB800707C2C /* person_move_3.png */,
+				43CA55A32001CAB800707C2C /* person_move_4.png */,
 				433D184B1FA0303500A283E0 /* person4.png */,
 			);
 			path = PersonPic;
@@ -876,6 +897,7 @@
 				43765FC91FBAE53E006E37D2 /* boss1Att2_left6.png in Resources */,
 				437174321FFCB3AD0000CB7D /* next.png in Resources */,
 				43765FD71FBAE6F5006E37D2 /* boss1Att2_right3.png in Resources */,
+				43CA55A72001CAB900707C2C /* person_move_4.png in Resources */,
 				43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
@@ -906,6 +928,7 @@
 				43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */,
 				43942E781FFF70B7003B728D /* kulouNightPic.atlas in Resources */,
 				434C5A861FD12FAA00C921AF /* Spark.sks in Resources */,
+				43CA55A92001CAB900707C2C /* person_move_2.png in Resources */,
 				434C5A841FD12FAA00C921AF /* FireFlies.sks in Resources */,
 				434C5A821FD12FAA00C921AF /* Fire.sks in Resources */,
 				4348DC301F9D98B30072D030 /* addDistance.jpg in Resources */,
@@ -940,6 +963,7 @@
 				43765F921FBAA627006E37D2 /* BOSS1_attack.png in Resources */,
 				43551B141FCE7FC600B86587 /* increaseDistance.png in Resources */,
 				434C5A9A1FD130D400C921AF /* kulouPic.atlas in Resources */,
+				43CA55AF2002021100707C2C /* fuzhuji_2.png in Resources */,
 				4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */,
 				43765FDA1FBAE6F5006E37D2 /* boss1Att2_right7.png in Resources */,
 				4307E36D1FA1DF0C00E1AD38 /* blood2.png in Resources */,
@@ -956,6 +980,7 @@
 				432F84C21F998A5B00F51146 /* LaunchScreen.storyboard in Resources */,
 				4348DC331F9D98B30072D030 /* blink.jpg in Resources */,
 				43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */,
+				43CA55B02002021100707C2C /* fuzhuji_3.png in Resources */,
 				43551B161FCE806800B86587 /* holdTime.png in Resources */,
 				434D58751FD547BF00253903 /* monster_2_attack.png in Resources */,
 				43656BC41F9F1FCE001EFDA5 /* WDMap_1Scene.sks in Resources */,
@@ -968,10 +993,13 @@
 				434C5A891FD12FAA00C921AF /* Rain.sks in Resources */,
 				4307E3711FA1DF0D00E1AD38 /* blood6.png in Resources */,
 				434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */,
+				43CA55AE2002021100707C2C /* fuzhuji_1.png in Resources */,
 				4348DC321F9D98B30072D030 /* addSpeed.jpg in Resources */,
 				434D58741FD547BF00253903 /* monster_1_attack.png in Resources */,
+				43CA55A82001CAB900707C2C /* person_move_3.png in Resources */,
 				434D587F1FD54C4900253903 /* monster_1_move_red.png in Resources */,
 				43765F971FBAA91A006E37D2 /* boss1_attLeft.png in Resources */,
+				43CA55AA2001CAB900707C2C /* person_move_1.png in Resources */,
 				4307E3731FA1DF0D00E1AD38 /* blood1.png in Resources */,
 				43656BCA1F9F2055001EFDA5 /* railing_up.png in Resources */,
 				432F84DC1F99E97800F51146 /* weaponBtn.png in Resources */,

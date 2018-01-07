@@ -328,11 +328,19 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //**************************************************************//
     //开火方法
     override func fireAction(direction: NSString) {
-//        if nearZom != nil {
-//             personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
-       // }else{
+        if nearZom != nil {
+             let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
+            if distance < CGFloat(personNode.wdAttackDistance){
+              personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
+            }else{
+                 WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, fuzhuji: personNode.fuzhujiNode)
+            }
+            
+            personNode?.personBehavior.attackAction(node: personNode)
+            
+        }else{
              personNode?.personBehavior.attackAction(node: personNode)
-       // }
+        }
        
     }
     
