@@ -35,7 +35,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
     let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
-    var isDeinit:Bool = false
+    var isDeinit:Bool = false  //地图释放，不在监测物理碰撞
     
     //进入方法
     override func didMove(to view: SKView) {
