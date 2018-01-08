@@ -127,6 +127,8 @@ class WDMap_1ZomModel: NSObject {
             let kulouNode:WDKulouNode = node as! WDKulouNode
             if kulouNode.isCall {
                 return
+                
+                
             }
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 3)
         }
