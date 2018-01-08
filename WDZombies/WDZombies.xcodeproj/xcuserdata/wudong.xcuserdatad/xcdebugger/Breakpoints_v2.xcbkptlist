@@ -19,13 +19,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WDZombies/Map/WDMap_1Scene.swift"
-            timestampString = "536837276.491181"
+            filePath = "WDZombies/Tool/WDAnimationTool.swift"
+            timestampString = "537068454.739007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "createZombies(timer:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "fuzhujiRotateAnimation(direction:fuzhuji:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WDZombies/Tool/WDAnimationTool.swift"
+            timestampString = "537068454.739079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "fuzhujiRotateAnimation(direction:fuzhuji:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

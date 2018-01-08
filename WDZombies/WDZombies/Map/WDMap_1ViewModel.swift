@@ -50,6 +50,13 @@ class WDMap_1ViewModel: NSObject {
         var inkNode:SKSpriteNode?
         var oxNode:WDOXNode?
         var oxLightNode:SKSpriteNode?
+        var kulouNightNode:WDKulouKnightNode?
+        
+     
+        kulouNightNode = (A?.name?.isEqual(KULOU_KNIGHT_NAME))! ? (A as? WDKulouKnightNode):nil;
+        if kulouNightNode == nil {
+            kulouNightNode = (B?.name?.isEqual(KULOU_KNIGHT_NAME))! ? (B as? WDKulouKnightNode):nil;
+        }
         
         oxLightNode = (A?.name?.isEqual(OX_LIGHT))! ? (A as? SKSpriteNode):nil;
         if oxLightNode == nil {
@@ -249,6 +256,13 @@ class WDMap_1ViewModel: NSObject {
             WDAnimationTool.bloodAnimation(node: oxNode!)
             fireNode?.removeFromParent()
         }
+        
+        if fireNode != nil && kulouNightNode != nil{
+            _ = kulouNightNode?.behavior.beAttack(attackNode: personNode, beAttackNode: kulouNightNode!)
+            WDAnimationTool.bloodAnimation(node: kulouNightNode!)
+            fireNode?.removeFromParent()
+        }
+        
     }
     
     

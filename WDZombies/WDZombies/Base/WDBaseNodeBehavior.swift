@@ -198,11 +198,14 @@ class WDBaseNodeBehavior: NSObject {
     
     
     @objc func _linkMove(){
-        if node.wdBlood<=0{
-            self._removeLink()
+        if (node != nil) {
+            if node.wdBlood<=0{
+                self._removeLink()
+            }
+            
+            moveBlock(node)
         }
-        
-        moveBlock(node)
+       
     }
     
     @objc func _canMove(){

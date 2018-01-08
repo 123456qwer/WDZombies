@@ -337,7 +337,43 @@ class WDTool: NSObject {
     }
     
     
-    
+    /// 自动瞄准方向
+    /// - Parameters:
+    ///   - point1: 移动坐标
+    ///   - point2: 起始坐标
+    /// - Returns: 方向
+    static func calculateAutoDirection(point1:CGPoint,point2:CGPoint) -> NSString {
+        
+        let x:CGFloat = point1.x - point2.x
+        let y:CGFloat = point1.y - point2.y
+        
+        let count:CGFloat = atan2(y, x) * 180 / CGFloat(Double.pi)
+        var direction:NSString?
+        
+        if (count <= 20 && count >= -20) {
+            direction = kRight;
+        }else if(count <= -70 && count >= -110){
+            direction = kDown;
+        }else if(count <= -160 || count >= 160){
+            direction = kLeft;
+        }else if(count <= 110 && count >= 70){
+            direction = kUp;
+        }
+        
+        if (direction == nil) {
+            if (count < -20 && count > -70) {
+                direction = kRD;
+            }else if(count < -110 && count > -160){
+                direction = kLD;
+            }else if(count < 160 && count > 110){
+                direction = kLU;
+            }else if(count < 70 && count > 20){
+                direction = kRU;
+            }
+        }
+        
+        return direction!;
+    }
     
     /// 人物朝向
     ///
@@ -496,8 +532,9 @@ class WDTool: NSObject {
         return dic
     }
     
+   
     
-    
+    //
     /// 子弹走向
     ///
     /// - Parameter personNode: person

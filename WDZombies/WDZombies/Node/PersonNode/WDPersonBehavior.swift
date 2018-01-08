@@ -41,6 +41,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     /// - Parameter direction: 方向
     override func moveAction(direction:NSString) -> Void {
       
+        
         if personNode.canMove {
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
             personNode.position = point
@@ -48,13 +49,15 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         }
       
         
-       
-     
+        
         if !direction.isEqual(to: personNode.direction as String) || !personNode.isMove {
            
+            
             WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
+            WDAnimationTool.fuzhujiRotateAnimation(direction: direction, fuzhuji: personNode.fuzhujiNode)
             personNode.direction = direction
             personNode.isMove = true
+            
         }
   
     }
@@ -115,7 +118,18 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     }
     
 
-    
+    func autoAttackAction(node:WDBaseNode,zomNode:WDBaseNode) {
+   
+        let x1:CGFloat = node.position.x - zomNode.position.x
+        let y1:CGFloat = node.position.y - zomNode.position.y
+            
+        let count:CGFloat = atan2(y1, x1)
+        let count1 = CGFloat(Double.pi)
+        let ran = SKAction.rotate(toAngle: count + count1 , duration: 0.005)
+            personNode.fuzhujiNode.run(ran)
+        
+        WDAnimationTool.autoFireAnimation(node: personNode, zomNode: zomNode)
+    }
     
     override func attackAction(node: WDBaseNode) {
         personNode.fireNode.position = WDTool.firePosition(direction: personNode.direction)

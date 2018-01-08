@@ -46,6 +46,7 @@ class WDMap_1ZomModel: NSObject {
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 5)
         }
         
+        self.addZomNodeForViewArr(node: kNight)
         return kNight
     }
     
@@ -91,6 +92,7 @@ class WDMap_1ZomModel: NSObject {
             greenN.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
         }
         
+        self.addZomNodeForViewArr(node: greenZom)
         return greenZom
     }
     
@@ -104,7 +106,6 @@ class WDMap_1ZomModel: NSObject {
         kulouNode.isBoss = isBoss
         kulouNode.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kulouNode)
-        
         
         weak var weakSelf = map1_scene
 
@@ -132,7 +133,8 @@ class WDMap_1ZomModel: NSObject {
             }
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 3)
         }
-        
+    
+        self.addZomNodeForViewArr(node: kulouNode)
         return kulouNode
     }
     
@@ -165,6 +167,7 @@ class WDMap_1ZomModel: NSObject {
             zombieNode.starMove()
         }
         
+        self.addZomNodeForViewArr(node: zombieNode)
         return zombieNode
     }
     
@@ -207,6 +210,7 @@ class WDMap_1ZomModel: NSObject {
             zombieNode.starMove()
         }
         
+        self.addZomNodeForViewArr(node: zombieNode)
         return zombieNode
     }
     
@@ -235,6 +239,7 @@ class WDMap_1ZomModel: NSObject {
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 6)
         }
         
+        self.addZomNodeForViewArr(node: squidNode)
         return squidNode
     }
     
@@ -264,6 +269,7 @@ class WDMap_1ZomModel: NSObject {
             oxNode.behavior.lightingAttack(personNode: (weakSelf?.personNode)!)
         }
         
+        self.addZomNodeForViewArr(node: oxZom)
         return oxZom
     }
     
@@ -302,6 +308,7 @@ class WDMap_1ZomModel: NSObject {
             wSelf?.kulouKnightCallKulou(point: CGPoint(x:(weakSelf?.personNode.position.x)!,y:(weakSelf?.personNode.position.y)! - 150))
         }
         
+        self.addZomNodeForViewArr(node: kulouKnightZom)
         return kulouKnightZom
     }
     
@@ -309,6 +316,7 @@ class WDMap_1ZomModel: NSObject {
         let kulou = self.createKulouZom(isBoss: false)
         kulou.canMove = false
         kulou.isMove  = false
+        kulou.isCall  = true
         kulou.position = point
         kulou.alpha = 0
         kulou.wdBlood = 5
@@ -316,6 +324,7 @@ class WDMap_1ZomModel: NSObject {
         kulou.run(alphaA) {
             kulou.canMove = true
         }
+        self.addZomNodeForViewArr(node: kulou)
     }
     
     
@@ -334,7 +343,12 @@ class WDMap_1ZomModel: NSObject {
             map.createBoss()
             map.removeNodeFromArr(node:node)
         }
-        
+    }
+    
+    
+    /// 将怪物Node添加到数组
+    func addZomNodeForViewArr(node:WDBaseNode){
+        map1_scene.addZomNode(node:node)
     }
     
 }
