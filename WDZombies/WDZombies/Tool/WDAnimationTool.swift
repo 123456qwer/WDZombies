@@ -44,7 +44,7 @@ class WDAnimationTool: NSObject {
     static func fuzhujiRotateAnimation(direction:NSString,fuzhuji:SKSpriteNode){
         
         //俩个计算为了避免转一周
-        let time:TimeInterval = 0.005
+        let time:TimeInterval = 0.15
         var action:SKAction!
         switch direction {
         case kLeft:
@@ -74,6 +74,7 @@ class WDAnimationTool: NSObject {
             
             let a = String(format:"%.4f",fuzhuji.zRotation)
             let b = String(format:"%.4f",CGFloat(Double.pi / 4.0))
+            print(a,b)
             if a == b{
                 fuzhuji.zRotation = CGFloat(Double.pi*2 + Double.pi / 4.0)
             }
@@ -360,7 +361,9 @@ class WDAnimationTool: NSObject {
                 //避免碰撞过后距离近，不在攻击
                 let distance1:CGFloat = WDTool.calculateNodesDistance(point1:zom.position,point2:person.position)
                 if distance1 < 30{
-                    zom.behavior.attackAction(node: person)
+                    if person.wdBlood > 0{
+                        zom.behavior.attackAction(node: person)
+                    }
                 }
                 
                 let distance = WDTool.calculateNodesDistance(point1: magic.position, point2: person.position)

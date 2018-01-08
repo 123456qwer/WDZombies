@@ -17,6 +17,8 @@ class WDPersonNode: WDBaseNode {
     var bloodNode:SKSpriteNode! = nil
     var ggAction:gameOverAction!
     var fuzhujiArr:NSMutableArray = NSMutableArray.init()
+    var fly_isFire:Bool = false
+    
     deinit {
         print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
         self.removeObserver(personBehavior, forKeyPath: "position")

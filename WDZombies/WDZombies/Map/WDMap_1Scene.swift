@@ -19,8 +19,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var boomModel:WDSkillModel!        //技能model，用于查看炸弹伤害
  
     
+    var fly_timer:Timer!               //辅助机计时器
     var createZomTimer:Timer!          //创建zom的timer
-    
     var mapLink:CADisplayLink!         //监测地图移动的link
     var zomLink:CADisplayLink!         //监测僵尸移动的link
     var nearZom:WDBaseNode!
@@ -56,6 +56,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.physicsWorld.contactDelegate = self
             
             createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
@@ -331,18 +332,31 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         if nearZom != nil {
              let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
             if distance < CGFloat(personNode.wdAttackDistance){
-              personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
+//              personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
             }else{
-                 WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, fuzhuji: personNode.fuzhujiNode)
+              WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, fuzhuji: personNode.fuzhujiNode)
             }
             
             personNode?.personBehavior.attackAction(node: personNode)
-            
         }else{
              personNode?.personBehavior.attackAction(node: personNode)
         }
-       
     }
+    
+    //自动攻击
+    @objc func autoFireAction(){
+        if nearZom != nil {
+            let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
+            if distance < CGFloat(personNode.wdAttackDistance){
+                personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
+                personNode.fly_isFire = true
+            }else{
+                personNode.fly_isFire = false
+            }
+        }
+    }
+    
+    
     
     //移动
     override func moveAction(direction: NSString) {

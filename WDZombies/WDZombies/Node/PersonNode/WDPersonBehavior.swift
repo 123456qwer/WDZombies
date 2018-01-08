@@ -54,7 +54,10 @@ class WDPersonBehavior: WDBaseNodeBehavior {
            
             
             WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
-            WDAnimationTool.fuzhujiRotateAnimation(direction: direction, fuzhuji: personNode.fuzhujiNode)
+            if personNode.fly_isFire == false{
+                WDAnimationTool.fuzhujiRotateAnimation(direction: direction, fuzhuji: personNode.fuzhujiNode)
+            }
+        
             personNode.direction = direction
             personNode.isMove = true
             
@@ -125,9 +128,8 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             
         let count:CGFloat = atan2(y1, x1)
         let count1 = CGFloat(Double.pi)
-        let ran = SKAction.rotate(toAngle: count + count1 , duration: 0.005)
+        let ran = SKAction.rotate(toAngle: count + count1 , duration: 0.25 / 2.0)
             personNode.fuzhujiNode.run(ran)
-        
         WDAnimationTool.autoFireAnimation(node: personNode, zomNode: zomNode)
     }
     
