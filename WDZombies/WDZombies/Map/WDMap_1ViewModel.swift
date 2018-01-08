@@ -52,7 +52,7 @@ class WDMap_1ViewModel: NSObject {
         var oxLightNode:SKSpriteNode?
         var kulouNightNode:WDKulouKnightNode?
         
-     
+    
         kulouNightNode = (A?.name?.isEqual(KULOU_KNIGHT_NAME))! ? (A as? WDKulouKnightNode):nil;
         if kulouNightNode == nil {
             kulouNightNode = (B?.name?.isEqual(KULOU_KNIGHT_NAME))! ? (B as? WDKulouKnightNode):nil;

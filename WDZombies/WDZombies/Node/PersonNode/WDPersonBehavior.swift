@@ -12,6 +12,7 @@ import SpriteKit
 class WDPersonBehavior: WDBaseNodeBehavior {
 
     weak var personNode:WDPersonNode! = nil
+    var lastRotation:CGFloat = 0
     var isGameOver = false
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -52,10 +53,9 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         
         if !direction.isEqual(to: personNode.direction as String) || !personNode.isMove {
            
-            
             WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
             if personNode.fly_isFire == false{
-                WDAnimationTool.fuzhujiRotateAnimation(direction: direction, fuzhuji: personNode.fuzhujiNode)
+                WDAnimationTool.fuzhujiRotateAnimation(direction: direction, personNode: personNode)
             }
         
             personNode.direction = direction
@@ -123,12 +123,25 @@ class WDPersonBehavior: WDBaseNodeBehavior {
 
     func autoAttackAction(node:WDBaseNode,zomNode:WDBaseNode) {
    
+        personNode.fuzhujiNode.zRotation = lastRotation
         let x1:CGFloat = node.position.x - zomNode.position.x
         let y1:CGFloat = node.position.y - zomNode.position.y
             
         let count:CGFloat = atan2(y1, x1)
         let count1 = CGFloat(Double.pi)
-        let ran = SKAction.rotate(toAngle: count + count1 , duration: 0.25 / 2.0)
+        var endRotation = count + count1
+        let temp = endRotation
+        //避免旋转一周的尴尬
+        if fabs(lastRotation - endRotation) > CGFloat(Double.pi){
+            if endRotation > lastRotation{
+                endRotation = -(CGFloat(Double.pi * 2) - endRotation)
+            }else{
+                endRotation = (CGFloat(Double.pi * 2) + endRotation)
+            }
+        }
+        
+        lastRotation = temp
+        let ran = SKAction.rotate(toAngle: endRotation , duration: 0.25 / 2.0)
             personNode.fuzhujiNode.run(ran)
         WDAnimationTool.autoFireAnimation(node: personNode, zomNode: zomNode)
     }

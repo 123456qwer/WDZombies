@@ -41,58 +41,93 @@ class WDAnimationTool: NSObject {
         node.run(repeatAction, withKey: "move")
     }
     
-    static func fuzhujiRotateAnimation(direction:NSString,fuzhuji:SKSpriteNode){
-        
-        //俩个计算为了避免转一周
-        let time:TimeInterval = 0.15
-        var action:SKAction!
+    static func initRotateDirection(direction:NSString) -> CGFloat{
+        var endRotation:CGFloat = 0
         switch direction {
         case kLeft:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi), duration: time)
+            endRotation = CGFloat(Double.pi)
             break
         case kRight:
-            let a = String(format:"%.4f",fuzhuji.zRotation)
-            let b = String(format:"%.4f",CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0))
-            if a == b{
-                fuzhuji.zRotation = CGFloat(-Double.pi / 4.0)
-            }
-            action = SKAction.rotate(toAngle: CGFloat(0), duration: time)
+            endRotation = 0
             break
         case kUp:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 2.0), duration: time)
+            endRotation = CGFloat(Double.pi / 2.0)
             break
         case kDown:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 2.0 + Double.pi), duration: time)
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi)
             break
         case kLD:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi + Double.pi / 4.0), duration: time)
+            endRotation = CGFloat(Double.pi + Double.pi / 4.0)
             break
         case kRD:
-            if fuzhuji.zRotation == 0{
-                fuzhuji.zRotation = CGFloat(Double.pi*2)
-            }
-            
-            let a = String(format:"%.4f",fuzhuji.zRotation)
-            let b = String(format:"%.4f",CGFloat(Double.pi / 4.0))
-            print(a,b)
-            if a == b{
-                fuzhuji.zRotation = CGFloat(Double.pi*2 + Double.pi / 4.0)
-            }
-            
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0), duration: time)
+            endRotation = CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0)
             break
         case kRU:
-            
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 4.0), duration: time)
+            endRotation = CGFloat(Double.pi / 4.0)
             break
         case kLU:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 2.0 + Double.pi / 4.0), duration: time)
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi / 4.0)
             break
         default:
             break
         }
         
-        fuzhuji.run(action)
+        return endRotation
+    }
+    
+    static func fuzhujiRotateAnimation(direction:NSString,personNode:WDPersonNode){
+        
+        //俩个计算为了避免转一周
+        let time:TimeInterval = 0.15
+        var action:SKAction!
+        let starRotation = personNode.lastRotation
+        personNode.fuzhujiNode.zRotation = starRotation
+        var endRotation:CGFloat = 0
+        
+        switch direction {
+        case kLeft:
+            endRotation = CGFloat(Double.pi)
+            break
+        case kRight:
+            endRotation = 0
+            break
+        case kUp:
+            endRotation = CGFloat(Double.pi / 2.0)
+            break
+        case kDown:
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi)
+            break
+        case kLD:
+            endRotation = CGFloat(Double.pi + Double.pi / 4.0)
+            break
+        case kRD:
+            endRotation = CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0)
+            break
+        case kRU:
+            endRotation = CGFloat(Double.pi / 4.0)
+            break
+        case kLU:
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi / 4.0)
+            break
+        default:
+            break
+        }
+        
+        personNode.lastRotation = endRotation
+        //旋转超过180度
+        if fabs(starRotation - endRotation) > CGFloat(Double.pi){
+            if endRotation > starRotation{
+                endRotation = -(CGFloat(Double.pi * 2) - endRotation)
+            }else{
+                endRotation = (CGFloat(Double.pi * 2) + endRotation)
+            }
+        }
+        
+        print(endRotation)
+        print(direction)
+        
+        action = SKAction.rotate(toAngle: endRotation, duration: time)
+        personNode.fuzhujiNode.run(action, withKey: "rotation")
     }
     
     static func fuzhujiMoveAnimation(direction:NSString,fuzhuji:SKSpriteNode){

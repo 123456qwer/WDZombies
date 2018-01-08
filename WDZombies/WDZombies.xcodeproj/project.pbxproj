@@ -53,6 +53,7 @@
 		4348DC331F9D98B30072D030 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC2D1F9D98B30072D030 /* blink.jpg */; };
 		4348DC351F9D99790072D030 /* boomIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC341F9D99780072D030 /* boomIcon.png */; };
 		4348DC381F9DE7DA0072D030 /* starGame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC371F9DE7DA0072D030 /* starGame.png */; };
+		434A1E7D200356130088B4FA /* WDPhyContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A1E7C200356130088B4FA /* WDPhyContactModel.swift */; };
 		434B4C411FB98A5B000A6566 /* map1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434B4C401FB98A5B000A6566 /* map1.png */; };
 		434C5A741FD12B4F00C921AF /* WDBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5A731FD12B4F00C921AF /* WDBaseViewController.swift */; };
 		434C5A771FD12F2200C921AF /* WDMonsterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5A761FD12F2200C921AF /* WDMonsterVC.swift */; };
@@ -233,6 +234,7 @@
 		4348DC2D1F9D98B30072D030 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
 		4348DC341F9D99780072D030 /* boomIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomIcon.png; sourceTree = "<group>"; };
 		4348DC371F9DE7DA0072D030 /* starGame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starGame.png; sourceTree = "<group>"; };
+		434A1E7C200356130088B4FA /* WDPhyContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDPhyContactModel.swift; sourceTree = "<group>"; };
 		434B4C401FB98A5B000A6566 /* map1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map1.png; sourceTree = "<group>"; };
 		434C5A731FD12B4F00C921AF /* WDBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBaseViewController.swift; sourceTree = "<group>"; };
 		434C5A761FD12F2200C921AF /* WDMonsterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WDMonsterVC.swift; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 				43656BC31F9F1FCE001EFDA5 /* WDMap_1Scene.sks */,
 				4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */,
 				436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */,
+				434A1E7C200356130088B4FA /* WDPhyContactModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */,
 				435589801FA06DEF00C80CA8 /* WDPhysicalAttribute.swift in Sources */,
 				434C5AA41FD130FA00C921AF /* WDBossBehavior_1.swift in Sources */,
+				434A1E7D200356130088B4FA /* WDPhyContactModel.swift in Sources */,
 				43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */,
 				434CDE1D1FE90BD100E46199 /* WDBaseModel.swift in Sources */,
 				434CDE191FE8A2BE00E46199 /* WDBaseViewModel.swift in Sources */,

@@ -35,7 +35,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
     let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
-    
+    var isDeinit:Bool = false
     
     //进入方法
     override func didMove(to view: SKView) {
@@ -224,7 +224,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_7_OXZom(isBoss: false)
             }else {
                 self.level_1_NormalZom(isBoss: false)
-
             }
         }
  
@@ -334,7 +333,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             if distance < CGFloat(personNode.wdAttackDistance){
 //              personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
             }else{
-              WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, fuzhuji: personNode.fuzhujiNode)
+              WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, personNode: personNode)
             }
             
             personNode?.personBehavior.attackAction(node: personNode)
@@ -390,6 +389,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //MARK: -物理碰撞
     //代理
     func didBegin(_ contact: SKPhysicsContact) {
+        if isDeinit {
+            return
+        }
         mapViewModel.phyContact(contact:contact, personNode: personNode, boomModel: boomModel)
     }
     
@@ -430,6 +432,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     deinit {
+        isDeinit = true
         print("地图1被释放了！！！！！！！！！")
     }
     
