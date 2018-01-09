@@ -236,7 +236,7 @@ class WDAnimationTool: NSObject {
     
     static func autoFireAnimation(node:WDPersonNode,zomNode:WDBaseNode) -> Void {
         
-        let texture:SKTexture = SKTexture.init(image: UIImage.init(named: "smallCircle")!)
+        let texture:SKTexture = node.fly_fireArr[0] as! SKTexture
         let firNode:SKSpriteNode = SKSpriteNode.init(texture: texture)
 
         
@@ -250,11 +250,13 @@ class WDAnimationTool: NSObject {
         firNode.position = CGPoint(x:fireX,y:fireY)
         firNode.zPosition = 2.0;
         firNode.name = FIRE as String
-        firNode.xScale = 0.1
-        firNode.yScale = 0.1
+        firNode.xScale = 0.3
+        firNode.yScale = 0.3
         node.parent?.addChild(firNode)
-        let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 700.0))
-        firNode.run(action) {
+        let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 300.0))
+        let firA = SKAction.animate(with: node.fly_fireArr as! [SKTexture], timePerFrame: TimeInterval(distance / 300.0 / 6.0))
+        let groupA = SKAction.group([action,firA])
+        firNode.run(groupA) {
             firNode.removeFromParent()
         }
         

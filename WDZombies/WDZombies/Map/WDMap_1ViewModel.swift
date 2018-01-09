@@ -249,6 +249,7 @@ class WDMap_1ViewModel: NSObject {
         if pNode != nil && oxLightNode != nil{
             WDAnimationTool.bloodAnimation(node: personNode)
             personNode.personBehavior.reduceBlood(number: 1)
+            personNode.personBehavior.beFlashAttack()
         }
         
         if fireNode != nil && oxNode != nil{
@@ -262,6 +263,7 @@ class WDMap_1ViewModel: NSObject {
             WDAnimationTool.bloodAnimation(node: kulouNightNode!)
             fireNode?.removeFromParent()
         }
+       
         
     }
     

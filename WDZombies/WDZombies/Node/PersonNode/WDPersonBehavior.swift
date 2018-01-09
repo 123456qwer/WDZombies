@@ -47,21 +47,23 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
             personNode.position = point
             personNode.zPosition = 3 * 667 - personNode.position.y
+            
+            if !direction.isEqual(to: personNode.direction as String) || !personNode.isMove {
+                
+                WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
+                if personNode.fly_isFire == false{
+                    WDAnimationTool.fuzhujiRotateAnimation(direction: direction, personNode: personNode)
+                }
+                
+                personNode.direction = direction
+                personNode.isMove = true
+                
+            }
         }
       
         
         
-        if !direction.isEqual(to: personNode.direction as String) || !personNode.isMove {
-           
-            WDAnimationTool.moveAnimation(direction: direction, dic: personNode.moveDic,node:personNode)
-            if personNode.fly_isFire == false{
-                WDAnimationTool.fuzhujiRotateAnimation(direction: direction, personNode: personNode)
-            }
-        
-            personNode.direction = direction
-            personNode.isMove = true
-            
-        }
+     
   
     }
     
@@ -69,11 +71,9 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     func reduceBlood(number:CGFloat)  {
         personNode.wdBlood -= number
         if personNode.wdBlood <= 0 && isGameOver == false{
-            let diedAction = SKAction.fadeAlpha(to: 0, duration: 0.1)
             personNode.removePhy()
-            personNode.run(diedAction, completion: {
+            personNode.alpha = 0
             self.personNode.ggAction()
-            })
             isGameOver = true
             return
         }
@@ -144,6 +144,19 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         let ran = SKAction.rotate(toAngle: endRotation , duration: 0.25 / 2.0)
             personNode.fuzhujiNode.run(ran)
         WDAnimationTool.autoFireAnimation(node: personNode, zomNode: zomNode)
+    }
+    
+    //被闪电击中
+    func beFlashAttack(){
+        personNode.removeAllActions()
+        personNode.texture = personNode.beFlashTexture
+        personNode.canMove = false
+        personNode.isMove = false
+        self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc func canMove()  {
+        personNode.canMove = true
     }
     
     override func attackAction(node: WDBaseNode) {

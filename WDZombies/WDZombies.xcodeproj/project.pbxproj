@@ -94,6 +94,13 @@
 		434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58811FD54D4E00253903 /* monster_3_attack_red.png */; };
 		434D58861FD54D4F00253903 /* monster_4_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58821FD54D4F00253903 /* monster_4_attack_red.png */; };
 		434D58871FD54D4F00253903 /* monster_2_attack_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 434D58831FD54D4F00253903 /* monster_2_attack_red.png */; };
+		434F60422004A42F00BAA804 /* fly_bullet_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F603C2004A42E00BAA804 /* fly_bullet_6.png */; };
+		434F60432004A42F00BAA804 /* fly_bullet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F603D2004A42F00BAA804 /* fly_bullet_1.png */; };
+		434F60442004A42F00BAA804 /* fly_bullet_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F603E2004A42F00BAA804 /* fly_bullet_3.png */; };
+		434F60452004A42F00BAA804 /* fly_bullet_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F603F2004A42F00BAA804 /* fly_bullet_4.png */; };
+		434F60462004A42F00BAA804 /* fly_bullet_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F60402004A42F00BAA804 /* fly_bullet_2.png */; };
+		434F60472004A42F00BAA804 /* fly_bullet_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F60412004A42F00BAA804 /* fly_bullet_5.png */; };
+		434F604B2004B12000BAA804 /* person_beFlash.png in Resources */ = {isa = PBXBuildFile; fileRef = 434F604A2004B12000BAA804 /* person_beFlash.png */; };
 		43524CD01FCFE78100326EFF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 43524CCF1FCFE78000326EFF /* back.png */; };
 		4353DABB1FEBB18B0092BD28 /* WDMap_1ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */; };
 		43544F2F1FFE0AE100E82FD2 /* 未标题-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43544F2E1FFE0AE100E82FD2 /* 未标题-1.png */; };
@@ -275,6 +282,13 @@
 		434D58811FD54D4E00253903 /* monster_3_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_3_attack_red.png; sourceTree = "<group>"; };
 		434D58821FD54D4F00253903 /* monster_4_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_4_attack_red.png; sourceTree = "<group>"; };
 		434D58831FD54D4F00253903 /* monster_2_attack_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_2_attack_red.png; sourceTree = "<group>"; };
+		434F603C2004A42E00BAA804 /* fly_bullet_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bullet_6.png; sourceTree = "<group>"; };
+		434F603D2004A42F00BAA804 /* fly_bullet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bullet_1.png; sourceTree = "<group>"; };
+		434F603E2004A42F00BAA804 /* fly_bullet_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bullet_3.png; sourceTree = "<group>"; };
+		434F603F2004A42F00BAA804 /* fly_bullet_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bullet_4.png; sourceTree = "<group>"; };
+		434F60402004A42F00BAA804 /* fly_bullet_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bullet_2.png; sourceTree = "<group>"; };
+		434F60412004A42F00BAA804 /* fly_bullet_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bullet_5.png; sourceTree = "<group>"; };
+		434F604A2004B12000BAA804 /* person_beFlash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_beFlash.png; sourceTree = "<group>"; };
 		43524CCF1FCFE78000326EFF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		4353DABA1FEBB18B0092BD28 /* WDMap_1ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMap_1ViewModel.swift; sourceTree = "<group>"; };
 		43544F2E1FFE0AE100E82FD2 /* 未标题-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未标题-1.png"; sourceTree = "<group>"; };
@@ -527,6 +541,13 @@
 		433D184A1FA0300500A283E0 /* PersonPic */ = {
 			isa = PBXGroup;
 			children = (
+				434F604A2004B12000BAA804 /* person_beFlash.png */,
+				434F603D2004A42F00BAA804 /* fly_bullet_1.png */,
+				434F60402004A42F00BAA804 /* fly_bullet_2.png */,
+				434F603E2004A42F00BAA804 /* fly_bullet_3.png */,
+				434F603F2004A42F00BAA804 /* fly_bullet_4.png */,
+				434F60412004A42F00BAA804 /* fly_bullet_5.png */,
+				434F603C2004A42E00BAA804 /* fly_bullet_6.png */,
 				43CA55AB2002021000707C2C /* fuzhuji_1.png */,
 				43CA55AC2002021100707C2C /* fuzhuji_2.png */,
 				43CA55AD2002021100707C2C /* fuzhuji_3.png */,
@@ -901,6 +922,7 @@
 				437174321FFCB3AD0000CB7D /* next.png in Resources */,
 				43765FD71FBAE6F5006E37D2 /* boss1Att2_right3.png in Resources */,
 				43CA55A72001CAB900707C2C /* person_move_4.png in Resources */,
+				434F60472004A42F00BAA804 /* fly_bullet_5.png in Resources */,
 				43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
@@ -919,6 +941,7 @@
 				435589881FA0753500C80CA8 /* NormalZom.png in Resources */,
 				43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */,
 				434C5A831FD12FAA00C921AF /* Snow.sks in Resources */,
+				434F60442004A42F00BAA804 /* fly_bullet_3.png in Resources */,
 				43544F2F1FFE0AE100E82FD2 /* 未标题-1.png in Resources */,
 				430B1BCD1FD9349B006A9809 /* monster_1_move.png in Resources */,
 				43765FCD1FBAE53E006E37D2 /* boss1Att2_left2.png in Resources */,
@@ -936,6 +959,7 @@
 				434C5A821FD12FAA00C921AF /* Fire.sks in Resources */,
 				4348DC301F9D98B30072D030 /* addDistance.jpg in Resources */,
 				4360090F1FA9642A006D48ED /* skillFrame.gif in Resources */,
+				434F60432004A42F00BAA804 /* fly_bullet_1.png in Resources */,
 				432F84BD1F998A5B00F51146 /* Main.storyboard in Resources */,
 				433F10D51FC3078500DECFBF /* boom.gif in Resources */,
 				43765FD51FBAE6F5006E37D2 /* boss1Att2_right1.png in Resources */,
@@ -945,6 +969,7 @@
 				434D58841FD54D4F00253903 /* monster_1_attack_red.png in Resources */,
 				43524CD01FCFE78100326EFF /* back.png in Resources */,
 				43656BCD1F9F2055001EFDA5 /* railing_left.png in Resources */,
+				434F604B2004B12000BAA804 /* person_beFlash.png in Resources */,
 				433D184C1FA0303500A283E0 /* person4.png in Resources */,
 				4348DC351F9D99790072D030 /* boomIcon.png in Resources */,
 				434C5A881FD12FAA00C921AF /* Magic.sks in Resources */,
@@ -972,6 +997,7 @@
 				4307E36D1FA1DF0C00E1AD38 /* blood2.png in Resources */,
 				43563FA11FB3DB5800D4BD46 /* RedNormalBorn.png in Resources */,
 				4307E36E1FA1DF0C00E1AD38 /* blood4.png in Resources */,
+				434F60452004A42F00BAA804 /* fly_bullet_4.png in Resources */,
 				43765FD91FBAE6F5006E37D2 /* boss1Att2_right6.png in Resources */,
 				432F84BF1F998A5B00F51146 /* Assets.xcassets in Resources */,
 				4392CE211FA6B7AD00A52D12 /* NormalDied.png in Resources */,
@@ -993,6 +1019,7 @@
 				43563FA71FB3DDAE00D4BD46 /* RedNormalZom.png in Resources */,
 				434D58871FD54D4F00253903 /* monster_2_attack_red.png in Resources */,
 				43765FD61FBAE6F5006E37D2 /* boss1Att2_right2.png in Resources */,
+				434F60462004A42F00BAA804 /* fly_bullet_2.png in Resources */,
 				434C5A891FD12FAA00C921AF /* Rain.sks in Resources */,
 				4307E3711FA1DF0D00E1AD38 /* blood6.png in Resources */,
 				434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */,
@@ -1012,6 +1039,7 @@
 				43551B121FCE7F1900B86587 /* reduceTime.png in Resources */,
 				432F84B61F998A5B00F51146 /* Actions.sks in Resources */,
 				4348DC381F9DE7DA0072D030 /* starGame.png in Resources */,
+				434F60422004A42F00BAA804 /* fly_bullet_6.png in Resources */,
 				434D58861FD54D4F00253903 /* monster_4_attack_red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
