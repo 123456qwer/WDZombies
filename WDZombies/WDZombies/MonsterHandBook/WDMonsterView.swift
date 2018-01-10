@@ -82,7 +82,7 @@ class WDMonsterView: UIView {
     
     func setDetail(str:String,font:UIFont)  {
         detailLabel.text = str
-        detailLabel.font = font
+        //detailLabel.font = font
     }
     
     

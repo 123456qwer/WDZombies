@@ -123,8 +123,8 @@ class WDAnimationTool: NSObject {
             }
         }
         
-        print(endRotation)
-        print(direction)
+//        print(endRotation)
+//        print(direction)
         
         action = SKAction.rotate(toAngle: endRotation, duration: time)
         personNode.fuzhujiNode.run(action, withKey: "rotation")

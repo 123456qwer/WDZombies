@@ -47,7 +47,6 @@ let KNIGHT_METEORITE_NAME = "KNIGHT_METEORITE_NAME"
 
 
 
-let ZOMBIE:NSString = "zombie"
 let PERSON:NSString = "person"
 let FIRE:NSString   = "fire"
 let MAGIC:NSString   = "magic"

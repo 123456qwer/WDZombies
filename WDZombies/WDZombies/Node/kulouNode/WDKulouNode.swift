@@ -38,7 +38,7 @@ class WDKulouNode: WDBaseNode {
         behavior.setNode(node:self)
         behavior.node = self
         
-        self.name = "KULOU"
+        self.name = KULOU_NAME
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:80,height:80))
         physicsBody.affectedByGravity = false;

@@ -42,7 +42,6 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     /// - Parameter direction: 方向
     override func moveAction(direction:NSString) -> Void {
       
-        
         if personNode.canMove {
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
             personNode.position = point
@@ -57,24 +56,22 @@ class WDPersonBehavior: WDBaseNodeBehavior {
                 
                 personNode.direction = direction
                 personNode.isMove = true
-                
             }
         }
-      
-        
-        
-     
-  
     }
     
     
-    func reduceBlood(number:CGFloat)  {
+    func reduceBlood(number:CGFloat,monsterName:String)  {
         personNode.wdBlood -= number
         if personNode.wdBlood <= 0 && isGameOver == false{
             personNode.removePhy()
             personNode.alpha = 0
             self.personNode.ggAction()
             isGameOver = true
+            
+            let model:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName:monsterName)
+            model.beKillCount = model.beKillCount + 1
+            _ = model.changeMonsterToSqlite()
             return
         }
         
@@ -113,7 +110,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     ///   - beAttackNode:
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
        
-        self.reduceBlood(number: attackNode.wdAttack)
+        self.reduceBlood(number: attackNode.wdAttack,monsterName: attackNode.name!)
         self.reduceBloodLabel(node: personNode, attackNode: attackNode)
         
         WDAnimationTool.bloodAnimation(node:personNode)

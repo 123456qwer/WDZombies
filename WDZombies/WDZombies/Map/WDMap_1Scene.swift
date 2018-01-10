@@ -32,6 +32,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var diedZomLabel:SKLabelNode!
     var level:NSInteger!
     
+    var overTimeLabel:SKLabelNode!   //通关时间
+    var overTimer:Timer!
+    var times:NSInteger = 0
+    
+    
     
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
     let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
@@ -57,7 +62,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             
             createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
             fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
-           
+            overTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overTimerAction), userInfo: nil, repeats: true)
+            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
@@ -91,6 +97,15 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
       // print("hahaha")
        
     }
+    
+   @objc func overTimerAction()  {
+        times = times + 1
+        let second:NSInteger = times % 60
+        let minute:NSInteger = times / 60
+        let str:String = String(format: "%02d:%02d", arguments: [minute, second])
+        overTimeLabel.text = str
+    }
+    
     //初始化Nodes
     func createNodes(){
         
@@ -100,14 +115,23 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         diedZomLabel.fontSize = 30
         diedZomLabel.verticalAlignmentMode = .center
         diedZomLabel.alpha = 0.6
-        print(diedZomLabel.frame.size.width,diedZomLabel.frame.size.height)
         
         diedZomLabel.position = CGPoint(x:diedZomLabel.frame.size.width / 2.0 + 10,y:self.frame.size.height - diedZomLabel.frame.size.height / 2.0 - 10)
         diedZomLabel.color = UIColor.black
         diedZomLabel.zPosition = 10000
         self.addChild(diedZomLabel)
         
-        print(kScreenHeight,self.frame.size.height)
+        overTimeLabel = SKLabelNode.init(text: "00:00")
+        overTimeLabel.fontName = "VCR OSD Mono"
+        overTimeLabel.fontColor = UIColor.red
+        overTimeLabel.fontSize = 30
+        overTimeLabel.verticalAlignmentMode = .center
+        overTimeLabel.alpha = 0.6
+        
+        overTimeLabel.position = CGPoint(x:kScreenWidth - overTimeLabel.frame.size.width - 10,y:self.frame.size.height - overTimeLabel.frame.size.height / 2.0 - 10)
+        overTimeLabel.color = UIColor.black
+        overTimeLabel.zPosition = 10000
+        self.addChild(overTimeLabel)
         
         
         let perDic:NSMutableDictionary = WDTool.cutMoveImage(moveImage: UIImage(named:"person4.png")!)
@@ -409,11 +433,22 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         self.ggAction()
     }
     
+    //修改通关时间
+    func overTime(bossNode:WDBaseNode) {
+        let model:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName: bossNode.name!)
+        if model.overTime > times || model.overTime == 0{
+            model.overTime = times
+            _ = model.changeMonsterToSqlite()
+        }
+    }
     
     //结束
     @objc func removeNode()  {
         
+        fly_timer.invalidate()
+        overTimer.invalidate()
         createZomTimer.invalidate()
+        
         if mapLink != nil {
             mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
             mapLink.invalidate()

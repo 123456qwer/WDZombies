@@ -8,6 +8,13 @@
 
 import UIKit
 
+//普通僵尸
+public let NORMAL_ZOM       = "NORMAL_ZOM"
+
+//红头僵尸
+public let RED_ZOM          = "RED_ZOM"
+
+
 //骷髅僵尸
 public let KULOU_MOVE       = "KULOU_MOVE"
 public let KULOU_DIED       = "KULOU_DIED"

@@ -170,10 +170,7 @@ class WDMap_1ZomModel: NSObject {
         self.addZomNodeForViewArr(node: zombieNode)
         return zombieNode
     }
-    
-    
-    
-    
+
     //MARK:创建红色僵尸
     /// 创建红色僵尸
     func createRedZom(isBoss:Bool) -> WDZombieNode {
@@ -331,18 +328,29 @@ class WDMap_1ZomModel: NSObject {
 ///////////////////////////公用////////////////
     /// 僵尸死亡调用方法
     func diedNextAction(map:WDMap_1Scene,node:WDBaseNode,count:NSInteger) {
+        
+        let monsterModel:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName: node.name!)
+        monsterModel.killCount = monsterModel.killCount + 1
+        _ = monsterModel.changeMonsterToSqlite()
+        
+        print(monsterModel.killCount)
+       
         let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
         if node.isBoss && model.monsterCount < count{
             model.monsterCount = count
             map.levelUp(model: model)
             map.personNode.createLevelUpNode()
             map.playNext()
+            map.overTime(bossNode: node)
         }else if node.isBoss {
             map.playNext()
+            map.overTime(bossNode: node)
         }else{
             map.createBoss()
             map.removeNodeFromArr(node:node)
         }
+        
+
     }
     
     

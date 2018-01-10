@@ -93,7 +93,7 @@ class WDOXBehavior: WDBaseNodeBehavior {
             let action:SKAction = SKAction.move(to: point, duration: 0.2)
             
             personNode.run(action, completion: {
-                personNode.personBehavior.reduceBlood(number:1)
+                personNode.personBehavior.reduceBlood(number:1,monsterName: OX_NAME)
                 WDAnimationTool.bloodAnimation(node:personNode)
             })
             

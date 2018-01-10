@@ -109,11 +109,15 @@ class WDZombieNode: WDBaseNode {
             moveDic = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomMove") as! NSMutableDictionary
             attackDic = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomAttack") as! NSMutableDictionary
             diedArr   = WDMapManager.sharedInstance.textureDic.object(forKey: "normalZomDied") as! NSMutableArray
+            self.name = NORMAL_ZOM
+
         }else if type == .Red{
             moveDic = WDMapManager.sharedInstance.textureDic.object(forKey: "redNormalZomMove") as! NSMutableDictionary
             attackDic = WDMapManager.sharedInstance.textureDic.object(forKey: "redNormalZomAttack") as! NSMutableDictionary
             diedArr   = WDMapManager.sharedInstance.textureDic.object(forKey: "redNormalZomDied") as! NSMutableArray
             redZomTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(redMoveTime), userInfo: nil, repeats: true)
+            self.name = RED_ZOM
+
         }
         
        
@@ -137,7 +141,6 @@ class WDZombieNode: WDBaseNode {
         physicsBody.isDynamic = true;
         
         self.physicsBody = physicsBody
-        self.name = ZOMBIE as String
         self.wdFire_impact = 30
         
         self.attribute(isBoss: isBoss)

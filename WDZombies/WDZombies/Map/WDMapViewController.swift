@@ -50,6 +50,8 @@ class WDMapViewController: UIViewController {
         self.setMap7(model: model)
         self.setMap8(model: model)
         
+        
+        
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
         backBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         backBtn.setImage(UIImage.init(named: "back"), for: .normal)
@@ -108,13 +110,13 @@ class WDMapViewController: UIViewController {
     func setMap1(model:WDUserModel)  {
      
         let images:NSMutableArray = [UIImage.init(named: "monster_1_move")!,UIImage.init(named: "monster_2_move")!]
-        self.setView(tag: MAP_1, width: 167 / 2.0, height: 197 / 2.0, imageArr: images , count: 0, model: model ,x:20)
+        self.setView(tag: MAP_1, width: 167 / 2.0, height: 197 / 2.0, imageArr: images , count: 0, model: model ,x:20,monsterName: NORMAL_ZOM)
     }
     
     func setMap2(model:WDUserModel)  {
       
         let images:NSMutableArray = [UIImage.init(named: "monster_1_move_red")!,UIImage.init(named: "monster_2_move_red")!]
-        self.setView(tag: MAP_2, width: 167 / 2.0, height: 197 / 2.0, imageArr: images, count: 1, model: model ,x:20 + kScreenWidth )
+        self.setView(tag: MAP_2, width: 167 / 2.0, height: 197 / 2.0, imageArr: images, count: 1, model: model ,x:20 + kScreenWidth ,monsterName: RED_ZOM)
     }
     
     
@@ -131,7 +133,7 @@ class WDMapViewController: UIViewController {
             }
         }
         
-        self.setView(tag: MAP_3, width: 167 / 2.0, height: 197 / 2.0, imageArr: moveArr, count: 2, model: model ,x :20 + kScreenWidth * 2)
+        self.setView(tag: MAP_3, width: 167 / 2.0, height: 197 / 2.0, imageArr: moveArr, count: 2, model: model ,x :20 + kScreenWidth * 2,monsterName: KULOU_NAME)
     }
     
     
@@ -151,7 +153,7 @@ class WDMapViewController: UIViewController {
             }
         }
         
-        self.setView(tag: MAP_4, width: 125 * 0.8, height: 125 * 0.8, imageArr: moveArr, count: 3, model: model,x:20 + 3 * kScreenWidth)
+        self.setView(tag: MAP_4, width: 125 * 0.8, height: 125 * 0.8, imageArr: moveArr, count: 3, model: model,x:20 + 3 * kScreenWidth,monsterName: GREEN_ZOM_NAME)
     }
     
     func setMap5(model:WDUserModel) {
@@ -170,7 +172,7 @@ class WDMapViewController: UIViewController {
             }
         }
         
-        self.setView(tag: MAP_5, width: 165 * 0.8, height: 165 * 0.8, imageArr: moveArr, count: 4, model: model,x:20 + 4 * kScreenWidth)
+        self.setView(tag: MAP_5, width: 165 * 0.8, height: 165 * 0.8, imageArr: moveArr, count: 4, model: model,x:20 + 4 * kScreenWidth,monsterName: KNIGHT_NAME)
     }
     
     func setMap6(model:WDUserModel) {
@@ -181,7 +183,7 @@ class WDMapViewController: UIViewController {
             moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_6, width: 140 * 0.8, height: 100 * 0.8, imageArr: moveArr, count: 5, model: model, x: 20 + 5 * kScreenWidth)
+        self.setView(tag: MAP_6, width: 140 * 0.8, height: 100 * 0.8, imageArr: moveArr, count: 5, model: model, x: 20 + 5 * kScreenWidth,monsterName: SQUID_NAME)
     }
     
     func setMap7(model:WDUserModel)  {
@@ -192,7 +194,7 @@ class WDMapViewController: UIViewController {
             moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_7, width: 200 * 0.8, height: 250 * 0.8, imageArr: moveArr, count: 6, model: model, x: 20 + 6 * kScreenWidth)
+        self.setView(tag: MAP_7, width: 200 * 0.8, height: 250 * 0.8, imageArr: moveArr, count: 6, model: model, x: 20 + 6 * kScreenWidth,monsterName: OX_NAME)
     }
     
     func setMap8(model:WDUserModel)  {
@@ -203,17 +205,29 @@ class WDMapViewController: UIViewController {
             moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_8, width: 170, height: 170, imageArr: moveArr, count: 7, model: model, x: 20 + 7 * kScreenWidth)
+        self.setView(tag: MAP_8, width: 170, height: 170, imageArr: moveArr, count: 7, model: model, x: 20 + 7 * kScreenWidth,monsterName: KULOU_KNIGHT_NAME)
     }
     
     //count 是当前怪物数量
-    func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat)  {
+    func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat,monsterName:String)  {
         
         let button:UIButton = UIButton.init(frame: CGRect(x:x,y:20,width:kScreenWidth - 40,height:kScreenHeight - 40))
         button.setImage(UIImage.init(named: "map1.png"), for: .normal)
         button.tag = tag
         button.addTarget(self, action: #selector(selectMapName(sender:)), for: .touchUpInside)
         bgScrollView.addSubview(button)
+        
+        
+        let label:UILabel = UILabel.init(frame: CGRect(x:0,y:20,width:kScreenWidth - 40,height:30))
+        let modelM:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName: monsterName)
+        let second:NSInteger = modelM.overTime % 60
+        let minute:NSInteger = modelM.overTime / 60
+        let str:String = String(format: "%02d:%02d", arguments: [minute, second])
+        label.text = str
+        label.textColor = UIColor.red
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textAlignment = .center
+        button.addSubview(label)
         
         
         let imageV:UIImageView = UIImageView.init(frame: CGRect(x:button.frame.size.width / 2.0 - width / 2.0,y:button.frame.size.height / 2.0 - height / 2.0,width:width,height:height))
