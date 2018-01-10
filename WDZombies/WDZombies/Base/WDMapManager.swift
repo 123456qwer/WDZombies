@@ -315,6 +315,48 @@ class WDMapManager: NSObject {
         self.textureDic.setObject(stayArr, forKey: KULOU_KNIGHT_STAY as NSCopying)
     }
     
+    func setSealZom()  {
+        let textures = SKTextureAtlas.init(named: "sealPic")
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let stayArr:NSMutableArray = NSMutableArray.init()
+        let diedArr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...10 {
+            if index < 4 {
+                let name = "seal_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+            }
+            
+            if index < 10 {
+                
+                let name1 = "seal_attack_\(index + 1)"
+                let temp1 = textures.textureNamed(name1)
+                attack1Arr.add(temp1)
+                
+            }
+            
+            if index < 5{
+                
+                let name = "seal_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+                
+                let name2 = "seal_stay_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                stayArr.add(temp2)
+            }
+            
+        }
+        
+        self.textureDic.setObject(moveArr, forKey: SEAL_MOVE as NSCopying)
+        self.textureDic.setObject(diedArr, forKey: SEAL_DIED as NSCopying)
+        self.textureDic.setObject(attack1Arr, forKey: SEAL_ATTACK1 as NSCopying)
+        self.textureDic.setObject(stayArr, forKey: SEAL_STAY as NSCopying)
+    }
+    
     func setPic()  {
         
         self.mapDic = NSMutableDictionary.init()
@@ -327,6 +369,7 @@ class WDMapManager: NSObject {
         self.setSquidZom()
         self.setOXZom()
         self.setKulouKnightZom()
+        self.setSealZom()
     }
     
     

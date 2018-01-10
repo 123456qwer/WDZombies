@@ -324,7 +324,31 @@ class WDMap_1ZomModel: NSObject {
         self.addZomNodeForViewArr(node: kulou)
     }
     
-    
+    //MARK:创建海豹
+    func createSealZom(isBoss:Bool) -> WDSealNode {
+        let sealZom:WDSealNode = WDSealNode.init()
+        sealZom.size = CGSize(width:130 ,height:150)
+        sealZom.isBoss = isBoss
+        sealZom.initWithPerson(personNode: map1_scene.personNode)
+        map1_scene.bgNode.addChild(sealZom)
+        
+        weak var weakSelf = map1_scene
+        sealZom.behavior.starMove()
+        sealZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let sealZ:WDSealNode = node as! WDSealNode
+            sealZ.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        weak var wSelf = self
+        sealZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
+        }
+        
+      
+        self.addZomNodeForViewArr(node: sealZom)
+        return sealZom
+    }
     
     
 ///////////////////////////公用////////////////

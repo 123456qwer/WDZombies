@@ -68,7 +68,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            //self.level_8_kulouKnightZom(isBoss: true)
+            //self.level_9_sealZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -298,6 +298,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         _ = mapZomModel.createKulouKnightZom(isBoss: isBoss)
     }
     
+    //海豹
+    func level_9_sealZom(isBoss:Bool) {
+        _ = mapZomModel.createSealZom(isBoss: isBoss)
+    }
+    
+    
     //从数组中删除Node方法
     func removeNodeFromArr(node:WDBaseNode){
         mapViewModel.removeNode(zomNode: node)
@@ -345,6 +351,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     @objc func testEmitter(timer:Timer) {
     }
+    
+    
     
     //MARK:操作相关方法
     //**************************************************************//

@@ -65,6 +65,13 @@ public let KULOU_KNIGHT_ATTACK1 = "KULOU_KNIGHT_ATTACK1"
 public let KULOU_KNIGHT_NAME    = "KULOU_KNIGHT_NAME"
 public let KULOU_KNIGHT_STAY    = "KULOU_KNIGHT_STAY"
 
+//海豹
+public let SEAL_NAME       = "SEAL_NAME"
+public let SEAL_MOVE       = "SEAL_MOVE"
+public let SEAL_DIED       = "SEAL_DIED"
+public let SEAL_STAY       = "SEAL_STAY"
+public let SEAL_ATTACK1    = "SEAL_ATTACK1"
+
 
 class WDConstant: NSObject {
 

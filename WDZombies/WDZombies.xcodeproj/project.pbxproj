@@ -128,6 +128,10 @@
 		435983621FC7A52900894AAD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 435983611FC7A52200894AAD /* libsqlite3.tbd */; };
 		435983641FC7A77700894AAD /* WDSkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435983631FC7A77700894AAD /* WDSkillModel.swift */; };
 		435E877F20059DFE0048BFC8 /* WDMonsterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435E877E20059DFE0048BFC8 /* WDMonsterModel.swift */; };
+		435E8782200610380048BFC8 /* sealPic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 435E8781200610380048BFC8 /* sealPic.atlas */; };
+		435E87842006106B0048BFC8 /* WDSealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435E87832006106B0048BFC8 /* WDSealModel.swift */; };
+		435E87862006107C0048BFC8 /* WDSealNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435E87852006107C0048BFC8 /* WDSealNode.swift */; };
+		435E8788200610930048BFC8 /* WDSealBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435E8787200610930048BFC8 /* WDSealBehavior.swift */; };
 		4360090F1FA9642A006D48ED /* skillFrame.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4360090E1FA9642A006D48ED /* skillFrame.gif */; };
 		43625F811FA1C62B00910ED0 /* NormalAttack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43625F801FA1C62B00910ED0 /* NormalAttack.png */; };
 		43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43625F821FA1C7FB00910ED0 /* WDAnimationTool.swift */; };
@@ -318,6 +322,10 @@
 		435983611FC7A52200894AAD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		435983631FC7A77700894AAD /* WDSkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillModel.swift; sourceTree = "<group>"; };
 		435E877E20059DFE0048BFC8 /* WDMonsterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMonsterModel.swift; sourceTree = "<group>"; };
+		435E8781200610380048BFC8 /* sealPic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sealPic.atlas; sourceTree = "<group>"; };
+		435E87832006106B0048BFC8 /* WDSealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSealModel.swift; sourceTree = "<group>"; };
+		435E87852006107C0048BFC8 /* WDSealNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSealNode.swift; sourceTree = "<group>"; };
+		435E8787200610930048BFC8 /* WDSealBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSealBehavior.swift; sourceTree = "<group>"; };
 		4360090E1FA9642A006D48ED /* skillFrame.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = skillFrame.gif; sourceTree = "<group>"; };
 		43625F801FA1C62B00910ED0 /* NormalAttack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NormalAttack.png; sourceTree = "<group>"; };
 		43625F821FA1C7FB00910ED0 /* WDAnimationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDAnimationTool.swift; sourceTree = "<group>"; };
@@ -650,6 +658,7 @@
 		434C5A8F1FD1309E00C921AF /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				435E8780200610270048BFC8 /* SealNode */,
 				43942E761FFF70A3003B728D /* kulouNightNode */,
 				43544F301FFE178400E82FD2 /* OXNode */,
 				436FF4001FF23B9300C40357 /* SquidNode */,
@@ -765,6 +774,17 @@
 				4359835F1FC7A49500894AAD /* libsqlite3.0.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		435E8780200610270048BFC8 /* SealNode */ = {
+			isa = PBXGroup;
+			children = (
+				435E8781200610380048BFC8 /* sealPic.atlas */,
+				435E8787200610930048BFC8 /* WDSealBehavior.swift */,
+				435E87852006107C0048BFC8 /* WDSealNode.swift */,
+				435E87832006106B0048BFC8 /* WDSealModel.swift */,
+			);
+			path = SealNode;
 			sourceTree = "<group>";
 		};
 		43656BB71F9EDD61001EFDA5 /* Base */ = {
@@ -954,6 +974,7 @@
 				434D58771FD547BF00253903 /* monster_4_attack.png in Resources */,
 				432F84CE1F9993E600F51146 /* starBG.jpg in Resources */,
 				43625F811FA1C62B00910ED0 /* NormalAttack.png in Resources */,
+				435E8782200610380048BFC8 /* sealPic.atlas in Resources */,
 				43551B0E1FCE3F0D00B86587 /* skill_1.png in Resources */,
 				43942E781FFF70B7003B728D /* kulouNightPic.atlas in Resources */,
 				434C5A861FD12FAA00C921AF /* Spark.sks in Resources */,
@@ -1075,6 +1096,7 @@
 				43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */,
 				436FF4061FF23C1D00C40357 /* WDSquidBehavior.swift in Sources */,
 				432F84D11F9999E800F51146 /* WDSkillAndFireView.swift in Sources */,
+				435E87842006106B0048BFC8 /* WDSealModel.swift in Sources */,
 				436FF4081FF23C3E00C40357 /* WDSquidModel.swift in Sources */,
 				434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */,
 				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
@@ -1092,6 +1114,7 @@
 				433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */,
 				434C5A9D1FD130D400C921AF /* WDPersonBehavior.swift in Sources */,
 				434C5A9B1FD130D400C921AF /* WDKulouBehavior.swift in Sources */,
+				435E8788200610930048BFC8 /* WDSealBehavior.swift in Sources */,
 				43544F381FFE181500E82FD2 /* WDOXModel.swift in Sources */,
 				4353DABB1FEBB18B0092BD28 /* WDMap_1ViewModel.swift in Sources */,
 				432F84DF1F99F2CF00F51146 /* WDSkillSelectView.swift in Sources */,
@@ -1099,6 +1122,7 @@
 				43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */,
 				43942E7C1FFF7117003B728D /* WDKulouKnightNode.swift in Sources */,
 				43365B741FC2674C00356D64 /* WDSkillBlockView.swift in Sources */,
+				435E87862006107C0048BFC8 /* WDSealNode.swift in Sources */,
 				436FF4041FF23BF900C40357 /* WDSquidNode.swift in Sources */,
 				434CDE1F1FE910C600E46199 /* WDGreenModel.swift in Sources */,
 				432F84D61F99A85300F51146 /* WDSkillView.swift in Sources */,

@@ -46,7 +46,14 @@ class WDBaseModel: NSObject {
             self.configureOXZom()
         }else if zomName == KULOU_KNIGHT_NAME{
             self.configureKulouKnightZom()
+        }else if zomName == SEAL_NAME{
+            self.configureSealZom()
         }
+    }
+    
+    func configureSealZom(){
+        self.setTextureWithString(moveName: SEAL_MOVE, diedName: SEAL_DIED, attack1Name: SEAL_ATTACK1, attack2Name: "none")
+        beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "sealPic", textureName: "seal_died_1")
     }
     
     func configureKulouKnightZom() {
