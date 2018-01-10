@@ -39,9 +39,6 @@ class WDKulouKnightNode: WDBaseNode {
         self.wdAttack = 3
         
         self.setAttribute(isBoss: self.isBoss)
-        
-        //self.addChild(model.phyColorNode())
-        
     }
     
     override func clearAction() {
@@ -58,6 +55,7 @@ class WDKulouKnightNode: WDBaseNode {
             behavior.xScale = 0.6
             behavior.yScale = 0.6
         }
-        
     }
+    
+    
 }
