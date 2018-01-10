@@ -58,10 +58,8 @@ class WDZombieNode: WDBaseNode {
            self.removeLink()
             return
         }
-        
         moveAction(self)
     }
-    
     
     /// 设置物理碰撞
     func setPhy() -> Void {
@@ -71,11 +69,9 @@ class WDZombieNode: WDBaseNode {
     }
     
     deinit {
-        self.moveDic = nil
-        self.diedArr = nil
-        self.attackDic = nil
         print("怪物node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
     }
+    
     
     /// 移除物理碰撞
     func removePhy() -> Void {
@@ -83,7 +79,6 @@ class WDZombieNode: WDBaseNode {
         self.physicsBody?.contactTestBitMask = 0;
         self.physicsBody?.collisionBitMask = 0;
     }
-    
     
     //远距离攻击，5秒出发一次
     @objc func redMoveTime()  {
@@ -95,8 +90,6 @@ class WDZombieNode: WDBaseNode {
                 redZomAttackCount = 0
             }
         }
-       
-        
     }
     
     func initWithZomType(type:zomType) -> Void {

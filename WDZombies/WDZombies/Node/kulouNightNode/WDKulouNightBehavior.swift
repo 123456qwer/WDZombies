@@ -14,8 +14,6 @@ class WDKulouNightBehavior: WDBaseNodeBehavior {
     typealias attack1 = (_ kulouKnightNode:WDKulouKnightNode) -> Void
     typealias attack2 = (_ kulouKnightNode:WDKulouKnightNode,_ personNode:WDPersonNode) -> Void
 
-    
-    
     weak var kulouKnightNode:WDKulouKnightNode!
     var callTimeCount:NSInteger = 0
     var callAttackBlock:attack1!
@@ -30,10 +28,11 @@ class WDKulouNightBehavior: WDBaseNodeBehavior {
             }
         }
     }
-    
  
     @objc func canMove() {
         kulouKnightNode.canMove = true
+        self.callAttackBlock(kulouKnightNode)
+
     }
     
     //MARK:复写方法

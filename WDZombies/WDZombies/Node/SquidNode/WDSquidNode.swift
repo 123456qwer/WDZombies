@@ -13,6 +13,10 @@ class WDSquidNode: WDBaseNode {
     var behavior:WDSquidBehavior = WDSquidBehavior.init()
     var model:WDSquidModel = WDSquidModel.init()
     
+    deinit {
+        print("鱿鱼哥被释放了")
+    }
+    
     override func configureModel() {
         model.configureWithZomName(zomName: SQUID_NAME)
     }

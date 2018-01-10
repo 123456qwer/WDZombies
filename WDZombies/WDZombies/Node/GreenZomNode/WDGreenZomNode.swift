@@ -15,7 +15,6 @@ class WDGreenZomNode: WDBaseNode{
     var behavior:WDGreenBehavior! = WDGreenBehavior.init()
     var model:WDGreenModel = WDGreenModel.init()
 
-    
     deinit {
         print("绿色僵尸释放了！！！！")
     }
@@ -30,7 +29,6 @@ class WDGreenZomNode: WDBaseNode{
 
     }
 
-  
     func setPhy() -> Void {
         self.physicsBody?.categoryBitMask = GREEN_ZOM_CATEGORY
         self.physicsBody?.contactTestBitMask = GREEN_ZOM_CONTACT
@@ -58,14 +56,10 @@ class WDGreenZomNode: WDBaseNode{
         
         behavior.setNode(node: self)
         behavior.node = self
-        
-        
         self.name = GREEN_ZOM_NAME
-       
         
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
-        
         
         self.physicsBody = model.physics()
         self.direction = kLeft

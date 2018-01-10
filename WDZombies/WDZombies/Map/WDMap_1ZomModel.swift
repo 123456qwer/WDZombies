@@ -288,7 +288,6 @@ class WDMap_1ZomModel: NSObject {
             knightNode.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
         }
         
-        
         weak var wSelf = self
         kulouKnightZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
@@ -309,6 +308,7 @@ class WDMap_1ZomModel: NSObject {
         return kulouKnightZom
     }
     
+    
     func kulouKnightCallKulou(point:CGPoint) {
         let kulou = self.createKulouZom(isBoss: false)
         kulou.canMove = false
@@ -325,7 +325,10 @@ class WDMap_1ZomModel: NSObject {
     }
     
     
+    
+    
 ///////////////////////////公用////////////////
+    //MARK:僵尸死亡
     /// 僵尸死亡调用方法
     func diedNextAction(map:WDMap_1Scene,node:WDBaseNode,count:NSInteger) {
         
@@ -349,11 +352,9 @@ class WDMap_1ZomModel: NSObject {
             map.createBoss()
             map.removeNodeFromArr(node:node)
         }
-        
-
     }
     
-    
+    //MARK:添加僵尸进入数组
     /// 将怪物Node添加到数组
     func addZomNodeForViewArr(node:WDBaseNode){
         map1_scene.addZomNode(node:node)

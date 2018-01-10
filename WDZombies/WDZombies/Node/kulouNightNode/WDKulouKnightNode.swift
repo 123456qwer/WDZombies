@@ -17,6 +17,10 @@ class WDKulouKnightNode: WDBaseNode {
         model.configureWithZomName(zomName: KULOU_KNIGHT_NAME)
     }
     
+    deinit {
+        print("骷髅骑士释放了！！！！")
+    }
+    
     func initWithPerson(personNode:WDPersonNode) {
         self.configureModel()
         nodeModel = model
