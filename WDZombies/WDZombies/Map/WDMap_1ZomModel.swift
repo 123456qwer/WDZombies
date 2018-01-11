@@ -128,6 +128,8 @@ class WDMap_1ZomModel: NSObject {
             let kulouNode:WDKulouNode = node as! WDKulouNode
             if kulouNode.isCall {
                 return
+                
+                
             }
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 3)
         }
@@ -168,10 +170,7 @@ class WDMap_1ZomModel: NSObject {
         self.addZomNodeForViewArr(node: zombieNode)
         return zombieNode
     }
-    
-    
-    
-    
+
     //MARK:创建红色僵尸
     /// 创建红色僵尸
     func createRedZom(isBoss:Bool) -> WDZombieNode {
@@ -289,7 +288,6 @@ class WDMap_1ZomModel: NSObject {
             knightNode.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
         }
         
-        
         weak var wSelf = self
         kulouKnightZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
@@ -310,6 +308,7 @@ class WDMap_1ZomModel: NSObject {
         return kulouKnightZom
     }
     
+    
     func kulouKnightCallKulou(point:CGPoint) {
         let kulou = self.createKulouZom(isBoss: false)
         kulou.canMove = false
@@ -325,25 +324,64 @@ class WDMap_1ZomModel: NSObject {
         self.addZomNodeForViewArr(node: kulou)
     }
     
+    //MARK:创建海豹
+    func createSealZom(isBoss:Bool) -> WDSealNode {
+        let sealZom:WDSealNode = WDSealNode.init()
+        sealZom.size = CGSize(width:130 ,height:150)
+        sealZom.isBoss = isBoss
+        sealZom.initWithPerson(personNode: map1_scene.personNode)
+        map1_scene.bgNode.addChild(sealZom)
+        weak var weakSelf = map1_scene
+        sealZom.behavior.starMove()
+        sealZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let sealZ:WDSealNode = node as! WDSealNode
+            sealZ.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        weak var wSelf = self
+        sealZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
+        }
+        
+        sealZom.behavior.iceAttackBlock = {(sealNode:WDSealNode) -> Void in
+             sealNode.behavior.attack(direction: "", nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+      
+        sealZom.behavior.iceAttackAction(personNode: map1_scene.personNode, point: map1_scene.position)
+        self.addZomNodeForViewArr(node: sealZom)
+        return sealZom
+    }
+    
     
 ///////////////////////////公用////////////////
+    //MARK:僵尸死亡
     /// 僵尸死亡调用方法
     func diedNextAction(map:WDMap_1Scene,node:WDBaseNode,count:NSInteger) {
+        
+        let monsterModel:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName: node.name!)
+        monsterModel.killCount = monsterModel.killCount + 1
+        _ = monsterModel.changeMonsterToSqlite()
+        
+        print(monsterModel.killCount)
+       
         let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
         if node.isBoss && model.monsterCount < count{
             model.monsterCount = count
             map.levelUp(model: model)
             map.personNode.createLevelUpNode()
             map.playNext()
+            map.overTime(bossNode: node)
         }else if node.isBoss {
             map.playNext()
+            map.overTime(bossNode: node)
         }else{
             map.createBoss()
             map.removeNodeFromArr(node:node)
         }
     }
     
-    
+    //MARK:添加僵尸进入数组
     /// 将怪物Node添加到数组
     func addZomNodeForViewArr(node:WDBaseNode){
         map1_scene.addZomNode(node:node)

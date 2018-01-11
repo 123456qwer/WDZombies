@@ -13,6 +13,10 @@ class WDOXNode: WDBaseNode {
     var behavior:WDOXBehavior = WDOXBehavior.init()
     var model:WDOXModel = WDOXModel.init()
     
+    deinit {
+        print("公牛释放了！！！！")
+    }
+    
     override func configureModel() {
         model.configureWithZomName(zomName: OX_NAME)
     }
@@ -22,10 +26,8 @@ class WDOXNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-        
-        
+    
         self.name = OX_NAME
-        
         
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y

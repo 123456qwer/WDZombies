@@ -24,7 +24,7 @@ class WDMonsterVC: WDBaseViewController {
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 3,height:0)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 4,height:0)
         
     
         //monster1
@@ -35,6 +35,9 @@ class WDMonsterVC: WDBaseViewController {
         
         //雾骑士 & 鱿鱼
         self.createMonster3()
+        
+        //公牛 & 骷髅骑士
+        self.createMonster4()
 
         let model:WDUserModel = WDUserModel.init()
         _ = model.searchToDB()
@@ -85,13 +88,29 @@ class WDMonsterVC: WDBaseViewController {
         return arr
     }
     
+    func createKillArrWithName(name1:String,name2:String) -> NSArray{
+        let model1:WDMonsterModel = WDMonsterModel.init()
+        model1.monsterName  = name1
+        _ = model1.searchToDB()
+        
+        let model2:WDMonsterModel = WDMonsterModel.init()
+        model2.monsterName  = name2
+        _ = model2.searchToDB()
+       
+        let kill1:String = "killed:\(model1.killCount)\n be killed:\(model1.beKillCount)"
+        let kill2:String = "killed:\(model2.killCount)\n be killed:\(model2.beKillCount)"
+
+        return [kill1,kill2]
+    }
     
     func createMonster1()  {
         
+        
         let arr:NSMutableArray = self.createView(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight), bgImage: UIImage.init(named: "redSun.jpg")!)
+    
         
         let arrType:NSArray = [zomType.Normal,zomType.Red]
-        let strArr:NSArray = ["Normal Zombie,Just Begin","Stronger than left :("]
+        let strArr:NSArray = self.createKillArrWithName(name1: NORMAL_ZOM, name2: RED_ZOM)
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
         let imageArr:NSArray = [[UIImage.init(named: "monster_1_move")!,UIImage.init(named: "monster_2_move")!],[UIImage.init(named: "monster_1_move_red")!,UIImage.init(named: "monster_2_move_red")!]]
         
@@ -163,7 +182,7 @@ class WDMonsterVC: WDBaseViewController {
         
         let move:NSArray = [moveArr,moveArr2]
         let attack:NSArray = [attackArr,attack2Arr]
-        let strArr:NSArray = ["I am the BOSS!","I am Slow"]
+        let strArr:NSArray = self.createKillArrWithName(name1: KULOU_NAME, name2: GREEN_ZOM_NAME)
         let arrType:NSArray = [zomType.kulou,zomType.GreenZom]
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
     
@@ -220,7 +239,7 @@ class WDMonsterVC: WDBaseViewController {
         
         let move:NSArray = [moveArr,moveArr2]
         let attack:NSArray = [attack1Arr,attack2Arr]
-        let strArr:NSArray = ["KNIGHT!!","I am a Squid~"]
+        let strArr:NSArray = self.createKillArrWithName(name1: KNIGHT_NAME, name2: SQUID_NAME)
         let arrType:NSArray = [zomType.kNight,zomType.Squid]
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
         
@@ -234,9 +253,49 @@ class WDMonsterVC: WDBaseViewController {
             
             viewArr.add(view)
         }
+    }
+    
+    func createMonster4() {
+        let arr:NSMutableArray = self.createView(frame: CGRect(x:kScreenWidth * 3,y:0,width:kScreenWidth,height:kScreenHeight), bgImage: UIImage.init(named: "universe.jpg")!)
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let moveArr2:NSMutableArray = NSMutableArray.init()
+        let attack2Arr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...7{
+            let moveName = "ox_stay_\(index + 1)"
+            let moveTemp:UIImage = UIImage.init(named: moveName)!
+            moveArr.add(moveTemp)
+            
+       
+        }
         
         
+        for index:NSInteger in 0...3 {
+          
+            let name = "kulou_knight_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr2.add(temp)
+            
+        }
         
+        let move:NSArray = [moveArr,moveArr2]
+        let attack:NSArray = [attack1Arr,attack2Arr]
+        let strArr:NSArray = self.createKillArrWithName(name1: OX_NAME, name2: KULOU_KNIGHT_NAME)
+        let arrType:NSArray = [zomType.ox,zomType.kulouKnight]
+        let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
+        
+        for index:NSInteger in 0...arr.count - 1 {
+            let view:WDMonsterView = arr.object(at: index) as! WDMonsterView
+            
+            view.setImage1(images: move.object(at: index) as! NSArray,frame:view.imageView1.frame)
+            view.setImage2(images: attack.object(at: index) as! NSArray,frame:view.imageView2.frame)
+            view.createWithType(type: arrType.object(at: index) as! zomType)
+            view.setDetail(str: strArr.object(at: index) as! String,font:fontArr.object(at: index) as! UIFont)
+            
+            viewArr.add(view)
+        }
     }
     
     deinit {

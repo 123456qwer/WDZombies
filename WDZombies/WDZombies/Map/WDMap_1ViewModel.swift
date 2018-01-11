@@ -31,11 +31,23 @@ class WDMap_1ViewModel: NSObject {
     //碰撞逻辑
     func phyContact(contact: SKPhysicsContact,personNode:WDPersonNode,boomModel:WDSkillModel){
         
-        let A = contact.bodyA.node;
-        let B = contact.bodyB.node;
+        let A:SKNode = contact.bodyA.node!
+        let B:SKNode = contact.bodyB.node!
+        
+        
+        if A.name == nil {
+            print(A,"崩溃原因！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！")
+            return
+        }
+        
+        if B.name == nil {
+            print(B,"崩溃原因！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！")
+            return
+        }
         
         var pNode:WDPersonNode?
         var zomNode:WDZombieNode?
+        var redNode:WDZombieNode?
         var fireNode:SKSpriteNode?
         var boomNode:SKSpriteNode?
         var magicNode:SKEmitterNode?
@@ -51,103 +63,124 @@ class WDMap_1ViewModel: NSObject {
         var oxNode:WDOXNode?
         var oxLightNode:SKSpriteNode?
         var kulouNightNode:WDKulouKnightNode?
+        var sealIceNode:SKSpriteNode?
+        var sealNode:WDSealNode?
         
-     
-        kulouNightNode = (A?.name?.isEqual(KULOU_KNIGHT_NAME))! ? (A as? WDKulouKnightNode):nil;
+        sealNode = (A.name?.isEqual(SEAL_NAME))! ? (A as? WDSealNode):nil;
+        if sealNode == nil {
+            sealNode = (B.name?.isEqual(SEAL_NAME))! ? (B as? WDSealNode):nil;
+        }
+        
+        sealIceNode = (A.name?.isEqual(SEAl_ICE))! ? (A as? SKSpriteNode):nil;
+        if sealIceNode == nil {
+            sealIceNode = (B.name?.isEqual(SEAl_ICE))! ? (B as? SKSpriteNode):nil;
+        }
+    
+        kulouNightNode = (A.name?.isEqual(KULOU_KNIGHT_NAME))! ? (A as? WDKulouKnightNode):nil;
         if kulouNightNode == nil {
-            kulouNightNode = (B?.name?.isEqual(KULOU_KNIGHT_NAME))! ? (B as? WDKulouKnightNode):nil;
+            kulouNightNode = (B.name?.isEqual(KULOU_KNIGHT_NAME))! ? (B as? WDKulouKnightNode):nil;
         }
         
-        oxLightNode = (A?.name?.isEqual(OX_LIGHT))! ? (A as? SKSpriteNode):nil;
+        oxLightNode = (A.name?.isEqual(OX_LIGHT))! ? (A as? SKSpriteNode):nil;
         if oxLightNode == nil {
-            oxLightNode = (B?.name?.isEqual(OX_LIGHT))! ? (B as? SKSpriteNode):nil;
+            oxLightNode = (B.name?.isEqual(OX_LIGHT))! ? (B as? SKSpriteNode):nil;
         }
         
-        oxNode = (A?.name?.isEqual(OX_NAME))! ? (A as? WDOXNode):nil;
+        oxNode = (A.name?.isEqual(OX_NAME))! ? (A as? WDOXNode):nil;
         if oxNode == nil {
-            oxNode = (B?.name?.isEqual(OX_NAME))! ? (B as? WDOXNode):nil;
+            oxNode = (B.name?.isEqual(OX_NAME))! ? (B as? WDOXNode):nil;
         }
         
-        inkNode = (A?.name?.isEqual(SQUID_INK))! ? (A as? SKSpriteNode):nil;
+        inkNode = (A.name?.isEqual(SQUID_INK))! ? (A as? SKSpriteNode):nil;
         if inkNode == nil {
-            inkNode = (B?.name?.isEqual(SQUID_INK))! ? (B as? SKSpriteNode):nil;
+            inkNode = (B.name?.isEqual(SQUID_INK))! ? (B as? SKSpriteNode):nil;
         }
         
-        squidNode = (A?.name?.isEqual(SQUID_NAME))! ? (A as? WDSquidNode):nil;
+        squidNode = (A.name?.isEqual(SQUID_NAME))! ? (A as? WDSquidNode):nil;
         if squidNode == nil {
-            squidNode = (B?.name?.isEqual(SQUID_NAME))! ? (B as? WDSquidNode):nil;
+            squidNode = (B.name?.isEqual(SQUID_NAME))! ? (B as? WDSquidNode):nil;
         }
         
-        meteoriteNode = (A?.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (A as? SKSpriteNode):nil;
+        meteoriteNode = (A.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (A as? SKSpriteNode):nil;
         if meteoriteNode == nil {
-            meteoriteNode = (B?.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (B as? SKSpriteNode):nil;
+            meteoriteNode = (B.name?.isEqual(KNIGHT_METEORITE_NAME))! ? (B as? SKSpriteNode):nil;
         }
         
-        knightNode = (A?.name?.isEqual(KNIGHT_NAME))! ? (A as? WDSmokeKnightNode):nil;
+        knightNode = (A.name?.isEqual(KNIGHT_NAME))! ? (A as? WDSmokeKnightNode):nil;
         if knightNode == nil {
-            knightNode = (B?.name?.isEqual(KNIGHT_NAME))! ? (B as? WDSmokeKnightNode):nil;
+            knightNode = (B.name?.isEqual(KNIGHT_NAME))! ? (B as? WDSmokeKnightNode):nil;
         }
         
-        greenClaw = (A?.name?.isEqual(GREEN_CLAW_NAME))! ? (A as? SKSpriteNode):nil;
+        greenClaw = (A.name?.isEqual(GREEN_CLAW_NAME))! ? (A as? SKSpriteNode):nil;
         if greenClaw == nil {
-            greenClaw = (B?.name?.isEqual(GREEN_CLAW_NAME))! ? (B as? SKSpriteNode):nil;
+            greenClaw = (B.name?.isEqual(GREEN_CLAW_NAME))! ? (B as? SKSpriteNode):nil;
         }
         
-        greenNode = (A?.name?.isEqual(GREEN_ZOM_NAME))! ? (A as? WDGreenZomNode):nil;
+        greenNode = (A.name?.isEqual(GREEN_ZOM_NAME))! ? (A as? WDGreenZomNode):nil;
         if greenNode == nil {
-            greenNode = (B?.name?.isEqual(GREEN_ZOM_NAME))! ? (B as? WDGreenZomNode):nil;
+            greenNode = (B.name?.isEqual(GREEN_ZOM_NAME))! ? (B as? WDGreenZomNode):nil;
         }
         
-        greenSmoke = (A?.name?.isEqual(GREEN_SMOKE_NAME))! ? (A as? SKSpriteNode):nil;
+        greenSmoke = (A.name?.isEqual(GREEN_SMOKE_NAME))! ? (A as? SKSpriteNode):nil;
         if greenSmoke == nil {
-            greenSmoke = (B?.name?.isEqual(GREEN_SMOKE_NAME))! ? (B as? SKSpriteNode):nil;
+            greenSmoke = (B.name?.isEqual(GREEN_SMOKE_NAME))! ? (B as? SKSpriteNode):nil;
         }
         
-        kulouNode = (A?.name?.isEqual(KULOU))! ? (A as? WDKulouNode):nil;
+        kulouNode = (A.name?.isEqual(KULOU_NAME))! ? (A as? WDKulouNode):nil;
         if kulouNode == nil {
-            kulouNode = (B?.name?.isEqual(KULOU))! ? (B as? WDKulouNode):nil;
+            kulouNode = (B.name?.isEqual(KULOU_NAME))! ? (B as? WDKulouNode):nil;
         }
         
-        boss1Node = (A?.name?.isEqual(BOSS1))! ? (A as? WDBossNode_1):nil;
+        boss1Node = (A.name?.isEqual(BOSS1))! ? (A as? WDBossNode_1):nil;
         if boss1Node == nil {
-            boss1Node = (B?.name?.isEqual(BOSS1))! ? (B as? WDBossNode_1):nil;
+            boss1Node = (B.name?.isEqual(BOSS1))! ? (B as? WDBossNode_1):nil;
         }
         
-        magicNode = (A?.name?.isEqual(MAGIC))! ? (A as? SKEmitterNode):nil;
+        magicNode = (A.name?.isEqual(MAGIC))! ? (A as? SKEmitterNode):nil;
         if magicNode == nil {
-            magicNode = (B?.name?.isEqual(MAGIC))! ? (B as? SKEmitterNode):nil;
+            magicNode = (B.name?.isEqual(MAGIC))! ? (B as? SKEmitterNode):nil;
         }
         
-        pNode = (A?.name?.isEqual(PERSON))! ? (A as? WDPersonNode):nil;
+        pNode = (A.name?.isEqual(PERSON))! ? (A as? WDPersonNode):nil;
         if pNode == nil {
-            pNode = (B?.name?.isEqual(PERSON))! ? (B as? WDPersonNode):nil;
+            pNode = (B.name?.isEqual(PERSON))! ? (B as? WDPersonNode):nil;
         }
         
-        zomNode = (A?.name?.isEqual(ZOMBIE))! ? (A as? WDZombieNode):nil;
+        zomNode = (A.name?.isEqual(NORMAL_ZOM))! ? (A as? WDZombieNode):nil;
         if zomNode == nil {
-            zomNode = (B?.name?.isEqual(ZOMBIE))! ? (B as? WDZombieNode):nil;
+            zomNode = (B.name?.isEqual(NORMAL_ZOM))! ? (B as? WDZombieNode):nil;
         }
         
-        fireNode = (A?.name?.isEqual(FIRE))! ? (A as? SKSpriteNode):nil;
+        redNode = (A.name?.isEqual(RED_ZOM))! ? (A as? WDZombieNode):nil;
+        if redNode == nil {
+            redNode = (B.name?.isEqual(RED_ZOM))! ? (B as? WDZombieNode):nil;
+        }
+        
+        fireNode = (A.name?.isEqual(FIRE))! ? (A as? SKSpriteNode):nil;
         if fireNode == nil {
-            fireNode = (B?.name?.isEqual(FIRE))! ? (B as? SKSpriteNode):nil;
+            fireNode = (B.name?.isEqual(FIRE))! ? (B as? SKSpriteNode):nil;
         }
         
-        boomNode = (A?.name?.isEqual(BOOM))! ? (A as? SKSpriteNode):nil;
+        boomNode = (A.name?.isEqual(BOOM))! ? (A as? SKSpriteNode):nil;
         if boomNode == nil {
-            boomNode = (B?.name?.isEqual(BOOM))! ? (B as? SKSpriteNode):nil;
+            boomNode = (B.name?.isEqual(BOOM))! ? (B as? SKSpriteNode):nil;
         }
+        
+        
+   //////逻辑////////
         
         if pNode != nil && boss1Node != nil {
             boss1Node?.bossBehavior.stopMoveAction(direction: "")
             boss1Node?.bossBehavior.attackAction(node: pNode!)
         }
         
-        
         if pNode != nil && zomNode != nil{
             self.personAndNormalZom(pNode: pNode!, zomNode: zomNode!)
         }
         
+        if pNode != nil && redNode != nil{
+            self.personAndNormalZom(pNode: pNode!, zomNode: redNode!)
+        }
         
         if boomNode != nil && zomNode != nil {
             personNode.wdAttack += CGFloat(boomModel.skillLevel2)
@@ -155,14 +188,25 @@ class WDMap_1ViewModel: NSObject {
             personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
         }
         
+        if boomNode != nil && redNode != nil {
+            personNode.wdAttack += CGFloat(boomModel.skillLevel2)
+            redNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: redNode!)
+            personNode.wdAttack -= CGFloat(boomModel.skillLevel2)
+        }
+        
         if magicNode != nil && pNode != nil {
             WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:1)
+            personNode.personBehavior.reduceBlood(number:1,monsterName: RED_ZOM)
         }
         
         if zomNode != nil && fireNode != nil{
             fireNode?.removeFromParent()
             zomNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: zomNode!)
+        }
+        
+        if redNode != nil && fireNode != nil{
+            fireNode?.removeFromParent()
+            redNode?.behavior.beAattackAction(attackNode: personNode, beAttackNode: redNode!)
         }
         
         if kulouNode != nil && fireNode != nil {
@@ -184,13 +228,13 @@ class WDMap_1ViewModel: NSObject {
         if greenClaw != nil && pNode != nil {
             // print("受到绿僵尸爪子攻击")
             WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:2)
+            personNode.personBehavior.reduceBlood(number:2,monsterName: GREEN_ZOM_NAME)
         }
         
         if greenSmoke != nil && pNode != nil {
             // print("受到毒气烟雾的攻击")
             WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:2)
+            personNode.personBehavior.reduceBlood(number:2,monsterName: GREEN_ZOM_NAME)
         }
         
         if greenNode != nil && fireNode != nil {
@@ -212,7 +256,7 @@ class WDMap_1ViewModel: NSObject {
         
         if pNode != nil && meteoriteNode != nil{
             WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:2)
+            personNode.personBehavior.reduceBlood(number:2,monsterName: KNIGHT_NAME)
             //print("陨石砸到我了")
         }
         
@@ -237,7 +281,7 @@ class WDMap_1ViewModel: NSObject {
                 inkNode?.removeFromParent()
             })
             WDAnimationTool.bloodAnimation(node:personNode)
-            personNode.personBehavior.reduceBlood(number:1)
+            personNode.personBehavior.reduceBlood(number:1,monsterName: SQUID_NAME)
         }
         
         if squidNode != nil && fireNode != nil {
@@ -248,7 +292,8 @@ class WDMap_1ViewModel: NSObject {
         
         if pNode != nil && oxLightNode != nil{
             WDAnimationTool.bloodAnimation(node: personNode)
-            personNode.personBehavior.reduceBlood(number: 1)
+            personNode.personBehavior.reduceBlood(number: 1,monsterName: OX_NAME)
+            personNode.personBehavior.beFlashAttack()
         }
         
         if fireNode != nil && oxNode != nil{
@@ -262,6 +307,23 @@ class WDMap_1ViewModel: NSObject {
             WDAnimationTool.bloodAnimation(node: kulouNightNode!)
             fireNode?.removeFromParent()
         }
+       
+        if sealIceNode != nil && pNode != nil{
+            WDAnimationTool.bloodAnimation(node: personNode)
+            personNode.personBehavior.reduceBlood(number: 1,monsterName: OX_NAME)
+            personNode.personBehavior.beIceAttack()
+        }
+        
+        if sealNode != nil && fireNode != nil {
+            _ = sealNode?.behavior.beAttack(attackNode: personNode, beAttackNode: sealNode!)
+            WDAnimationTool.bloodAnimation(node: sealNode!)
+            fireNode?.removeFromParent()
+        }
+        
+        if sealNode != nil && pNode != nil{
+            sealNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
+        }
+        
         
     }
     

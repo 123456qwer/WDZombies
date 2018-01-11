@@ -17,6 +17,10 @@ class WDPersonNode: WDBaseNode {
     var bloodNode:SKSpriteNode! = nil
     var ggAction:gameOverAction!
     var fuzhujiArr:NSMutableArray = NSMutableArray.init()
+    var fly_isFire:Bool = false
+    var lastRotation:CGFloat = 0
+    var fly_fireArr:NSMutableArray = NSMutableArray.init()
+    var beFlashTexture:SKTexture = SKTexture.init(image: UIImage.init(named: "person_beFlash")!)
     deinit {
         print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
         self.removeObserver(personBehavior, forKeyPath: "position")
@@ -45,6 +49,12 @@ class WDPersonNode: WDBaseNode {
             let image = UIImage.init(named: "fuzhuji_\(index + 1)")
             let texture = SKTexture.init(image: image!)
             fuzhujiArr.add(texture)
+        }
+        
+        for index:NSInteger in 0...5 {
+            let image = UIImage.init(named: "fly_bullet_\(index + 1)")
+            let texture = SKTexture.init(image: image!)
+            fly_fireArr.add(texture)
         }
         
         moveDic = dic

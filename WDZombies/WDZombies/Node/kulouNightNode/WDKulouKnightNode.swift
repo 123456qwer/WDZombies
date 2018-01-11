@@ -17,6 +17,10 @@ class WDKulouKnightNode: WDBaseNode {
         model.configureWithZomName(zomName: KULOU_KNIGHT_NAME)
     }
     
+    deinit {
+        print("骷髅骑士释放了！！！！")
+    }
+    
     func initWithPerson(personNode:WDPersonNode) {
         self.configureModel()
         nodeModel = model
@@ -35,9 +39,6 @@ class WDKulouKnightNode: WDBaseNode {
         self.wdAttack = 3
         
         self.setAttribute(isBoss: self.isBoss)
-        
-        //self.addChild(model.phyColorNode())
-        
     }
     
     override func clearAction() {
@@ -54,6 +55,7 @@ class WDKulouKnightNode: WDBaseNode {
             behavior.xScale = 0.6
             behavior.yScale = 0.6
         }
-        
     }
+    
+    
 }

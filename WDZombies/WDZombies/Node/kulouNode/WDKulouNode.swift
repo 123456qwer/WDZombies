@@ -38,7 +38,7 @@ class WDKulouNode: WDBaseNode {
         behavior.setNode(node:self)
         behavior.node = self
         
-        self.name = "KULOU"
+        self.name = KULOU_NAME
         
         let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:80,height:80))
         physicsBody.affectedByGravity = false;
@@ -59,7 +59,6 @@ class WDKulouNode: WDBaseNode {
         self.direction = kLeft
         self.wdFire_impact = 100
         self.wdAttack = 3
-        
     }
     
     
@@ -76,7 +75,6 @@ class WDKulouNode: WDBaseNode {
     }
     
     func setPhysicsBody(isSet:Bool) -> Void {
- 
         if isSet {
             self.setPhy()
         }else{
@@ -97,4 +95,5 @@ class WDKulouNode: WDBaseNode {
         self.physicsBody?.collisionBitMask = 0;
     }
 
+    
 }

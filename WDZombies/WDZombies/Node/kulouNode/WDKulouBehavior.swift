@@ -31,9 +31,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         }
     }
     
-    
 
- 
     func blinkAction(personNode:WDPersonNode) {
         
         kulouNode.canMove = false
@@ -53,11 +51,6 @@ class WDKulouBehavior: WDBaseNodeBehavior {
             self.kulouNode.alpha = 1
         }
     }
-    
-
-
-    
-  
     
     
     
@@ -92,10 +85,6 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         kulouNode = node as! WDKulouNode
         attackTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(blinkTimerAction), userInfo: nil, repeats: true)
     }
-    
-    
-    
-    
     
     
     //MARK:私有

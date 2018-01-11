@@ -23,8 +23,7 @@ class WDKnightBehavior: WDBaseNodeBehavior {
     weak var kNight:WDSmokeKnightNode!
     var blood = 0
    
-    
-    
+
     func blackCircleAttackAction(personNode:WDPersonNode){
         self.blackCircleAnimation(personNode: personNode)
     }
@@ -33,8 +32,6 @@ class WDKnightBehavior: WDBaseNodeBehavior {
     func meteoriteAttackAction(personNode:WDPersonNode){
         self.meteoriteAttackAnimation(personNode: personNode)
     }
-    
-    
     
 //*************************动画相关******************************************//
     //释放黑色漩涡
@@ -193,12 +190,9 @@ class WDKnightBehavior: WDBaseNodeBehavior {
     }
     
     
-  
-    
     override func beAttack(attackNode: WDBaseNode, beAttackNode: WDBaseNode) -> Bool {
         let isBreak:Bool = super.beAttack(attackNode: attackNode, beAttackNode: beAttackNode)
         if isBreak   {
-            print("雾骑士被打瘫痪了")
             self.blinkAction(personNode: attackNode as! WDPersonNode)
         }
         return isBreak
@@ -247,7 +241,5 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             }
         }
     }
-    
-  
     
 }

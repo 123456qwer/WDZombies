@@ -41,40 +41,93 @@ class WDAnimationTool: NSObject {
         node.run(repeatAction, withKey: "move")
     }
     
-    static func fuzhujiRotateAnimation(direction:NSString,fuzhuji:SKSpriteNode){
-        
-        //俩个计算为了避免转一周
-        var action:SKAction!
+    static func initRotateDirection(direction:NSString) -> CGFloat{
+        var endRotation:CGFloat = 0
         switch direction {
         case kLeft:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi), duration: 0.25)
+            endRotation = CGFloat(Double.pi)
             break
         case kRight:
-            action = SKAction.rotate(toAngle: CGFloat(2*Double.pi), duration: 0.25)
+            endRotation = 0
             break
         case kUp:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 2.0), duration: 0.25)
+            endRotation = CGFloat(Double.pi / 2.0)
             break
         case kDown:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 2.0 + Double.pi), duration: 0.25)
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi)
             break
         case kLD:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi + Double.pi / 4.0), duration: 0.25)
+            endRotation = CGFloat(Double.pi + Double.pi / 4.0)
             break
         case kRD:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0), duration: 0.25)
+            endRotation = CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0)
             break
         case kRU:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 4.0), duration: 0.25)
+            endRotation = CGFloat(Double.pi / 4.0)
             break
         case kLU:
-            action = SKAction.rotate(toAngle: CGFloat(Double.pi / 2.0 + Double.pi / 4.0), duration: 0.25)
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi / 4.0)
             break
         default:
             break
         }
         
-        fuzhuji.run(action)
+        return endRotation
+    }
+    
+    static func fuzhujiRotateAnimation(direction:NSString,personNode:WDPersonNode){
+        
+        //俩个计算为了避免转一周
+        let time:TimeInterval = 0.15
+        var action:SKAction!
+        let starRotation = personNode.lastRotation
+        personNode.fuzhujiNode.zRotation = starRotation
+        var endRotation:CGFloat = 0
+        
+        switch direction {
+        case kLeft:
+            endRotation = CGFloat(Double.pi)
+            break
+        case kRight:
+            endRotation = 0
+            break
+        case kUp:
+            endRotation = CGFloat(Double.pi / 2.0)
+            break
+        case kDown:
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi)
+            break
+        case kLD:
+            endRotation = CGFloat(Double.pi + Double.pi / 4.0)
+            break
+        case kRD:
+            endRotation = CGFloat(Double.pi / 4.0 + Double.pi + Double.pi / 2.0)
+            break
+        case kRU:
+            endRotation = CGFloat(Double.pi / 4.0)
+            break
+        case kLU:
+            endRotation = CGFloat(Double.pi / 2.0 + Double.pi / 4.0)
+            break
+        default:
+            break
+        }
+        
+        personNode.lastRotation = endRotation
+        //旋转超过180度
+        if fabs(starRotation - endRotation) > CGFloat(Double.pi){
+            if endRotation > starRotation{
+                endRotation = -(CGFloat(Double.pi * 2) - endRotation)
+            }else{
+                endRotation = (CGFloat(Double.pi * 2) + endRotation)
+            }
+        }
+        
+//        print(endRotation)
+//        print(direction)
+        
+        action = SKAction.rotate(toAngle: endRotation, duration: time)
+        personNode.fuzhujiNode.run(action, withKey: "rotation")
     }
     
     static func fuzhujiMoveAnimation(direction:NSString,fuzhuji:SKSpriteNode){
@@ -183,7 +236,7 @@ class WDAnimationTool: NSObject {
     
     static func autoFireAnimation(node:WDPersonNode,zomNode:WDBaseNode) -> Void {
         
-        let texture:SKTexture = SKTexture.init(image: UIImage.init(named: "smallCircle")!)
+        let texture:SKTexture = node.fly_fireArr[0] as! SKTexture
         let firNode:SKSpriteNode = SKSpriteNode.init(texture: texture)
 
         
@@ -197,11 +250,13 @@ class WDAnimationTool: NSObject {
         firNode.position = CGPoint(x:fireX,y:fireY)
         firNode.zPosition = 2.0;
         firNode.name = FIRE as String
-        firNode.xScale = 0.1
-        firNode.yScale = 0.1
+        firNode.xScale = 0.3
+        firNode.yScale = 0.3
         node.parent?.addChild(firNode)
-        let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 700.0))
-        firNode.run(action) {
+        let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 300.0))
+        let firA = SKAction.animate(with: node.fly_fireArr as! [SKTexture], timePerFrame: TimeInterval(distance / 300.0 / 6.0))
+        let groupA = SKAction.group([action,firA])
+        firNode.run(groupA) {
             firNode.removeFromParent()
         }
         
@@ -343,7 +398,9 @@ class WDAnimationTool: NSObject {
                 //避免碰撞过后距离近，不在攻击
                 let distance1:CGFloat = WDTool.calculateNodesDistance(point1:zom.position,point2:person.position)
                 if distance1 < 30{
-                    zom.behavior.attackAction(node: person)
+                    if person.wdBlood > 0{
+                        zom.behavior.attackAction(node: person)
+                    }
                 }
                 
                 let distance = WDTool.calculateNodesDistance(point1: magic.position, point2: person.position)

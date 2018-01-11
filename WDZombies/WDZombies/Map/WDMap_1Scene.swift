@@ -8,7 +8,7 @@
 
 import UIKit
 import SpriteKit
-
+                                            
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
@@ -19,8 +19,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var boomModel:WDSkillModel!        //技能model，用于查看炸弹伤害
  
     
+    var fly_timer:Timer!               //辅助机计时器
     var createZomTimer:Timer!          //创建zom的timer
-    
     var mapLink:CADisplayLink!         //监测地图移动的link
     var zomLink:CADisplayLink!         //监测僵尸移动的link
     var nearZom:WDBaseNode!
@@ -32,6 +32,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var diedZomLabel:SKLabelNode!
     var level:NSInteger!
     
+    var overTimeLabel:SKLabelNode!   //通关时间
+    var overTimer:Timer!
+    var times:NSInteger = 0
     
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
     let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
@@ -56,14 +59,16 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.physicsWorld.contactDelegate = self
             
             createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
-           
+            fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
+            overTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overTimerAction), userInfo: nil, repeats: true)
+            
             mapLink = CADisplayLink.init(target: self, selector: #selector(mapMoveAction))
             mapLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            //self.level_8_kulouKnightZom(isBoss: true)
+            //self.level_9_sealZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -90,6 +95,15 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
       // print("hahaha")
        
     }
+    
+   @objc func overTimerAction()  {
+        times = times + 1
+        let second:NSInteger = times % 60
+        let minute:NSInteger = times / 60
+        let str:String = String(format: "%02d:%02d", arguments: [minute, second])
+        overTimeLabel.text = str
+    }
+    
     //初始化Nodes
     func createNodes(){
         
@@ -99,14 +113,23 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         diedZomLabel.fontSize = 30
         diedZomLabel.verticalAlignmentMode = .center
         diedZomLabel.alpha = 0.6
-        print(diedZomLabel.frame.size.width,diedZomLabel.frame.size.height)
         
         diedZomLabel.position = CGPoint(x:diedZomLabel.frame.size.width / 2.0 + 10,y:self.frame.size.height - diedZomLabel.frame.size.height / 2.0 - 10)
         diedZomLabel.color = UIColor.black
         diedZomLabel.zPosition = 10000
         self.addChild(diedZomLabel)
         
-        print(kScreenHeight,self.frame.size.height)
+        overTimeLabel = SKLabelNode.init(text: "00:00")
+        overTimeLabel.fontName = "VCR OSD Mono"
+        overTimeLabel.fontColor = UIColor.red
+        overTimeLabel.fontSize = 30
+        overTimeLabel.verticalAlignmentMode = .center
+        overTimeLabel.alpha = 0.6
+        
+        overTimeLabel.position = CGPoint(x:kScreenWidth - overTimeLabel.frame.size.width - 10,y:self.frame.size.height - overTimeLabel.frame.size.height / 2.0 - 10)
+        overTimeLabel.color = UIColor.black
+        overTimeLabel.zPosition = 10000
+        self.addChild(overTimeLabel)
         
         
         let perDic:NSMutableDictionary = WDTool.cutMoveImage(moveImage: UIImage(named:"person4.png")!)
@@ -223,7 +246,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_7_OXZom(isBoss: false)
             }else {
                 self.level_1_NormalZom(isBoss: false)
-
             }
         }
  
@@ -276,6 +298,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         _ = mapZomModel.createKulouKnightZom(isBoss: isBoss)
     }
     
+    //海豹
+    func level_9_sealZom(isBoss:Bool) {
+        _ = mapZomModel.createSealZom(isBoss: isBoss)
+    }
+    
+    
     //从数组中删除Node方法
     func removeNodeFromArr(node:WDBaseNode){
         mapViewModel.removeNode(zomNode: node)
@@ -324,6 +352,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     @objc func testEmitter(timer:Timer) {
     }
     
+    
+    
     //MARK:操作相关方法
     //**************************************************************//
     //开火方法
@@ -331,18 +361,31 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         if nearZom != nil {
              let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
             if distance < CGFloat(personNode.wdAttackDistance){
-              personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
+//              personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
             }else{
-                 WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, fuzhuji: personNode.fuzhujiNode)
+              WDAnimationTool.fuzhujiRotateAnimation(direction: personNode.direction, personNode: personNode)
             }
             
             personNode?.personBehavior.attackAction(node: personNode)
-            
         }else{
              personNode?.personBehavior.attackAction(node: personNode)
         }
-       
     }
+    
+    //自动攻击
+    @objc func autoFireAction(){
+        if nearZom != nil {
+            let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
+            if distance < CGFloat(personNode.wdAttackDistance){
+                personNode.personBehavior.autoAttackAction(node: personNode, zomNode: nearZom)
+                personNode.fly_isFire = true
+            }else{
+                personNode.fly_isFire = false
+            }
+        }
+    }
+    
+    
     
     //移动
     override func moveAction(direction: NSString) {
@@ -393,11 +436,22 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         self.ggAction()
     }
     
+    //修改通关时间
+    func overTime(bossNode:WDBaseNode) {
+        let model:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName: bossNode.name!)
+        if model.overTime > times || model.overTime == 0{
+            model.overTime = times
+            _ = model.changeMonsterToSqlite()
+        }
+    }
     
     //结束
     @objc func removeNode()  {
         
+        fly_timer.invalidate()
+        overTimer.invalidate()
         createZomTimer.invalidate()
+        
         if mapLink != nil {
             mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
             mapLink.invalidate()

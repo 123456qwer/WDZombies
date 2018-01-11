@@ -58,12 +58,9 @@ class WDSmokeKnightNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-    
-        
+     
         self.name = KNIGHT_NAME
-       
-      
-      
+     
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         

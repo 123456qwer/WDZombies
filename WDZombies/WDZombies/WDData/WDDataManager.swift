@@ -39,6 +39,19 @@ class WDDataManager: NSObject {
         let level1Arr:NSArray = [50,30,50]
         let level2Arr:NSArray = [5,200,2]
         
+        
+        let monsterNameArr:NSArray = [NORMAL_ZOM,RED_ZOM,KULOU_NAME,GREEN_ZOM_NAME,KNIGHT_NAME,SQUID_NAME,OX_NAME,KULOU_KNIGHT_NAME]
+        //插入怪兽数量
+        for index:NSInteger in 0...monsterNameArr.count - 1 {
+            let model:WDMonsterModel = WDMonsterModel.init()
+            model.monsterName = monsterNameArr[index] as! String
+            model.beKillCount = 0
+            model.killCount   = 0
+            model.overTime    = 0
+            _ = model.insertSelfToDB()
+        }
+        
+        //插入人物技能学习情况
         for index:NSInteger in 0...2 {
             
             let skillModel:WDSkillModel = WDSkillModel.init()
@@ -50,7 +63,7 @@ class WDDataManager: NSObject {
 
             skillModel.skillLevel1 = level1Arr.object(at: index) as! Int
             skillModel.skillLevel2 = level2Arr.object(at: index) as! Int
-            skillModel.haveLearn   = 0
+            skillModel.haveLearn   = 1
             
             if skillModel.insertSelfToDB(){
                 print("插入成功了!!!!again")
@@ -100,9 +113,10 @@ class WDDataManager: NSObject {
         //建表的SQL语句
         let creatUserTable = "CREATE TABLE IF NOT EXISTS 't_Skill' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'skillName' TEXT,'haveLearn' INTEGER,'skillLevel1' INTEGER,'skillLevel2' INTEGER,'skillLevel1Str' TEXT,'skillLevel2Str' TEXT,'skillDetailStr' TEXT);"
         let createUserTable2 = "CREATE TABLE IF NOT EXISTS 't_User' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'blood' TEXT,'attack' TEXT,'speed' TEXT,'level' INTEGER,'skillCount' INTEGER,'fire_impact' TEXT,'attackDistance' TEXT,'mapLevel' INTEGER,'monsterCount' INTEGER)"
+        let createMonsterTable = "CREATE TABLE IF NOT EXISTS 't_Monster' ('ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'monsterName' TEXT,'killCount' INTEGER,'beKillCount' INTEGER,'overTime' INTEGER)"
         //let creatCarTable = "CREATE TABLE IF NOT EXISTS 't_Car' ('ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'type' TEXT,'output' REAL,'master' TEXT);"
         //执行SQL语句-创建表 依然,项目中一般不会只有一个表
-        return creatTableExecSQL(SQL_ARR: [creatUserTable,createUserTable2])
+        return creatTableExecSQL(SQL_ARR: [creatUserTable,createUserTable2,createMonsterTable])
     }
     
     
