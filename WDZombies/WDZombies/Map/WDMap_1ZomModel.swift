@@ -331,7 +331,6 @@ class WDMap_1ZomModel: NSObject {
         sealZom.isBoss = isBoss
         sealZom.initWithPerson(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(sealZom)
-        
         weak var weakSelf = map1_scene
         sealZom.behavior.starMove()
         sealZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
@@ -349,6 +348,7 @@ class WDMap_1ZomModel: NSObject {
              sealNode.behavior.attack(direction: "", nodeDic: ["personNode":weakSelf?.personNode! as Any])
         }
       
+        sealZom.behavior.iceAttackAction(personNode: map1_scene.personNode, point: map1_scene.position)
         self.addZomNodeForViewArr(node: sealZom)
         return sealZom
     }

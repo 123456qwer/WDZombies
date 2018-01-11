@@ -320,6 +320,11 @@ class WDMap_1ViewModel: NSObject {
             fireNode?.removeFromParent()
         }
         
+        if sealNode != nil && pNode != nil{
+            sealNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
+        }
+        
+        
     }
     
     
