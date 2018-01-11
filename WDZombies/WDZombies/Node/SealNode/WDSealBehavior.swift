@@ -78,6 +78,7 @@ class WDSealBehavior: WDBaseNodeBehavior {
     
     override func attack(direction: NSString, nodeDic: NSDictionary) {
         sealNode.removeAction(forKey: "move")
+        iceAttackTime = 0
         sealNode.canMove = false
         sealNode.isMove  = false
         let personNode:WDPersonNode = nodeDic.object(forKey: "personNode") as! WDPersonNode
