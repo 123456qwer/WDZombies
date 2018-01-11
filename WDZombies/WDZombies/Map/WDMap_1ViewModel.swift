@@ -35,6 +35,16 @@ class WDMap_1ViewModel: NSObject {
         let B:SKNode = contact.bodyB.node!
         
         
+        if A.name == nil {
+            print(A,"崩溃原因！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！")
+            return
+        }
+        
+        if B.name == nil {
+            print(B,"崩溃原因！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！")
+            return
+        }
+        
         var pNode:WDPersonNode?
         var zomNode:WDZombieNode?
         var redNode:WDZombieNode?
@@ -53,7 +63,18 @@ class WDMap_1ViewModel: NSObject {
         var oxNode:WDOXNode?
         var oxLightNode:SKSpriteNode?
         var kulouNightNode:WDKulouKnightNode?
+        var sealIceNode:SKSpriteNode?
+        var sealNode:WDSealNode?
         
+        sealNode = (A.name?.isEqual(SEAL_NAME))! ? (A as? WDSealNode):nil;
+        if sealNode == nil {
+            sealNode = (B.name?.isEqual(SEAL_NAME))! ? (B as? WDSealNode):nil;
+        }
+        
+        sealIceNode = (A.name?.isEqual(SEAl_ICE))! ? (A as? SKSpriteNode):nil;
+        if sealIceNode == nil {
+            sealIceNode = (B.name?.isEqual(SEAl_ICE))! ? (B as? SKSpriteNode):nil;
+        }
     
         kulouNightNode = (A.name?.isEqual(KULOU_KNIGHT_NAME))! ? (A as? WDKulouKnightNode):nil;
         if kulouNightNode == nil {
@@ -287,6 +308,17 @@ class WDMap_1ViewModel: NSObject {
             fireNode?.removeFromParent()
         }
        
+        if sealIceNode != nil && pNode != nil{
+            WDAnimationTool.bloodAnimation(node: personNode)
+            personNode.personBehavior.reduceBlood(number: 1,monsterName: OX_NAME)
+            personNode.personBehavior.beIceAttack()
+        }
+        
+        if sealNode != nil && fireNode != nil {
+            _ = sealNode?.behavior.beAttack(attackNode: personNode, beAttackNode: sealNode!)
+            WDAnimationTool.bloodAnimation(node: sealNode!)
+            fireNode?.removeFromParent()
+        }
         
     }
     

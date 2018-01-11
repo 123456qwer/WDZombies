@@ -71,6 +71,7 @@ public let SEAL_MOVE       = "SEAL_MOVE"
 public let SEAL_DIED       = "SEAL_DIED"
 public let SEAL_STAY       = "SEAL_STAY"
 public let SEAL_ATTACK1    = "SEAL_ATTACK1"
+public let SEAl_ICE        = "SEAL_ICE"
 
 
 class WDConstant: NSObject {

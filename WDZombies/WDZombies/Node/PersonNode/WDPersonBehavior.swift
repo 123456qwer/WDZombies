@@ -152,6 +152,18 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
     }
     
+    //被冰击中
+    func beIceAttack(){
+        let colorAction = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 0.6, duration: 0.5)
+        let colorAction2 = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 0, duration: 0.5)
+        let seq = SKAction.sequence([colorAction,colorAction2])
+        personNode.wdSpeed = 1.5
+        personNode.run(seq) {
+            self.personNode.wdSpeed = 3
+        }
+        
+    }
+    
     @objc func canMove()  {
         personNode.canMove = true
     }

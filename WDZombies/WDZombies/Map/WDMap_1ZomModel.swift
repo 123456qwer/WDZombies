@@ -345,6 +345,9 @@ class WDMap_1ZomModel: NSObject {
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
         }
         
+        sealZom.behavior.iceAttackBlock = {(sealNode:WDSealNode) -> Void in
+             sealNode.behavior.attack(direction: "", nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
       
         self.addZomNodeForViewArr(node: sealZom)
         return sealZom

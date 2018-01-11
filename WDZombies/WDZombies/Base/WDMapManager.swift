@@ -322,6 +322,7 @@ class WDMapManager: NSObject {
         let attack1Arr:NSMutableArray = NSMutableArray.init()
         let stayArr:NSMutableArray = NSMutableArray.init()
         let diedArr:NSMutableArray = NSMutableArray.init()
+        let iceArr:NSMutableArray  = NSMutableArray.init()
         
         for index:NSInteger in 0...10 {
             if index < 4 {
@@ -347,6 +348,10 @@ class WDMapManager: NSObject {
                 let name2 = "seal_stay_\(index + 1)"
                 let temp2 = textures.textureNamed(name2)
                 stayArr.add(temp2)
+                
+                let name3 = "seal_ice_\(index + 1)"
+                let temp3 = textures.textureNamed(name3)
+                iceArr.add(temp3)
             }
             
         }
@@ -355,6 +360,8 @@ class WDMapManager: NSObject {
         self.textureDic.setObject(diedArr, forKey: SEAL_DIED as NSCopying)
         self.textureDic.setObject(attack1Arr, forKey: SEAL_ATTACK1 as NSCopying)
         self.textureDic.setObject(stayArr, forKey: SEAL_STAY as NSCopying)
+        self.textureDic.setObject(iceArr, forKey: SEAl_ICE as NSCopying)
+
     }
     
     func setPic()  {
