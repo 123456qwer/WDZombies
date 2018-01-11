@@ -247,6 +247,24 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             }else {
                 self.level_1_NormalZom(isBoss: false)
             }
+        }else if level == 9{
+            if chance == 7{
+                self.level_3_KulouZom(isBoss: false)
+            }else if chance == 8 {
+                self.level_2_RedZom(isBoss: false)
+            }else if chance == 9{
+                self.level_4_GreenZom(isBoss: false)
+            }else if chance == 0{
+                self.level_5_KnightZom(isBoss: false)
+            }else if chance == 6{
+                self.level_6_SquidZom(isBoss: false)
+            }else if chance == 5{
+                self.level_7_OXZom(isBoss: false)
+            }else if chance == 4{
+                self.level_8_kulouKnightZom(isBoss: false)
+            }else{
+                self.level_1_NormalZom(isBoss: false)
+            }
         }
  
     }
@@ -309,6 +327,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         mapViewModel.removeNode(zomNode: node)
         mapViewModel.zomArr.remove(node)
     }
+
     
     func addZomNode(node:WDBaseNode){
         mapViewModel.zomArr.add(node)
@@ -335,6 +354,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_7_OXZom(isBoss: true)
             }else if self.level == 8{
                 self.level_8_kulouKnightZom(isBoss: true)
+            }else if self.level == 9{
+                self.level_9_sealZom(isBoss: true)
             }
         }
         

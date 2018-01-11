@@ -30,6 +30,7 @@ class WDMap_1ViewModel: NSObject {
     
     //碰撞逻辑
     func phyContact(contact: SKPhysicsContact,personNode:WDPersonNode,boomModel:WDSkillModel){
+      
         
         let A:SKNode = contact.bodyA.node!
         let B:SKNode = contact.bodyB.node!

@@ -30,8 +30,11 @@ class WDKulouNightBehavior: WDBaseNodeBehavior {
     }
  
     @objc func canMove() {
-        kulouKnightNode.canMove = true
-        self.callAttackBlock(kulouKnightNode)
+        if self.kulouKnightNode != nil {
+            kulouKnightNode.canMove = true
+            self.callAttackBlock(kulouKnightNode)
+        }
+      
 
     }
     

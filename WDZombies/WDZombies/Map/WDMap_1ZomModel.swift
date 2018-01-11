@@ -341,7 +341,7 @@ class WDMap_1ZomModel: NSObject {
         
         weak var wSelf = self
         sealZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
-            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 8)
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 9)
         }
         
         sealZom.behavior.iceAttackBlock = {(sealNode:WDSealNode) -> Void in

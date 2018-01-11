@@ -22,12 +22,7 @@ class WDSealBehavior: WDBaseNodeBehavior {
         if sealNode.canMove {
             iceAttackTime += 1
             if iceAttackTime >= 5{
-                if arc4random() % 2 == 0{
-                    self.iceAttackBlock(sealNode)
-                }else{
-                    self.stayAction()
-                }
-                
+                self.iceAttackBlock(sealNode)
                 iceAttackTime = 0
             }
         }
@@ -59,12 +54,15 @@ class WDSealBehavior: WDBaseNodeBehavior {
             
             let alphaAction = SKAction.fadeAlpha(to: 1, duration: 0.5)
             iceNode.run(alphaAction) {
-                let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
-                self.setIcePhy(iceNode: iceNode)
-                iceNode.run(textureAction, completion: {
-                    iceNode.removeFromParent()
-                    self.iceAttackAction(personNode: personNode, point: self.randomPosition(personNode: personNode))
-                })
+                if self.sealNode != nil{
+                    let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
+                    self.setIcePhy(iceNode: iceNode)
+                    iceNode.run(textureAction, completion: {
+                        iceNode.removeFromParent()
+                        self.iceAttackAction(personNode: personNode, point: self.randomPosition(personNode: personNode))
+                    })
+                }
+               
             }
         }
     }
@@ -78,7 +76,7 @@ class WDSealBehavior: WDBaseNodeBehavior {
             iceNode.name = SEAl_ICE
             personNode.parent?.addChild(iceNode)
             
-            let alphaAction = SKAction.fadeAlpha(to: 1, duration: 0.5)
+            let alphaAction = SKAction.fadeAlpha(to: 1, duration: 0.6)
             iceNode.run(alphaAction) {
                 let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
                 self.setIcePhy(iceNode: iceNode)
@@ -110,31 +108,27 @@ class WDSealBehavior: WDBaseNodeBehavior {
         return CGPoint(x:x,y:y)
     }
     
-    func bossRandomAttackPosition(personNode:WDPersonNode,index:NSInteger) -> CGPoint {
-         let g = arc4random() % 4
-        var b:CGFloat = 1
+    func bossRandomAttackPosition(personNode:WDPersonNode,index:NSInteger,g:NSInteger) -> CGPoint {
          var x:CGFloat = 0
          var y:CGFloat = 0
 
-         if index % 2 == 0{
-            b = -1
-         }
-        
-        //横向攻击
-        if g == 0 {
-            x = personNode.position.x + CGFloat(index) * 50 * b
+        //横向
+        if g == 0{
+            x = -300 + CGFloat(index) * 60 + personNode.position.x
             y = personNode.position.y
-        }else if g == 1{
+         }else if g == 1{
             x = personNode.position.x
-            y = personNode.position.y + CGFloat(index) * 50 * b
+            y = -300 + CGFloat(index) * 60 + personNode.position.y
         }else if g == 2{
-            x = personNode.position.x + CGFloat(index) * 50 * b
-            y = personNode.position.x - CGFloat(index) * 50 * b
-        }else if g == 3{
-            x = personNode.position.x + CGFloat(index) * 50 * b
-            y = personNode.position.x + CGFloat(index) * 50 * b
+            x = -300 + CGFloat(index) * 60 + personNode.position.x
+            y = -300 + CGFloat(index) * 60 + personNode.position.y
+        }else{
+            x = -300 + CGFloat(index) * 60 + personNode.position.x
+            y =  300 + -CGFloat(index) * 60 + personNode.position.y
         }
+
         
+ 
         return CGPoint(x:x,y:y)
     }
     
@@ -151,7 +145,8 @@ class WDSealBehavior: WDBaseNodeBehavior {
     }
     
     @objc func canMove() {
-        self.sealNode.canMove = true
+        sealNode.canMove = true
+        self.iceAttackBlock(sealNode)
     }
     
     //MARK:复写
@@ -176,10 +171,11 @@ class WDSealBehavior: WDBaseNodeBehavior {
             sealNode.canMove = false
             sealNode.isMove  = false
             let personNode:WDPersonNode = nodeDic.object(forKey: "personNode") as! WDPersonNode
-            let textureAction = SKAction.animate(with: sealNode.model.attack1Arr, timePerFrame: 0.1)
+            let textureAction = SKAction.animate(with: sealNode.model.attack1Arr, timePerFrame: 0.15)
+            let g = arc4random() % 4
             sealNode.run(textureAction) {
                 for index:NSInteger in 0...10{
-                    self.iceAttackActionFromBoss(personNode: personNode, point: self.bossRandomAttackPosition(personNode: personNode, index: index))
+                    self.iceAttackActionFromBoss(personNode: personNode, point: self.bossRandomAttackPosition(personNode: personNode, index: index,g: NSInteger(g)))
                 }
                 self.sealNode.canMove = true
             }

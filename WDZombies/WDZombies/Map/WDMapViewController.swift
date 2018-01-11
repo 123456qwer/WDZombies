@@ -21,6 +21,7 @@ class WDMapViewController: UIViewController {
     let MAP_6 = 60
     let MAP_7 = 70
     let MAP_8 = 80
+    let MAP_9 = 90
 
     var bgScrollView:UIScrollView!
     
@@ -35,7 +36,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 8.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 9.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -49,7 +50,7 @@ class WDMapViewController: UIViewController {
         self.setMap6(model: model)
         self.setMap7(model: model)
         self.setMap8(model: model)
-        
+        self.setMap9(model: model)
         
         
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
@@ -93,6 +94,10 @@ class WDMapViewController: UIViewController {
         }else if sender.tag == MAP_8{
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",8)
+            })
+        }else if sender.tag == MAP_9{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",9)
             })
         }
     }
@@ -206,6 +211,17 @@ class WDMapViewController: UIViewController {
         }
         
         self.setView(tag: MAP_8, width: 170, height: 170, imageArr: moveArr, count: 7, model: model, x: 20 + 7 * kScreenWidth,monsterName: KULOU_KNIGHT_NAME)
+    }
+    
+    func setMap9(model:WDUserModel)  {
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...5 {
+            let name = "seal_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
+        }
+        
+        self.setView(tag: MAP_9, width: 130, height: 150, imageArr: moveArr, count: 8, model: model, x: 20 + 8 * kScreenWidth,monsterName: SEAL_NAME)
     }
     
     //count 是当前怪物数量

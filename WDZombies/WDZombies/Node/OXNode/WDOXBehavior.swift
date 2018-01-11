@@ -40,12 +40,14 @@ class WDOXBehavior: WDBaseNodeBehavior {
         personNode.parent?.addChild(lightNode)
         let alphaA = SKAction.fadeAlpha(to: 1, duration: 0.5)
         lightNode.run(alphaA) {
-            self.setLightPhy(light: lightNode)
-            let lightA = SKAction.animate(with: self.oxNode.model.lightArr, timePerFrame: 0.1)
-            let rep    = SKAction.repeat(lightA, count: 10)
-            lightNode.run(rep, completion: {
-                lightNode.removeFromParent()
-            })
+            if self.oxNode != nil{
+                self.setLightPhy(light: lightNode)
+                let lightA = SKAction.animate(with: self.oxNode.model.lightArr, timePerFrame: 0.1)
+                let rep    = SKAction.repeat(lightA, count: 10)
+                lightNode.run(rep, completion: {
+                    lightNode.removeFromParent()
+                })
+            }
         }
     }
     
