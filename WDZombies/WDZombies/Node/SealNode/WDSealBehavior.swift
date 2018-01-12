@@ -128,7 +128,7 @@ class WDSealBehavior: WDBaseNodeBehavior {
         }
 
         
- 
+        //测试
         return CGPoint(x:x,y:y)
     }
     
