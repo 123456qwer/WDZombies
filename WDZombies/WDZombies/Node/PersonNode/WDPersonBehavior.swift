@@ -168,7 +168,6 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         personNode.run(seq) {
             self.personNode.wdSpeed = 3
         }
-        
     }
     
     @objc func canMove()  {
@@ -186,5 +185,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     @objc func hiddenFireNode() -> Void {
         personNode.fireNode.isHidden = true
     }
+    
+    
     
 }

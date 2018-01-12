@@ -482,7 +482,7 @@ class WDAnimationTool: NSObject {
    /// - Parameter node: <#node description#>
     static func blinkAnimation(node:WDPersonNode,model:WDSkillModel) -> Void {
     
-    node.removeAllActions()
+    node.removeAction(forKey: "move")
     node.canMove = false
     node.isMove  = false
     
