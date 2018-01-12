@@ -78,11 +78,14 @@ class WDSealBehavior: WDBaseNodeBehavior {
             
             let alphaAction = SKAction.fadeAlpha(to: 1, duration: 0.6)
             iceNode.run(alphaAction) {
-                let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
-                self.setIcePhy(iceNode: iceNode)
-                iceNode.run(textureAction, completion: {
-                    iceNode.removeFromParent()
-                })
+                if self.sealNode != nil{
+                    let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
+                    self.setIcePhy(iceNode: iceNode)
+                    iceNode.run(textureAction, completion: {
+                        iceNode.removeFromParent()
+                    })
+                }
+               
             }
         
     }

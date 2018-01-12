@@ -372,7 +372,7 @@ class GameViewController: UIViewController {
         gameOverBtn.alpha = 0
         self.view.addSubview(gameOverBtn)
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 1, animations: {
             label.alpha = 1
         }) { (true) in
             UIView.animate(withDuration: 0.5, animations: {
@@ -413,7 +413,7 @@ class GameViewController: UIViewController {
         gameOverBtn.alpha = 0
         self.view.addSubview(gameOverBtn)
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 1, animations: {
             label.alpha = 1
         }) { (true) in
             UIView.animate(withDuration: 0.5, animations: {
@@ -428,6 +428,7 @@ class GameViewController: UIViewController {
     ///
     /// - Parameter sceneName: 场景名字
     func showScene(sceneName:String,level:NSInteger) -> Void {
+        
         if let view = self.view as! SKView? {
             
                 if sceneName == "WDMap_1Scene" {

@@ -53,7 +53,8 @@ class WDGreenZomNode: WDBaseNode{
         
         self.configureModel()
         nodeModel = model
-        
+        nodeBehavior = behavior
+
         behavior.setNode(node: self)
         behavior.node = self
         self.name = GREEN_ZOM_NAME
@@ -73,15 +74,13 @@ class WDGreenZomNode: WDBaseNode{
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 1
-            behavior.yScale = 1
             behavior.attackAllCount = 6
+            self.size = CGSize(width:125,height:125)
 
         }else{
             self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
             behavior.attackAllCount = 15
+            self.size = CGSize(width:125 * 0.6,height:125 * 0.6)
 
         }
     }

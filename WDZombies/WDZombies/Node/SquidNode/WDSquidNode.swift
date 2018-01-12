@@ -26,7 +26,8 @@ class WDSquidNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-        
+        nodeBehavior = behavior
+
         
         self.name = SQUID_NAME
         
@@ -51,12 +52,11 @@ class WDSquidNode: WDBaseNode {
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 1
-            behavior.yScale = 1
+            self.size = CGSize(width:140 ,height:100)
+
         }else{
             self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
+            self.size = CGSize(width:140 * 0.6 ,height:100 * 0.6)
         }
     
     }

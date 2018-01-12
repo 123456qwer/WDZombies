@@ -325,11 +325,48 @@ class WDMap_1ViewModel: NSObject {
             sealNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
         }
         
+        //炸弹逻辑
+        if boomNode != nil {
+            if kulouNode != nil{
+                self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: kulouNode!, personNode: personNode)
+            }
+            
+            if greenNode != nil{
+                 self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: greenNode!, personNode: personNode)
+            }
+            
+            if knightNode != nil{
+                self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: knightNode!, personNode: personNode)
+            }
+            
+            if squidNode != nil{
+                 self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: squidNode!, personNode: personNode)
+            }
+            
+            if oxNode != nil{
+                self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: oxNode!, personNode: personNode)
+            }
+            
+            if kulouNightNode != nil {
+                self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: kulouNightNode!, personNode: personNode)
+            }
+            
+            if sealNode != nil {
+                 self.boomAttack(model: boomModel, boobNode: boomNode!, beAttackNode: sealNode!, personNode: personNode)
+            }
+        }
+        
         
     }
     
-    
-    
+    ///炸弹攻击
+    func boomAttack(model:WDSkillModel,boobNode:SKSpriteNode,beAttackNode:WDBaseNode,personNode:WDPersonNode) {
+       
+        personNode.wdAttack += CGFloat(model.skillLevel2)
+        _ = beAttackNode.nodeBehavior.beAttack(attackNode: personNode, beAttackNode: beAttackNode)
+        personNode.wdAttack -= CGFloat(model.skillLevel2)
+        
+    }
     
     
     /// 删除所有僵尸

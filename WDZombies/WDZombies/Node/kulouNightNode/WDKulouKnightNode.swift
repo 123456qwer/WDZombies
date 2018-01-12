@@ -26,7 +26,8 @@ class WDKulouKnightNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-        
+        nodeBehavior = behavior
+
         self.name = KULOU_KNIGHT_NAME
         
         self.position = model.randomBornPosition()
@@ -48,12 +49,12 @@ class WDKulouKnightNode: WDBaseNode {
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 0.8
-            behavior.yScale = 0.8
+            self.size = CGSize(width:170 * 0.8,height:170 * 0.8)
+
         }else{
-            self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
+            self.wdBlood = 10
+            self.size = CGSize(width:170 * 0.6,height:170 * 0.6)
+
         }
     }
     

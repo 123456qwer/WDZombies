@@ -37,6 +37,7 @@ class WDKulouNode: WDBaseNode {
         
         behavior.setNode(node:self)
         behavior.node = self
+        nodeBehavior = behavior
         
         self.name = KULOU_NAME
         
@@ -63,14 +64,15 @@ class WDKulouNode: WDBaseNode {
     
     
     func setAttribute(isBoss:Bool)  {
+
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 1
-            behavior.yScale = 1
+            self.size = CGSize(width:110 ,height:130)
+
         }else{
             self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
+            self.size = CGSize(width:110 * 0.6,height:130 * 0.6)
+
         }
     }
     
