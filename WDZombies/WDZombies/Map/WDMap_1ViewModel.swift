@@ -31,6 +31,9 @@ class WDMap_1ViewModel: NSObject {
     //碰撞逻辑
     func phyContact(contact: SKPhysicsContact,personNode:WDPersonNode,boomModel:WDSkillModel){
       
+        if contact.bodyA.node == nil || contact.bodyB.node == nil{
+            return
+        }
         
         let A:SKNode = contact.bodyA.node!
         let B:SKNode = contact.bodyB.node!
@@ -40,6 +43,8 @@ class WDMap_1ViewModel: NSObject {
             print(A,"崩溃原因！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！")
             return
         }
+        
+       
         
         if B.name == nil {
             print(B,"崩溃原因！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！")
