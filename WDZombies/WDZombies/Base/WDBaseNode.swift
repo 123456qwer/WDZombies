@@ -48,12 +48,7 @@ class WDBaseNode: SKSpriteNode {
     
     var nodeBehavior:WDBaseNodeBehavior!
     var nodeModel:WDBaseModel!
-    
-    
-    
-    
-    
-    
+    var experience:CGFloat = 20
     
     
 }
