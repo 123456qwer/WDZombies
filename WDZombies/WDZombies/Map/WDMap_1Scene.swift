@@ -366,7 +366,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     func levelUp(model:WDUserModel)  {
         model.skillCount += 1
         _ = model.changeSkillToSqlite()
-        WDDataManager.shareInstance().closeDB()
+        //WDDataManager.shareInstance().closeDB()
     }
     
     

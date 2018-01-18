@@ -72,7 +72,9 @@ class WDOXBehavior: WDBaseNodeBehavior {
     }
     
     @objc func canMove(){
-        oxNode.canMove = true
+        if self.oxNode != nil{
+            oxNode.canMove = true
+        }
     }
     
     //MARK:复写方法

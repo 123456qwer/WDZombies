@@ -227,7 +227,7 @@ class WDAnimationTool: NSObject {
         bloodNode.yScale = 0.4
         node.parent?.addChild(bloodNode)
         
-        let alphaAction:SKAction = SKAction.fadeAlpha(to: 0, duration: 2.0)
+        let alphaAction:SKAction = SKAction.fadeAlpha(to: 0, duration: 1.0)
         bloodNode.run(alphaAction) {
             bloodNode.removeFromParent()
         }
@@ -482,7 +482,7 @@ class WDAnimationTool: NSObject {
    /// - Parameter node: <#node description#>
     static func blinkAnimation(node:WDPersonNode,model:WDSkillModel) -> Void {
     
-    node.removeAllActions()
+    node.removeAction(forKey: "move")
     node.canMove = false
     node.isMove  = false
     

@@ -58,7 +58,8 @@ class WDSmokeKnightNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-     
+        nodeBehavior = behavior
+
         self.name = KNIGHT_NAME
      
         self.position = model.randomBornPosition()
@@ -78,14 +79,14 @@ class WDSmokeKnightNode: WDBaseNode {
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 1
-            behavior.yScale = 1
             self.behavior.attackAllCount = 5
+            self.size = CGSize(width:165,height:165)
+
         }else{
             self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
             self.behavior.attackAllCount = 20
+            self.size = CGSize(width:165 * 0.6,height:165 * 0.6)
+
         }
     }
 }

@@ -40,7 +40,7 @@ class WDDataManager: NSObject {
         let level2Arr:NSArray = [5,200,2]
         
         
-        let monsterNameArr:NSArray = [NORMAL_ZOM,RED_ZOM,KULOU_NAME,GREEN_ZOM_NAME,KNIGHT_NAME,SQUID_NAME,OX_NAME,KULOU_KNIGHT_NAME]
+        let monsterNameArr:NSArray = [NORMAL_ZOM,RED_ZOM,KULOU_NAME,GREEN_ZOM_NAME,KNIGHT_NAME,SQUID_NAME,OX_NAME,KULOU_KNIGHT_NAME,SEAL_NAME]
         //插入怪兽数量
         for index:NSInteger in 0...monsterNameArr.count - 1 {
             let model:WDMonsterModel = WDMonsterModel.init()

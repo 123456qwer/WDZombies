@@ -22,10 +22,18 @@ class WDKulouNightBehavior: WDBaseNodeBehavior {
     @objc func callKulouTimerAction() {
         if kulouKnightNode.canMove {
             callTimeCount += 1
-            if callTimeCount == 5{
-                self.callAttackBlock(kulouKnightNode)
-                callTimeCount = 0
+            if kulouKnightNode.isBoss{
+                if callTimeCount == 5{
+                    self.callAttackBlock(kulouKnightNode)
+                    callTimeCount = 0
+                }
+            }else{
+                if callTimeCount == 8{
+                    self.callAttackBlock(kulouKnightNode)
+                    callTimeCount = 0
+                }
             }
+            
         }
     }
  

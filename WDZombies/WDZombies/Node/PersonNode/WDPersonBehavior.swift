@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import AudioToolbox
 
 class WDPersonBehavior: WDBaseNodeBehavior {
 
@@ -62,8 +63,13 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     
     
     func reduceBlood(number:CGFloat,monsterName:String)  {
+        
+        //震动效果
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        
         personNode.wdBlood -= number
         if personNode.wdBlood <= 0 && isGameOver == false{
+            personNode.canMove = false
             personNode.removePhy()
             personNode.alpha = 0
             self.personNode.ggAction()
@@ -72,6 +78,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             let model:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName:monsterName)
             model.beKillCount = model.beKillCount + 1
             _ = model.changeMonsterToSqlite()
+            
             return
         }
         
@@ -161,7 +168,6 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         personNode.run(seq) {
             self.personNode.wdSpeed = 3
         }
-        
     }
     
     @objc func canMove()  {
@@ -179,5 +185,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     @objc func hiddenFireNode() -> Void {
         personNode.fireNode.isHidden = true
     }
+    
+    
     
 }

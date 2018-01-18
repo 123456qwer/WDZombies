@@ -26,7 +26,8 @@ class WDOXNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-    
+        nodeBehavior = behavior
+
         self.name = OX_NAME
         
         self.position = model.randomBornPosition()
@@ -51,12 +52,12 @@ class WDOXNode: WDBaseNode {
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 0.8
-            behavior.yScale = 0.8
+            self.size = CGSize(width:200 * 0.8 ,height:250 * 0.8)
+
         }else{
             self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
+            self.size = CGSize(width:200 * 0.6 ,height:250 * 0.6)
+
         }
         
     }

@@ -27,7 +27,8 @@ class WDSealNode: WDBaseNode {
         nodeModel = model
         behavior.setNode(node: self)
         behavior.node = self
-        
+        nodeBehavior = behavior
+
         self.name = SEAL_NAME
         
         self.position = model.randomBornPosition()
@@ -49,12 +50,10 @@ class WDSealNode: WDBaseNode {
     func setAttribute(isBoss:Bool)  {
         if isBoss{
             self.wdBlood = 100
-            behavior.xScale = 0.8
-            behavior.yScale = 0.8
+            self.size = CGSize(width:130 ,height:150)
         }else{
             self.wdBlood = 20
-            behavior.xScale = 0.6
-            behavior.yScale = 0.6
+            self.size = CGSize(width:130 * 0.6,height:150 * 0.6)
         }
     }
 }

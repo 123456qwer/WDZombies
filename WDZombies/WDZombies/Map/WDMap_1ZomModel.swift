@@ -17,7 +17,6 @@ class WDMap_1ZomModel: NSObject {
     /// 创建雾骑士
     func createKnightZom(isBoss:Bool) -> WDSmokeKnightNode {
         let kNight:WDSmokeKnightNode = WDSmokeKnightNode.init()
-        kNight.size = CGSize(width:165,height:165)
         kNight.isBoss = isBoss
         kNight.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kNight)
@@ -55,7 +54,6 @@ class WDMap_1ZomModel: NSObject {
     /// 创建绿色僵尸
     func createGreenZom(isBoss:Bool) -> WDGreenZomNode {
         let greenZom = WDGreenZomNode.init()
-        greenZom.size = CGSize(width:125,height:125)
         
         greenZom.isBoss = isBoss
         greenZom.initWithPersonNode(personNode: map1_scene.personNode)
@@ -102,7 +100,6 @@ class WDMap_1ZomModel: NSObject {
     func createKulouZom(isBoss:Bool) -> WDKulouNode {
         
         let kulouNode:WDKulouNode = WDKulouNode.init()
-        kulouNode.size = CGSize(width:110 ,height:130)
         kulouNode.isBoss = isBoss
         kulouNode.initWithPersonNode(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kulouNode)
@@ -127,9 +124,8 @@ class WDMap_1ZomModel: NSObject {
         kulouNode.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             let kulouNode:WDKulouNode = node as! WDKulouNode
             if kulouNode.isCall {
+                weakSelf?.removeNodeFromArr(node:node)
                 return
-                
-                
             }
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 3)
         }
@@ -214,7 +210,6 @@ class WDMap_1ZomModel: NSObject {
     //MARK:创建鱿鱼僵尸
     func createSquidZom(isBoss:Bool) -> WDSquidNode {
         let squidNode:WDSquidNode = WDSquidNode.init()
-        squidNode.size = CGSize(width:140 ,height:100)
         squidNode.isBoss = isBoss
         squidNode.initWithPerson(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(squidNode)
@@ -243,7 +238,6 @@ class WDMap_1ZomModel: NSObject {
     //MARK:创建公牛
     func createOXZom(isBoss:Bool) -> WDOXNode {
         let oxZom:WDOXNode = WDOXNode.init()
-        oxZom.size = CGSize(width:200 ,height:250)
         oxZom.isBoss = isBoss
         oxZom.initWithPerson(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(oxZom)
@@ -275,7 +269,6 @@ class WDMap_1ZomModel: NSObject {
     func createKulouKnightZom(isBoss:Bool) -> WDKulouKnightNode {
         
         let kulouKnightZom:WDKulouKnightNode = WDKulouKnightNode.init()
-        kulouKnightZom.size = CGSize(width:170 ,height:170)
         kulouKnightZom.isBoss = isBoss
         kulouKnightZom.initWithPerson(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(kulouKnightZom)
@@ -317,7 +310,8 @@ class WDMap_1ZomModel: NSObject {
         kulou.position = point
         kulou.alpha = 0
         kulou.wdBlood = 5
-        let alphaA = SKAction.fadeAlpha(to: 1, duration: 0.5)
+        kulou.wdAttack = 1
+        let alphaA = SKAction.fadeAlpha(to: 1, duration: 1)
         kulou.run(alphaA) {
             kulou.canMove = true
         }
@@ -327,7 +321,6 @@ class WDMap_1ZomModel: NSObject {
     //MARK:创建海豹
     func createSealZom(isBoss:Bool) -> WDSealNode {
         let sealZom:WDSealNode = WDSealNode.init()
-        sealZom.size = CGSize(width:130 ,height:150)
         sealZom.isBoss = isBoss
         sealZom.initWithPerson(personNode: map1_scene.personNode)
         map1_scene.bgNode.addChild(sealZom)
