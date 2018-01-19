@@ -14,7 +14,6 @@ class WDPersonNode: WDBaseNode {
     var fuzhujiNode:SKSpriteNode = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "fuzhuji_1")!))
     var personBehavior:WDPersonBehavior! = nil
     var fireNode:SKSpriteNode! = nil
-    var bloodNode:SKSpriteNode! = nil
     var ggAction:gameOverAction!
     var fuzhujiArr:NSMutableArray = NSMutableArray.init()
     var fly_isFire:Bool = false
@@ -89,14 +88,7 @@ class WDPersonNode: WDBaseNode {
         self.addChild(fireNode)
         
         
-        bloodNode = SKSpriteNode.init()
-        bloodNode.size = CGSize(width:self.size.width,height:5)
-        bloodNode.position = CGPoint(x:-self.size.width / 2.0,y:self.size.height / 2.0 + 5)
-        bloodNode.alpha = 0.8
-        bloodNode.anchorPoint = CGPoint(x:0,y:0)
-        bloodNode.color = UIColor.init(red: 0, green: 165 / 255.0, blue: 129 / 255.0, alpha: 1)
-        bloodNode.zPosition = 3
-        self.addChild(bloodNode)
+
         
         let model:WDUserModel = WDUserModel.init()
         if model.searchToDB(){

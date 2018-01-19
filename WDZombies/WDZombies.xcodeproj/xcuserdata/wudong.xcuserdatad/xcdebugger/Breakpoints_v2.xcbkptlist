@@ -13,6 +13,7 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+<<<<<<< HEAD
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
@@ -29,5 +30,7 @@
             landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
+=======
+>>>>>>> 7e11528a31dd68a37c06375c7b00133a1bad545d
    </Breakpoints>
 </Bucket>

@@ -11,7 +11,11 @@ import SpriteKit
 import AudioToolbox
 
 class WDPersonBehavior: WDBaseNodeBehavior {
-
+    
+    typealias reduceA = () -> Void
+    
+    var reduceBloodBlock:reduceA!
+    
     weak var personNode:WDPersonNode! = nil
     var lastRotation:CGFloat = 0
     var isGameOver = false
@@ -68,6 +72,8 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         personNode.wdBlood -= number
+        self.reduceBloodBlock()
+
         if personNode.wdBlood <= 0 && isGameOver == false{
             personNode.canMove = false
             personNode.removePhy()
@@ -82,31 +88,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             return
         }
         
-        let percentage:CGFloat = personNode.wdBlood / personNode.wdAllBlood
-        let width:CGFloat = personNode.size.width * percentage
-        //let x:CGFloat = personNode.size.width - width
-        var bloodColor = UIColor.green
         
-        if percentage >= 0.7{
-            bloodColor = UIColor.init(red: 0, green: 165 / 255.0, blue: 129 / 255.0, alpha: 1)
-        }else if percentage < 0.7 &&  percentage >= 0.4{
-            bloodColor = UIColor.init(red: 255 / 255.0, green: 232 / 255.0, blue: 81 / 255.0, alpha: 1)
-        }else if percentage < 0.4 && percentage >= 0.2{
-            bloodColor = UIColor.init(red: 240 / 255.0, green: 136 / 255.0, blue: 66 / 255.0, alpha: 1)
-        }else{
-            bloodColor = UIColor.init(red: 115 / 255.0, green: 21 / 255.0, blue: 26 / 255.0, alpha: 1)
-        }
-        
-        if #available(iOS 10.0, *) {
-            let colorAction = SKAction.colorize(with: bloodColor, colorBlendFactor: 1, duration: 0.1)
-            var widthAction:SKAction? = nil
-            widthAction = SKAction.scale(to: CGSize(width:width,height:5), duration: 0.1)
-            let group = SKAction.group([colorAction,widthAction!])
-            personNode.bloodNode.run(group)
-        } else {
-            personNode.bloodNode.size = CGSize(width:width,height:5)
-            personNode.color = bloodColor
-        }
     }
     
     

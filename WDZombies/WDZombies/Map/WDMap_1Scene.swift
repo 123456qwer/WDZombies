@@ -35,6 +35,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var overTimeLabel:SKLabelNode!   //通关时间
     var overTimer:Timer!
     var times:NSInteger = 0
+    var levelNode:SKLabelNode!       //等级
+    var bloodNode:SKSpriteNode!      //血条
     
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
     let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
@@ -114,7 +116,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         diedZomLabel.verticalAlignmentMode = .center
         diedZomLabel.alpha = 0.6
         
-        diedZomLabel.position = CGPoint(x:diedZomLabel.frame.size.width / 2.0 + 10,y:self.frame.size.height - diedZomLabel.frame.size.height / 2.0 - 10)
+        diedZomLabel.position = CGPoint(x:diedZomLabel.frame.size.width / 2.0 + 300,y:self.frame.size.height - diedZomLabel.frame.size.height / 2.0 - 10)
         diedZomLabel.color = UIColor.black
         diedZomLabel.zPosition = 10000
         self.addChild(diedZomLabel)
@@ -144,9 +146,16 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             weakSelf?.gameOver()
         }
         
+        personNode.personBehavior.reduceBloodBlock = {() -> Void in
+            weakSelf?.reduceBlood()
+        }
+        
         bgNode = self.childNode(withName: "landNode") as! SKSpriteNode
         bgNode.position = CGPoint(x:0,y:0)
         bgNode.addChild(personNode)
+        
+        
+        
         
         //边界，云层
         let big1:SKSpriteNode = bgNode.childNode(withName: "big1") as! SKSpriteNode
@@ -162,6 +171,51 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         big2.run(rep)
         big3.run(rep)
         big4.run(rep)
+        
+        let texture = SKTexture.init(image: UIImage.init(named: "levelBg2")!)
+        let levelBg2:SKSpriteNode = SKSpriteNode.init(texture: texture)
+        levelBg2.xScale = 0.5;
+        levelBg2.yScale = 0.5
+        levelBg2.position = CGPoint(x:7 + levelBg2.size.width / 2.0, y:kScreenHeight - 7 - levelBg2.size.height / 2.0)
+        levelBg2.zPosition = 4000
+        
+        self.addChild(levelBg2)
+        
+        let texture4 = SKTexture.init(image: UIImage.init(named: "levelBg")!)
+        let levelBg:SKSpriteNode = SKSpriteNode.init(texture: texture4)
+        levelBg.xScale = 0.5;
+        levelBg.yScale = 0.5
+        levelBg.position = levelBg2.position
+        levelBg.zPosition = 3000
+        
+        self.addChild(levelBg)
+        
+        levelNode = SKLabelNode.init(text: "1")
+        levelNode.fontName = "VCR OSD Mono"
+        levelNode.position = CGPoint(x:0,y:0)
+        levelNode.zPosition = 3000
+        levelNode.fontColor = UIColor.white
+        levelNode.fontSize = 80
+        levelNode.verticalAlignmentMode = .center
+        levelNode.alpha = 0.6
+        levelBg.addChild(levelNode)
+       
+        
+        let texture1 = SKTexture.init(image: UIImage.init(named: "blood_tiao")!)
+        bloodNode = SKSpriteNode.init(texture: texture1)
+        bloodNode.xScale = 0.5
+        bloodNode.yScale = 0.5
+        bloodNode.zPosition = 3000
+        bloodNode.alpha = 0.5
+        bloodNode.position = CGPoint(x:10 + levelBg.size.width ,y:levelBg.position.y)
+        self.addChild(bloodNode)
+        
+        let colorAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.1, duration: 1)
+        let colorAction2 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 0, duration: 1)
+        let seqa = SKAction.sequence([colorAction,colorAction2])
+        let repa = SKAction.repeatForever(seqa)
+        bloodNode.run(repa, withKey: "bloodA")
+        bloodNode.anchorPoint = CGPoint(x:0,y:0.5)
     }
     
    
@@ -369,6 +423,24 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         //WDDataManager.shareInstance().closeDB()
     }
     
+    func reduceBlood() {
+        if personNode.wdBlood <= 0 {
+            bloodNode.removeAllActions()
+            bloodNode.removeFromParent()
+        }
+        bloodNode.removeAction(forKey: "bloodA")
+        let percentage = 1 - personNode.wdBlood / personNode.wdAllBlood
+        let leavePercentage = personNode.wdBlood / personNode.wdAllBlood
+        let action = SKAction.scaleX(to: leavePercentage * 0.5, duration: 0.3)
+        bloodNode.run(action) {
+            let colorAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: percentage, duration: TimeInterval(leavePercentage))
+            let colorAction2 = SKAction.colorize(with: UIColor.red, colorBlendFactor: 0, duration: TimeInterval(leavePercentage))
+            let seqa = SKAction.sequence([colorAction,colorAction2])
+            let repa = SKAction.repeatForever(seqa)
+            self.bloodNode.run(repa, withKey: "bloodA")
+        }
+    
+    }
     
     @objc func testEmitter(timer:Timer) {
     }
