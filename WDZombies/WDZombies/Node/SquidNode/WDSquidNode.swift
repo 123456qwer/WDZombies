@@ -40,6 +40,7 @@ class WDSquidNode: WDBaseNode {
         self.wdFire_impact = 200
         self.wdBlood = 100
         self.wdAttack = 3
+        self.experience = 30
         
         self.setAttribute(isBoss: self.isBoss)
         

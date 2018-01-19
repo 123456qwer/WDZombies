@@ -66,6 +66,7 @@ class WDGreenZomNode: WDBaseNode{
         self.direction = kLeft
         self.wdFire_impact = 100
         self.wdBlood = 50
+        self.experience = 20
         
         self.setAttribute(isBoss: self.isBoss)
     }

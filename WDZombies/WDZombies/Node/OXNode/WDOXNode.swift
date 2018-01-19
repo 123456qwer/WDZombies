@@ -40,6 +40,7 @@ class WDOXNode: WDBaseNode {
         self.wdAttack = 3
         
         self.setAttribute(isBoss: self.isBoss)
+        self.experience = 35
         
         //self.addChild(model.phyColorNode())
         

@@ -23,9 +23,11 @@ class WDDataManager: NSObject {
         userModel.fire_impact = 10
         userModel.attackDistance = 170
         userModel.skillCount = 1
-        userModel.level = 0
+        userModel.level = 1
         userModel.mapLevel = 0
         userModel.monsterCount = 0
+        userModel.experience = 0
+        userModel.experienceAll = 200
         
         if userModel.insertSelfToDB(){
             print("人物属性插入成功")
@@ -112,7 +114,7 @@ class WDDataManager: NSObject {
     func creatTable() -> Bool {
         //建表的SQL语句
         let creatUserTable = "CREATE TABLE IF NOT EXISTS 't_Skill' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'skillName' TEXT,'haveLearn' INTEGER,'skillLevel1' INTEGER,'skillLevel2' INTEGER,'skillLevel1Str' TEXT,'skillLevel2Str' TEXT,'skillDetailStr' TEXT);"
-        let createUserTable2 = "CREATE TABLE IF NOT EXISTS 't_User' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'blood' TEXT,'attack' TEXT,'speed' TEXT,'level' INTEGER,'skillCount' INTEGER,'fire_impact' TEXT,'attackDistance' TEXT,'mapLevel' INTEGER,'monsterCount' INTEGER)"
+        let createUserTable2 = "CREATE TABLE IF NOT EXISTS 't_User' ( 'ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'blood' TEXT,'attack' TEXT,'speed' TEXT,'level' INTEGER,'skillCount' INTEGER,'fire_impact' TEXT,'attackDistance' TEXT,'mapLevel' INTEGER,'monsterCount' INTEGER,'experience' INTEGER,'experienceAll' INTEGER)"
         let createMonsterTable = "CREATE TABLE IF NOT EXISTS 't_Monster' ('ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'monsterName' TEXT,'killCount' INTEGER,'beKillCount' INTEGER,'overTime' INTEGER)"
         //let creatCarTable = "CREATE TABLE IF NOT EXISTS 't_Car' ('ID' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'type' TEXT,'output' REAL,'master' TEXT);"
         //执行SQL语句-创建表 依然,项目中一般不会只有一个表

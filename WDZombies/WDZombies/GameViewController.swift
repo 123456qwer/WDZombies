@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
     var showScene:WDBaseScene!               = nil
     var mapName:String!                    = nil
     var _level:NSInteger = 1
-    
+    var _experienceView:UIView! = nil
 //********************生命周期*********************************//
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -465,6 +465,10 @@ class GameViewController: UIViewController {
                 weakSelf?.createNextView()
             }
             
+            showScene.setExperienceBlock = {(radius:CGFloat,arcCenter:CGPoint,startAngle:CGFloat,endAngle:CGFloat,lineWidth:CGFloat) -> Void in
+                weakSelf?.drawAction(radius: radius, arcCenter: arcCenter, startAngle: startAngle, endAngle: endAngle, lineWidth: lineWidth)
+            }
+            
             view.ignoresSiblingOrder = true
             view.showsFPS = true
             view.showsNodeCount = true
@@ -472,7 +476,31 @@ class GameViewController: UIViewController {
     }
     
     
-
+    func drawAction(radius:CGFloat,arcCenter:CGPoint,startAngle:CGFloat,endAngle:CGFloat,lineWidth:CGFloat) {
+        
+       
+        
+        let view:WDExperienceView = WDExperienceView.init();
+        
+        let userModel:WDUserModel = WDUserModel.init()
+        _ = userModel.searchToDB()
+        
+        let percentage:CGFloat = CGFloat(CGFloat(userModel.experience) / CGFloat(userModel.experienceAll))
+        let endAngle1 = CGFloat(Double.pi * 2) * percentage
+        
+        view.setParameters(radius: 75 / 2.0 - lineWidth / 2.0, arcCenter: CGPoint(x:75 / 2.0,y:75 / 2.0), startAngle: 0, endAngle: endAngle1, lineWidth: lineWidth)
+        view.backgroundColor = UIColor.clear
+        view.frame = CGRect(x:7,y:7,width:75,height:75)
+        self.view.addSubview(view)
+        
+        if _experienceView != nil {
+            _experienceView.removeFromSuperview()
+            _experienceView = view
+        }else{
+            _experienceView = view
+        }
+    }
+    
 
 //******************系统方法*************************************//
     override var shouldAutorotate: Bool {

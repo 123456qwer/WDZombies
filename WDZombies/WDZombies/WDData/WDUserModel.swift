@@ -13,16 +13,18 @@ class WDUserModel: NSObject {
     @objc var blood:CGFloat = 0
     @objc var attack:CGFloat = 0
     @objc var speed:CGFloat = 0
-    @objc var level:NSInteger = 0
+    @objc var level:NSInteger = 1
+    @objc var experience:NSInteger = 0  //当前经验值，升级清空
     @objc var skillCount:NSInteger = 0
     @objc var fire_impact:CGFloat = 0  //人物攻击击飞怪物的最远距离
     @objc var attackDistance:CGFloat = 0 //攻击距离,子弹飞行距离
     @objc var mapLevel:NSInteger = 0
     @objc var monsterCount:NSInteger = 0
+    @objc var experienceAll:NSInteger = 0 //人物升级需要的经验值
     
     func insertSelfToDB() -> Bool {
         //插入SQL语句
-        let insertSQL = "INSERT INTO 't_User' (blood,attack,speed,level,skillCount,fire_impact,attackDistance,mapLevel,monsterCount) VALUES ('\(blood)','\(attack)','\(speed)','\(level)','\(skillCount)','\(fire_impact)','\(attackDistance)','\(mapLevel)','\(monsterCount)');"
+        let insertSQL = "INSERT INTO 't_User' (blood,attack,speed,level,skillCount,fire_impact,attackDistance,mapLevel,monsterCount,experience,experienceAll) VALUES ('\(blood)','\(attack)','\(speed)','\(level)','\(skillCount)','\(fire_impact)','\(attackDistance)','\(mapLevel)','\(monsterCount)','\(experience)','\(experienceAll)');"
         if WDDataManager.shareInstance().execSQL(SQL: insertSQL) {
             print("插入数据成功")
             return true
@@ -38,7 +40,7 @@ class WDUserModel: NSObject {
     
     func changeSkillToSqlite() -> Bool {
         //更改
-        let changeSQL = "UPDATE 't_User' set blood = '\(blood)',attack = '\(attack)',speed = '\(speed)',level = '\(level)',skillCount = '\(skillCount)',fire_impact = '\(fire_impact)',attackDistance = '\(attackDistance)', mapLevel = '\(mapLevel)',monsterCount = '\(monsterCount)'"
+        let changeSQL = "UPDATE 't_User' set blood = '\(blood)',attack = '\(attack)',speed = '\(speed)',level = '\(level)',skillCount = '\(skillCount)',fire_impact = '\(fire_impact)',attackDistance = '\(attackDistance)', mapLevel = '\(mapLevel)',monsterCount = '\(monsterCount)',experience = '\(experience)',experienceAll = '\(experienceAll)'"
         if WDDataManager.shareInstance().execSQL(SQL: changeSQL) {
             
             print("修改数据成功")
@@ -67,4 +69,48 @@ class WDUserModel: NSObject {
     }
     
     
+    static func addExperience(nodeExperience:NSInteger) -> Bool{
+    let model:WDUserModel = WDUserModel.init()
+    _ = model.searchToDB()
+        var levelUp = false
+    model.experience = model.experience + nodeExperience
+        if model.experience > model.experienceAll{
+            model.experience = 0
+            model.level = model.level + 1
+            model.skillCount = model.skillCount + 1
+            model.experienceAll = WDUserModel.levelAllExperience(nowLevel: model.level)
+            levelUp = true
+        }
+    _ = model.changeSkillToSqlite()
+        
+        return levelUp
+    }
+    
+    static func levelAllExperience(nowLevel:NSInteger) -> NSInteger{
+        switch nowLevel {
+        
+        case 1:
+            return 200
+        case 2:
+            return 400
+        case 3:
+            return 800
+        case 4:
+            return 800
+        case 5:
+            return 800
+        case 6:
+            return 800
+        case 7:
+            return 800
+        case 8:
+            return 800
+        case 9:
+            return 800
+            
+        default:
+            return 10000
+        }
+        
+    }
 }

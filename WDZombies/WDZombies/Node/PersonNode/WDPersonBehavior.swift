@@ -69,7 +69,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     func reduceBlood(number:CGFloat,monsterName:String)  {
         
         //震动效果
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         
         personNode.wdBlood -= number
         self.reduceBloodBlock()
