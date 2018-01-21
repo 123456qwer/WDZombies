@@ -666,6 +666,7 @@
 		434C5A8F1FD1309E00C921AF /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				434C5A941FD130D400C921AF /* PersonNode */,
 				435E8780200610270048BFC8 /* SealNode */,
 				43942E761FFF70A3003B728D /* kulouNightNode */,
 				43544F301FFE178400E82FD2 /* OXNode */,
@@ -674,7 +675,6 @@
 				430B1BC81FD92EFC006A9809 /* GreenZomNode */,
 				434C5AA11FD130FA00C921AF /* BossNode */,
 				434C5A901FD130D400C921AF /* kulouNode */,
-				434C5A941FD130D400C921AF /* PersonNode */,
 				434C5A971FD130D400C921AF /* ZombiesNode */,
 			);
 			path = Node;
