@@ -12,6 +12,8 @@ import SpriteKit
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
+   
+    
     static let ZOMCOUNT = 20
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
@@ -41,6 +43,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
     let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
     
+    var _radius:CGFloat = 0
+    var _arcCenter:CGPoint = CGPoint(x:0,y:0)
+    var _startAngle:CGFloat = 0
+    var _endAngle:CGFloat = 0
+    var _lineWidth:CGFloat = 0
     
     //进入方法
     override func didMove(to view: SKView) {
@@ -190,7 +197,10 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         self.addChild(levelBg)
         
-        levelNode = SKLabelNode.init(text: "1")
+        let model:WDUserModel = WDUserModel.init()
+        _ = model.searchToDB()
+        
+        levelNode = SKLabelNode.init(text: "\(model.level)")
         levelNode.fontName = "VCR OSD Mono"
         levelNode.position = CGPoint(x:0,y:0)
         levelNode.zPosition = 3000
@@ -216,6 +226,18 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let repa = SKAction.repeatForever(seqa)
         bloodNode.run(repa, withKey: "bloodA")
         bloodNode.anchorPoint = CGPoint(x:0,y:0.5)
+        
+        let exWidth:CGFloat = 4
+        let radius = levelBg2.size.width / 2.0 - exWidth/2.0
+      
+        _radius = radius
+        _arcCenter = levelBg.position
+        _startAngle = 0
+        _endAngle = CGFloat(Double.pi / 2.0)
+        _lineWidth = exWidth
+        
+       
+        
     }
     
    
@@ -378,6 +400,18 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //从数组中删除Node方法
     func removeNodeFromArr(node:WDBaseNode){
+        if setExperienceBlock != nil {
+            
+            if WDUserModel.addExperience(nodeExperience: NSInteger(node.experience)){
+                let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
+                levelNode.text = "\(model.level)"
+                self.personNode.createLevelUpNode()
+            }
+            
+            setExperienceBlock!(_radius,_arcCenter,_startAngle,_endAngle,_lineWidth)
+            _startAngle = _endAngle
+            _endAngle   = _endAngle + CGFloat(Double.pi / 2.0)
+        }
         mapViewModel.removeNode(zomNode: node)
         mapViewModel.zomArr.remove(node)
     }
@@ -417,11 +451,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //******************************************************//
 
-    func levelUp(model:WDUserModel)  {
-        model.skillCount += 1
-        _ = model.changeSkillToSqlite()
-        //WDDataManager.shareInstance().closeDB()
-    }
     
     func reduceBlood() {
         if personNode.wdBlood <= 0 {
@@ -451,6 +480,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //**************************************************************//
     //开火方法
     override func fireAction(direction: NSString) {
+        
+      
         if nearZom != nil {
              let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
             if distance < CGFloat(personNode.wdAttackDistance){

@@ -160,9 +160,11 @@ class WDZombieNode: WDBaseNode {
         if _zomType == .Normal {
             self.wdBlood = 5
             self.speed = 1
+            self.experience = 5
         }else if _zomType == .Red{
             self.wdBlood = 10
             self.speed = 2
+            self.experience = 10
         }
         
         if isBoss {

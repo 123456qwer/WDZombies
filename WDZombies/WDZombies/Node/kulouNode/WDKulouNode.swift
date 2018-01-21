@@ -60,6 +60,8 @@ class WDKulouNode: WDBaseNode {
         self.direction = kLeft
         self.wdFire_impact = 100
         self.wdAttack = 3
+        
+        self.experience = 15
     }
     
     

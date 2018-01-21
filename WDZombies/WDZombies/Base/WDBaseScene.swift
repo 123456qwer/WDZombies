@@ -11,6 +11,11 @@ import SpriteKit
 
 class WDBaseScene: SKScene {
 
+
+    
+    typealias setExperience = (_ radius:CGFloat,_ arcCenter:CGPoint,_ startAngle:CGFloat, _ endAngle:CGFloat,_ lineWidth:CGFloat) -> Void
+    var setExperienceBlock:setExperience?
+    
     var isCreateScene:Bool! = false
     var personNode:WDPersonNode! = nil
     var bgNode:SKSpriteNode! = nil

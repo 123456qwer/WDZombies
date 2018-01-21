@@ -361,13 +361,16 @@ class WDMap_1ZomModel: NSObject {
         let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
         if node.isBoss && model.monsterCount < count{
             model.monsterCount = count
-            map.levelUp(model: model)
-            map.personNode.createLevelUpNode()
+            _ = model.changeSkillToSqlite()
             map.playNext()
             map.overTime(bossNode: node)
+            map.removeNodeFromArr(node:node)
+
         }else if node.isBoss {
             map.playNext()
             map.overTime(bossNode: node)
+            map.removeNodeFromArr(node:node)
+
         }else{
             map.createBoss()
             map.removeNodeFromArr(node:node)

@@ -154,6 +154,8 @@
 		436FF4041FF23BF900C40357 /* WDSquidNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4031FF23BF900C40357 /* WDSquidNode.swift */; };
 		436FF4061FF23C1D00C40357 /* WDSquidBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4051FF23C1D00C40357 /* WDSquidBehavior.swift */; };
 		436FF4081FF23C3E00C40357 /* WDSquidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4071FF23C3E00C40357 /* WDSquidModel.swift */; };
+		43701E08201187AE004452D3 /* WDExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43701E07201187AE004452D3 /* WDExperienceView.swift */; };
+		43701E0B2011E9CE004452D3 /* dogPic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43701E0A2011E9CE004452D3 /* dogPic.atlas */; };
 		4371741E1FFC7D5E0000CB7D /* 乌云1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4371741D1FFC7D5E0000CB7D /* 乌云1.png */; };
 		437174201FFC7D690000CB7D /* 乌云2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4371741F1FFC7D690000CB7D /* 乌云2.png */; };
 		437174221FFC7D710000CB7D /* 乌云3.png in Resources */ = {isa = PBXBuildFile; fileRef = 437174211FFC7D710000CB7D /* 乌云3.png */; };
@@ -352,6 +354,8 @@
 		436FF4031FF23BF900C40357 /* WDSquidNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidNode.swift; sourceTree = "<group>"; };
 		436FF4051FF23C1D00C40357 /* WDSquidBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidBehavior.swift; sourceTree = "<group>"; };
 		436FF4071FF23C3E00C40357 /* WDSquidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidModel.swift; sourceTree = "<group>"; };
+		43701E07201187AE004452D3 /* WDExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDExperienceView.swift; sourceTree = "<group>"; };
+		43701E0A2011E9CE004452D3 /* dogPic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = dogPic.atlas; sourceTree = "<group>"; };
 		4371741D1FFC7D5E0000CB7D /* 乌云1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "乌云1.png"; sourceTree = "<group>"; };
 		4371741F1FFC7D690000CB7D /* 乌云2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "乌云2.png"; sourceTree = "<group>"; };
 		437174211FFC7D710000CB7D /* 乌云3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "乌云3.png"; sourceTree = "<group>"; };
@@ -488,6 +492,7 @@
 				4355897F1FA06DEF00C80CA8 /* WDPhysicalAttribute.swift */,
 				43625F821FA1C7FB00910ED0 /* WDAnimationTool.swift */,
 				430B1BCF1FD93696006A9809 /* WDConstant.swift */,
+				43701E07201187AE004452D3 /* WDExperienceView.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -667,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				434C5A941FD130D400C921AF /* PersonNode */,
+				43701E092011E9BF004452D3 /* DogNode */,
 				435E8780200610270048BFC8 /* SealNode */,
 				43942E761FFF70A3003B728D /* kulouNightNode */,
 				43544F301FFE178400E82FD2 /* OXNode */,
@@ -865,6 +871,14 @@
 			path = SquidNode;
 			sourceTree = "<group>";
 		};
+		43701E092011E9BF004452D3 /* DogNode */ = {
+			isa = PBXGroup;
+			children = (
+				43701E0A2011E9CE004452D3 /* dogPic.atlas */,
+			);
+			path = DogNode;
+			sourceTree = "<group>";
+		};
 		4392CE221FA6BBF400A52D12 /* FirePic */ = {
 			isa = PBXGroup;
 			children = (
@@ -1005,6 +1019,7 @@
 				433B050A1FB19CCB006210B2 /* boomAnimation.png in Resources */,
 				434D58841FD54D4F00253903 /* monster_1_attack_red.png in Resources */,
 				43524CD01FCFE78100326EFF /* back.png in Resources */,
+				43701E0B2011E9CE004452D3 /* dogPic.atlas in Resources */,
 				43656BCD1F9F2055001EFDA5 /* railing_left.png in Resources */,
 				434F604B2004B12000BAA804 /* person_beFlash.png in Resources */,
 				433D184C1FA0303500A283E0 /* person4.png in Resources */,
@@ -1115,6 +1130,7 @@
 				435E87842006106B0048BFC8 /* WDSealModel.swift in Sources */,
 				436FF4081FF23C3E00C40357 /* WDSquidModel.swift in Sources */,
 				434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */,
+				43701E08201187AE004452D3 /* WDExperienceView.swift in Sources */,
 				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
 				9BB042A11FDA92DF00E674DB /* JWStore.swift in Sources */,
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
