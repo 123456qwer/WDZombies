@@ -364,6 +364,46 @@ class WDMapManager: NSObject {
 
     }
     
+    func setDogZom(){
+        let textures = SKTextureAtlas.init(named: "dogPic")
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let stayArr:NSMutableArray = NSMutableArray.init()
+        let diedArr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...15 {
+            if index < 4 {
+                let name = "dog_died_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                diedArr.add(temp)
+                
+                let name2 = "dog_stay_\(index + 1)"
+                let temp2 = textures.textureNamed(name2)
+                stayArr.add(temp2)
+            }
+            
+            if index < 16 {
+                let name1 = "dog_attack_\(index + 1)"
+                let temp1 = textures.textureNamed(name1)
+                attack1Arr.add(temp1)
+            }
+            
+            if index < 8{
+                let name = "dog_move_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                moveArr.add(temp)
+            }
+        }
+            self.textureDic.setObject(moveArr, forKey: DOG_MOVE as NSCopying)
+            self.textureDic.setObject(diedArr, forKey: DOG_DIED as NSCopying)
+            self.textureDic.setObject(attack1Arr, forKey: DOG_ATTACK1 as NSCopying)
+            self.textureDic.setObject(stayArr, forKey: DOG_STAY as NSCopying)
+        
+    }
+    
+    
+    //MARK:初始化pic
     func setPic()  {
         
         self.mapDic = NSMutableDictionary.init()
@@ -377,6 +417,7 @@ class WDMapManager: NSObject {
         self.setOXZom()
         self.setKulouKnightZom()
         self.setSealZom()
+        self.setDogZom();
     }
     
     

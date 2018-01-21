@@ -67,7 +67,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
             fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
             overTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overTimerAction), userInfo: nil, repeats: true)
             
@@ -77,7 +77,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            //self.level_9_sealZom(isBoss: true)
+            self.level_10_dogZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -395,6 +395,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //海豹
     func level_9_sealZom(isBoss:Bool) {
         _ = mapZomModel.createSealZom(isBoss: isBoss)
+    }
+    
+    //狗
+    func level_10_dogZom(isBoss:Bool) {
+        _ = mapZomModel.createDogZom(isBoss: isBoss)
     }
     
     

@@ -149,6 +149,9 @@
 		43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 43691BAF1FDF822800D4772E /* knightNodePic.atlas */; };
 		43691BB21FDF827400D4772E /* WDSmokeKnightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */; };
 		43691BB41FDF828E00D4772E /* WDKnightBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */; };
+		436C75FC20143689009A3818 /* WDDogBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C75FB20143689009A3818 /* WDDogBehavior.swift */; };
+		436C75FE20143699009A3818 /* WDDogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C75FD20143699009A3818 /* WDDogModel.swift */; };
+		436C7600201436A8009A3818 /* WDDogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C75FF201436A8009A3818 /* WDDogNode.swift */; };
 		436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */; };
 		436FF4021FF23BAC00C40357 /* squidNodePic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 436FF4011FF23BAC00C40357 /* squidNodePic.atlas */; };
 		436FF4041FF23BF900C40357 /* WDSquidNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4031FF23BF900C40357 /* WDSquidNode.swift */; };
@@ -349,6 +352,9 @@
 		43691BAF1FDF822800D4772E /* knightNodePic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = knightNodePic.atlas; sourceTree = "<group>"; };
 		43691BB11FDF827400D4772E /* WDSmokeKnightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSmokeKnightNode.swift; sourceTree = "<group>"; };
 		43691BB31FDF828E00D4772E /* WDKnightBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDKnightBehavior.swift; sourceTree = "<group>"; };
+		436C75FB20143689009A3818 /* WDDogBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDogBehavior.swift; sourceTree = "<group>"; };
+		436C75FD20143699009A3818 /* WDDogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDogModel.swift; sourceTree = "<group>"; };
+		436C75FF201436A8009A3818 /* WDDogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDogNode.swift; sourceTree = "<group>"; };
 		436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMap_1ZomModel.swift; sourceTree = "<group>"; };
 		436FF4011FF23BAC00C40357 /* squidNodePic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squidNodePic.atlas; sourceTree = "<group>"; };
 		436FF4031FF23BF900C40357 /* WDSquidNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidNode.swift; sourceTree = "<group>"; };
@@ -875,6 +881,9 @@
 			isa = PBXGroup;
 			children = (
 				43701E0A2011E9CE004452D3 /* dogPic.atlas */,
+				436C75FB20143689009A3818 /* WDDogBehavior.swift */,
+				436C75FF201436A8009A3818 /* WDDogNode.swift */,
+				436C75FD20143699009A3818 /* WDDogModel.swift */,
 			);
 			path = DogNode;
 			sourceTree = "<group>";
@@ -1125,6 +1134,7 @@
 				434C5A771FD12F2200C921AF /* WDMonsterVC.swift in Sources */,
 				434C5A741FD12B4F00C921AF /* WDBaseViewController.swift in Sources */,
 				43625F831FA1C7FB00910ED0 /* WDAnimationTool.swift in Sources */,
+				436C75FC20143689009A3818 /* WDDogBehavior.swift in Sources */,
 				436FF4061FF23C1D00C40357 /* WDSquidBehavior.swift in Sources */,
 				432F84D11F9999E800F51146 /* WDSkillAndFireView.swift in Sources */,
 				435E87842006106B0048BFC8 /* WDSealModel.swift in Sources */,
@@ -1132,6 +1142,7 @@
 				434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */,
 				43701E08201187AE004452D3 /* WDExperienceView.swift in Sources */,
 				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
+				436C75FE20143699009A3818 /* WDDogModel.swift in Sources */,
 				9BB042A11FDA92DF00E674DB /* JWStore.swift in Sources */,
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
 				4376D1B91F9F2845004E6188 /* WDBaseNode.swift in Sources */,
@@ -1143,6 +1154,7 @@
 				434C5A9C1FD130D400C921AF /* WDKulouNode.swift in Sources */,
 				43544F361FFE17FD00E82FD2 /* WDOXBehavior.swift in Sources */,
 				434C5AA01FD130D400C921AF /* WDZombieNode.swift in Sources */,
+				436C7600201436A8009A3818 /* WDDogNode.swift in Sources */,
 				433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */,
 				434C5A9D1FD130D400C921AF /* WDPersonBehavior.swift in Sources */,
 				434C5A9B1FD130D400C921AF /* WDKulouBehavior.swift in Sources */,

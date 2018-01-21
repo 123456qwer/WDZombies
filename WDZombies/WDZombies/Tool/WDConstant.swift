@@ -73,6 +73,13 @@ public let SEAL_STAY       = "SEAL_STAY"
 public let SEAL_ATTACK1    = "SEAL_ATTACK1"
 public let SEAl_ICE        = "SEAL_ICE"
 
+//狗
+public let DOG_NAME        = "DOG_NAME"
+public let DOG_MOVE        = "DOG_MOVE"
+public let DOG_DIED        = "DOG_DIED"
+public let DOG_STAY        = "DOG_STAY"
+public let DOG_ATTACK1     = "DOG_ATTACK1"
+
 
 class WDConstant: NSObject {
 
