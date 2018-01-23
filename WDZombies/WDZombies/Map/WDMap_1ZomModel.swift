@@ -347,6 +347,30 @@ class WDMap_1ZomModel: NSObject {
     }
     
     
+    //MARK:狗
+    func createDogZom(isBoss:Bool) -> WDDogNode {
+        let dogZom:WDDogNode = WDDogNode.init()
+        dogZom.isBoss = isBoss
+        dogZom.initWithPerson(personNode: map1_scene.personNode)
+        map1_scene.bgNode.addChild(dogZom)
+        weak var weakSelf = map1_scene
+        dogZom.behavior.starMove()
+        dogZom.behavior.moveBlock = {(node:WDBaseNode) -> Void in
+            let direction = WDTool.calculateDirectionForZom(point1: node.position, point2: (weakSelf?.personNode.position)!)
+            let dogZ:WDDogNode = node as! WDDogNode
+            dogZ.behavior.move(direction: direction, nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
+        
+        weak var wSelf = self
+        dogZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
+            wSelf?.diedNextAction(map: weakSelf!, node: node, count: 10)
+        }
+
+        self.addZomNodeForViewArr(node: dogZom)
+        return dogZom
+        
+    }
+    
 ///////////////////////////公用////////////////
     //MARK:僵尸死亡
     /// 僵尸死亡调用方法
