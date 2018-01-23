@@ -22,6 +22,7 @@ class WDMapViewController: UIViewController {
     let MAP_7 = 70
     let MAP_8 = 80
     let MAP_9 = 90
+    let MAP_10  = 100
 
     var bgScrollView:UIScrollView!
     
@@ -36,7 +37,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 9.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 10.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -51,6 +52,7 @@ class WDMapViewController: UIViewController {
         self.setMap7(model: model)
         self.setMap8(model: model)
         self.setMap9(model: model)
+        self.setMap10(model:model)
         
         
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
@@ -98,6 +100,10 @@ class WDMapViewController: UIViewController {
         }else if sender.tag == MAP_9{
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",9)
+            })
+        }else if sender.tag == MAP_10{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",10)
             })
         }
     }
@@ -224,6 +230,18 @@ class WDMapViewController: UIViewController {
         self.setView(tag: MAP_9, width: 130, height: 150, imageArr: moveArr, count: 8, model: model, x: 20 + 8 * kScreenWidth,monsterName: SEAL_NAME)
     }
     
+    func setMap10(model:WDUserModel)  {
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...7 {
+            let name = "dog_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
+        }
+        
+        self.setView(tag: MAP_10, width: 180 , height: 130 , imageArr: moveArr, count: 9, model: model ,x:20 + 9 * kScreenWidth ,monsterName: DOG_NAME)
+    }
+    
     //count 是当前怪物数量
     func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat,monsterName:String)  {
         
@@ -262,6 +280,9 @@ class WDMapViewController: UIViewController {
         }else{
             button.isUserInteractionEnabled = false
             imageV.image = UIImage.init(named: "lock")
+            //106 , 122
+            imageV.frame.size = CGSize(width:130 * (2.0 / 3),height:130 * ( 2.0 / 3))
+            imageV.frame.origin = CGPoint(x:kScreenWidth / 2.0 - imageV.frame.size.width / 2.0,y:kScreenHeight / 2.0 - imageV.frame.size.height / 2.0)
         }
         
         

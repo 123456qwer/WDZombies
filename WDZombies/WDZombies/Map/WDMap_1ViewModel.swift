@@ -71,6 +71,24 @@ class WDMap_1ViewModel: NSObject {
         var kulouNightNode:WDKulouKnightNode?
         var sealIceNode:SKSpriteNode?
         var sealNode:WDSealNode?
+        var dogStayFireNode:SKEmitterNode?
+        var dogFireNode:SKSpriteNode?
+        var dogNode:WDDogNode?
+        
+        dogNode = (A.name?.isEqual(DOG_NAME))! ? (A as? WDDogNode):nil;
+        if dogNode == nil {
+            dogNode = (B.name?.isEqual(DOG_NAME))! ? (B as? WDDogNode):nil;
+        }
+        
+        dogFireNode = (A.name?.isEqual(DOG_FIRE))! ? (A as? SKSpriteNode):nil;
+        if dogFireNode == nil {
+            dogFireNode = (B.name?.isEqual(DOG_FIRE))! ? (B as? SKSpriteNode):nil;
+        }
+        
+        dogStayFireNode = (A.name?.isEqual(DOG_STAY_FIRE))! ? (A as? SKEmitterNode):nil;
+        if dogStayFireNode == nil {
+            dogStayFireNode = (B.name?.isEqual(DOG_STAY_FIRE))! ? (B as? SKEmitterNode):nil;
+        }
         
         sealNode = (A.name?.isEqual(SEAL_NAME))! ? (A as? WDSealNode):nil;
         if sealNode == nil {
@@ -328,6 +346,32 @@ class WDMap_1ViewModel: NSObject {
         
         if sealNode != nil && pNode != nil{
             sealNode?.behavior.attack(direction: "", nodeDic: ["personNode":personNode])
+        }
+        
+        if dogStayFireNode != nil && pNode != nil{
+           
+           let alpha = SKAction.fadeAlpha(to: 0, duration: 0.5)
+            dogStayFireNode?.run(alpha, completion: {
+                dogStayFireNode?.removeFromParent()
+            })
+           personNode.personBehavior.reduceBlood(number: 1,monsterName: DOG_NAME)
+           WDAnimationTool.bloodAnimation(node: pNode!)
+        }
+        
+        if dogFireNode != nil && pNode != nil {
+            let node = dogFireNode?.parent?.childNode(withName: "flyFire")
+            node?.removeAllActions()
+            node?.removeFromParent()
+            dogFireNode?.removeAllActions()
+            dogFireNode?.removeFromParent()
+            personNode.personBehavior.reduceBlood(number: 5,monsterName: DOG_NAME)
+            WDAnimationTool.bloodAnimation(node: pNode!)
+        }
+        
+        if dogNode != nil && fireNode != nil {
+            fireNode?.removeFromParent()
+            _ = dogNode?.behavior.beAttack(attackNode: personNode, beAttackNode: dogNode!)
+            WDAnimationTool.bloodAnimation(node: dogNode!)
         }
         
         //炸弹逻辑

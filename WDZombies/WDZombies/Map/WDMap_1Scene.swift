@@ -1,4 +1,4 @@
-//
+ //
 //  WDMap_1Scene.swift
 //  WDZombies
 //
@@ -14,7 +14,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
    
     
-    static let ZOMCOUNT = 20
+    static let ZOMCOUNT = 10
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -67,7 +67,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
             fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
             overTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overTimerAction), userInfo: nil, repeats: true)
             
@@ -77,7 +77,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            self.level_10_dogZom(isBoss: true)
+            //self.level_10_dogZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -96,8 +96,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 }
             }
         }
-      
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -112,6 +110,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         let str:String = String(format: "%02d:%02d", arguments: [minute, second])
         overTimeLabel.text = str
     }
+    
     
     //初始化Nodes
     func createNodes(){
@@ -235,9 +234,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         _startAngle = 0
         _endAngle = CGFloat(Double.pi / 2.0)
         _lineWidth = exWidth
-        
-       
-        
     }
     
    
@@ -338,6 +334,26 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_7_OXZom(isBoss: false)
             }else if chance == 4{
                 self.level_8_kulouKnightZom(isBoss: false)
+            }else{
+                self.level_1_NormalZom(isBoss: false)
+            }
+        }else if level == 10{
+            if chance == 7{
+                self.level_3_KulouZom(isBoss: false)
+            }else if chance == 8 {
+                self.level_2_RedZom(isBoss: false)
+            }else if chance == 9{
+                self.level_4_GreenZom(isBoss: false)
+            }else if chance == 0{
+                self.level_5_KnightZom(isBoss: false)
+            }else if chance == 6{
+                self.level_6_SquidZom(isBoss: false)
+            }else if chance == 5{
+                self.level_7_OXZom(isBoss: false)
+            }else if chance == 4{
+                self.level_8_kulouKnightZom(isBoss: false)
+            }else if chance == 3{
+                self.level_9_sealZom(isBoss: false)
             }else{
                 self.level_1_NormalZom(isBoss: false)
             }
@@ -449,6 +465,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_8_kulouKnightZom(isBoss: true)
             }else if self.level == 9{
                 self.level_9_sealZom(isBoss: true)
+            }else if self.level == 10{
+                self.level_10_dogZom(isBoss: true)
             }
         }
         

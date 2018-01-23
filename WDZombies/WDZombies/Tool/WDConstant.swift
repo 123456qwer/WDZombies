@@ -79,6 +79,8 @@ public let DOG_MOVE        = "DOG_MOVE"
 public let DOG_DIED        = "DOG_DIED"
 public let DOG_STAY        = "DOG_STAY"
 public let DOG_ATTACK1     = "DOG_ATTACK1"
+public let DOG_FIRE        = "DOG_FIRE"
+public let DOG_STAY_FIRE   = "DOG_STAY_FIRE"
 
 
 class WDConstant: NSObject {

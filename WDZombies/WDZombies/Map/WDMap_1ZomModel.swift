@@ -365,6 +365,10 @@ class WDMap_1ZomModel: NSObject {
         dogZom.behavior.alreadyDied = {(node:WDBaseNode) -> Void in
             wSelf?.diedNextAction(map: weakSelf!, node: node, count: 10)
         }
+        
+        dogZom.behavior.fireAttackBlock = {(dogNode:WDDogNode) -> Void in
+                dogNode.behavior.attack(direction: "", nodeDic: ["personNode":weakSelf?.personNode! as Any])
+        }
 
         self.addZomNodeForViewArr(node: dogZom)
         return dogZom

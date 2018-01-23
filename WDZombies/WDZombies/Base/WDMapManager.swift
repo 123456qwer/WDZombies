@@ -371,8 +371,9 @@ class WDMapManager: NSObject {
         let attack1Arr:NSMutableArray = NSMutableArray.init()
         let stayArr:NSMutableArray = NSMutableArray.init()
         let diedArr:NSMutableArray = NSMutableArray.init()
+        let dogFireArr:NSMutableArray = NSMutableArray.init()
         
-        for index:NSInteger in 0...15 {
+        for index:NSInteger in 0...11 {
             if index < 4 {
                 let name = "dog_died_\(index + 1)"
                 let temp = textures.textureNamed(name)
@@ -383,7 +384,13 @@ class WDMapManager: NSObject {
                 stayArr.add(temp2)
             }
             
-            if index < 16 {
+            if index < 5{
+                let name = "dog_fire_\(index + 1)"
+                let temp = textures.textureNamed(name)
+                dogFireArr.add(temp)
+            }
+            
+            if index < 12 {
                 let name1 = "dog_attack_\(index + 1)"
                 let temp1 = textures.textureNamed(name1)
                 attack1Arr.add(temp1)
@@ -399,6 +406,7 @@ class WDMapManager: NSObject {
             self.textureDic.setObject(diedArr, forKey: DOG_DIED as NSCopying)
             self.textureDic.setObject(attack1Arr, forKey: DOG_ATTACK1 as NSCopying)
             self.textureDic.setObject(stayArr, forKey: DOG_STAY as NSCopying)
+            self.textureDic.setObject(dogFireArr, forKey: DOG_FIRE as NSCopying)
         
     }
     
