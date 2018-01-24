@@ -61,6 +61,7 @@ class WDMonsterView: UIView {
         if images.count > 0{
             
             imageView1.frame = frame
+            imageView1.frame.origin = CGPoint(x:((imageView1.superview?.frame.size.width)! - imageView1.frame.size.width) / 2.0,y:((imageView1.superview?.frame.size.height)! - imageView1.frame.size.height) / 2.0)
             imageView1.animationImages = images as? [UIImage]
             imageView1.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
             //imageView1.backgroundColor = UIColor.orange
@@ -72,6 +73,7 @@ class WDMonsterView: UIView {
     func setImage2(images:NSArray,frame:CGRect) {
         if images.count > 0{
             imageView2.frame = frame
+            imageView2.frame.origin = CGPoint(x:((imageView2.superview?.frame.size.width)! - imageView2.frame.size.width) / 2.0,y:((imageView2.superview?.frame.size.height)! - imageView2.frame.size.height) / 2.0)
             imageView2.animationImages = images as? [UIImage]
             imageView2.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(1 / 5.0))
             //imageView2.backgroundColor = UIColor.orange
@@ -119,32 +121,59 @@ class WDMonsterView: UIView {
             speedLabel.text = "speed:   2"
             attackLabel.text = "attack:   1"
         }else if type == .kulou{
-            bloodLabel.text = "blood:   50"
+            bloodLabel.text = "blood:   20"
             speedLabel.text = "speed:   1"
-            attackLabel.text = "attack:   2"
+            attackLabel.text = "attack:   3"
         }else if type == .GreenZom{
-            bloodLabel.text = "blood:   50"
+            bloodLabel.text = "blood:   20"
             speedLabel.text = "speed:   1"
             attackLabel.text = "attack:   3"
         }else if type == .kNight{
-            bloodLabel.text = "blood:   50"
+            bloodLabel.text = "blood:   20"
             speedLabel.text = "speed:   1"
             attackLabel.text = "attack:   3"
         }else if type == .Squid{
-            bloodLabel.text = "blood:   50"
+            bloodLabel.text = "blood:   20"
             speedLabel.text = "speed:   1"
             attackLabel.text = "attack:   3"
+        }else if type == .ox{
+            bloodLabel.text = "blood:   20"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   3"
+        }else if type == .kulouKnight{
+            bloodLabel.text = "blood:   20"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   1"
+        }else if type == .seal{
+            bloodLabel.text = "blood:   20"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   1"
+        }else if type == .dog{
+            bloodLabel.text = "blood:   20"
+            speedLabel.text = "speed:   1"
+            attackLabel.text = "attack:   5"
         }
-        
-        
     }
+    
     
     func setLock(isLock:Bool)  {
         if isLock {
-            let imageView:UIImageView = UIImageView.init(frame: CGRect(x:0,y:0,width:self.frame.size.width,height:self.frame.size.height))
-            imageView.backgroundColor = UIColor.black
-            imageView.image = UIImage.init(named: "lock.png")
-            self.addSubview(imageView)
+            
+            imageView1.stopAnimating()
+            imageView2.stopAnimating()
+            
+            imageView1.frame = CGRect(x:0,y:0,width:130,height:130)
+            imageView2.frame = CGRect(x:0,y:0,width:130,height:130)
+            
+            imageView1.image = UIImage.init(named: "lock")
+            imageView2.image = UIImage.init(named: "lock")
+
+            imageView1.frame.origin = CGPoint(x:((imageView2.superview?.frame.size.width)! - imageView2.frame.size.width) / 2.0,y:((imageView2.superview?.frame.size.height)! - imageView2.frame.size.height) / 2.0)
+            imageView2.frame.origin = CGPoint(x:((imageView2.superview?.frame.size.width)! - imageView2.frame.size.width) / 2.0,y:((imageView2.superview?.frame.size.height)! - imageView2.frame.size.height) / 2.0)
+            
+            bloodLabel.text = "blood:   ???"
+            speedLabel.text = "speed:   ???"
+            attackLabel.text = "attack:   ???"
         }
     }
     

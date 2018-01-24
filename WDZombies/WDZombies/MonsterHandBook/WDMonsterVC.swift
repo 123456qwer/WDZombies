@@ -24,7 +24,7 @@ class WDMonsterVC: WDBaseViewController {
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 4,height:0)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 5,height:0)
         
     
         //monster1
@@ -39,6 +39,9 @@ class WDMonsterVC: WDBaseViewController {
         //公牛 & 骷髅骑士
         self.createMonster4()
 
+        //海豹 & 狗
+        self.createMonster5()
+        
         let model:WDUserModel = WDUserModel.init()
         _ = model.searchToDB()
     
@@ -46,11 +49,10 @@ class WDMonsterVC: WDBaseViewController {
         for index:NSInteger in 0...viewArr.count - 1 {
             let view:WDMonsterView = viewArr.object(at: index) as! WDMonsterView
             //FIXME: 怪物个数
-            
             if model.monsterCount >= index + 1{
                 view.setLock(isLock: false)
             }else{
-                view.setLock(isLock: false)
+                view.setLock(isLock: true)
             }
         }
         
@@ -152,11 +154,11 @@ class WDMonsterVC: WDBaseViewController {
         let moveArr:NSMutableArray = NSMutableArray.init()
         let attackArr:NSMutableArray = NSMutableArray.init()
         for index:NSInteger in 0...3 {
-                let name = "skull_move_\(index + 1)"
+                let name = "book_kulou_move_\(index + 1)"
                 let temp:UIImage = UIImage.init(named: name)!
                 moveArr.add(temp)
                 
-                let attackName = "kulou_attack_\(index + 1)"
+                let attackName = "book_kulou_attack_\(index + 1)"
                 let temp1:UIImage = UIImage.init(named: attackName)!
                 attackArr.add(temp1)
             
@@ -167,14 +169,14 @@ class WDMonsterVC: WDBaseViewController {
         for index:NSInteger in 0...11 {
             
             if index < 3{
-                let name = "green_move_\(index + 1)_\(index + 1)"
+                let name = "book_green_move_\(index + 1)"
                 let temp:UIImage = UIImage.init(named: name)!
                 moveArr2.add(temp)
               
             }
             
             if index < 12 {
-                let name = "green_attack2_\(index + 1)"
+                let name = "book_green_attack_\(index + 1)"
                 let temp:UIImage = UIImage.init(named: name)!
                 attack2Arr.add(temp)
             }
@@ -210,12 +212,12 @@ class WDMonsterVC: WDBaseViewController {
         let attack2Arr:NSMutableArray = NSMutableArray.init()
         
         for index:NSInteger in 0...7{
-            let moveName = "squid_move_\(index + 1)"
+            let moveName = "book_squid_move_\(index + 1)"
             let moveTemp:UIImage = UIImage.init(named: moveName)!
             moveArr2.add(moveTemp)
             
             if index < 6{
-                let attack = "squid_attack_\(index + 1)"
+                let attack = "book_squid_attack_\(index + 1)"
                 let attackTemp:UIImage = UIImage.init(named: attack)!
                 attack2Arr.add(attackTemp)
             }
@@ -225,13 +227,13 @@ class WDMonsterVC: WDBaseViewController {
         for index:NSInteger in 0...10 {
         
             if index < 11 {
-                let name = "wuqishi_attack2_\(index + 1)"
+                let name = "book_kinght_attack_\(index + 1)"
                 let temp:UIImage = UIImage.init(named: name)!
                 attack1Arr.add(temp)
             }
             
             if index < 5 {
-                let name = "wuqishi_move_\(index + 1)"
+                let name = "book_kinght_move_\(index + 1)"
                 let temp:UIImage = UIImage.init(named: name)!
                 moveArr.add(temp)
             }
@@ -254,9 +256,9 @@ class WDMonsterVC: WDBaseViewController {
             viewArr.add(view)
         }
     }
-    
+
     func createMonster4() {
-        let arr:NSMutableArray = self.createView(frame: CGRect(x:kScreenWidth * 3,y:0,width:kScreenWidth,height:kScreenHeight), bgImage: UIImage.init(named: "universe.jpg")!)
+        let arr:NSMutableArray = self.createView(frame: CGRect(x:kScreenWidth * 3,y:0,width:kScreenWidth,height:kScreenHeight), bgImage: UIImage.init(named: "redSun.jpg")!)
         
         let moveArr:NSMutableArray = NSMutableArray.init()
         let attack1Arr:NSMutableArray = NSMutableArray.init()
@@ -264,11 +266,19 @@ class WDMonsterVC: WDBaseViewController {
         let attack2Arr:NSMutableArray = NSMutableArray.init()
         
         for index:NSInteger in 0...7{
-            let moveName = "ox_stay_\(index + 1)"
+            let moveName = "book_ox_stay_\(index + 1)"
             let moveTemp:UIImage = UIImage.init(named: moveName)!
             moveArr.add(moveTemp)
             
-       
+            if index < 6{
+                let attackName = "ox_attack_\(index + 1)"
+                let attackPic  = UIImage.init(named: attackName)!
+                attack1Arr.add(attackPic)
+            }
+            
+            let kulouA = "kulou_knight_attack_\(index + 1)"
+            let kulouAImage = UIImage.init(named: kulouA)!
+            attack2Arr.add(kulouAImage)
         }
         
         
@@ -286,11 +296,17 @@ class WDMonsterVC: WDBaseViewController {
         let arrType:NSArray = [zomType.ox,zomType.kulouKnight]
         let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
         
+        
+        let frame1Arr = [CGRect(x:0,y:0,width:163/2.0,height:197/2.0),CGRect(x:0,y:0,width:170/2.0,height:170/2.0)]
+        let frame2Arr = [CGRect(x:0,y:0,width:200/2.0,height:250/2.0),CGRect(x:0,y:0,width:170/2.0,height:170/2.0)]
+        
+        
         for index:NSInteger in 0...arr.count - 1 {
             let view:WDMonsterView = arr.object(at: index) as! WDMonsterView
             
-            view.setImage1(images: move.object(at: index) as! NSArray,frame:view.imageView1.frame)
-            view.setImage2(images: attack.object(at: index) as! NSArray,frame:view.imageView2.frame)
+            view.setImage1(images: move.object(at: index) as! NSArray,frame:frame1Arr[index])
+            
+            view.setImage2(images: attack.object(at: index) as! NSArray,frame:frame2Arr[index])
             view.createWithType(type: arrType.object(at: index) as! zomType)
             view.setDetail(str: strArr.object(at: index) as! String,font:fontArr.object(at: index) as! UIFont)
             
@@ -298,18 +314,78 @@ class WDMonsterVC: WDBaseViewController {
         }
     }
     
+    func createMonster5() {
+       
+        let arr:NSMutableArray = self.createView(frame: CGRect(x:kScreenWidth * 4,y:0,width:kScreenWidth,height:kScreenHeight), bgImage: UIImage.init(named: "universe.jpg")!)
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        let attack1Arr:NSMutableArray = NSMutableArray.init()
+        let moveArr2:NSMutableArray = NSMutableArray.init()
+        let attack2Arr:NSMutableArray = NSMutableArray.init()
+        
+        for index:NSInteger in 0...10{
+          
+            //130 / 150
+            let attackName = "seal_attack_\(index + 1)"
+            let attackPic  = UIImage.init(named: attackName)!
+            attack1Arr.add(attackPic)
+            
+            if index < 6{
+                
+                let moveName = "seal_move_\(index + 1)"
+                let moveTemp:UIImage = UIImage.init(named: moveName)!
+                moveArr.add(moveTemp)
+            }
+         
+        }
+        
+        for index:NSInteger in 0...11{
+            
+            //130 / 150
+            let attackName = "dog_attack_\(index + 1)"
+            let attackPic  = UIImage.init(named: attackName)!
+            attack2Arr.add(attackPic)
+            
+            if index < 8{
+                
+                let moveName = "dog_move_\(index + 1)"
+                let moveTemp:UIImage = UIImage.init(named: moveName)!
+                moveArr2.add(moveTemp)
+            }
+            
+        }
+        
+      
+        
+        let move:NSArray = [moveArr,moveArr2]
+        let attack:NSArray = [attack1Arr,attack2Arr]
+        let strArr:NSArray = self.createKillArrWithName(name1: SEAL_NAME, name2: DOG_NAME)
+        let arrType:NSArray = [zomType.seal,zomType.dog]
+        let fontArr:NSArray = [UIFont.boldSystemFont(ofSize: 17),UIFont.boldSystemFont(ofSize: 20)]
+        
+        
+        let frame1Arr = [CGRect(x:0,y:0,width:130 * 0.7,height:150 * 0.7),CGRect(x:0,y:0,width:180 * 0.7,height:130 * 0.7)]
+        let frame2Arr = [CGRect(x:0,y:0,width:130 * 0.7,height:150 * 0.7),CGRect(x:0,y:0,width:180 * 0.7,height:130 * 0.7)]
+        
+        
+        for index:NSInteger in 0...arr.count - 1 {
+            let view:WDMonsterView = arr.object(at: index) as! WDMonsterView
+            
+            view.setImage1(images: move.object(at: index) as! NSArray,frame:frame1Arr[index])
+            
+            view.setImage2(images: attack.object(at: index) as! NSArray,frame:frame2Arr[index])
+            view.createWithType(type: arrType.object(at: index) as! zomType)
+            view.setDetail(str: strArr.object(at: index) as! String,font:fontArr.object(at: index) as! UIFont)
+            
+            viewArr.add(view)
+        }
+    }
+    
+    
+    
+    
     deinit {
         print("怪兽列表释放了")
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

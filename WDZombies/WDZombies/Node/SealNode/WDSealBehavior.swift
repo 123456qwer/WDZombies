@@ -42,9 +42,13 @@ class WDSealBehavior: WDBaseNodeBehavior {
     }
     
     func iceAttackAction(personNode:WDPersonNode,point:CGPoint) {
+        if sealNode == nil {
+            return
+        }
         if isStarAttack == false {
             
         }else{
+            
             let iceNode:SKSpriteNode = SKSpriteNode.init(texture: sealNode.model.iceArr[0])
             iceNode.position = point
             iceNode.zPosition = 3000

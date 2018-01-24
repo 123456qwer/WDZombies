@@ -133,79 +133,61 @@ class WDMapViewController: UIViewController {
     
     func setMap3(model:WDUserModel)  {
       
-        let textures = SKTextureAtlas.init(named: "kulouPic")
         let moveArr:NSMutableArray = NSMutableArray.init()
-        for index:NSInteger in 0...textures.textureNames.count - 1 {
-            if index < 4{
-                
-                let name = "skull_move_\(index + 1)"
-                let temp:UIImage = UIImage.init(named: name)!
-                moveArr.add(temp)
-            }
+        for index:NSInteger in 0...3 {
+            let name = "book_kulou_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_3, width: 167 / 2.0, height: 197 / 2.0, imageArr: moveArr, count: 2, model: model ,x :20 + kScreenWidth * 2,monsterName: KULOU_NAME)
+        self.setView(tag: MAP_3, width: 163 * 0.8, height: 197 * 0.8, imageArr: moveArr, count: 2, model: model ,x :20 + kScreenWidth * 2,monsterName: KULOU_NAME)
     }
     
     
     func setMap4(model:WDUserModel) {
        
-        let textures = SKTextureAtlas.init(named: "greenZomPic")
         let moveArr:NSMutableArray = NSMutableArray.init()
-        for index:NSInteger in 0...textures.textureNames.count - 1 {
-            if index < 3{
-                let name = "green_move_\(index + 1)_\(index + 1)"
-                let temp:UIImage = UIImage.init(named: name)!
-                moveArr.add(temp)
-            }
-            
-            if index > 3{
-                break
-            }
+        for index:NSInteger in 0...2 {
+            let name = "book_green_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_4, width: 125 * 0.8, height: 125 * 0.8, imageArr: moveArr, count: 3, model: model,x:20 + 3 * kScreenWidth,monsterName: GREEN_ZOM_NAME)
+        self.setView(tag: MAP_4,width: 163 * 0.8, height: 197 * 0.8, imageArr: moveArr, count: 3, model: model,x:20 + 3 * kScreenWidth,monsterName: GREEN_ZOM_NAME)
     }
     
     func setMap5(model:WDUserModel) {
         
-        let textures = SKTextureAtlas.init(named: "greenZomPic")
         let moveArr:NSMutableArray = NSMutableArray.init()
-        for index:NSInteger in 0...textures.textureNames.count - 1 {
-            if index < 5{
-                let name = "wuqishi_move_\(index + 1)"
-                let temp:UIImage = UIImage.init(named: name)!
-                moveArr.add(temp)
-            }
-            
-            if index > 5{
-                break
-            }
+        for index:NSInteger in 0...4{
+            let name = "book_kinght_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_5, width: 165 * 0.8, height: 165 * 0.8, imageArr: moveArr, count: 4, model: model,x:20 + 4 * kScreenWidth,monsterName: KNIGHT_NAME)
+        self.setView(tag: MAP_5, width: 163 * 0.8, height: 197 * 0.8, imageArr: moveArr, count: 4, model: model,x:20 + 4 * kScreenWidth,monsterName: KNIGHT_NAME)
     }
     
     func setMap6(model:WDUserModel) {
         let moveArr:NSMutableArray = NSMutableArray.init()
         for index:NSInteger in 0...7 {
-            let name = "squid_move_\(index + 1)"
+            let name = "book_squid_move_\(index + 1)"
             let temp:UIImage = UIImage.init(named: name)!
             moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_6, width: 140 * 0.8, height: 100 * 0.8, imageArr: moveArr, count: 5, model: model, x: 20 + 5 * kScreenWidth,monsterName: SQUID_NAME)
+        self.setView(tag: MAP_6, width: 163 * 0.8, height: 197 * 0.8, imageArr: moveArr, count: 5, model: model, x: 20 + 5 * kScreenWidth,monsterName: SQUID_NAME)
     }
     
     func setMap7(model:WDUserModel)  {
         let moveArr:NSMutableArray = NSMutableArray.init()
         for index:NSInteger in 0...7 {
-            let name = "ox_stay_\(index + 1)"
+            let name = "book_ox_stay_\(index + 1)"
             let temp:UIImage = UIImage.init(named: name)!
             moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_7, width: 200 * 0.8, height: 250 * 0.8, imageArr: moveArr, count: 6, model: model, x: 20 + 6 * kScreenWidth,monsterName: OX_NAME)
+        self.setView(tag: MAP_7, width: 163 * 0.8, height: 197 * 0.8 , imageArr: moveArr, count: 6, model: model, x: 20 + 6 * kScreenWidth,monsterName: OX_NAME)
     }
     
     func setMap8(model:WDUserModel)  {
@@ -216,7 +198,7 @@ class WDMapViewController: UIViewController {
             moveArr.add(temp)
         }
         
-        self.setView(tag: MAP_8, width: 170, height: 170, imageArr: moveArr, count: 7, model: model, x: 20 + 7 * kScreenWidth,monsterName: KULOU_KNIGHT_NAME)
+        self.setView(tag: MAP_8, width: 170 * 0.8, height: 170 * 0.8, imageArr: moveArr, count: 7, model: model, x: 20 + 7 * kScreenWidth,monsterName: KULOU_KNIGHT_NAME)
     }
     
     func setMap9(model:WDUserModel)  {
@@ -269,7 +251,7 @@ class WDMapViewController: UIViewController {
         button.addSubview(imageV)
         
         
-        if model.monsterCount >= count {
+        if model.monsterCount > count {
             
             button.isUserInteractionEnabled = true
             let images:NSArray = imageArr

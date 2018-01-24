@@ -385,10 +385,11 @@ class WDMap_1ZomModel: NSObject {
         _ = monsterModel.changeMonsterToSqlite()
         
         print(monsterModel.killCount)
-       
+        
+        let count1 = count + 1
         let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
-        if node.isBoss && model.monsterCount < count{
-            model.monsterCount = count
+        if node.isBoss && model.monsterCount < count1{
+            model.monsterCount = count1
             _ = model.changeSkillToSqlite()
             map.playNext()
             map.overTime(bossNode: node)
