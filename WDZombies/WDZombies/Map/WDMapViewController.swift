@@ -13,6 +13,8 @@ class WDMapViewController: UIViewController {
 
     typealias dismissAction = (_ mapName:String ,_ level:NSInteger) -> Void
     
+    let LAST_LEVEL = 110
+    
     let MAP_1 = 10
     let MAP_2 = 20
     let MAP_3 = 30
@@ -23,6 +25,7 @@ class WDMapViewController: UIViewController {
     let MAP_8 = 80
     let MAP_9 = 90
     let MAP_10  = 100
+    let MAP_11  = 110
 
     var bgScrollView:UIScrollView!
     
@@ -37,7 +40,7 @@ class WDMapViewController: UIViewController {
         
         bgScrollView = UIScrollView.init(frame: CGRect(x:0,y:0,width:kScreenWidth,height:kScreenHeight))
         bgScrollView.isPagingEnabled = true
-        bgScrollView.contentSize = CGSize(width:kScreenWidth * 10.0,height:kScreenHeight)
+        bgScrollView.contentSize = CGSize(width:kScreenWidth * 11.0,height:kScreenHeight)
         bgScrollView.bounces = false
         self.view.addSubview(bgScrollView)
         
@@ -53,7 +56,8 @@ class WDMapViewController: UIViewController {
         self.setMap8(model: model)
         self.setMap9(model: model)
         self.setMap10(model:model)
-        
+        self.setMap11(model:model)
+
         
         let backBtn:UIButton = UIButton.init(frame: CGRect(x:kScreenWidth - 10 - 50,y:10,width:50,height:50))
         backBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
@@ -104,6 +108,10 @@ class WDMapViewController: UIViewController {
         }else if sender.tag == MAP_10{
             self.dismiss(animated: false, completion: {
                 self.disMiss("WDMap_1Scene",10)
+            })
+        }else if sender.tag == MAP_11{
+            self.dismiss(animated: false, completion: {
+                self.disMiss("WDMap_1Scene",11)
             })
         }
     }
@@ -224,6 +232,19 @@ class WDMapViewController: UIViewController {
         self.setView(tag: MAP_10, width: 180 , height: 130 , imageArr: moveArr, count: 9, model: model ,x:20 + 9 * kScreenWidth ,monsterName: DOG_NAME)
     }
     
+    func setMap11(model:WDUserModel) {
+        
+        
+        let moveArr:NSMutableArray = NSMutableArray.init()
+        for index:NSInteger in 0...7 {
+            let name = "dog_move_\(index + 1)"
+            let temp:UIImage = UIImage.init(named: name)!
+            moveArr.add(temp)
+        }
+        
+        self.setView(tag: MAP_11, width: 180 , height: 130 , imageArr: moveArr, count: 10, model: model ,x:20 + 10 * kScreenWidth ,monsterName: DOG_NAME)
+    }
+    
     //count 是当前怪物数量
     func setView(tag:NSInteger,width:CGFloat,height:CGFloat,imageArr:NSMutableArray,count:NSInteger,model:WDUserModel,x:CGFloat,monsterName:String)  {
         
@@ -238,7 +259,10 @@ class WDMapViewController: UIViewController {
         let modelM:WDMonsterModel = WDMonsterModel.initWithMonsterName(monsterName: monsterName)
         let second:NSInteger = modelM.overTime % 60
         let minute:NSInteger = modelM.overTime / 60
-        let str:String = String(format: "%02d:%02d", arguments: [minute, second])
+        var str:String = String(format: "%02d:%02d", arguments: [minute, second])
+        if tag == LAST_LEVEL {
+            str = "score:\(model.score)"
+        }
         label.text = str
         label.textColor = UIColor.red
         label.font = UIFont.boldSystemFont(ofSize: 30)
@@ -250,15 +274,21 @@ class WDMapViewController: UIViewController {
         //imageV.backgroundColor = UIColor.orange
         button.addSubview(imageV)
         
-        
+        //Icon.1_22
         if model.monsterCount > count {
-            
-            button.isUserInteractionEnabled = true
-            let images:NSArray = imageArr
-            imageV.animationImages = images as? [UIImage]
-            imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(0.1))
-            imageV.animationRepeatCount = 0
-            imageV.startAnimating()
+            if tag == LAST_LEVEL {
+                imageV.image = UIImage.init(named: "Icon.1_22")
+                imageV.frame = CGRect(x:0,y:0,width:200,height:200)
+                imageV.frame.origin = CGPoint(x:((imageV.superview?.frame.size.width)! - 200) / 2.0,y:((imageV.superview?.frame.size.height)! - 200) / 2.0)
+            }else{
+                button.isUserInteractionEnabled = true
+                let images:NSArray = imageArr
+                imageV.animationImages = images as? [UIImage]
+                imageV.animationDuration = TimeInterval(CGFloat(images.count) * CGFloat(0.1))
+                imageV.animationRepeatCount = 0
+                imageV.startAnimating()
+            }
+        
         }else{
             button.isUserInteractionEnabled = false
             imageV.image = UIImage.init(named: "lock")

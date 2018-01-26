@@ -152,8 +152,11 @@ class WDSealBehavior: WDBaseNodeBehavior {
     }
     
     @objc func canMove() {
-        sealNode.canMove = true
-        self.iceAttackBlock(sealNode)
+        if sealNode != nil {
+            sealNode.canMove = true
+            self.iceAttackBlock(sealNode)
+        }
+        
     }
     
     //MARK:复写

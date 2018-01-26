@@ -8,13 +8,18 @@
 
 import UIKit
 import SpriteKit
-                                            
+ 
+ 
+public let LAST_LEVEL = 11
+
 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
    
+    var score:CGFloat = 0
+
     
-    static let ZOMCOUNT = 10
+    let ZOMCOUNT = 10
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -48,6 +53,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var _startAngle:CGFloat = 0
     var _endAngle:CGFloat = 0
     var _lineWidth:CGFloat = 0
+    
     
     //进入方法
     override func didMove(to view: SKView) {
@@ -115,7 +121,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //初始化Nodes
     func createNodes(){
         
-        diedZomLabel = SKLabelNode.init(text: "\(self.diedZomCount)/\(WDMap_1Scene.ZOMCOUNT)")
+        if level == LAST_LEVEL {
+            diedZomLabel = SKLabelNode.init(text: "score:0")
+        }else{
+            diedZomLabel = SKLabelNode.init(text: "0/\(ZOMCOUNT)")
+        }
         diedZomLabel.fontName = "VCR OSD Mono"
         diedZomLabel.fontColor = UIColor.red
         diedZomLabel.fontSize = 30
@@ -241,123 +251,158 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //normal/red僵尸相关
     @objc override func createZombies(timer:Timer){
         //开始创建僵尸
-        self.zomCount += 1
-        if self.zomCount == WDMap_1Scene.ZOMCOUNT {
-            timer.invalidate()
-        }
+        if level == LAST_LEVEL {
         
-        let chance = arc4random() % 10
-        
-        if level == 1{
-            self.level_1_NormalZom(isBoss: false)
-        }else if level == 2{
-            self.level_1_NormalZom(isBoss: false)
-        }else if level == 3{
-            if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else{
-                self.level_1_NormalZom(isBoss: false)
+            if self.zomCount == ZOMCOUNT{
+                return
             }
-        }else if level == 4{
             
-            if chance == 7{
+            self.zomCount += 1
+            
+            let chance = arc4random() % 10
+            //print("无尽模式")
+            if chance == 3{
                 self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
+            }else if chance == 2 {
                 self.level_2_RedZom(isBoss: false)
-            }else{
-                self.level_1_NormalZom(isBoss: false)
-            }
-        }else if level == 5{
-            if chance == 7{
-                self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else if chance == 9{
-                self.level_4_GreenZom(isBoss: false)
-            }else {
-                self.level_1_NormalZom(isBoss: false)
-            }
-        }else if level == 6{
-            if chance == 7{
-                self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else if chance == 9{
-                self.level_4_GreenZom(isBoss: false)
-            }else if chance == 0{
-                self.level_5_KnightZom(isBoss: false)
-            }else{
-                self.level_1_NormalZom(isBoss: false)
-            }
-        }else if level == 7{
-            if chance == 7{
-                self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else if chance == 9{
-                self.level_4_GreenZom(isBoss: false)
-            }else if chance == 0{
-                self.level_5_KnightZom(isBoss: false)
-            }else if chance == 6{
-                self.level_6_SquidZom(isBoss: false)
-            }else{
-                self.level_1_NormalZom(isBoss: false)
-            }
-        }else if level == 8{
-            if chance == 7{
-                self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else if chance == 9{
-                self.level_4_GreenZom(isBoss: false)
-            }else if chance == 0{
-                self.level_5_KnightZom(isBoss: false)
-            }else if chance == 6{
-                self.level_6_SquidZom(isBoss: false)
-            }else if chance == 5{
-                self.level_7_OXZom(isBoss: false)
-            }else {
-                self.level_1_NormalZom(isBoss: false)
-            }
-        }else if level == 9{
-            if chance == 7{
-                self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else if chance == 9{
-                self.level_4_GreenZom(isBoss: false)
-            }else if chance == 0{
-                self.level_5_KnightZom(isBoss: false)
-            }else if chance == 6{
-                self.level_6_SquidZom(isBoss: false)
-            }else if chance == 5{
-                self.level_7_OXZom(isBoss: false)
             }else if chance == 4{
-                self.level_8_kulouKnightZom(isBoss: false)
-            }else{
-                self.level_1_NormalZom(isBoss: false)
-            }
-        }else if level == 10{
-            if chance == 7{
-                self.level_3_KulouZom(isBoss: false)
-            }else if chance == 8 {
-                self.level_2_RedZom(isBoss: false)
-            }else if chance == 9{
                 self.level_4_GreenZom(isBoss: false)
-            }else if chance == 0{
+            }else if chance == 5{
                 self.level_5_KnightZom(isBoss: false)
             }else if chance == 6{
                 self.level_6_SquidZom(isBoss: false)
-            }else if chance == 5{
+            }else if chance == 7{
                 self.level_7_OXZom(isBoss: false)
-            }else if chance == 4{
+            }else if chance == 8{
                 self.level_8_kulouKnightZom(isBoss: false)
-            }else if chance == 3{
+            }else if chance == 9{
                 self.level_9_sealZom(isBoss: false)
             }else{
                 self.level_1_NormalZom(isBoss: false)
             }
+            
+        }else{
+            
+            self.zomCount += 1
+            if self.zomCount == ZOMCOUNT {
+                timer.invalidate()
+            }
+
+            let chance = arc4random() % 10
+            
+            if level == 1{
+                self.level_1_NormalZom(isBoss: false)
+            }else if level == 2{
+                self.level_1_NormalZom(isBoss: false)
+            }else if level == 3{
+                if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else{
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 4{
+                
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else{
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 5{
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else if chance == 9{
+                    self.level_4_GreenZom(isBoss: false)
+                }else {
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 6{
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else if chance == 9{
+                    self.level_4_GreenZom(isBoss: false)
+                }else if chance == 0{
+                    self.level_5_KnightZom(isBoss: false)
+                }else{
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 7{
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else if chance == 9{
+                    self.level_4_GreenZom(isBoss: false)
+                }else if chance == 0{
+                    self.level_5_KnightZom(isBoss: false)
+                }else if chance == 6{
+                    self.level_6_SquidZom(isBoss: false)
+                }else{
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 8{
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else if chance == 9{
+                    self.level_4_GreenZom(isBoss: false)
+                }else if chance == 0{
+                    self.level_5_KnightZom(isBoss: false)
+                }else if chance == 6{
+                    self.level_6_SquidZom(isBoss: false)
+                }else if chance == 5{
+                    self.level_7_OXZom(isBoss: false)
+                }else {
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 9{
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else if chance == 9{
+                    self.level_4_GreenZom(isBoss: false)
+                }else if chance == 0{
+                    self.level_5_KnightZom(isBoss: false)
+                }else if chance == 6{
+                    self.level_6_SquidZom(isBoss: false)
+                }else if chance == 5{
+                    self.level_7_OXZom(isBoss: false)
+                }else if chance == 4{
+                    self.level_8_kulouKnightZom(isBoss: false)
+                }else{
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }else if level == 10{
+                if chance == 7{
+                    self.level_3_KulouZom(isBoss: false)
+                }else if chance == 8 {
+                    self.level_2_RedZom(isBoss: false)
+                }else if chance == 9{
+                    self.level_4_GreenZom(isBoss: false)
+                }else if chance == 0{
+                    self.level_5_KnightZom(isBoss: false)
+                }else if chance == 6{
+                    self.level_6_SquidZom(isBoss: false)
+                }else if chance == 5{
+                    self.level_7_OXZom(isBoss: false)
+                }else if chance == 4{
+                    self.level_8_kulouKnightZom(isBoss: false)
+                }else if chance == 3{
+                    self.level_9_sealZom(isBoss: false)
+                }else{
+                    self.level_1_NormalZom(isBoss: false)
+                }
+            }
         }
+        
+       
  
     }
  
@@ -433,6 +478,21 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             _startAngle = _endAngle
             _endAngle   = _endAngle + CGFloat(Double.pi / 2.0)
         }
+        
+        //得分
+        if level == LAST_LEVEL{
+            score = score + node.experience
+            diedZomLabel.text = "score:\(score)"
+           
+            if self.diedZomCount == ZOMCOUNT{
+                self.diedZomCount = 0
+                self.zomCount = 0
+            }
+            
+        }else{
+            diedZomLabel.text = "\(self.diedZomCount)/\(ZOMCOUNT)"
+        }
+
         mapViewModel.removeNode(zomNode: node)
         mapViewModel.zomArr.remove(node)
     }
@@ -444,31 +504,37 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     func createBoss()  {
-        self.diedZomCount += 1
-        if self.diedZomCount >= WDMap_1Scene.ZOMCOUNT {
-            //根据等级召唤boss
-            if self.level == 1{
-                self.level_1_NormalZom(isBoss: true)
-            }else if self.level == 2{
-                self.level_2_RedZom(isBoss: true)
-            }else if self.level == 3{
-                self.level_3_KulouZom(isBoss: true)
-            }else if self.level == 4{
-                self.level_4_GreenZom(isBoss: true)
-            }else if self.level == 5{
-                self.level_5_KnightZom(isBoss: true)
-            }else if self.level == 6{
-                self.level_6_SquidZom(isBoss: true)
-            }else if self.level == 7{
-                self.level_7_OXZom(isBoss: true)
-            }else if self.level == 8{
-                self.level_8_kulouKnightZom(isBoss: true)
-            }else if self.level == 9{
-                self.level_9_sealZom(isBoss: true)
-            }else if self.level == 10{
-                self.level_10_dogZom(isBoss: true)
+        
+        if level == LAST_LEVEL {
+            self.diedZomCount += 1
+        }else{
+            self.diedZomCount += 1
+            if self.diedZomCount >= ZOMCOUNT {
+                //根据等级召唤boss
+                if self.level == 1{
+                    self.level_1_NormalZom(isBoss: true)
+                }else if self.level == 2{
+                    self.level_2_RedZom(isBoss: true)
+                }else if self.level == 3{
+                    self.level_3_KulouZom(isBoss: true)
+                }else if self.level == 4{
+                    self.level_4_GreenZom(isBoss: true)
+                }else if self.level == 5{
+                    self.level_5_KnightZom(isBoss: true)
+                }else if self.level == 6{
+                    self.level_6_SquidZom(isBoss: true)
+                }else if self.level == 7{
+                    self.level_7_OXZom(isBoss: true)
+                }else if self.level == 8{
+                    self.level_8_kulouKnightZom(isBoss: true)
+                }else if self.level == 9{
+                    self.level_9_sealZom(isBoss: true)
+                }else if self.level == 10{
+                    self.level_10_dogZom(isBoss: true)
+                }
             }
         }
+        
         
     }
     
@@ -549,8 +615,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             personNode.position = WDTool.overStepTest(point: personNode.position)
             personNode.zPosition = 3 * 667 - personNode.position.y;
             WDMapManager.sharedInstance.setMapPosition(point: personNode.position, mapNode: bgNode)
-            //击杀个数
-            diedZomLabel.text = "\(self.diedZomCount)/\(WDMap_1Scene.ZOMCOUNT)"
+           
         }
     }
     
@@ -594,6 +659,15 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //结束
     @objc func removeNode()  {
+        
+        if level == LAST_LEVEL{
+            let model:WDUserModel = WDUserModel.init()
+            _ = model.searchToDB()
+            if CGFloat(model.score) < score{
+                model.score = NSInteger(score)
+               _ = model.changeSkillToSqlite()
+            }
+        }
         
         fly_timer.invalidate()
         overTimer.invalidate()
