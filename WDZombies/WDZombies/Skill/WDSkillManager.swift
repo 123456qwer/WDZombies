@@ -13,6 +13,7 @@ import SpriteKit
 public let BLINK:String = "blink"
 public let SPEED:String = "speed"
 public let BOOM :String = "boom"
+public let IMMUNE:String = "immune_Injury"
 
 
 class WDSkillManager: NSObject {
@@ -30,7 +31,7 @@ class WDSkillManager: NSObject {
             modelDic.removeAllObjects()
         }
         
-        let skillArr:NSArray = [BLINK,SPEED,BOOM]
+        let skillArr:NSArray = [BLINK,SPEED,BOOM,IMMUNE]
         if WDDataManager.shareInstance().openDB(){
             for index:NSInteger in 0...skillArr.count - 1 {
                 let skillName = skillArr.object(at: index)
@@ -75,6 +76,9 @@ class WDSkillManager: NSObject {
             
             break
         case .none:
+            break
+        case .immune_Injury?:
+            self.immuneAction(skillView: skillView, node: node)
             break
         }
 
@@ -129,6 +133,18 @@ class WDSkillManager: NSObject {
     }
     
     
+    //免疫伤害技能
+    func immuneAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
+        let model:WDSkillModel = modelDic.object(forKey: IMMUNE) as! WDSkillModel
+        let pasDic:NSDictionary = self.createLabelWithNumber(str: "\(model.skillLevel1)", skillView: skillView, node: node, color: UIColor.blue)
+        let imageView:UIImageView = pasDic.object(forKey: "imageView") as! UIImageView
+        imageView.removeFromSuperview()
+        node.isImmune = true
+        node.immuneNode.isHidden = false
+        
+        self.perform(#selector(immuneReduce(dic:)), with: pasDic, afterDelay: TimeInterval(model.skillLevel2))
+    }
+    
     //炸弹技能
     func boomAction(skillView:WDSkillView,node:WDPersonNode) -> Void {
         
@@ -150,8 +166,7 @@ class WDSkillManager: NSObject {
         imageView.removeFromSuperview()
      
         WDAnimationTool.blinkAnimation(node: node,model:model)
-        
-        
+
     }
     
     
@@ -176,7 +191,12 @@ class WDSkillManager: NSObject {
     
     
     
-
+    @objc func immuneReduce(dic:NSDictionary) -> Void {
+         let personNode:WDPersonNode = dic.object(forKey: "personNode") as! WDPersonNode
+        personNode.isImmune = false
+        personNode.immuneNode.isHidden = true
+    }
+   
     
     @objc func speedReduce(dic:NSDictionary) -> Void {
         let personNode:WDPersonNode = dic.object(forKey: "personNode") as! WDPersonNode

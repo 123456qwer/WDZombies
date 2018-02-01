@@ -11,7 +11,7 @@ import SpriteKit
 
 enum  personSkillType{
     
-   case NoSelect,SPEED,Attack,Attack_distance,BLINK,BOOM,Fire
+   case NoSelect,SPEED,Attack,Attack_distance,BLINK,BOOM,Fire,immune_Injury
 };
 
 enum  zomType{
@@ -162,9 +162,9 @@ class WDTool: NSObject {
         case .Attack:
             return UIImage(named:"addAttack.jpg")!
         case .BLINK:
-            return UIImage(named:"blink.jpg")!
+            return UIImage(named:"blink.png")!
         case .SPEED:
-            return UIImage(named:"addSpeed.jpg")!
+            return UIImage(named:"addSpeed.png")!
         case .BOOM:
             return UIImage(named:"boomIcon.png")!
         case .Attack_distance:
@@ -173,6 +173,8 @@ class WDTool: NSObject {
             return UIImage(named:"starGame.png")!
         case .Fire:
             return UIImage(named:"fire.png")!
+        case .immune_Injury:
+            return UIImage(named:"immune_Injury.png")!
         }
     }
     
@@ -197,6 +199,8 @@ class WDTool: NSObject {
             return "123"
         case .Fire:
             return "123"
+        case .immune_Injury:
+            return IMMUNE
         }
     }
     

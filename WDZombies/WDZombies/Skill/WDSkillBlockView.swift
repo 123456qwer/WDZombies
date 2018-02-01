@@ -332,6 +332,8 @@ class WDSkillBlockView: UIView {
             break
         case .Fire:
             break
+        case .immune_Injury:
+            break
         }
     }
     

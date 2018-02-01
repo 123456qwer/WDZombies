@@ -39,31 +39,34 @@ class WDSkillSelectView: UIScrollView ,UIScrollViewDelegate{
      
         let page:CGFloat = 20
         let btnWidth:CGFloat = (kScreenWidth - page * 7) / 6.0
+        let y_page:CGFloat = 20
   
-        //增加攻击力技能
+        let star_x:CGFloat = (kScreenWidth - 5 * btnWidth - 6 * page) / 2.0
+        
+        //增加移速
         let attackSkill:WDSelectBtn = WDSelectBtn(type: .custom)
-        attackSkill.initWithType(frame: CGRect(x:page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .Attack)
+        attackSkill.initWithType(frame: CGRect(x:page + star_x,y:WDTool.bottom(View: titleLabel) + y_page,width:btnWidth, height:btnWidth), skillType: .SPEED)
         self.addSubview(attackSkill)
         
         //炸弹
         let boomSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        boomSkill.initWithType(frame: CGRect(x:WDTool.right(View: attackSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .BOOM)
+        boomSkill.initWithType(frame: CGRect(x:WDTool.right(View: attackSkill)+page,y:WDTool.bottom(View: titleLabel) + y_page,width:btnWidth, height:btnWidth), skillType: .BOOM)
         self.addSubview(boomSkill)
         
         //闪现
         let blinkSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        blinkSkill.initWithType(frame: CGRect(x:WDTool.right(View: boomSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .BLINK)
+        blinkSkill.initWithType(frame: CGRect(x:WDTool.right(View: boomSkill)+page,y:WDTool.bottom(View: titleLabel) + y_page,width:btnWidth, height:btnWidth), skillType: .BLINK)
         self.addSubview(blinkSkill)
         
-        //增加移速
+        //免疫伤害
         let addSpeedSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        addSpeedSkill.initWithType(frame: CGRect(x:WDTool.right(View: blinkSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .SPEED)
+        addSpeedSkill.initWithType(frame: CGRect(x:WDTool.right(View: blinkSkill)+page,y:WDTool.bottom(View: titleLabel) + y_page,width:btnWidth, height:btnWidth), skillType: .immune_Injury)
         self.addSubview(addSpeedSkill)
         
         
         //增加攻击距离
         let attack_distanceSkill:WDSelectBtn = WDSelectBtn(type:.custom)
-        attack_distanceSkill.initWithType(frame: CGRect(x:WDTool.right(View: addSpeedSkill)+page,y:WDTool.bottom(View: titleLabel) + 10,width:btnWidth, height:btnWidth), skillType: .Attack_distance)
+        attack_distanceSkill.initWithType(frame: CGRect(x:WDTool.right(View: addSpeedSkill)+page,y:WDTool.bottom(View: titleLabel) + y_page,width:btnWidth, height:btnWidth), skillType: .Attack_distance)
         self.addSubview(attack_distanceSkill)
         
         

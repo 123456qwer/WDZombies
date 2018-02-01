@@ -50,9 +50,6 @@
 		4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC281F9D98B20072D030 /* addFast.jpg */; };
 		4348DC2F1F9D98B30072D030 /* addAttack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC291F9D98B30072D030 /* addAttack.jpg */; };
 		4348DC301F9D98B30072D030 /* addDistance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC2A1F9D98B30072D030 /* addDistance.jpg */; };
-		4348DC321F9D98B30072D030 /* addSpeed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC2C1F9D98B30072D030 /* addSpeed.jpg */; };
-		4348DC331F9D98B30072D030 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC2D1F9D98B30072D030 /* blink.jpg */; };
-		4348DC351F9D99790072D030 /* boomIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC341F9D99780072D030 /* boomIcon.png */; };
 		4348DC381F9DE7DA0072D030 /* starGame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC371F9DE7DA0072D030 /* starGame.png */; };
 		434A1E7D200356130088B4FA /* WDPhyContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A1E7C200356130088B4FA /* WDPhyContactModel.swift */; };
 		434B4C411FB98A5B000A6566 /* map1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434B4C401FB98A5B000A6566 /* map1.png */; };
@@ -253,9 +250,6 @@
 		4348DC281F9D98B20072D030 /* addFast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addFast.jpg; sourceTree = "<group>"; };
 		4348DC291F9D98B30072D030 /* addAttack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addAttack.jpg; sourceTree = "<group>"; };
 		4348DC2A1F9D98B30072D030 /* addDistance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addDistance.jpg; sourceTree = "<group>"; };
-		4348DC2C1F9D98B30072D030 /* addSpeed.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addSpeed.jpg; sourceTree = "<group>"; };
-		4348DC2D1F9D98B30072D030 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
-		4348DC341F9D99780072D030 /* boomIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomIcon.png; sourceTree = "<group>"; };
 		4348DC371F9DE7DA0072D030 /* starGame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starGame.png; sourceTree = "<group>"; };
 		434A1E7C200356130088B4FA /* WDPhyContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDPhyContactModel.swift; sourceTree = "<group>"; };
 		434B4C401FB98A5B000A6566 /* map1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map1.png; sourceTree = "<group>"; };
@@ -603,12 +597,9 @@
 				433B05081FB19CCB006210B2 /* boomAnimation.png */,
 				433B05091FB19CCB006210B2 /* boomBegin.png */,
 				4360090E1FA9642A006D48ED /* skillFrame.gif */,
-				4348DC341F9D99780072D030 /* boomIcon.png */,
 				4348DC291F9D98B30072D030 /* addAttack.jpg */,
 				4348DC2A1F9D98B30072D030 /* addDistance.jpg */,
 				4348DC281F9D98B20072D030 /* addFast.jpg */,
-				4348DC2C1F9D98B30072D030 /* addSpeed.jpg */,
-				4348DC2D1F9D98B30072D030 /* blink.jpg */,
 			);
 			path = SkillPic;
 			sourceTree = "<group>";
@@ -1035,7 +1026,6 @@
 				43656BCD1F9F2055001EFDA5 /* railing_left.png in Resources */,
 				434F604B2004B12000BAA804 /* person_beFlash.png in Resources */,
 				433D184C1FA0303500A283E0 /* person4.png in Resources */,
-				4348DC351F9D99790072D030 /* boomIcon.png in Resources */,
 				434C5A881FD12FAA00C921AF /* Magic.sks in Resources */,
 				436FF4021FF23BAC00C40357 /* squidNodePic.atlas in Resources */,
 				4355898A1FA075D200C80CA8 /* NormalBorn.png in Resources */,
@@ -1072,7 +1062,6 @@
 				433F10D11FC2FFB700DECFBF /* blink.gif in Resources */,
 				432F84C21F998A5B00F51146 /* LaunchScreen.storyboard in Resources */,
 				4354EC322010CCB5007472AE /* levelBg.png in Resources */,
-				4348DC331F9D98B30072D030 /* blink.jpg in Resources */,
 				43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */,
 				43CA55B02002021100707C2C /* fuzhuji_3.png in Resources */,
 				43551B161FCE806800B86587 /* holdTime.png in Resources */,
@@ -1090,7 +1079,6 @@
 				4307E3711FA1DF0D00E1AD38 /* blood6.png in Resources */,
 				434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */,
 				43CA55AE2002021100707C2C /* fuzhuji_1.png in Resources */,
-				4348DC321F9D98B30072D030 /* addSpeed.jpg in Resources */,
 				434D58741FD547BF00253903 /* monster_1_attack.png in Resources */,
 				43CA55A82001CAB900707C2C /* person_move_3.png in Resources */,
 				434D587F1FD54C4900253903 /* monster_1_move_red.png in Resources */,

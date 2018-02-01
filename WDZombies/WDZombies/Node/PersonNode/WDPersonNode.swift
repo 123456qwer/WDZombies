@@ -11,6 +11,8 @@ import SpriteKit
 
 class WDPersonNode: WDBaseNode {
   
+    var immuneNode:SKSpriteNode = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "immuneAnimation")!))
+    
     var fuzhujiNode:SKSpriteNode = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "fuzhuji_1")!))
     var personBehavior:WDPersonBehavior! = nil
     var fireNode:SKSpriteNode! = nil
@@ -18,6 +20,7 @@ class WDPersonNode: WDBaseNode {
     var fuzhujiArr:NSMutableArray = NSMutableArray.init()
     var fly_isFire:Bool = false
     var lastRotation:CGFloat = 0
+    var isImmune:Bool = false   //是否无敌状态
     var fly_fireArr:NSMutableArray = NSMutableArray.init()
     var beFlashTexture:SKTexture = SKTexture.init(image: UIImage.init(named: "person_beFlash")!)
     deinit {
@@ -109,8 +112,60 @@ class WDPersonNode: WDBaseNode {
         let ac = SKAction.animate(with: fuzhujiArr as! [SKTexture], timePerFrame: 0.15)
         let rep = SKAction.repeatForever(ac)
         fuzhujiNode.run(rep, withKey: "fushuji")
+        
+//        let nodea11 = SKSpriteNode.init(color: UIColor.orange, size: self.frame.size)
+//        self.addChild(nodea11)
+        
+        immuneNode.xScale = 0.1
+        immuneNode.yScale = 0.1
+        immuneNode.alpha = 0.8
+        immuneNode.anchorPoint = CGPoint(x:0.5,y:0.5)
+        immuneNode.position = CGPoint(x:-immuneNode.frame.size.width / 2.0 - self.frame.size.width / 2.0,y:0)
+        immuneNode.zPosition = 1
+        
+        self.addChild(immuneNode)
+        
+        let action_im1 = SKAction.move(to: CGPoint(x:self.frame.size.width / 2.0 + immuneNode.frame.size.width / 2.0,y:0), duration: 1)
+   
+
+        immuneNode.isHidden = true
+        self.immuneA11(zPosition: -1, action: action_im1)
+        self.color = UIColor.orange
     }
     
+    
+    //护盾node
+    func immuneA11(zPosition:CGFloat,action:SKAction) {
+      
+        if self.wdBlood <= 0 {
+            immuneNode.removeAllActions()
+            immuneNode.removeFromParent()
+            return
+        }
+    
+        
+        if zPosition > 0 {
+            
+            let action_im2 = SKAction.move(to: CGPoint(x:-immuneNode.frame.size.width / 2.0 - self.frame.size.width / 2.0,y:0), duration: 0.7)
+        
+        
+            immuneNode.run(action, completion: {
+                self.immuneA11(zPosition: -1, action: action_im2)
+                self.immuneNode.zPosition = zPosition
+            })
+
+            
+        }else{
+            
+            let action_im1 = SKAction.move(to: CGPoint(x:self.frame.size.width / 2.0 + immuneNode.frame.size.width / 2.0,y:0), duration: 0.7)
+            immuneNode.run(action, completion: {
+                self.immuneA11(zPosition: 1, action: action_im1)
+                self.immuneNode.zPosition = zPosition
+            })
+
+        }
+ 
+    }
  
     
     func setPhyColor()  {

@@ -70,10 +70,14 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         
         //震动效果
         //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        
+        if personNode.isImmune {
+            return
+        }
+   
         personNode.wdBlood -= number
         self.reduceBloodBlock()
-
+        WDAnimationTool.bloodAnimation(node: personNode)
+        
         if personNode.wdBlood <= 0 && isGameOver == false{
             personNode.canMove = false
             personNode.removePhy()
@@ -99,10 +103,13 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     ///   - beAttackNode:
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
        
+        if personNode.isImmune {
+            return
+        }
+        
         self.reduceBlood(number: attackNode.wdAttack,monsterName: attackNode.name!)
         self.reduceBloodLabel(node: personNode, attackNode: attackNode)
         
-        WDAnimationTool.bloodAnimation(node:personNode)
         WDAnimationTool.beAttackAnimationForPerson(attackNode: attackNode, beAttackNode: beAttackNode as! WDPersonNode)
     }
     

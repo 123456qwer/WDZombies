@@ -25,7 +25,7 @@ class WDDataManager: NSObject {
         userModel.skillCount = 1
         userModel.level = 1
         userModel.mapLevel = 0
-        userModel.monsterCount = 1
+        userModel.monsterCount = 11
         userModel.experience = 0
         userModel.experienceAll = 200
         
@@ -34,12 +34,12 @@ class WDDataManager: NSObject {
         }
         
         
-        let nameStrArr:NSArray = [BOOM,BLINK,SPEED]
-        let detailStrAarr:NSArray = ["Waiting Time: 50S \n Damage: 5","Waiting Time: 30S \n Blink Distance: 200","Waiting Time: 50S \n Hold Time: 5S"]
-        let level1StrArr:NSArray = ["0/5 \n Reduce Waiting Time 5S","0/5 \n Reduce Waiting Time 5S","0/5\n Reduce Waiting Time 5S"]
-        let level2StrArr:NSArray = ["0/5 \n Increase Damage 1","0/5 \n Increase Distance 20","0/5 \n Increase Hold Time 1"]
-        let level1Arr:NSArray = [50,30,50]
-        let level2Arr:NSArray = [5,200,2]
+        let nameStrArr:NSArray = [BOOM,BLINK,SPEED,IMMUNE]
+        let detailStrAarr:NSArray = ["Waiting Time: 50S \n Damage: 5","Waiting Time: 30S \n Blink Distance: 200","Waiting Time: 50S \n Hold Time: 5S","Waiting Time: 50S \n Hold Time: 5S"]
+        let level1StrArr:NSArray = ["0/5 \n Reduce Waiting Time 5S","0/5 \n Reduce Waiting Time 5S","0/5\n Reduce Waiting Time 5S",""]
+        let level2StrArr:NSArray = ["0/5 \n Increase Damage 1","0/5 \n Increase Distance 20","0/5 \n Increase Hold Time 1","0/5 \n Increase Hold Time 1"]
+        let level1Arr:NSArray = [50,30,50,50]
+        let level2Arr:NSArray = [5,200,2,5]
         
         
         let monsterNameArr:NSArray = [NORMAL_ZOM,RED_ZOM,KULOU_NAME,GREEN_ZOM_NAME,KNIGHT_NAME,SQUID_NAME,OX_NAME,KULOU_KNIGHT_NAME,SEAL_NAME,DOG_NAME]
@@ -54,7 +54,7 @@ class WDDataManager: NSObject {
         }
         
         //插入人物技能学习情况
-        for index:NSInteger in 0...2 {
+        for index:NSInteger in 0...3 {
             
             let skillModel:WDSkillModel = WDSkillModel.init()
             skillModel.skillName = nameStrArr.object(at: index) as! String

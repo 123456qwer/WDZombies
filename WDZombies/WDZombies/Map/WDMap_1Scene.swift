@@ -144,7 +144,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         overTimeLabel.verticalAlignmentMode = .center
         overTimeLabel.alpha = 0.6
         
-        overTimeLabel.position = CGPoint(x:kScreenWidth - overTimeLabel.frame.size.width - 10,y:self.frame.size.height - overTimeLabel.frame.size.height / 2.0 - 10)
+        overTimeLabel.position = CGPoint(x:self.frame.size.width - overTimeLabel.frame.size.width - 10,y:self.frame.size.height - overTimeLabel.frame.size.height / 2.0 - 10)
         overTimeLabel.color = UIColor.black
         overTimeLabel.zPosition = 10000
         self.addChild(overTimeLabel)
@@ -188,23 +188,27 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         big3.run(rep)
         big4.run(rep)
         
-        let texture = SKTexture.init(image: UIImage.init(named: "levelBg2")!)
-        let levelBg2:SKSpriteNode = SKSpriteNode.init(texture: texture)
-        levelBg2.xScale = 0.5;
-        levelBg2.yScale = 0.5
-        levelBg2.position = CGPoint(x:7 + levelBg2.size.width / 2.0, y:kScreenHeight - 7 - levelBg2.size.height / 2.0)
-        levelBg2.zPosition = 4000
         
+        let texture = SKTexture.init(image: UIImage.init(named: "levelBg2")!)
+        let levelBg2:SKSpriteNode = SKSpriteNode.init(color: UIColor.black, size: CGSize(width:150 / 2.0,height:150 / 2.0))
+     
+        levelBg2.position = CGPoint(x:7 + levelBg2.size.width / 2.0, y:self.frame.size.height - 7 - levelBg2.size.height / 2.0)
+        levelBg2.zPosition = 4000
+        print(levelBg2.size)
         self.addChild(levelBg2)
+        levelBg2.texture = texture
         
         let texture4 = SKTexture.init(image: UIImage.init(named: "levelBg")!)
-        let levelBg:SKSpriteNode = SKSpriteNode.init(texture: texture4)
-        levelBg.xScale = 0.5;
-        levelBg.yScale = 0.5
+        let levelBg:SKSpriteNode = SKSpriteNode.init(color: UIColor.cyan, size: CGSize(width:136 / 2.0,height:136 / 2.0))
+        
         levelBg.position = levelBg2.position
         levelBg.zPosition = 3000
-        
+        print(levelBg.size)
+        levelBg.texture = texture4
+
         self.addChild(levelBg)
+        
+        print(levelBg,levelBg2)
         
         let model:WDUserModel = WDUserModel.init()
         _ = model.searchToDB()
@@ -214,10 +218,12 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         levelNode.position = CGPoint(x:0,y:0)
         levelNode.zPosition = 3000
         levelNode.fontColor = UIColor.white
-        levelNode.fontSize = 80
+        levelNode.fontSize = 40
         levelNode.verticalAlignmentMode = .center
         levelNode.alpha = 0.6
         levelBg.addChild(levelNode)
+        
+
        
         
         let texture1 = SKTexture.init(image: UIImage.init(named: "blood_tiao")!)
@@ -244,8 +250,13 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         _startAngle = 0
         _endAngle = CGFloat(Double.pi / 2.0)
         _lineWidth = exWidth
+        
+        self.perform(#selector(aaa), with: nil, afterDelay: 2)
     }
     
+    @objc func aaa(){
+        setExperienceBlock!(_radius,_arcCenter,_startAngle,_endAngle,_lineWidth)
+    }
    
     
     //normal/red僵尸相关
@@ -540,7 +551,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //******************************************************//
 
-    
+    //主页血条
     func reduceBlood() {
         if personNode.wdBlood <= 0 {
             bloodNode.removeAllActions()

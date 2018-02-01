@@ -488,10 +488,16 @@ class GameViewController: UIViewController {
         let percentage:CGFloat = CGFloat(CGFloat(userModel.experience) / CGFloat(userModel.experienceAll))
         let endAngle1 = CGFloat(Double.pi * 2) * percentage
         
-        view.setParameters(radius: 75 / 2.0 - lineWidth / 2.0, arcCenter: CGPoint(x:75 / 2.0,y:75 / 2.0), startAngle: 0, endAngle: endAngle1, lineWidth: lineWidth)
+        //这块适配问题，6p的情况下，node的显示像素点数比设置的实际size要大，可能是根据分辨率自动放大了一些，而普通的视图，size没有放大，还是实际尺寸(例：头像node设置为 75，75，实际显示 83,83)
+        let x = kScreenHeight / 375
+        
+        view.setParameters(radius: 75 * x / 2.0 - lineWidth / 2.0, arcCenter: CGPoint(x:75 * x / 2.0,y:75 * x / 2.0), startAngle: 0, endAngle: endAngle1, lineWidth: lineWidth)
         view.backgroundColor = UIColor.clear
-        view.frame = CGRect(x:7,y:7,width:75,height:75)
+        
+        view.frame = CGRect(x:7,y:7,width:75 * x,height:75 * x)
         self.view.addSubview(view)
+        
+        print(view.frame.size,kScreenHeight,kScreenWidth)
         
         if _experienceView != nil {
             _experienceView.removeFromSuperview()

@@ -219,7 +219,6 @@ class WDMap_1ViewModel: NSObject {
         }
         
         if magicNode != nil && pNode != nil {
-            WDAnimationTool.bloodAnimation(node:personNode)
             personNode.personBehavior.reduceBlood(number:1,monsterName: RED_ZOM)
         }
         
@@ -235,7 +234,6 @@ class WDMap_1ViewModel: NSObject {
         
         if kulouNode != nil && fireNode != nil {
            _ = kulouNode?.behavior.beAttack(attackNode: personNode, beAttackNode: kulouNode!)
-            WDAnimationTool.bloodAnimation(node: kulouNode!)
             fireNode?.removeFromParent()
         }
         
@@ -251,26 +249,22 @@ class WDMap_1ViewModel: NSObject {
         
         if greenClaw != nil && pNode != nil {
             // print("受到绿僵尸爪子攻击")
-            WDAnimationTool.bloodAnimation(node:personNode)
             personNode.personBehavior.reduceBlood(number:2,monsterName: GREEN_ZOM_NAME)
         }
         
         if greenSmoke != nil && pNode != nil {
             // print("受到毒气烟雾的攻击")
-            WDAnimationTool.bloodAnimation(node:personNode)
             personNode.personBehavior.reduceBlood(number:2,monsterName: GREEN_ZOM_NAME)
         }
         
         if greenNode != nil && fireNode != nil {
            _ = greenNode?.behavior.beAttack(attackNode: personNode, beAttackNode: greenNode!)
-            WDAnimationTool.bloodAnimation(node: greenNode!)
             fireNode?.removeFromParent()
         }
         
         if knightNode != nil && fireNode != nil {
             //print("雾骑士被打了")
             _ = knightNode?.behavior.beAttack(attackNode: personNode, beAttackNode: knightNode!)
-            WDAnimationTool.bloodAnimation(node: knightNode!)
             fireNode?.removeFromParent()
         }
         
@@ -279,7 +273,6 @@ class WDMap_1ViewModel: NSObject {
         }
         
         if pNode != nil && meteoriteNode != nil{
-            WDAnimationTool.bloodAnimation(node:personNode)
             personNode.personBehavior.reduceBlood(number:2,monsterName: KNIGHT_NAME)
             //print("陨石砸到我了")
         }
@@ -304,43 +297,36 @@ class WDMap_1ViewModel: NSObject {
             inkNode?.run(alphaA, completion: {
                 inkNode?.removeFromParent()
             })
-            WDAnimationTool.bloodAnimation(node:personNode)
             personNode.personBehavior.reduceBlood(number:1,monsterName: SQUID_NAME)
         }
         
         if squidNode != nil && fireNode != nil {
             _ = squidNode?.behavior.beAttack(attackNode: personNode, beAttackNode: squidNode!)
-            WDAnimationTool.bloodAnimation(node: squidNode!)
             fireNode?.removeFromParent()
         }
         
         if pNode != nil && oxLightNode != nil{
-            WDAnimationTool.bloodAnimation(node: personNode)
             personNode.personBehavior.reduceBlood(number: 1,monsterName: OX_NAME)
             personNode.personBehavior.beFlashAttack()
         }
         
         if fireNode != nil && oxNode != nil{
            _ = oxNode?.behavior.beAttack(attackNode: personNode, beAttackNode: oxNode!)
-            WDAnimationTool.bloodAnimation(node: oxNode!)
             fireNode?.removeFromParent()
         }
         
         if fireNode != nil && kulouNightNode != nil{
             _ = kulouNightNode?.behavior.beAttack(attackNode: personNode, beAttackNode: kulouNightNode!)
-            WDAnimationTool.bloodAnimation(node: kulouNightNode!)
             fireNode?.removeFromParent()
         }
        
         if sealIceNode != nil && pNode != nil{
-            WDAnimationTool.bloodAnimation(node: personNode)
             personNode.personBehavior.reduceBlood(number: 1,monsterName: OX_NAME)
             personNode.personBehavior.beIceAttack()
         }
         
         if sealNode != nil && fireNode != nil {
             _ = sealNode?.behavior.beAttack(attackNode: personNode, beAttackNode: sealNode!)
-            WDAnimationTool.bloodAnimation(node: sealNode!)
             fireNode?.removeFromParent()
         }
         
@@ -355,7 +341,6 @@ class WDMap_1ViewModel: NSObject {
                 dogStayFireNode?.removeFromParent()
             })
            personNode.personBehavior.reduceBlood(number: 1,monsterName: DOG_NAME)
-           WDAnimationTool.bloodAnimation(node: pNode!)
         }
         
         if dogFireNode != nil && pNode != nil {
@@ -365,13 +350,11 @@ class WDMap_1ViewModel: NSObject {
             dogFireNode?.removeAllActions()
             dogFireNode?.removeFromParent()
             personNode.personBehavior.reduceBlood(number: 5,monsterName: DOG_NAME)
-            WDAnimationTool.bloodAnimation(node: pNode!)
         }
         
         if dogNode != nil && fireNode != nil {
             fireNode?.removeFromParent()
             _ = dogNode?.behavior.beAttack(attackNode: personNode, beAttackNode: dogNode!)
-            WDAnimationTool.bloodAnimation(node: dogNode!)
         }
         
         //炸弹逻辑

@@ -105,13 +105,15 @@ class WDBaseNodeBehavior: NSObject {
         beAttackNode.wdBlood -= attackNode.wdAttack
         addUpToBlood += NSInteger(attackNode.wdAttack)
         
-        self.reduceBloodLabel(node: beAttackNode, attackNode: attackNode)
         
         if beAttackNode.wdBlood <= 0 {
             self.died()
             self._removePhysics()
             return false
         }
+        
+        self.reduceBloodLabel(node: beAttackNode, attackNode: attackNode)
+
         
         if addUpToBlood >= 10 && beAttackNode.canMove == true{
             
@@ -143,6 +145,8 @@ class WDBaseNodeBehavior: NSObject {
     
     /// 伤害数值显示
     func reduceBloodLabel(node:WDBaseNode,attackNode:WDBaseNode)  {
+        
+        WDAnimationTool.bloodAnimation(node: node)
         
         var xScale:CGFloat = 1
         if node.xScale < 0 {
