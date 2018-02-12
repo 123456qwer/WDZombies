@@ -25,7 +25,7 @@ class WDDataManager: NSObject {
         userModel.skillCount = 1
         userModel.level = 1
         userModel.mapLevel = 0
-        userModel.monsterCount = 11
+        userModel.monsterCount = 1
         userModel.experience = 0
         userModel.experienceAll = 200
         

@@ -11,14 +11,11 @@ import SpriteKit
  
  
 public let LAST_LEVEL = 11
-
-
+ 
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
-   
     var score:CGFloat = 0
 
-    
     let ZOMCOUNT = 10
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
