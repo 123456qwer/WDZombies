@@ -62,7 +62,6 @@ class WDGreenZomNode: WDBaseNode{
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         
-        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 100
         self.wdBlood = 50
@@ -78,10 +77,16 @@ class WDGreenZomNode: WDBaseNode{
             behavior.attackAllCount = 6
             self.size = CGSize(width:125,height:125)
 
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:60,height:100),point:CGPoint(x:15,y:0))
+            self.setPhyBodyColor(size: CGSize(width:60,height:100),point:CGPoint(x:15,y:0))
+            
         }else{
+            
             self.wdBlood = 20
             behavior.attackAllCount = 15
             self.size = CGSize(width:125 * 0.6,height:125 * 0.6)
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:60*0.6,height:100*0.6),point:CGPoint(x:15*0.6,y:0))
+            self.setPhyBodyColor(size: CGSize(width:60*0.6,height:100*0.6),point:CGPoint(x:15*0.6,y:0))
 
         }
     }

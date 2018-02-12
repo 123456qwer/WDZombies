@@ -65,7 +65,7 @@ class WDSmokeKnightNode: WDBaseNode {
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         
-        self.physicsBody = model.physics()
+        
         self.direction = kLeft
         self.wdFire_impact = 200
         self.wdBlood = 100
@@ -83,11 +83,16 @@ class WDSmokeKnightNode: WDBaseNode {
             self.behavior.attackAllCount = 5
             self.size = CGSize(width:165,height:165)
 
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:60,height:60), point: CGPoint(x:0,y:0))
+            self.setPhyBodyColor(size: CGSize(width:60,height:60), point: CGPoint(x:0,y:0))
+            
         }else{
             self.wdBlood = 20
             self.behavior.attackAllCount = 20
             self.size = CGSize(width:165 * 0.6,height:165 * 0.6)
 
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:60*0.6,height:60*0.6), point: CGPoint(x:0,y:0))
+            self.setPhyBodyColor(size: CGSize(width:60*0.6,height:60*0.6), point: CGPoint(x:0,y:0))
         }
     }
 }

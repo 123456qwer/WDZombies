@@ -130,7 +130,9 @@ class WDPersonNode: WDBaseNode {
 
         immuneNode.isHidden = true
         self.immuneA11(zPosition: -1, action: action_im1)
-        self.color = UIColor.orange
+  
+        self.setPhyColor()
+        
     }
     
     
@@ -171,7 +173,7 @@ class WDPersonNode: WDBaseNode {
     func setPhyColor()  {
         let phyColorNode:SKSpriteNode = SKSpriteNode.init(color: .blue, size: CGSize(width:20,height:20))
         phyColorNode.position = CGPoint(x:0,y:0)
-        phyColorNode.zPosition = 10
+        phyColorNode.zPosition = 0
         self.addChild(phyColorNode)
     }
     

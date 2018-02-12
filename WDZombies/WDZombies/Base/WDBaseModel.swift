@@ -30,6 +30,18 @@ class WDBaseModel: NSObject {
         return CGPoint(x:x, y:y)
     }
     
+    func setUsualPhyBody(size:CGSize,point:CGPoint) -> SKPhysicsBody {
+        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: size, center: point)
+
+        physicsBody.affectedByGravity = false;
+        physicsBody.allowsRotation = false;
+        physicsBody.categoryBitMask = USUAL_ZOM_CATEGORY;
+        physicsBody.contactTestBitMask = USUAL_ZOM_CONTACT;
+        physicsBody.collisionBitMask = USUAL_ZOM_COLLISION;
+        physicsBody.isDynamic = true;
+        
+        return physicsBody
+    }
     
     
     /// 配置怪物属性:基本属性,move,died,attack,beAttack
@@ -111,8 +123,6 @@ class WDBaseModel: NSObject {
         if attack2Name != "none" {
             attack2Arr = WDMapManager.sharedInstance.textureDic.object(forKey: attack2Name) as! Array<SKTexture>
         }
-       
-        
     }
     
     

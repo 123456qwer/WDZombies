@@ -14,15 +14,5 @@ class WDDogModel: WDBaseModel {
     let stayArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: DOG_STAY) as! Array<SKTexture>
     let fireArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: DOG_FIRE) as! Array<SKTexture>
     
-    func physics() -> SKPhysicsBody{
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:100,height:100), center: CGPoint(x:0,y:0))
-        physicsBody.affectedByGravity = false;
-        physicsBody.allowsRotation = false;
-        physicsBody.categoryBitMask = GREEN_ZOM_CATEGORY;
-        physicsBody.contactTestBitMask = GREEN_ZOM_CONTACT;
-        physicsBody.collisionBitMask = GREEN_ZOM_COLLISION;
-        physicsBody.isDynamic = true;
-        
-        return physicsBody
-    }
+  
 }

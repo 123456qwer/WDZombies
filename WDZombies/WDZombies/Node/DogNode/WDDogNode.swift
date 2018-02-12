@@ -35,7 +35,6 @@ class WDDogNode: WDBaseNode {
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         
-        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 200
         self.wdBlood = 100
@@ -53,9 +52,15 @@ class WDDogNode: WDBaseNode {
         if isBoss{
             self.wdBlood = 100
             self.size = CGSize(width:180 ,height:130)
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:100,height:100), point: CGPoint(x:10,y:-15))
+            self.setPhyBodyColor(size: CGSize(width:100,height:100), point: CGPoint(x:10,y:-15))
+            
         }else{
+            
             self.wdBlood = 20
             self.size = CGSize(width:180 * 0.6,height:130 * 0.6)
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:100*0.6,height:100*0.6), point: CGPoint(x:10*0.6,y:-15*0.6))
+            self.setPhyBodyColor(size: CGSize(width:100*0.6,height:100*0.6), point: CGPoint(x:10*0.6,y:-15*0.6))
         }
     }
 }

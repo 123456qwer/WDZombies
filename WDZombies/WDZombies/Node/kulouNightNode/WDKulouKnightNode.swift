@@ -33,7 +33,6 @@ class WDKulouKnightNode: WDBaseNode {
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         
-        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 200
         self.wdBlood = 100
@@ -50,11 +49,14 @@ class WDKulouKnightNode: WDBaseNode {
         if isBoss{
             self.wdBlood = 100
             self.size = CGSize(width:170 * 0.8,height:170 * 0.8)
-
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:100,height:110), point: CGPoint(x:0,y:-10))
+            self.setPhyBodyColor(size: CGSize(width:100,height:110), point: CGPoint(x:0,y:-10))
+            
         }else{
             self.wdBlood = 10
             self.size = CGSize(width:170 * 0.6,height:170 * 0.6)
-
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:100 * 0.6,height:110 * 0.6), point: CGPoint(x:0,y:-10))
+            self.setPhyBodyColor(size: CGSize(width:100 * 0.6,height:110 * 0.6), point: CGPoint(x:0,y:-10))
         }
     }
     

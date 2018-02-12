@@ -41,14 +41,9 @@ class WDKulouNode: WDBaseNode {
         
         self.name = KULOU_NAME
         
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:80,height:80))
-        physicsBody.affectedByGravity = false;
-        physicsBody.allowsRotation = false;
         
-        physicsBody.categoryBitMask = KULOU_CATEGORY;
-        physicsBody.contactTestBitMask = KULOU_CONTACT;
-        physicsBody.collisionBitMask = KULOU_COLLISION;
-        physicsBody.isDynamic = true;
+       
+
         
         let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
         let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
@@ -56,12 +51,12 @@ class WDKulouNode: WDBaseNode {
         self.position = CGPoint(x:x, y:y);
         self.zPosition = 3 * 667 - y;
         
-        self.physicsBody = physicsBody
         self.direction = kLeft
         self.wdFire_impact = 100
         self.wdAttack = 3
         
         self.experience = 15
+       
     }
     
     
@@ -70,13 +65,25 @@ class WDKulouNode: WDBaseNode {
         if isBoss{
             self.wdBlood = 100
             self.size = CGSize(width:110 ,height:130)
+           
+            let physicsBody:SKPhysicsBody = model.setUsualPhyBody(size:CGSize(width:80,height:80),point:CGPoint(x:0,y:0))
+            self.physicsBody = physicsBody
+            
+            self.setPhyBodyColor(size:CGSize(width:80,height:80),point:CGPoint(x:0,y:0))
 
         }else{
+            
             self.wdBlood = 20
             self.size = CGSize(width:110 * 0.6,height:130 * 0.6)
+            let physicsBody:SKPhysicsBody = model.setUsualPhyBody(size:CGSize(width:80*0.6,height:80*0.6),point:CGPoint(x:0,y:0))
+            self.physicsBody = physicsBody
+            
+            self.setPhyBodyColor(size:CGSize(width:80*0.6,height:80*0.6),point:CGPoint(x:0,y:0))
 
         }
     }
+    
+  
     
     func setPhysicsBody(isSet:Bool) -> Void {
         if isSet {

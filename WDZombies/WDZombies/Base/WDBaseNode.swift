@@ -50,5 +50,11 @@ class WDBaseNode: SKSpriteNode {
     var nodeModel:WDBaseModel!
     var experience:CGFloat = 20
     
+    func setPhyBodyColor(size:CGSize,point:CGPoint){
+        let phyColorNode:SKSpriteNode = SKSpriteNode.init(color: .blue, size: size)
+        phyColorNode.position = point
+        phyColorNode.zPosition = 0
+        self.addChild(phyColorNode)
+    }
     
 }

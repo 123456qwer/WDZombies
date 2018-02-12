@@ -33,7 +33,6 @@ class WDOXNode: WDBaseNode {
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         
-        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 200
         self.wdBlood = 100
@@ -41,8 +40,7 @@ class WDOXNode: WDBaseNode {
         
         self.setAttribute(isBoss: self.isBoss)
         self.experience = 35
-        
-        //self.addChild(model.phyColorNode())
+  
         
     }
     
@@ -54,11 +52,14 @@ class WDOXNode: WDBaseNode {
         if isBoss{
             self.wdBlood = 100
             self.size = CGSize(width:200 * 0.8 ,height:250 * 0.8)
-
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:100,height:100), point: CGPoint(x:0,y:-40))
+            self.setPhyBodyColor(size: CGSize(width:100,height:100), point: CGPoint(x:0,y:-40))
+            
         }else{
             self.wdBlood = 20
             self.size = CGSize(width:200 * 0.6 ,height:250 * 0.6)
-
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:100*0.6,height:100*0.6), point: CGPoint(x:0,y:-40*0.6))
+            self.setPhyBodyColor(size: CGSize(width:100*0.6,height:100*0.6), point: CGPoint(x:0,y:-40*0.6))
         }
         
     }

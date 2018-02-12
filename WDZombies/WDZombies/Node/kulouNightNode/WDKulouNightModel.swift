@@ -11,16 +11,5 @@ import SpriteKit
 
 class WDKulouNightModel: WDBaseModel {
     let stayArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: KULOU_KNIGHT_STAY) as! Array<SKTexture>
- 
-    func physics() -> SKPhysicsBody{
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:100,height:80), center: CGPoint(x:0,y:-10))
-        physicsBody.affectedByGravity = false;
-        physicsBody.allowsRotation = false;
-        physicsBody.categoryBitMask = GREEN_ZOM_CATEGORY;
-        physicsBody.contactTestBitMask = GREEN_ZOM_CONTACT;
-        physicsBody.collisionBitMask = GREEN_ZOM_COLLISION;
-        physicsBody.isDynamic = true;
-        
-        return physicsBody
-    }
+
 }

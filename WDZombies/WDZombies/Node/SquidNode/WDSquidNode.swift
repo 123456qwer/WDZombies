@@ -35,7 +35,6 @@ class WDSquidNode: WDBaseNode {
         self.position = model.randomBornPosition()
         self.zPosition = 3 * 667 - self.position.y
         
-        self.physicsBody = model.physics()
         self.direction = kLeft
         self.wdFire_impact = 200
         self.wdBlood = 100
@@ -54,10 +53,14 @@ class WDSquidNode: WDBaseNode {
         if isBoss{
             self.wdBlood = 100
             self.size = CGSize(width:140 ,height:100)
-
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:60,height:80), point: CGPoint(x:0,y:0))
+            self.setPhyBodyColor(size: CGSize(width:60,height:80), point: CGPoint(x:0,y:0))
+            
         }else{
             self.wdBlood = 20
             self.size = CGSize(width:140 * 0.6 ,height:100 * 0.6)
+            self.physicsBody = model.setUsualPhyBody(size: CGSize(width:60*0.6,height:80*0.6), point: CGPoint(x:0,y:0))
+            self.setPhyBodyColor(size: CGSize(width:60*0.6,height:80*0.6), point: CGPoint(x:0,y:0))
         }
     
     }

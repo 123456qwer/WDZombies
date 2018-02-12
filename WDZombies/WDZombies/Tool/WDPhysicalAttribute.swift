@@ -45,7 +45,10 @@ let GREEN_ZOM_COLLISION:UInt32     = 0x01    //0000  0001
 let KNIGHT_METEORITE_CONTACT:UInt32 = 0x01 //0000 0001
 let KNIGHT_METEORITE_NAME = "KNIGHT_METEORITE_NAME"
 
-
+//通常物理属性<通用boss>
+let USUAL_ZOM_CATEGORY:UInt32      = 0x04    //0000  0100
+let USUAL_ZOM_CONTACT:UInt32       = 0x01    //0000  0001
+let USUAL_ZOM_COLLISION:UInt32     = 0x01    //0000  0001
 
 let PERSON:NSString = "person"
 let FIRE:NSString   = "fire"

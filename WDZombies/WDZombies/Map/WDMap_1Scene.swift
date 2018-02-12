@@ -80,7 +80,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            //self.level_10_dogZom(isBoss: true)
+           
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }

@@ -17,17 +17,6 @@ class WDKnightModel: WDBaseModel {
     let meteoriteTexture:SKTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "knightNodePic", textureName: "meteoriteShadow")
     
     
-    func physics() -> SKPhysicsBody{
-        let physicsBody:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:40,height:40))
-        physicsBody.affectedByGravity = false;
-        physicsBody.allowsRotation = false;
-        
-        physicsBody.categoryBitMask = GREEN_ZOM_CATEGORY;
-        physicsBody.contactTestBitMask = GREEN_ZOM_CONTACT;
-        physicsBody.collisionBitMask = GREEN_ZOM_COLLISION;
-        physicsBody.isDynamic = true;
-        
-        return physicsBody
-    }
+ 
     
 }
