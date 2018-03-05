@@ -68,6 +68,8 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     //攻击
     override func attack(direction: NSString, nodeDic: NSDictionary) {
        
+        self._soundWithName(musicName: attackMusicName, numberOfLoops: 0, volume: 1)
+        
         let personNode = nodeDic.object(forKey: "personNode")
         
         kulouNode.removeAction(forKey: "move")
@@ -94,12 +96,16 @@ class WDKulouBehavior: WDBaseNodeBehavior {
             let distance:CGFloat = WDTool.calculateNodesDistance(point1:self.kulouNode.position,point2:personNode.position)
             
             let dis = personNode.size.width / 2.0 + kulouNode.size.width / 2.0
-            print(dis,distance)
             
             if distance < dis {
                 personNode.personBehavior.beAattackAction(attackNode: self.kulouNode, beAttackNode: personNode)
             }
         }
+    }
+    
+    @objc override func died() {
+        self._soundWithName(musicName: diedMusicName, numberOfLoops: 0, volume: 1)
+        super.died()
     }
     
     @objc func setPhy()  {

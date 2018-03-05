@@ -14,7 +14,7 @@ class WDSquidNode: WDBaseNode {
     var model:WDSquidModel = WDSquidModel.init()
     
     deinit {
-        print("鱿鱼哥被释放了")
+        WDLog(item: "鱿鱼哥被释放了")
     }
     
     override func configureModel() {

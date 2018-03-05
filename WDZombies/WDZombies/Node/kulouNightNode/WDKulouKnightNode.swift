@@ -18,7 +18,7 @@ class WDKulouKnightNode: WDBaseNode {
     }
     
     deinit {
-        print("骷髅骑士释放了！！！！")
+        WDLog(item: "骷髅骑士释放了！！！！")
     }
     
     func initWithPerson(personNode:WDPersonNode) {

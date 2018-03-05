@@ -20,7 +20,7 @@ class WDDogNode: WDBaseNode {
     }
     
     deinit {
-        print("狗释放了！！！！")
+        WDLog(item: "狗释放了！！！")
     }
     
     func initWithPerson(personNode:WDPersonNode) {

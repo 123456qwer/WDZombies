@@ -30,7 +30,7 @@ class WDDataManager: NSObject {
         userModel.experienceAll = 200
         
         if userModel.insertSelfToDB(){
-            print("人物属性插入成功")
+            WDLog(item: "人物属性插入成功")
         }
         
         
@@ -68,7 +68,7 @@ class WDDataManager: NSObject {
             skillModel.haveLearn   = 1
             
             if skillModel.insertSelfToDB(){
-                print("插入成功了!!!!again")
+                WDLog(item: "人物技能插入成功")
             }
         }
         
@@ -101,7 +101,7 @@ class WDDataManager: NSObject {
         let cDBPath = DBPath.cString(using: String.Encoding.utf8)
         
         if sqlite3_open(cDBPath, &db) != SQLITE_OK {
-            print("数据库打开失败")
+            WDLog(item: "数据库打开失败")
         }
         
         return creatTable()

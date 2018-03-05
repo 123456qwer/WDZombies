@@ -8,15 +8,17 @@
 
 import UIKit
 import SpriteKit
+
 class WDKulouNode: WDBaseNode {
 
    
     var behavior:WDKulouBehavior! = WDKulouBehavior.init()
     var model:WDKulouModel = WDKulouModel.init()
     var isCall:Bool = false //是否是骷髅骑士召唤出来的
+  
     
     deinit {
-        print("骷髅释放了！！")
+        WDLog(item: "骷髅释放了！！")
     }
     
     override func configureModel() {
@@ -38,12 +40,11 @@ class WDKulouNode: WDBaseNode {
         behavior.setNode(node:self)
         behavior.node = self
         nodeBehavior = behavior
+        behavior.attackMusicName = "kulou_attack"
+        behavior.diedMusicName = "kulou_died"
         
         self.name = KULOU_NAME
         
-        
-       
-
         
         let x:CGFloat = CGFloat(arc4random() % UInt32(kScreenHeight*2));
         let y:CGFloat = CGFloat(arc4random() % UInt32(kScreenWidth*2));
@@ -107,4 +108,6 @@ class WDKulouNode: WDBaseNode {
     }
 
     
+    
+ 
 }

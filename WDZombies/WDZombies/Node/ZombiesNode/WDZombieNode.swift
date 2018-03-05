@@ -69,7 +69,7 @@ class WDZombieNode: WDBaseNode {
     }
     
     deinit {
-        print("怪物node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
+        WDLog(item: "怪物node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
     }
     
     

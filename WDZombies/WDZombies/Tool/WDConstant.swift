@@ -8,6 +8,20 @@
 
 import UIKit
 
+let kPrintLog = 1  // 控制台输出开关 1：打开   0：关闭
+let autoFire = false
+// 控制台打印
+func WDLog(item: Any...) {
+    if kPrintLog == 1 {
+        print(item.last!)
+    }
+}
+
+//是否开启自动攻击
+func WDAutoFire() -> Bool{
+   return autoFire
+}
+
 //普通僵尸
 public let NORMAL_ZOM       = "NORMAL_ZOM"
 
@@ -82,6 +96,10 @@ public let DOG_ATTACK1     = "DOG_ATTACK1"
 public let DOG_FIRE        = "DOG_FIRE"
 public let DOG_STAY_FIRE   = "DOG_STAY_FIRE"
 
+
+
+//声音
+public let MOVE_SOUND     = "MOVE_SOUND"
 
 class WDConstant: NSObject {
 

@@ -44,6 +44,7 @@ class WDOXBehavior: WDBaseNodeBehavior {
                 self.setLightPhy(light: lightNode)
                 let lightA = SKAction.animate(with: self.oxNode.model.lightArr, timePerFrame: 0.1)
                 let rep    = SKAction.repeat(lightA, count: 10)
+                self._soundWithName(musicName: "ox_flash", numberOfLoops: 1, volume: 1)
                 lightNode.run(rep, completion: {
                     lightNode.removeFromParent()
                 })
@@ -100,8 +101,7 @@ class WDOXBehavior: WDBaseNodeBehavior {
                 personNode.personBehavior.reduceBlood(number:1,monsterName: OX_NAME)
                 WDAnimationTool.bloodAnimation(node:personNode)
             })
-            
-            print("撞到玩家了！")
+      
             return
         }
         

@@ -70,7 +70,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
             fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
             overTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overTimerAction), userInfo: nil, repeats: true)
             
@@ -80,7 +80,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-           
+            self.level_7_OXZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -503,6 +503,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
 
         mapViewModel.removeNode(zomNode: node)
         mapViewModel.zomArr.remove(node)
+        if nearZom == node{
+            nearZom = nil
+        }
     }
 
     
@@ -595,6 +598,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //自动攻击
     @objc func autoFireAction(){
+        
+        if  !WDAutoFire() {
+           return
+        }
+        
         if nearZom != nil {
             let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
             if distance < CGFloat(personNode.wdAttackDistance){

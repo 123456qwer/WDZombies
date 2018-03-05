@@ -16,7 +16,7 @@ class WDGreenZomNode: WDBaseNode{
     var model:WDGreenModel = WDGreenModel.init()
 
     deinit {
-        print("绿色僵尸释放了！！！！")
+        WDLog(item: "绿色僵尸释放了！！！！")
     }
    
     /// 设置基础属性、图片

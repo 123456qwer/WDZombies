@@ -8,8 +8,9 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
-class WDBaseNodeBehavior: NSObject {
+class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
 
         
     
@@ -30,6 +31,9 @@ class WDBaseNodeBehavior: NSObject {
     
     
     weak var node:WDBaseNode!
+    var attackMusicPlayer = AVAudioPlayer()
+    var attackMusicName = "guess"
+    var diedMusicName = "guess"
     
     
     typealias _moveBlock = (_ node:WDBaseNode) -> Void
@@ -59,9 +63,13 @@ class WDBaseNodeBehavior: NSObject {
         
         if node.canMove == true {
             
+
             let personNode:WDPersonNode = nodeDic.object(forKey: "personNode") as! WDPersonNode
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: node.speed, node: node)
             node.position = point
+            
+          
+            
             node.zPosition = 3 * 667 - node.position.y;
             let bossDirection = WDTool.calculateDirectionForBoss1(bossPoint: node.position, personPoint: personNode.position)
             
@@ -95,7 +103,6 @@ class WDBaseNodeBehavior: NSObject {
     
     /// 僵尸攻击
     func attack(direction:NSString,nodeDic:NSDictionary){
-        
     }
     
     
@@ -132,7 +139,7 @@ class WDBaseNodeBehavior: NSObject {
     
     /// 僵尸死亡
     func died(){
-        
+                
         node.removeAllActions()
         let diedAction = SKAction.animate(with: node.nodeModel.diedArr , timePerFrame: 0.2)
         node.run(diedAction) {
@@ -185,6 +192,24 @@ class WDBaseNodeBehavior: NSObject {
 ////////////////////////////
     
     //MARK:私有
+    func _soundWithName(musicName:String,numberOfLoops:Int,volume:Float){
+        let bgMusicURL =  Bundle.main.url(forResource: musicName, withExtension: "mp3")!
+        //根据背景音乐地址生成播放器
+        try! attackMusicPlayer = AVAudioPlayer (contentsOf: bgMusicURL)
+        //设置为循环播放(
+        attackMusicPlayer.numberOfLoops = numberOfLoops
+        //准备播放音乐
+        attackMusicPlayer.prepareToPlay()
+        //大小
+        attackMusicPlayer.volume = volume
+        //播放音乐
+        attackMusicPlayer.play()
+        
+    }
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+      
+    }
+    
     func _removeLink()  {
         if moveLink != nil{
             moveLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)

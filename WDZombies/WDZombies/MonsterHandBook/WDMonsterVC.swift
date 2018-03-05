@@ -385,7 +385,7 @@ class WDMonsterVC: WDBaseViewController {
     
     
     deinit {
-        print("怪兽列表释放了")
+        WDLog(item: "怪兽列表释放了")
     }
 
 }

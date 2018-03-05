@@ -131,6 +131,8 @@ class WDMap_1ZomModel: NSObject {
         }
     
         self.addZomNodeForViewArr(node: kulouNode)
+        
+        
         return kulouNode
     }
     

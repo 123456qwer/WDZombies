@@ -27,10 +27,10 @@ class WDUserModel: NSObject {
         //插入SQL语句
         let insertSQL = "INSERT INTO 't_User' (blood,attack,speed,level,skillCount,fire_impact,attackDistance,mapLevel,monsterCount,experience,experienceAll,score) VALUES ('\(blood)','\(attack)','\(speed)','\(level)','\(skillCount)','\(fire_impact)','\(attackDistance)','\(mapLevel)','\(monsterCount)','\(experience)','\(experienceAll)','\(score)');"
         if WDDataManager.shareInstance().execSQL(SQL: insertSQL) {
-            print("插入数据成功")
+            WDLog(item: "人物数据插入成功")
             return true
         }else{
-            print("插入数据失败")
+            WDLog(item: "人物数据插入失败")
             return false
         }
     }
@@ -44,10 +44,10 @@ class WDUserModel: NSObject {
         let changeSQL = "UPDATE 't_User' set blood = '\(blood)',attack = '\(attack)',speed = '\(speed)',level = '\(level)',skillCount = '\(skillCount)',fire_impact = '\(fire_impact)',attackDistance = '\(attackDistance)', mapLevel = '\(mapLevel)',monsterCount = '\(monsterCount)',experience = '\(experience)',experienceAll = '\(experienceAll)',score = '\(score)'"
         if WDDataManager.shareInstance().execSQL(SQL: changeSQL) {
             
-            print("修改数据成功")
+            WDLog(item: "修改人物数据成功")
             return true
         }else{
-            
+            WDLog(item: "修改人物数据失败")
             return false
         }
     }

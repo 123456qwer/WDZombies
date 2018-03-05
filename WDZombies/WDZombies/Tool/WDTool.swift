@@ -433,6 +433,24 @@ class WDTool: NSObject {
         return sqrt(x * x + y * y);
     }
     
+    static func calculateNodeMoveSound(distance:CGFloat) -> CGFloat{
+        var volume:CGFloat = 0
+        if distance >= 500{
+            volume = 0
+        }else if distance >= 400{
+            volume = 0.2
+        }else if distance >= 300{
+            volume = 0.4
+        }else if distance >= 200{
+            volume = 0.6
+        }else if distance >= 100{
+            volume = 0.8
+        }else{
+            volume = 1
+        }
+        
+        return volume
+    }
     
     
     /// 反方向

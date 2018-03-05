@@ -24,7 +24,8 @@ class WDPersonNode: WDBaseNode {
     var fly_fireArr:NSMutableArray = NSMutableArray.init()
     var beFlashTexture:SKTexture = SKTexture.init(image: UIImage.init(named: "person_beFlash")!)
     deinit {
-        print("玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
+
+        WDLog(item: "玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
         self.removeObserver(personBehavior, forKeyPath: "position")
     }
     
@@ -131,7 +132,7 @@ class WDPersonNode: WDBaseNode {
         immuneNode.isHidden = true
         self.immuneA11(zPosition: -1, action: action_im1)
   
-        self.setPhyColor()
+        //self.setPhyColor()
         
     }
     

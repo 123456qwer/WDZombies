@@ -19,7 +19,7 @@ class WDSealNode: WDBaseNode {
     }
     
     deinit {
-        print("海豹释放了！！！！")
+        WDLog(item: "海豹释放了！！！！")
     }
     
     func initWithPerson(personNode:WDPersonNode) {

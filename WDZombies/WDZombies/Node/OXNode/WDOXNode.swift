@@ -14,7 +14,7 @@ class WDOXNode: WDBaseNode {
     var model:WDOXModel = WDOXModel.init()
     
     deinit {
-        print("公牛释放了！！！！")
+        WDLog(item: "公牛释放了！！！！")
     }
     
     override func configureModel() {

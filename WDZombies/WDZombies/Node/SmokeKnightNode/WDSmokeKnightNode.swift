@@ -15,7 +15,7 @@ class WDSmokeKnightNode: WDBaseNode {
     var model:WDKnightModel = WDKnightModel.init()
     
     deinit {
-        print("雾骑士释放了！！！！！！！")
+        WDLog(item: "雾骑士释放了！！！！！！！")
     }
     
     

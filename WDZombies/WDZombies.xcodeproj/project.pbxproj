@@ -149,6 +149,14 @@
 		436C75FC20143689009A3818 /* WDDogBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C75FB20143689009A3818 /* WDDogBehavior.swift */; };
 		436C75FE20143699009A3818 /* WDDogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C75FD20143699009A3818 /* WDDogModel.swift */; };
 		436C7600201436A8009A3818 /* WDDogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C75FF201436A8009A3818 /* WDDogNode.swift */; };
+		436DDF9C204D1E140076E417 /* WDMusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436DDF9B204D1E140076E417 /* WDMusicManager.swift */; };
+		436DDFA2204D2AC70076E417 /* kulou_move_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDF9E204D2AC60076E417 /* kulou_move_3.mp3 */; };
+		436DDFA3204D2AC70076E417 /* kulou_move_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDF9F204D2AC70076E417 /* kulou_move_4.mp3 */; };
+		436DDFA4204D2AC70076E417 /* kulou_move_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDFA0204D2AC70076E417 /* kulou_move_2.mp3 */; };
+		436DDFA5204D2AC70076E417 /* kulou_move_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDFA1204D2AC70076E417 /* kulou_move_1.mp3 */; };
+		436DDFA7204D44390076E417 /* kulou_attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDFA6204D44390076E417 /* kulou_attack.mp3 */; };
+		436DDFA9204D464B0076E417 /* kulou_died.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDFA8204D464B0076E417 /* kulou_died.mp3 */; };
+		436DDFAC204D47D00076E417 /* ox_flash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 436DDFAB204D47D00076E417 /* ox_flash.mp3 */; };
 		436FD96B1FEC9DEE00EB023C /* WDMap_1ZomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */; };
 		436FF4021FF23BAC00C40357 /* squidNodePic.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 436FF4011FF23BAC00C40357 /* squidNodePic.atlas */; };
 		436FF4041FF23BF900C40357 /* WDSquidNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FF4031FF23BF900C40357 /* WDSquidNode.swift */; };
@@ -350,6 +358,14 @@
 		436C75FB20143689009A3818 /* WDDogBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDogBehavior.swift; sourceTree = "<group>"; };
 		436C75FD20143699009A3818 /* WDDogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDogModel.swift; sourceTree = "<group>"; };
 		436C75FF201436A8009A3818 /* WDDogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDDogNode.swift; sourceTree = "<group>"; };
+		436DDF9B204D1E140076E417 /* WDMusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMusicManager.swift; sourceTree = "<group>"; };
+		436DDF9E204D2AC60076E417 /* kulou_move_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kulou_move_3.mp3; sourceTree = "<group>"; };
+		436DDF9F204D2AC70076E417 /* kulou_move_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kulou_move_4.mp3; sourceTree = "<group>"; };
+		436DDFA0204D2AC70076E417 /* kulou_move_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kulou_move_2.mp3; sourceTree = "<group>"; };
+		436DDFA1204D2AC70076E417 /* kulou_move_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kulou_move_1.mp3; sourceTree = "<group>"; };
+		436DDFA6204D44390076E417 /* kulou_attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kulou_attack.mp3; sourceTree = "<group>"; };
+		436DDFA8204D464B0076E417 /* kulou_died.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kulou_died.mp3; sourceTree = "<group>"; };
+		436DDFAB204D47D00076E417 /* ox_flash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ox_flash.mp3; sourceTree = "<group>"; };
 		436FD96A1FEC9DEE00EB023C /* WDMap_1ZomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMap_1ZomModel.swift; sourceTree = "<group>"; };
 		436FF4011FF23BAC00C40357 /* squidNodePic.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squidNodePic.atlas; sourceTree = "<group>"; };
 		436FF4031FF23BF900C40357 /* WDSquidNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSquidNode.swift; sourceTree = "<group>"; };
@@ -463,6 +479,7 @@
 		432F84B01F998A5B00F51146 /* WDZombies */ = {
 			isa = PBXGroup;
 			children = (
+				436DDF9A204D1DFC0076E417 /* Music */,
 				9BB0429F1FDA926400E674DB /* Store */,
 				434C5A8F1FD1309E00C921AF /* Node */,
 				43656BB71F9EDD61001EFDA5 /* Base */,
@@ -689,6 +706,7 @@
 		434C5A901FD130D400C921AF /* kulouNode */ = {
 			isa = PBXGroup;
 			children = (
+				436DDF9D204D2AAD0076E417 /* music */,
 				434C5A911FD130D400C921AF /* kulouPic.atlas */,
 				434C5A921FD130D400C921AF /* WDKulouBehavior.swift */,
 				434C5A931FD130D400C921AF /* WDKulouNode.swift */,
@@ -727,6 +745,7 @@
 		43544F301FFE178400E82FD2 /* OXNode */ = {
 			isa = PBXGroup;
 			children = (
+				436DDFAA204D47B40076E417 /* music */,
 				43544F311FFE179600E82FD2 /* OXNodePic.atlas */,
 				43544F351FFE17FD00E82FD2 /* WDOXBehavior.swift */,
 				43544F331FFE17D900E82FD2 /* WDOXNode.swift */,
@@ -860,6 +879,35 @@
 			path = SmokeKnightNode;
 			sourceTree = "<group>";
 		};
+		436DDF9A204D1DFC0076E417 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				436DDF9B204D1E140076E417 /* WDMusicManager.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		436DDF9D204D2AAD0076E417 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				436DDFA8204D464B0076E417 /* kulou_died.mp3 */,
+				436DDFA6204D44390076E417 /* kulou_attack.mp3 */,
+				436DDFA1204D2AC70076E417 /* kulou_move_1.mp3 */,
+				436DDFA0204D2AC70076E417 /* kulou_move_2.mp3 */,
+				436DDF9E204D2AC60076E417 /* kulou_move_3.mp3 */,
+				436DDF9F204D2AC70076E417 /* kulou_move_4.mp3 */,
+			);
+			path = music;
+			sourceTree = "<group>";
+		};
+		436DDFAA204D47B40076E417 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				436DDFAB204D47D00076E417 /* ox_flash.mp3 */,
+			);
+			path = music;
+			sourceTree = "<group>";
+		};
 		436FF4001FF23B9300C40357 /* SquidNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -979,6 +1027,7 @@
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
 				43551B1D1FCEAF7300B86587 /* Level.atlas in Resources */,
+				436DDFA2204D2AC70076E417 /* kulou_move_3.mp3 in Resources */,
 				43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */,
 				4307E3701FA1DF0D00E1AD38 /* blood5.png in Resources */,
 				43551B101FCE61C300B86587 /* sun.jpg in Resources */,
@@ -986,6 +1035,7 @@
 				430B1BCA1FD92FE6006A9809 /* greenZomPic.atlas in Resources */,
 				433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */,
 				43563FA51FB3DB9F00D4BD46 /* RedNormalAttack.png in Resources */,
+				436DDFAC204D47D00076E417 /* ox_flash.mp3 in Resources */,
 				43765FD81FBAE6F5006E37D2 /* boss1Att2_right4.png in Resources */,
 				43656BBD1F9EDFED001EFDA5 /* bigCircle.png in Resources */,
 				433F10D31FC3045A00DECFBF /* speed.gif in Resources */,
@@ -993,6 +1043,7 @@
 				435589881FA0753500C80CA8 /* NormalZom.png in Resources */,
 				43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */,
 				434C5A831FD12FAA00C921AF /* Snow.sks in Resources */,
+				436DDFA4204D2AC70076E417 /* kulou_move_2.mp3 in Resources */,
 				434F60442004A42F00BAA804 /* fly_bullet_3.png in Resources */,
 				43544F2F1FFE0AE100E82FD2 /* 未标题-1.png in Resources */,
 				430B1BCD1FD9349B006A9809 /* monster_1_move.png in Resources */,
@@ -1031,6 +1082,7 @@
 				4355898A1FA075D200C80CA8 /* NormalBorn.png in Resources */,
 				4371741E1FFC7D5E0000CB7D /* 乌云1.png in Resources */,
 				437174301FFCB3290000CB7D /* playAgain.png in Resources */,
+				436DDFA3204D2AC70076E417 /* kulou_move_4.mp3 in Resources */,
 				4307E3721FA1DF0D00E1AD38 /* blood3.png in Resources */,
 				432F84B41F998A5B00F51146 /* GameScene.sks in Resources */,
 				43765FC71FBAE53E006E37D2 /* boss1Att2_left5.png in Resources */,
@@ -1054,6 +1106,7 @@
 				43FEB0742010E98D00FED8F1 /* levelBg2.png in Resources */,
 				43765FD91FBAE6F5006E37D2 /* boss1Att2_right6.png in Resources */,
 				432F84BF1F998A5B00F51146 /* Assets.xcassets in Resources */,
+				436DDFA5204D2AC70076E417 /* kulou_move_1.mp3 in Resources */,
 				4392CE211FA6B7AD00A52D12 /* NormalDied.png in Resources */,
 				434D587E1FD54C4900253903 /* monster_2_move_red.png in Resources */,
 				434C5AA91FD13F4B00C921AF /* Assets.xcassets in Resources */,
@@ -1086,9 +1139,11 @@
 				43CA55AA2001CAB900707C2C /* person_move_1.png in Resources */,
 				4307E3731FA1DF0D00E1AD38 /* blood1.png in Resources */,
 				43656BCA1F9F2055001EFDA5 /* railing_up.png in Resources */,
+				436DDFA7204D44390076E417 /* kulou_attack.mp3 in Resources */,
 				432F84DC1F99E97800F51146 /* weaponBtn.png in Resources */,
 				43765F911FBAA627006E37D2 /* BOSS1_move.png in Resources */,
 				43C6C0702017161B00599E26 /* lock.png in Resources */,
+				436DDFA9204D464B0076E417 /* kulou_died.mp3 in Resources */,
 				43765FC81FBAE53E006E37D2 /* boss1Att2_left7.png in Resources */,
 				43656BBC1F9EDFED001EFDA5 /* smallCircle.png in Resources */,
 				43FEB0702010CEE500FED8F1 /* person_4.png in Resources */,
@@ -1134,6 +1189,7 @@
 				434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */,
 				43701E08201187AE004452D3 /* WDExperienceView.swift in Sources */,
 				4359835D1FC7A2D400894AAD /* WDDataManager.swift in Sources */,
+				436DDF9C204D1E140076E417 /* WDMusicManager.swift in Sources */,
 				436C75FE20143699009A3818 /* WDDogModel.swift in Sources */,
 				9BB042A11FDA92DF00E674DB /* JWStore.swift in Sources */,
 				4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */,
