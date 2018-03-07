@@ -8,20 +8,24 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 
 public let BLINK:String = "blink"
 public let SPEED:String = "speed"
 public let BOOM :String = "boom"
 public let IMMUNE:String = "immune_Injury"
+let kMusicKey = "kMusicKey"
 
-
-class WDSkillManager: NSObject {
+class WDSkillManager: NSObject,AVAudioPlayerDelegate {
     
     static let sharedInstance = WDSkillManager.init()
     private override init() {}
+  
     
+
     var modelDic:NSMutableDictionary! = nil
+    var playerMusicArr:NSMutableArray = NSMutableArray.init()
     
     func initModelDic() {
         
@@ -51,20 +55,41 @@ class WDSkillManager: NSObject {
         WDDataManager.shareInstance().closeDB()
     }
     
+    //代理方法播放完毕，删除音频
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playerMusicArr.remove(player)
+    }
+    
+   
+    
     func skillWithType(skillView:WDSkillView,node:WDPersonNode) -> Void {
+        
+        let player = WDSkillMusicPlayer.init()
+        
         
         switch skillView.skillType {
         case .Attack?:
             self.addAttackAction(skillView: skillView, node: node)
             break
         case .BLINK?:
+
+            player.playWithName(musicName: player.blink)
+            playerMusicArr.add(player.player)
+           
             self.blinkAction(skillView: skillView, node: node)
             break
         case .SPEED?:
+            
+            player.playWithName(musicName: player.speed)
+            playerMusicArr.add(player.player)
+
             self.addSpeedAction(skillView: skillView, node: node)
             break
         case .BOOM?:
+            
+            self.perform(#selector(boomMusic(dic:)), with: ["player":player], afterDelay: 1.5)
             self.boomAction(skillView: skillView, node: node)
+            
             break
         case .Attack_distance?:
 
@@ -78,12 +103,27 @@ class WDSkillManager: NSObject {
         case .none:
             break
         case .immune_Injury?:
+            
+            player.playWithName(musicName: player.dun)
+            playerMusicArr.add(player.player)
+            
             self.immuneAction(skillView: skillView, node: node)
             break
         }
-
+        
+        if (player.player != nil) {
+            player.player.delegate = self
+        }
     }
     
+    //炸弹延迟调用
+    @objc func boomMusic(dic:NSDictionary) -> Void {
+        let musicPlayer:WDSkillMusicPlayer = dic.object(forKey: "player") as! WDSkillMusicPlayer
+        musicPlayer.playWithName(musicName: musicPlayer.boom)
+        playerMusicArr.add(musicPlayer.player)
+        
+        musicPlayer.player.delegate = self
+    }
     
     /// 公用
     /// - Returns:

@@ -127,6 +127,25 @@ class WDSkillAndFireView: UIView {
         
         skillView.selectBegin = { (select : Bool, index:NSInteger) -> Void in
             
+            /*
+            var type:zomType!
+            if index == 1{
+                type = .btn1
+            }else if index == 2{
+                type = .btn2
+            }else if index == 3{
+                type = .btn3
+            }else if index == 4{
+                type = .btn4
+            }else if index == 0{
+                type = .btn0
+            }
+            
+            if index != 0 {
+                WDMusicManager.shareInstance.playerIndexAndMusicName(type: type, musicName: WDMusicManager.shareInstance.btn_music, numberOfLoops: 0, volume: 1)
+            }
+            */
+            
             //选中方法
             self.tapAction?(skillView)
 

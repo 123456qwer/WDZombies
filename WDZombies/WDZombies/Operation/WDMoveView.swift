@@ -92,7 +92,7 @@ class WDMoveView: UIView {
         smallCircle.center = _location
         
         count = 0
-        
+        WDMusicManager.shareInstance.stopMove()
         self.stopAction(_direction!)
     }
     

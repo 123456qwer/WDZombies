@@ -37,9 +37,8 @@ class WDPersonBehavior: WDBaseNodeBehavior {
             self.personNode.removeAction(forKey: "move")
             self.personNode.isMove = false
         }
-        
-        
     }
+    
     
     
     /// 人物移动
@@ -48,6 +47,9 @@ class WDPersonBehavior: WDBaseNodeBehavior {
     override func moveAction(direction:NSString) -> Void {
       
         if personNode.canMove {
+            
+            WDMusicManager.shareInstance.continueMove()
+            
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
             personNode.position = point
             personNode.zPosition = 3 * 667 - personNode.position.y

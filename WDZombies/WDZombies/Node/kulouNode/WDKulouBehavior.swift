@@ -68,7 +68,9 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     //攻击
     override func attack(direction: NSString, nodeDic: NSDictionary) {
        
-        self._soundWithName(musicName: attackMusicName, numberOfLoops: 0, volume: 1)
+        self._soundWithName(musicName: WDMusicManager.shareInstance.kulou_attack, numberOfLoops: 0, volume: 1)
+     
+        
         
         let personNode = nodeDic.object(forKey: "personNode")
         
@@ -104,7 +106,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     }
     
     @objc override func died() {
-        self._soundWithName(musicName: diedMusicName, numberOfLoops: 0, volume: 1)
+        self._soundWithName(musicName: WDMusicManager.shareInstance.kulou_died, numberOfLoops: 0, volume: 1)
         super.died()
     }
     

@@ -70,7 +70,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             self.createNodes()
             self.physicsWorld.contactDelegate = self
             
-            //createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
+            createZomTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(createZombies(timer:)), userInfo: nil, repeats: true)
             fly_timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(autoFireAction), userInfo: nil, repeats: true)
             overTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overTimerAction), userInfo: nil, repeats: true)
             
@@ -80,7 +80,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            self.level_7_OXZom(isBoss: true)
+            //self.level_3_KulouZom(isBoss: true)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
@@ -654,15 +654,21 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     }
     
     
+    
     func playNext()  {
         self.perform(#selector(removeNode), with: nil, afterDelay: 1)
         self.nextAction()
+        WDMusicManager.shareInstance.playerIndexAndMusicName(type: .game, musicName: WDMusicManager.shareInstance.game_next, numberOfLoops: 0, volume: 1)
     }
+    
     
     @objc override func gameOver() {
         self.perform(#selector(removeNode), with: nil, afterDelay: 1)
         self.ggAction()
+        WDMusicManager.shareInstance.playerIndexAndMusicName(type: .game, musicName: WDMusicManager.shareInstance.game_over, numberOfLoops: 0, volume: 1)
     }
+    
+    
     
     //修改通关时间
     func overTime(bossNode:WDBaseNode) {

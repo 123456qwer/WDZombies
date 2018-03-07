@@ -12,6 +12,8 @@ import SpriteKit
 class WDZombieBehavior: WDBaseNodeBehavior {
 
     weak var zombieNode:WDZombieNode! = nil
+    
+    var player:WDSkillMusicPlayer! = nil
   
     
     override func moveAction(direction: NSString) {
@@ -36,12 +38,17 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         
         let personNode:WDPersonNode = node as! WDPersonNode
         WDAnimationTool.zomAttackAnimation(zombieNode: zombieNode, personNode: personNode)
-      
+        
+        player = WDSkillMusicPlayer.init()
+        player.playWithName(musicName: player.normalZomAttack)
     }
     
     func redAttackAction(node: WDBaseNode)  {
         let personNode:WDPersonNode = node as! WDPersonNode
         WDAnimationTool.magicAnimation(zom: zombieNode, person: personNode)
+        
+        player = WDSkillMusicPlayer.init()
+        player.playWithName(musicName: player.redZomAttack)
     }
     
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
@@ -75,6 +82,10 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         zombieNode.physicsBody = nil
         zombieNode.zPosition = 1
         let diedAction = SKAction.animate(with: zombieNode.diedArr as! [SKTexture], timePerFrame: 0.2)
+        
+        player = WDSkillMusicPlayer.init()
+        player.playWithName(musicName: player.normalZomDied)
+        
         zombieNode.run(diedAction) {
             self.alreadyDied?(self.zombieNode)
             self.zombieNode.removeAllChildren()

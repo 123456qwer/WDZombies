@@ -8,10 +8,24 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
-class WDMap_1ZomModel: NSObject {
+class WDMap_1ZomModel: NSObject,AVAudioPlayerDelegate {
     
     weak var map1_scene:WDMap_1Scene! = nil
+    let musicArr:NSMutableArray = NSMutableArray.init()
+    
+    
+    //音乐
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        musicArr.remove(player)
+    }
+    
+    func createMusicWithName(musicName:String,music:WDSkillMusicPlayer) {
+        music.playWithName(musicName: musicName)
+        music.player.delegate = self
+        musicArr.add(music.player)
+    }
     
     //MARK:创建雾骑士
     /// 创建雾骑士
@@ -161,6 +175,14 @@ class WDMap_1ZomModel: NSObject {
         }
         
         let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
+        
+        //僵尸出现音效
+        if arc4random() % 2 == 0 {
+            let music = WDSkillMusicPlayer.init()
+            self.createMusicWithName(musicName: music.normalZomAppear, music: music)
+        }
+        
+        
         zombieNode.run(bornAction) {
             zombieNode.starMove()
         }
@@ -201,6 +223,14 @@ class WDMap_1ZomModel: NSObject {
         }
         
         let bornAction:SKAction = SKAction.animate(with: arr as! [SKTexture], timePerFrame: 0.2)
+        
+        //僵尸出现音效
+        if arc4random() % 2 == 0 {
+            let music = WDSkillMusicPlayer.init()
+            self.createMusicWithName(musicName: music.normalZomAppear, music: music)
+        }
+       
+        
         zombieNode.run(bornAction) {
             zombieNode.starMove()
         }

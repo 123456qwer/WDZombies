@@ -44,7 +44,7 @@ class WDOXBehavior: WDBaseNodeBehavior {
                 self.setLightPhy(light: lightNode)
                 let lightA = SKAction.animate(with: self.oxNode.model.lightArr, timePerFrame: 0.1)
                 let rep    = SKAction.repeat(lightA, count: 10)
-                self._soundWithName(musicName: "ox_flash", numberOfLoops: 1, volume: 1)
+                WDMusicManager.shareInstance.playerIndexAndMusicName(type: .ox, musicName: WDMusicManager.shareInstance.ox_flash_attack, numberOfLoops: 1, volume: 1)
                 lightNode.run(rep, completion: {
                     lightNode.removeFromParent()
                 })

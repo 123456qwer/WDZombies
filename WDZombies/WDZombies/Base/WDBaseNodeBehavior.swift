@@ -204,8 +204,8 @@ class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
         attackMusicPlayer.volume = volume
         //播放音乐
         attackMusicPlayer.play()
-        
     }
+    
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
       
     }
