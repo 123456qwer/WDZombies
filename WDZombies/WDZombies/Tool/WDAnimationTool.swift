@@ -339,6 +339,7 @@ class WDAnimationTool: NSObject {
         
 
         zombieNode.run(attackAction) {
+            zombieNode.behavior.musicManager.normalZomAttackNumber -= 1
             let distance:CGFloat = WDTool.calculateNodesDistance(point1:zombieNode.position,point2:personNode.position)
             var page:CGFloat = 30
             if zombieNode.isBoss {

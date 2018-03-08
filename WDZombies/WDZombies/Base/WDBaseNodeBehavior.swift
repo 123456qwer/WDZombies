@@ -35,6 +35,11 @@ class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
     var attackMusicName = "guess"
     var diedMusicName = "guess"
     
+    //声音管理
+    let musicManager:WDMusicManager = WDMusicManager.shareInstance
+    //声音执行
+    let musicPlayer:WDSkillMusicPlayer = WDSkillMusicPlayer.init()
+    
     
     typealias _moveBlock = (_ node:WDBaseNode) -> Void
     var addUpToBlood = 0
@@ -187,6 +192,15 @@ class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
     func clearAction(){
         self._removeLink()
         self._removeTimer()
+    }
+    
+    
+    func canPlayMusic(number:Int,maxNumber:Int) -> Bool {
+        if number < maxNumber{
+            return true
+        }else{
+            return false
+        }
     }
     
 ////////////////////////////

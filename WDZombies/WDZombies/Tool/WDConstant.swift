@@ -9,7 +9,7 @@
 import UIKit
 
 let kPrintLog = 1  // 控制台输出开关 1：打开   0：关闭
-let autoFire = false
+let autoFire = true
 // 控制台打印
 func WDLog(item: Any...) {
     if kPrintLog == 1 {

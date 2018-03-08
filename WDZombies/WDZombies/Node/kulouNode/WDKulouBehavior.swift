@@ -67,10 +67,11 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     
     //攻击
     override func attack(direction: NSString, nodeDic: NSDictionary) {
-       
-        self._soundWithName(musicName: WDMusicManager.shareInstance.kulou_attack, numberOfLoops: 0, volume: 1)
-     
-        
+    
+        if self.canPlayMusic(number: musicManager.kulouAttackNumber, maxNumber: musicManager.kulouAttackMax) {
+            musicManager.kulouAttackNumber += 1
+            musicPlayer.playWithName(musicName: WDMusicManager.shareInstance.kulou_attack)
+        }
         
         let personNode = nodeDic.object(forKey: "personNode")
         
@@ -82,6 +83,7 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         self.perform(#selector(hitTheTarget(personNode:)), with: personNode, afterDelay: 0.25)
         kulouNode.run(attackAction) {
             self.kulouNode.canMove = true
+            self.musicManager.kulouAttackNumber -= 1
         }
     }
     
@@ -106,7 +108,12 @@ class WDKulouBehavior: WDBaseNodeBehavior {
     }
     
     @objc override func died() {
-        self._soundWithName(musicName: WDMusicManager.shareInstance.kulou_died, numberOfLoops: 0, volume: 1)
+        
+        if self.canPlayMusic(number: musicManager.kulouDiedNumber, maxNumber: musicManager.kulouDiedMax) {
+            musicPlayer.playWithName(musicName: WDMusicManager.shareInstance.kulou_died)
+            musicManager.kulouDiedNumber += 1
+        }
+      
         super.died()
     }
     
@@ -114,6 +121,11 @@ class WDKulouBehavior: WDBaseNodeBehavior {
         if kulouNode != nil{
             kulouNode.setPhy()
         }
+    }
+    
+    deinit {
+        WDLog(item: "骷髅行为管理者释放了...............")
+        musicManager.kulouDiedNumber -= 1
     }
     
     @objc func canMove()  {

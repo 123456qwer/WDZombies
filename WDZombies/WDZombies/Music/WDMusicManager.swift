@@ -15,8 +15,9 @@ class WDMusicManager {
     static let shareInstance = WDMusicManager.init()
     private init() {
         self.moveMusic()
+    
     }
-
+   
     //人物相关音乐
     let levelUp = "level_up"
     
@@ -38,6 +39,7 @@ class WDMusicManager {
     /*公牛*/
     let ox_flash_attack = "ox_flash"
     
+
     
     var gamePlayer:AVAudioPlayer!   //游戏关卡相关
     var btn1Player:AVAudioPlayer!   //按钮1
@@ -62,13 +64,31 @@ class WDMusicManager {
     var dogPlayer:AVAudioPlayer!     //狗
     
     
+    //声音限定次数，否则会卡顿，crash
+    /*骷髅相关*/
+    var kulouAttackNumber:Int = 0
+    var kulouDiedNumber:Int   = 0
+    var kulouAttackMax:Int    = 2
+    var kulouDiedMax:Int      = 2
+    
+    /*普通僵尸相关*/
+    var normalZomAttackNumber:Int = 0
+    var normalZomDiedNumber:Int   = 0
+    var normalZomAttackMax:Int    = 2
+    var normalZomDiedMax:Int      = 2
+    
+    /*牛*/
+    var flashAttackNumber:Int = 0
+    var flashAttackMax:Int    = 2
+    
+    
     //人物相关
     func moveMusic()  {
-      let music_name =  Bundle.main.url(forResource: "move", withExtension: "mp3")!
-      try! movePlayer = AVAudioPlayer (contentsOf: music_name)
-      movePlayer.volume = 0
-      movePlayer.numberOfLoops = -1
-      movePlayer.prepareToPlay()
+//      let music_name =  Bundle.main.url(forResource: "move", withExtension: "mp3")!
+//      try! movePlayer = AVAudioPlayer (contentsOf: music_name)
+//      movePlayer.volume = 0
+//      movePlayer.numberOfLoops = -1
+//      movePlayer.prepareToPlay()
     
     }
     

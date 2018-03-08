@@ -48,7 +48,7 @@ class WDPersonBehavior: WDBaseNodeBehavior {
       
         if personNode.canMove {
             
-            WDMusicManager.shareInstance.continueMove()
+            //WDMusicManager.shareInstance.continueMove()
             
             let point:CGPoint = WDTool.calculateMovePoint(direction: direction, speed: personNode.wdSpeed, node: personNode!)
             personNode.position = point

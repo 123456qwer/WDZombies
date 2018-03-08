@@ -25,6 +25,8 @@ class WDSkillMusicPlayer {
     let normalZomDied      = "zom_died"
     let redZomAttack = "red_zom_attack"
     
+    
+    /// 只执行一次，声音固定为1
     func playWithName(musicName:String){
         
         let music_name =  Bundle.main.url(forResource: musicName, withExtension: "mp3")!
@@ -35,7 +37,19 @@ class WDSkillMusicPlayer {
         player.play()
     }
     
+    
+    /// 自定义时间，声音大小
+    func playWithName(musicName:String,volume:Float,numberOfLoops:Int){
+        
+        let music_name =  Bundle.main.url(forResource: musicName, withExtension: "mp3")!
+        try! player = AVAudioPlayer (contentsOf: music_name)
+        player.volume = volume
+        player.numberOfLoops = numberOfLoops
+        player.prepareToPlay()
+        player.play()
+    }
+    
     deinit {
-        WDLog(item: "音乐技能被销毁了！")
+        //WDLog(item: "音乐技能被销毁了！")
     }
 }

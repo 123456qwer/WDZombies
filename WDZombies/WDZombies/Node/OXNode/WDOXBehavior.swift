@@ -44,9 +44,17 @@ class WDOXBehavior: WDBaseNodeBehavior {
                 self.setLightPhy(light: lightNode)
                 let lightA = SKAction.animate(with: self.oxNode.model.lightArr, timePerFrame: 0.1)
                 let rep    = SKAction.repeat(lightA, count: 10)
-                WDMusicManager.shareInstance.playerIndexAndMusicName(type: .ox, musicName: WDMusicManager.shareInstance.ox_flash_attack, numberOfLoops: 1, volume: 1)
+                
+                if self.canPlayMusic(number: self.musicManager.flashAttackNumber, maxNumber: self.musicManager.flashAttackMax){
+                    self.musicPlayer.playWithName(musicName: WDMusicManager.shareInstance.ox_flash_attack, volume: 1, numberOfLoops: 1)
+                    self.musicManager.flashAttackNumber += 1
+                }
+                
+                
                 lightNode.run(rep, completion: {
                     lightNode.removeFromParent()
+                    self.musicManager.flashAttackNumber -= 1
+
                 })
             }
         }
@@ -176,4 +184,8 @@ class WDOXBehavior: WDBaseNodeBehavior {
         }
     }
  
+    deinit {
+        WDLog(item: "公牛行为管理者释放了........")
+    }
+    
 }

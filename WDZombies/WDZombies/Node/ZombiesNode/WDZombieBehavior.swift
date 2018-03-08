@@ -13,7 +13,6 @@ class WDZombieBehavior: WDBaseNodeBehavior {
 
     weak var zombieNode:WDZombieNode! = nil
     
-    var player:WDSkillMusicPlayer! = nil
   
     
     override func moveAction(direction: NSString) {
@@ -39,16 +38,18 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         let personNode:WDPersonNode = node as! WDPersonNode
         WDAnimationTool.zomAttackAnimation(zombieNode: zombieNode, personNode: personNode)
         
-        player = WDSkillMusicPlayer.init()
-        player.playWithName(musicName: player.normalZomAttack)
+        if self.canPlayMusic(number: musicManager.normalZomAttackNumber, maxNumber: musicManager.normalZomAttackMax){
+            musicPlayer.playWithName(musicName: musicPlayer.normalZomAttack)
+            musicManager.normalZomAttackNumber += 1
+        }
     }
     
     func redAttackAction(node: WDBaseNode)  {
         let personNode:WDPersonNode = node as! WDPersonNode
         WDAnimationTool.magicAnimation(zom: zombieNode, person: personNode)
         
-        player = WDSkillMusicPlayer.init()
-        player.playWithName(musicName: player.redZomAttack)
+    
+        musicPlayer.playWithName(musicName: musicPlayer.redZomAttack)
     }
     
     override func beAattackAction(attackNode: WDBaseNode, beAttackNode: WDBaseNode) {
@@ -83,8 +84,11 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         zombieNode.zPosition = 1
         let diedAction = SKAction.animate(with: zombieNode.diedArr as! [SKTexture], timePerFrame: 0.2)
         
-        player = WDSkillMusicPlayer.init()
-        player.playWithName(musicName: player.normalZomDied)
+        if self.canPlayMusic(number: musicManager.normalZomDiedNumber, maxNumber: musicManager.normalZomDiedMax) {
+            musicPlayer.playWithName(musicName: musicPlayer.normalZomDied)
+            musicManager.normalZomDiedNumber += 1
+        }
+        
         
         zombieNode.run(diedAction) {
             self.alreadyDied?(self.zombieNode)
@@ -94,5 +98,10 @@ class WDZombieBehavior: WDBaseNodeBehavior {
     
     }
 
+    
+    deinit {
+        WDLog(item: "普通僵尸行为管理者释放了........")
+        musicManager.normalZomDiedNumber -= 1
+    }
     
 }

@@ -57,6 +57,9 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
        
         if !isCreateScene {
 
+            let mu:WDMusicManager = WDMusicManager.shareInstance
+            
+            
             mapZomModel.map1_scene = self
             
             //需要获取炸弹伤害
@@ -80,7 +83,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             zomLink = CADisplayLink.init(target: self, selector: #selector(zomMoveAction))
             zomLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
             
-            //self.level_3_KulouZom(isBoss: true)
+            //self.level_3_KulouZom(isBoss: false)
             //测试新粒子效果
             //Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(testEmitter(timer:)), userInfo: nil, repeats: true)
         }
