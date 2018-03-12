@@ -15,8 +15,8 @@ public let LAST_LEVEL = 11
 class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     var score:CGFloat = 0
-
-    let ZOMCOUNT = 2
+    
+    let ZOMCOUNT = 10
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -29,6 +29,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var zomLink:CADisplayLink!         //监测僵尸移动的link
     var nearZom:WDBaseNode!
 
+    var diedOrPass:Bool = false               //判断是否过关了,避免同时跳出下一关和gg的提示
     
     var zomCount:NSInteger = 0         //创建的僵尸个数
     var diedZomCount:NSInteger = 0     //击杀僵尸个数
@@ -57,7 +58,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
        
         if !isCreateScene {
 
-            let mu:WDMusicManager = WDMusicManager.shareInstance
+            let _:WDMusicManager = WDMusicManager.shareInstance
             
             
             mapZomModel.map1_scene = self
@@ -288,8 +289,10 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
                 self.level_8_kulouKnightZom(isBoss: false)
             }else if chance == 9{
                 self.level_9_sealZom(isBoss: false)
-            }else{
+            }else if chance == 1{
                 self.level_1_NormalZom(isBoss: false)
+            }else{
+                self.level_10_dogZom(isBoss: false)
             }
             
         }else{
@@ -662,6 +665,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     func playNext()  {
+        if !diedOrPass {
+            diedOrPass = true
+        }else{
+            return
+        }
         self.perform(#selector(removeNode), with: nil, afterDelay: 1)
         self.nextAction()
         WDMusicManager.shareInstance.playerIndexAndMusicName(type: .game, musicName: WDMusicManager.shareInstance.game_next, numberOfLoops: 0, volume: 1)
@@ -669,6 +677,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     
     @objc override func gameOver() {
+        if !diedOrPass {
+            diedOrPass = true
+        }else{
+            return
+        }
         self.perform(#selector(removeNode), with: nil, afterDelay: 1)
         self.ggAction()
         WDMusicManager.shareInstance.playerIndexAndMusicName(type: .game, musicName: WDMusicManager.shareInstance.game_over, numberOfLoops: 0, volume: 1)

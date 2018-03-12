@@ -43,9 +43,6 @@
 		433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */ = {isa = PBXBuildFile; fileRef = 433B05091FB19CCB006210B2 /* boomBegin.png */; };
 		433D18461FA017E900A283E0 /* WDSkillManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433D18451FA017E900A283E0 /* WDSkillManager.swift */; };
 		433D184C1FA0303500A283E0 /* person4.png in Resources */ = {isa = PBXBuildFile; fileRef = 433D184B1FA0303500A283E0 /* person4.png */; };
-		433F10D11FC2FFB700DECFBF /* blink.gif in Resources */ = {isa = PBXBuildFile; fileRef = 433F10D01FC2FFB700DECFBF /* blink.gif */; };
-		433F10D31FC3045A00DECFBF /* speed.gif in Resources */ = {isa = PBXBuildFile; fileRef = 433F10D21FC3045A00DECFBF /* speed.gif */; };
-		433F10D51FC3078500DECFBF /* boom.gif in Resources */ = {isa = PBXBuildFile; fileRef = 433F10D41FC3078500DECFBF /* boom.gif */; };
 		4348DC261F9D92C00072D030 /* WDSelectBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348DC251F9D92BF0072D030 /* WDSelectBtn.swift */; };
 		4348DC2E1F9D98B30072D030 /* addFast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC281F9D98B20072D030 /* addFast.jpg */; };
 		4348DC2F1F9D98B30072D030 /* addAttack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4348DC291F9D98B30072D030 /* addAttack.jpg */; };
@@ -77,6 +74,12 @@
 		434C5AA51FD130FA00C921AF /* WDBossNode_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5AA31FD130FA00C921AF /* WDBossNode_1.swift */; };
 		434C5AA71FD131A000C921AF /* WDMonsterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C5AA61FD131A000C921AF /* WDMonsterView.swift */; };
 		434C5AA91FD13F4B00C921AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 434C5AA81FD13F4B00C921AF /* Assets.xcassets */; };
+		434CD3CD205679A3007F51C5 /* arrow_left_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CD3C7205679A2007F51C5 /* arrow_left_1.png */; };
+		434CD3CE205679A3007F51C5 /* arrow_left_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CD3C8205679A2007F51C5 /* arrow_left_3.png */; };
+		434CD3CF205679A3007F51C5 /* arrow_right_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CD3C9205679A2007F51C5 /* arrow_right_1.png */; };
+		434CD3D0205679A3007F51C5 /* arrow_left_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CD3CA205679A2007F51C5 /* arrow_left_2.png */; };
+		434CD3D1205679A3007F51C5 /* arrow_right_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CD3CB205679A2007F51C5 /* arrow_right_2.png */; };
+		434CD3D2205679A3007F51C5 /* arrow_right_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CD3CC205679A2007F51C5 /* arrow_right_3.png */; };
 		434CDE191FE8A2BE00E46199 /* WDBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE181FE8A2BE00E46199 /* WDBaseViewModel.swift */; };
 		434CDE1D1FE90BD100E46199 /* WDBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE1C1FE90BD100E46199 /* WDBaseModel.swift */; };
 		434CDE1F1FE910C600E46199 /* WDGreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434CDE1E1FE910C600E46199 /* WDGreenModel.swift */; };
@@ -268,9 +271,6 @@
 		433B05091FB19CCB006210B2 /* boomBegin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boomBegin.png; sourceTree = "<group>"; };
 		433D18451FA017E900A283E0 /* WDSkillManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSkillManager.swift; sourceTree = "<group>"; };
 		433D184B1FA0303500A283E0 /* person4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person4.png; sourceTree = "<group>"; };
-		433F10D01FC2FFB700DECFBF /* blink.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blink.gif; sourceTree = "<group>"; };
-		433F10D21FC3045A00DECFBF /* speed.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = speed.gif; sourceTree = "<group>"; };
-		433F10D41FC3078500DECFBF /* boom.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = boom.gif; sourceTree = "<group>"; };
 		4348DC251F9D92BF0072D030 /* WDSelectBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDSelectBtn.swift; sourceTree = "<group>"; };
 		4348DC281F9D98B20072D030 /* addFast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addFast.jpg; sourceTree = "<group>"; };
 		4348DC291F9D98B30072D030 /* addAttack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addAttack.jpg; sourceTree = "<group>"; };
@@ -302,6 +302,12 @@
 		434C5AA31FD130FA00C921AF /* WDBossNode_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WDBossNode_1.swift; sourceTree = "<group>"; };
 		434C5AA61FD131A000C921AF /* WDMonsterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDMonsterView.swift; sourceTree = "<group>"; };
 		434C5AA81FD13F4B00C921AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		434CD3C7205679A2007F51C5 /* arrow_left_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left_1.png; sourceTree = "<group>"; };
+		434CD3C8205679A2007F51C5 /* arrow_left_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left_3.png; sourceTree = "<group>"; };
+		434CD3C9205679A2007F51C5 /* arrow_right_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right_1.png; sourceTree = "<group>"; };
+		434CD3CA205679A2007F51C5 /* arrow_left_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left_2.png; sourceTree = "<group>"; };
+		434CD3CB205679A2007F51C5 /* arrow_right_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right_2.png; sourceTree = "<group>"; };
+		434CD3CC205679A2007F51C5 /* arrow_right_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right_3.png; sourceTree = "<group>"; };
 		434CDE181FE8A2BE00E46199 /* WDBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBaseViewModel.swift; sourceTree = "<group>"; };
 		434CDE1C1FE90BD100E46199 /* WDBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDBaseModel.swift; sourceTree = "<group>"; };
 		434CDE1E1FE910C600E46199 /* WDGreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDGreenModel.swift; sourceTree = "<group>"; };
@@ -582,10 +588,13 @@
 		432F84CC1F99939A00F51146 /* BGPic */ = {
 			isa = PBXGroup;
 			children = (
+				434CD3C7205679A2007F51C5 /* arrow_left_1.png */,
+				434CD3CA205679A2007F51C5 /* arrow_left_2.png */,
+				434CD3C8205679A2007F51C5 /* arrow_left_3.png */,
+				434CD3C9205679A2007F51C5 /* arrow_right_1.png */,
+				434CD3CB205679A2007F51C5 /* arrow_right_2.png */,
+				434CD3CC205679A2007F51C5 /* arrow_right_3.png */,
 				43551B0F1FCE61C300B86587 /* sun.jpg */,
-				433F10D41FC3078500DECFBF /* boom.gif */,
-				433F10D21FC3045A00DECFBF /* speed.gif */,
-				433F10D01FC2FFB700DECFBF /* blink.gif */,
 				432F84CD1F9993E600F51146 /* starBG.jpg */,
 			);
 			path = BGPic;
@@ -1108,11 +1117,13 @@
 				434F60472004A42F00BAA804 /* fly_bullet_5.png in Resources */,
 				43691BB01FDF822800D4772E /* knightNodePic.atlas in Resources */,
 				434B4C411FB98A5B000A6566 /* map1.png in Resources */,
+				434CD3CE205679A3007F51C5 /* arrow_left_3.png in Resources */,
 				434C5A851FD12FAA00C921AF /* Bokeh.sks in Resources */,
 				43551B1D1FCEAF7300B86587 /* Level.atlas in Resources */,
 				43656BCC1F9F2055001EFDA5 /* railing_right.png in Resources */,
 				4307E3701FA1DF0D00E1AD38 /* blood5.png in Resources */,
 				43551B101FCE61C300B86587 /* sun.jpg in Resources */,
+				434CD3D2205679A3007F51C5 /* arrow_right_3.png in Resources */,
 				4371742A1FFCB2600000CB7D /* backHomePage.png in Resources */,
 				430B1BCA1FD92FE6006A9809 /* greenZomPic.atlas in Resources */,
 				433B050B1FB19CCB006210B2 /* boomBegin.png in Resources */,
@@ -1120,7 +1131,6 @@
 				436DDFAC204D47D00076E417 /* ox_flash.mp3 in Resources */,
 				43765FD81FBAE6F5006E37D2 /* boss1Att2_right4.png in Resources */,
 				43656BBD1F9EDFED001EFDA5 /* bigCircle.png in Resources */,
-				433F10D31FC3045A00DECFBF /* speed.gif in Resources */,
 				43765FCA1FBAE53E006E37D2 /* boss1Att2_left1.png in Resources */,
 				435589881FA0753500C80CA8 /* NormalZom.png in Resources */,
 				43656BCF1F9F215D001EFDA5 /* railing_down.png in Resources */,
@@ -1129,6 +1139,7 @@
 				434F60442004A42F00BAA804 /* fly_bullet_3.png in Resources */,
 				43544F2F1FFE0AE100E82FD2 /* 未标题-1.png in Resources */,
 				430B1BCD1FD9349B006A9809 /* monster_1_move.png in Resources */,
+				434CD3CD205679A3007F51C5 /* arrow_left_1.png in Resources */,
 				43765FCD1FBAE53E006E37D2 /* boss1Att2_left2.png in Resources */,
 				434C5A871FD12FAA00C921AF /* Smoke.sks in Resources */,
 				43FEB0722010D7E400FED8F1 /* blood_tiao.png in Resources */,
@@ -1152,7 +1163,6 @@
 				434F60432004A42F00BAA804 /* fly_bullet_1.png in Resources */,
 				432F84BD1F998A5B00F51146 /* Main.storyboard in Resources */,
 				43B6A6E9204FD23E000096A6 /* zom_died.mp3 in Resources */,
-				433F10D51FC3078500DECFBF /* boom.gif in Resources */,
 				43765FD51FBAE6F5006E37D2 /* boss1Att2_right1.png in Resources */,
 				43765FCB1FBAE53E006E37D2 /* boss1Att2_left4.png in Resources */,
 				437174201FFC7D690000CB7D /* 乌云2.png in Resources */,
@@ -1189,11 +1199,13 @@
 				43765FDA1FBAE6F5006E37D2 /* boss1Att2_right7.png in Resources */,
 				4307E36D1FA1DF0C00E1AD38 /* blood2.png in Resources */,
 				436AA3EF2053663B00135425 /* green_died.mp3 in Resources */,
+				434CD3D0205679A3007F51C5 /* arrow_left_2.png in Resources */,
 				436AA3EC2053661300135425 /* green_attack2.mp3 in Resources */,
 				43563FA11FB3DB5800D4BD46 /* RedNormalBorn.png in Resources */,
 				436AA3ED2053661300135425 /* green_attack1.mp3 in Resources */,
 				4307E36E1FA1DF0C00E1AD38 /* blood4.png in Resources */,
 				434F60452004A42F00BAA804 /* fly_bullet_4.png in Resources */,
+				434CD3D1205679A3007F51C5 /* arrow_right_2.png in Resources */,
 				43FEB0742010E98D00FED8F1 /* levelBg2.png in Resources */,
 				43765FD91FBAE6F5006E37D2 /* boss1Att2_right6.png in Resources */,
 				432F84BF1F998A5B00F51146 /* Assets.xcassets in Resources */,
@@ -1203,7 +1215,6 @@
 				434C5AA91FD13F4B00C921AF /* Assets.xcassets in Resources */,
 				43765FCC1FBAE53E006E37D2 /* boss1Att2_left3.png in Resources */,
 				43551B181FCE814200B86587 /* increaseBoom.png in Resources */,
-				433F10D11FC2FFB700DECFBF /* blink.gif in Resources */,
 				432F84C21F998A5B00F51146 /* LaunchScreen.storyboard in Resources */,
 				4354EC322010CCB5007472AE /* levelBg.png in Resources */,
 				43765F961FBAA91A006E37D2 /* boss1_attRight.png in Resources */,
@@ -1227,6 +1238,7 @@
 				434D58851FD54D4F00253903 /* monster_3_attack_red.png in Resources */,
 				43CA55AE2002021100707C2C /* fuzhuji_1.png in Resources */,
 				434D58741FD547BF00253903 /* monster_1_attack.png in Resources */,
+				434CD3CF205679A3007F51C5 /* arrow_right_1.png in Resources */,
 				43CA55A82001CAB900707C2C /* person_move_3.png in Resources */,
 				434D587F1FD54C4900253903 /* monster_1_move_red.png in Resources */,
 				436AA3E6205360F300135425 /* smoke_attack.mp3 in Resources */,
@@ -1467,15 +1479,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 9728B43SWE;
+				DEVELOPMENT_TEAM = BT8UTD5NYK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = WDZombies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
+				PRODUCT_BUNDLE_IDENTIFIER = dream.wd.game;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eb94e9a5-93a8-4e41-a976-da32f33bb8e0";
-				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
+				PROVISIONING_PROFILE = "dd50bc4d-503e-48e3-913d-8946ed58f538";
+				PROVISIONING_PROFILE_SPECIFIER = zombiesDeve;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1487,15 +1499,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 9728B43SWE;
+				DEVELOPMENT_TEAM = BT8UTD5NYK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = WDZombies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiaomi.iphone.WDZombies;
+				PRODUCT_BUNDLE_IDENTIFIER = dream.wd.game;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3c4bd18d-22a7-47c5-90ff-9e727cf6d4e2";
-				PROVISIONING_PROFILE_SPECIFIER = newtongpei0801;
+				PROVISIONING_PROFILE = "dd50bc4d-503e-48e3-913d-8946ed58f538";
+				PROVISIONING_PROFILE_SPECIFIER = zombiesDeve;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

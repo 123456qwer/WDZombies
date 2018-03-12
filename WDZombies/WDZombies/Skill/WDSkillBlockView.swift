@@ -488,6 +488,7 @@ class WDSkillBlockView: UIView {
     
     @objc func detailAction(sender:UIButton)  {
        
+        /*
         sender.isSelected = !sender.isSelected
         self.superview?.bringSubview(toFront: self)
       
@@ -516,6 +517,7 @@ class WDSkillBlockView: UIView {
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: CHANGE_SKILLVIEW_FRAME_NOTIFICATION), object: self, userInfo: ["select":0,"view":self])
         }
+         */
     }
     
     

@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class WDMapViewController: UIViewController {
+class WDMapViewController: UIViewController,UIScrollViewDelegate {
 
     typealias dismissAction = (_ mapName:String ,_ level:NSInteger) -> Void
     
@@ -28,8 +28,24 @@ class WDMapViewController: UIViewController {
     let MAP_11  = 110
 
     var bgScrollView:UIScrollView!
+    var leftArrowImageV:UIImageView!
+    var rightArrowImageV:UIImageView!
     
     var disMiss:dismissAction!
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x >= kScreenWidth {
+            leftArrowImageV.isHidden = false
+        }else{
+            leftArrowImageV.isHidden = true
+        }
+        
+        if scrollView.contentOffset.x ==  kScreenWidth * 10{
+            rightArrowImageV.isHidden = true
+        }else{
+            rightArrowImageV.isHidden = false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +58,10 @@ class WDMapViewController: UIViewController {
         bgScrollView.isPagingEnabled = true
         bgScrollView.contentSize = CGSize(width:kScreenWidth * 11.0,height:kScreenHeight)
         bgScrollView.bounces = false
+        bgScrollView.delegate = self
         self.view.addSubview(bgScrollView)
+        
+        
         
         let model:WDUserModel = WDDataManager.shareInstance().createUserModel()
         
@@ -63,6 +82,41 @@ class WDMapViewController: UIViewController {
         backBtn.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         backBtn.setImage(UIImage.init(named: "back"), for: .normal)
         self.view.addSubview(backBtn)
+        
+        let width:CGFloat = 150 / 2.0
+        let height:CGFloat = 115 / 2.0
+        
+        
+        let leftArr:NSMutableArray = NSMutableArray.init()
+        let rightArr:NSMutableArray = NSMutableArray.init()
+        for inedx123:Int in 0...2 {
+            let leftName = "arrow_left_\(inedx123+1)"
+            let rightName = "arrow_right_\(inedx123+1)"
+            
+            let leftImage = UIImage.init(named: leftName)
+            let rightImage = UIImage.init(named: rightName)
+            leftArr.add(leftImage as Any)
+            rightArr.add(rightImage as Any)
+        }
+        //150*115
+        leftArrowImageV = UIImageView.init(frame:CGRect(x:10,y:(kScreenHeight - height) / 2.0,width:width,height:height))
+        //leftArrowImageV.backgroundColor = UIColor.red
+        self.view.addSubview(leftArrowImageV)
+        leftArrowImageV.isHidden = true
+        leftArrowImageV.animationImages = leftArr as? [UIImage]
+        leftArrowImageV.animationDuration = TimeInterval(CGFloat(leftArr.count) * CGFloat(1 / 5.0))
+        leftArrowImageV.animationRepeatCount = 0
+        leftArrowImageV.startAnimating()
+        
+        rightArrowImageV = UIImageView.init(frame:CGRect(x:kScreenWidth - width - 10,y:(kScreenHeight - height) / 2.0,width:width,height:height))
+        self.view.addSubview(rightArrowImageV)
+        //rightArrowImageV.backgroundColor = UIColor.red
+
+        rightArrowImageV.animationImages = rightArr as? [UIImage]
+        rightArrowImageV.animationDuration = TimeInterval(CGFloat(leftArr.count) * CGFloat(1 / 5.0))
+        rightArrowImageV.animationRepeatCount = 0
+        rightArrowImageV.startAnimating()
+        
     }
     
     

@@ -89,7 +89,8 @@ class WDKnightBehavior: WDBaseNodeBehavior {
             let posi = CGPoint(x:personNode.position.x + personNode.size.width / 2.0,y:personNode.position.y + personNode.size.height / 2.0 + 5)
             let flyAction = SKAction.move(to: posi, duration: 0.5)
             let flyAction1 = SKAction.animate(with: kNight.model.meteoriteArr1, timePerFrame: 0.1)
-            let groupAction = SKAction.group([flyAction,flyAction1])
+            let musicAction = SKAction.playSoundFileNamed(self.kNight.model.attack2Music, waitForCompletion: false)
+            let groupAction = SKAction.group([flyAction,flyAction1,musicAction])
             
             
             
@@ -144,6 +145,8 @@ class WDKnightBehavior: WDBaseNodeBehavior {
         kNight.isMove  = false
         
         let action1 = SKAction.animate(with: kNight.model.attack2Arr, timePerFrame: 0.2)
+        let musicA = SKAction.playSoundFileNamed(kNight.model.attack1Music, waitForCompletion: false)
+        let group = SKAction.group([action1,musicA])
         
         let time: TimeInterval = 0.2 * 6
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
@@ -156,7 +159,7 @@ class WDKnightBehavior: WDBaseNodeBehavior {
         }
         
         
-        kNight.run(action1) {
+        kNight.run(group) {
             self.kNight.canMove = true
             
             /*

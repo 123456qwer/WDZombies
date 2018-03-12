@@ -110,6 +110,8 @@ class WDBaseModel: NSObject {
     
     //雾骑士
     func configureKnightZom(){
+        self.attack2Music = "smoke_attack3"
+        self.attack1Music = "smoke_attack2"
         self.setTextureWithString(moveName: KNIGHT_MOVE, diedName: KNIGHT_DIED, attack1Name: KNIGHT_ATTACK1, attack2Name: KNIGHT_ATTACK2)
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "knightNodePic", textureName: "wuqishi_bAttack")
     }
