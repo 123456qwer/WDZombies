@@ -16,7 +16,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     var score:CGFloat = 0
 
-    let ZOMCOUNT = 10
+    let ZOMCOUNT = 2
     let BOSS_BLOOD:CGFloat = 20.0
     let BOSS_ATTACK:CGFloat = 3.0
     
@@ -584,7 +584,10 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //开火方法
     override func fireAction(direction: NSString) {
         
-      
+        self.run(SKAction.playSoundFileNamed("perNAttack", waitForCompletion: false)) {
+            
+        }
+        
         if nearZom != nil {
              let distance:CGFloat = WDTool.calculateNodesDistance(point1: nearZom.position, point2: personNode.position)
             if distance < CGFloat(personNode.wdAttackDistance){

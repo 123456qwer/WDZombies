@@ -35,7 +35,9 @@ class WDKulouNode: WDBaseNode {
 
         //设置图片
         self.configureModel()
+        
         nodeModel = model
+        
         
         behavior.setNode(node:self)
         behavior.node = self

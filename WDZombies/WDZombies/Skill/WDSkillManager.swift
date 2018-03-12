@@ -73,16 +73,13 @@ class WDSkillManager: NSObject,AVAudioPlayerDelegate {
             break
         case .BLINK?:
 
-            player.playWithName(musicName: player.blink)
-            playerMusicArr.add(player.player)
-           
+    
+            node.run(SKAction.playSoundFileNamed(player.blink, waitForCompletion: false))
             self.blinkAction(skillView: skillView, node: node)
             break
         case .SPEED?:
             
-            player.playWithName(musicName: player.speed)
-            playerMusicArr.add(player.player)
-
+            node.run(SKAction.playSoundFileNamed(player.speed, waitForCompletion: false))
             self.addSpeedAction(skillView: skillView, node: node)
             break
         case .BOOM?:
@@ -104,9 +101,7 @@ class WDSkillManager: NSObject,AVAudioPlayerDelegate {
             break
         case .immune_Injury?:
             
-            player.playWithName(musicName: player.dun)
-            playerMusicArr.add(player.player)
-            
+            node.run(SKAction.playSoundFileNamed(player.dun, waitForCompletion: false))
             self.immuneAction(skillView: skillView, node: node)
             break
         }

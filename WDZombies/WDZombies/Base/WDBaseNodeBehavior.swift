@@ -110,7 +110,9 @@ class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
     func attack(direction:NSString,nodeDic:NSDictionary){
     }
     
-    
+    func createMusicAction(name:String) -> SKAction {
+        return SKAction.playSoundFileNamed(name, waitForCompletion: false)
+    }
     
     /// 僵尸被攻击
     func beAttack(attackNode:WDBaseNode,beAttackNode:WDBaseNode) -> Bool{
@@ -147,7 +149,10 @@ class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
                 
         node.removeAllActions()
         let diedAction = SKAction.animate(with: node.nodeModel.diedArr , timePerFrame: 0.2)
-        node.run(diedAction) {
+        let diedMusic = SKAction.playSoundFileNamed(node.nodeModel.diedMusic, waitForCompletion: false)
+        let group = SKAction.group([diedAction,diedMusic])
+        
+        node.run(group) {
             self.alreadyDied!(self.node)
             self.node.removeFromParent()
         }

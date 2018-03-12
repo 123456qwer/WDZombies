@@ -37,18 +37,12 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         
         let personNode:WDPersonNode = node as! WDPersonNode
         WDAnimationTool.zomAttackAnimation(zombieNode: zombieNode, personNode: personNode)
-        
-        if self.canPlayMusic(number: musicManager.normalZomAttackNumber, maxNumber: musicManager.normalZomAttackMax){
-            musicPlayer.playWithName(musicName: musicPlayer.normalZomAttack)
-            musicManager.normalZomAttackNumber += 1
-        }
+     
     }
     
     func redAttackAction(node: WDBaseNode)  {
         let personNode:WDPersonNode = node as! WDPersonNode
         WDAnimationTool.magicAnimation(zom: zombieNode, person: personNode)
-        
-    
         musicPlayer.playWithName(musicName: musicPlayer.redZomAttack)
     }
     
@@ -83,14 +77,11 @@ class WDZombieBehavior: WDBaseNodeBehavior {
         zombieNode.physicsBody = nil
         zombieNode.zPosition = 1
         let diedAction = SKAction.animate(with: zombieNode.diedArr as! [SKTexture], timePerFrame: 0.2)
-        
-        if self.canPlayMusic(number: musicManager.normalZomDiedNumber, maxNumber: musicManager.normalZomDiedMax) {
-            musicPlayer.playWithName(musicName: musicPlayer.normalZomDied)
-            musicManager.normalZomDiedNumber += 1
-        }
+        let musicA = SKAction.playSoundFileNamed(musicPlayer.normalZomDied, waitForCompletion: false)
+        let group = SKAction.group([musicA,diedAction])
         
         
-        zombieNode.run(diedAction) {
+        zombieNode.run(group) {
             self.alreadyDied?(self.zombieNode)
             self.zombieNode.removeAllChildren()
             self.zombieNode.removeFromParent()
@@ -101,7 +92,6 @@ class WDZombieBehavior: WDBaseNodeBehavior {
     
     deinit {
         WDLog(item: "普通僵尸行为管理者释放了........")
-        musicManager.normalZomDiedNumber -= 1
     }
     
 }

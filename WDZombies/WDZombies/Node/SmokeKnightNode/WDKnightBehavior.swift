@@ -44,11 +44,12 @@ class WDKnightBehavior: WDBaseNodeBehavior {
         kNight.canMove = false
         kNight.isMove  = false
         
-
+        let action2 = SKAction.playSoundFileNamed("smoke_attack", waitForCompletion: false)
         let action1 = SKAction.animate(with: kNight.model.attack1Arr, timePerFrame: 0.2)
+        let action3 = SKAction.group([action1,action2])
         self.perform(#selector(attackPerson(personNode:)), with: personNode, afterDelay: 0.2 * 3)
         
-        kNight.run(action1) {
+        kNight.run(action3) {
             self.kNight.canMove = true
         }
     }

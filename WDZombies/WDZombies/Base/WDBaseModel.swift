@@ -17,6 +17,12 @@ class WDBaseModel: NSObject {
     var attack2Arr:Array<SKTexture>! = nil
     var beAttackTexture:SKTexture! = nil
     
+    //默认死亡音效
+    var diedMusic:String = "green_died"
+    var attack1Music:String = "green_attack1"
+    var attack2Music:String = "green_attack2"
+
+    
     var wdSpeed: CGFloat = 1
     var wdAttack: CGFloat = 3
     var wdFire_impact: CGFloat = 100
@@ -65,42 +71,54 @@ class WDBaseModel: NSObject {
         }
     }
     
+    //狗
     func configureDogZom(){
         self.setTextureWithString(moveName: DOG_MOVE, diedName: DOG_DIED, attack1Name: DOG_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "dogPic", textureName: "dog_beAttack")
     }
     
+    //海狮
     func configureSealZom(){
         self.setTextureWithString(moveName: SEAL_MOVE, diedName: SEAL_DIED, attack1Name: SEAL_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "sealPic", textureName: "seal_died_1")
     }
     
+    //骷髅骑士
     func configureKulouKnightZom() {
         self.setTextureWithString(moveName: KULOU_KNIGHT_MOVE, diedName: KULOU_KNIGHT_DIED, attack1Name: KULOU_KNIGHT_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "kulouNightPic", textureName: "kulou_knight_died_1")
     }
     
+    //公牛
     func configureOXZom() {
         self.setTextureWithString(moveName: OX_MOVE, diedName: OX_DIED, attack1Name: OX_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "OXNodePic", textureName: "ox_beAttack")
     }
     
+    //鱿鱼
     func configureSquidZom(){
         self.setTextureWithString(moveName: SQUID_MOVE, diedName: SQUID_DIED, attack1Name: SQUID_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "squidNodePic", textureName: "squid_beAttack")
     }
     
+    //绿僵尸
     func configureGreenZom(){
+        self.diedMusic = "green_died"
         self.setTextureWithString(moveName: GREEN_MOVE, diedName: GREEN_DIED, attack1Name: GREEN_ATTACK1, attack2Name: GREEN_ATTACK2)
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "greenZomPic", textureName: "green_bAttack")
     }
     
+    //雾骑士
     func configureKnightZom(){
         self.setTextureWithString(moveName: KNIGHT_MOVE, diedName: KNIGHT_DIED, attack1Name: KNIGHT_ATTACK1, attack2Name: KNIGHT_ATTACK2)
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "knightNodePic", textureName: "wuqishi_bAttack")
     }
     
+    
+    //骷髅
     func configureKulouZom(){
+        self.diedMusic = "kulou_died"
+        self.attack1Music = "kulou_attack"
         self.setTextureWithString(moveName: KULOU_MOVE, diedName: KULOU_DIED, attack1Name: KULOU_ATTACK, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "kulouPic", textureName: "kulou_battack")
     }

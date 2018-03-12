@@ -50,11 +50,13 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         greenZom.isMove  = false
         
         let attackAction = SKAction.animate(with: greenZom.model.attack2Arr, timePerFrame: 0.2)
+        let musicA = self.createMusicAction(name: self.greenZom.model.attack2Music)
         
         let dic = ["greenZom":greenZom,"personNode":personNode]
         self.perform(#selector(createSmokeNode(dic:)), with: dic, afterDelay: 0.2 * 5)
         
-        greenZom.run(attackAction) {
+        let group = SKAction.group([attackAction,musicA])
+        greenZom.run(group) {
             greenZom.canMove = true
         }
     }
@@ -107,8 +109,10 @@ class WDGreenBehavior: WDBaseNodeBehavior {
         
         let dic = ["greenZom":greenZom,"personNode":personNode]
         self.perform(#selector(createClawNode(dic:)), with: dic, afterDelay: 0.2 * 3)
-        
-        greenZom.run(attackAction) {
+        let musicA = self.createMusicAction(name:self.greenZom.model.attack1Music)
+        let group = SKAction.group([attackAction,musicA])
+
+        greenZom.run(group) {
             greenZom.canMove = true
         }
     }
@@ -161,9 +165,10 @@ class WDGreenBehavior: WDBaseNodeBehavior {
             self.perform(#selector(canMove), with: nil, afterDelay: 0.5)
         }
         
-        return isBreak
+        return isBreak 
     }
     
+ 
     
    //timer
     @objc func attackTimerAction(){

@@ -336,10 +336,10 @@ class WDAnimationTool: NSObject {
         
         let animationArr:NSMutableArray = zombieNode.attackDic.object(forKey: zombieNode.direction) as! NSMutableArray
         let attackAction:SKAction = SKAction.animate(with: animationArr as! [SKTexture], timePerFrame: 0.2)
+        let musicA = SKAction.playSoundFileNamed(zombieNode.behavior.musicPlayer.normalZomAttack, waitForCompletion: false)
+        let group = SKAction.group([musicA,attackAction])
         
-
-        zombieNode.run(attackAction) {
-            zombieNode.behavior.musicManager.normalZomAttackNumber -= 1
+        zombieNode.run(group) {
             let distance:CGFloat = WDTool.calculateNodesDistance(point1:zombieNode.position,point2:personNode.position)
             var page:CGFloat = 30
             if zombieNode.isBoss {
