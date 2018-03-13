@@ -155,6 +155,7 @@ class WDBaseNodeBehavior: NSObject,AVAudioPlayerDelegate {
         node.run(group) {
             self.alreadyDied!(self.node)
             self.node.removeFromParent()
+            self.node = nil
         }
     }
     

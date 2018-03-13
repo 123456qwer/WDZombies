@@ -29,7 +29,9 @@ class WDAnimationTool: NSObject {
     ///   - dic: [texture]
     /// - Returns: 方法
     static func moveAnimation(direction:NSString,dic:NSMutableDictionary,node:WDBaseNode) -> Void{
-        
+        if dic.count == 0{
+            return
+        }
         node.removeAction(forKey: "move")
         let moveArr:NSMutableArray = NSMutableArray.init()
         for index: NSInteger in 1...2 {
@@ -172,7 +174,6 @@ class WDAnimationTool: NSObject {
     ///   - attackNode:
     ///   - beAttackNode:
     static func beAttackAnimationForPerson(attackNode: WDBaseNode, beAttackNode: WDPersonNode) -> Void {
-        WDAnimationTool.bloodAnimation(node:beAttackNode)
         let direction:NSString = WDTool.oppositeDirection(direction: attackNode.direction)
         beAttackNode.direction = direction
         let impact:NSInteger = attackNode.wdFire_impact
@@ -227,7 +228,7 @@ class WDAnimationTool: NSObject {
         bloodNode.yScale = 0.4
         node.parent?.addChild(bloodNode)
         
-        let alphaAction:SKAction = SKAction.fadeAlpha(to: 0, duration: 1.0)
+        let alphaAction:SKAction = SKAction.fadeAlpha(to: 0, duration: 0.5)
         bloodNode.run(alphaAction) {
             bloodNode.removeFromParent()
         }
@@ -445,8 +446,10 @@ class WDAnimationTool: NSObject {
     /// - Parameter node: <#node description#>
     static func boomAnimation(node:WDPersonNode) -> Void{
         
+        let beginBoom:NSMutableArray = WDMapManager.sharedInstance.textureDic.object(forKey: PERSON_BOOM1) as! NSMutableArray
+        let boomBoom:NSMutableArray = WDMapManager.sharedInstance.textureDic.object(forKey: PERSON_BOOM2) as! NSMutableArray
         
-        let boomNode:SKSpriteNode = SKSpriteNode.init(texture: node.boomBeginArr.object(at: 0) as? SKTexture)
+        let boomNode:SKSpriteNode = SKSpriteNode.init(texture: beginBoom.object(at: 0) as? SKTexture)
         boomNode.position = node.position;
         boomNode.zPosition = 100;
         boomNode.xScale = 0.8;
@@ -454,9 +457,9 @@ class WDAnimationTool: NSObject {
         boomNode.name = BOOM as String;
         node.parent?.addChild(boomNode)
         
-        let boomBeginAn:SKAction = SKAction.animate(with: node.boomBeginArr as! [SKTexture], timePerFrame: 1.5 / 6.0)
+        let boomBeginAn:SKAction = SKAction.animate(with: beginBoom as! [SKTexture], timePerFrame: 1.5 / 6.0)
         boomNode.run(boomBeginAn) {
-            let boomBomAn:SKAction = SKAction.animate(with: node.boomBoomArr as! [SKTexture], timePerFrame: 0.5 / 5.0)
+            let boomBomAn:SKAction = SKAction.animate(with: boomBoom as! [SKTexture], timePerFrame: 0.5 / 5.0)
             let body:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: boomNode.size)
             
             body.affectedByGravity = false;
@@ -517,7 +520,7 @@ class WDAnimationTool: NSObject {
     
     static func createEmitterNode(name:NSString) -> SKEmitterNode{
         let str:NSString = Bundle.main.path(forResource: name as String, ofType: "sks")! as NSString
-        let emitter:SKEmitterNode = NSKeyedUnarchiver.unarchiveObject(withFile: str as String) as! SKEmitterNode       
+        let emitter:SKEmitterNode = (NSKeyedUnarchiver.unarchiveObject(withFile: str as String) as? SKEmitterNode)!
         return emitter
 
     }

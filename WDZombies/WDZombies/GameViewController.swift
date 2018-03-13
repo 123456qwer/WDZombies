@@ -292,11 +292,12 @@ class GameViewController: UIViewController {
     @objc func gameOver() -> Void {
   
         self.removeDiedView()
+        self.showScene.removeAll()
 
         if let view = self.view as! SKView?{
             view.presentScene(nil)
         }
-        
+        self.showScene = nil
         skillAndFireView.gameOverReload()
         self.createBg()
         
@@ -308,10 +309,12 @@ class GameViewController: UIViewController {
         
         self.removeDiedView()
         
-        
+        self.showScene.removeAll()
+
         skillAndFireView.playAgain()
         self.moveView.isHidden = false
         self.skillAndFireView.isHidden = false
+        self.showScene = nil
         self.showScene(sceneName: mapName,level:_level)
 
     }
@@ -320,10 +323,11 @@ class GameViewController: UIViewController {
     @objc func playNext(){
         _level += 1
         self.removeDiedView()
-    
+        self.showScene.removeAll()
         skillAndFireView.playAgain()
         self.moveView.isHidden = false
         self.skillAndFireView.isHidden = false
+        self.showScene = nil
         self.showScene(sceneName: mapName,level:_level)
         
     }

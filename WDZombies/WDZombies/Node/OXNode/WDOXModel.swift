@@ -11,8 +11,14 @@ import SpriteKit
 
 class WDOXModel: WDBaseModel {
 
-    let stayArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: OX_STAY) as! Array<SKTexture>
-    let lightArr:Array<SKTexture> = WDMapManager.sharedInstance.textureDic.object(forKey: OX_LIGHT) as! Array<SKTexture>
+    var stayArr:Array<SKTexture>! = WDMapManager.sharedInstance.textureDic.object(forKey: OX_STAY) as! Array<SKTexture>
+    var lightArr:Array<SKTexture>! = WDMapManager.sharedInstance.textureDic.object(forKey: OX_LIGHT) as! Array<SKTexture>
     
-
+    
+    deinit {
+        stayArr  = nil
+        lightArr = nil
+        WDLog(item: "OXModel释放了!!!")
+    }
+    
 }

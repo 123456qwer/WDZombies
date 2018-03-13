@@ -41,6 +41,10 @@ class WDBaseScene: SKScene {
     func createZombies(timer:Timer) -> Void {
     }
     
+    func removeAll() {
+        
+    }
+    
     func gameOver() {
         
     }

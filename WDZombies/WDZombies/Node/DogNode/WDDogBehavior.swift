@@ -55,7 +55,9 @@ class WDDogBehavior: WDBaseNodeBehavior {
     
     /// 火球攻击逻辑
     @objc func createFireNode(personNode:WDPersonNode){
-        
+        if dogNode == nil {
+            return
+        }
         let fireNode = SKSpriteNode.init(texture: dogNode.model.fireArr[0])
         var position = CGPoint(x:0,y:0)
         fireNode.name = DOG_FIRE
@@ -117,6 +119,10 @@ class WDDogBehavior: WDBaseNodeBehavior {
         fireNode.run(grou) {
             
             self.clearLinkAndFire()
+            
+            if self.dogNode == nil{
+                return
+            }
             
             let physicsBody:SKPhysicsBody = self.setPhysicsBody(size: CGSize(width:110,height:110))
             fireNode.physicsBody = physicsBody
@@ -186,8 +192,9 @@ class WDDogBehavior: WDBaseNodeBehavior {
             
             self.perform(#selector(createFireNode(personNode:)), with: personNode, afterDelay: 0.1 * 9)
             
-            
-            dogNode.run(attack, completion: {
+            let musicA = SKAction.playSoundFileNamed(self.dogNode.model.attack1Music, waitForCompletion: false)
+            let gr = SKAction.group([attack,musicA])
+            dogNode.run(gr, completion: {
                 self.dogNode.canMove = true
             })
             
@@ -204,7 +211,9 @@ class WDDogBehavior: WDBaseNodeBehavior {
     }
     
     @objc func canMove() {
-        dogNode.canMove = true
+        if dogNode != nil {
+            dogNode.canMove = true
+        }
     }
     
     override func clearAction() {

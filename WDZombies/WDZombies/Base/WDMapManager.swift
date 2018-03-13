@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class WDMapManager: NSObject {
+class WDMapManager {
 
     var inkTexture:SKTexture? //鱿鱼哥专属
     
@@ -22,8 +22,8 @@ class WDMapManager: NSObject {
 
     
     
-    static let sharedInstance = WDMapManager.init()
-    private override init() {}
+    static let sharedInstance = WDMapManager()
+    private init() {}
     
     func setZom()  {
         let moveDic = WDTool.cutMoveImage(moveImage: UIImage.init(named: "NormalZom.png")!)
@@ -410,6 +410,20 @@ class WDMapManager: NSObject {
         
     }
     
+    //玩家
+    func setPerson() {
+        let perDic:NSMutableDictionary = WDTool.cutMoveImage(moveImage: UIImage(named:"person4.png")!)
+        self.textureDic.setObject(perDic, forKey: PERSON_NAME as NSCopying)
+        self.textureDic.setObject(WDTool.cutFireImage(), forKey: PERSON_FIRE as NSCopying)
+        let boomArr1:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "boomBegin")!, line: 1, arrange: 6, size: CGSize(width:130,height:110))
+        let boomArr2:NSMutableArray = WDTool.cutCustomImage(image: UIImage.init(named: "boomAnimation")!, line: 1, arrange: 6, size: CGSize(width:130,height:110))
+        
+        boomArr2.removeObject(at: 0)
+        
+        self.textureDic.setObject(boomArr1, forKey: PERSON_BOOM1 as NSCopying)
+        self.textureDic.setObject(boomArr2, forKey: PERSON_BOOM2 as NSCopying)
+
+    }
     
     //MARK:初始化pic
     func setPic()  {
@@ -425,7 +439,8 @@ class WDMapManager: NSObject {
         self.setOXZom()
         self.setKulouKnightZom()
         self.setSealZom()
-        self.setDogZom();
+        self.setDogZom()
+        self.setPerson()
     }
     
     

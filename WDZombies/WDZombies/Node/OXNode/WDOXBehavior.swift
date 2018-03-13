@@ -32,6 +32,9 @@ class WDOXBehavior: WDBaseNodeBehavior {
     }
     
     func lightAttack(personNode:WDPersonNode){
+        if oxNode == nil {
+            return
+        }
         let lightNode:SKSpriteNode = SKSpriteNode.init(texture: oxNode.model.lightArr[0])
         lightNode.position = personNode.position
         lightNode.zPosition = 4000
@@ -54,7 +57,6 @@ class WDOXBehavior: WDBaseNodeBehavior {
                 lightNode.run(rep, completion: {
                     lightNode.removeFromParent()
                     self.musicManager.flashAttackNumber -= 1
-
                 })
             }
         }
@@ -107,7 +109,6 @@ class WDOXBehavior: WDBaseNodeBehavior {
             
             personNode.run(action, completion: {
                 personNode.personBehavior.reduceBlood(number:1,monsterName: OX_NAME)
-                WDAnimationTool.bloodAnimation(node:personNode)
             })
       
             return
@@ -185,7 +186,11 @@ class WDOXBehavior: WDBaseNodeBehavior {
     }
  
     deinit {
-        WDLog(item: "公牛行为管理者释放了........")
+        
+          oxNode = nil
+          self.lightingAttackBlock = nil
+          self.clearAction()
+          WDLog(item: "公牛行为管理者释放了........")
     }
     
 }

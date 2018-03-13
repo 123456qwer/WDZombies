@@ -444,4 +444,8 @@ class WDMap_1ZomModel: NSObject,AVAudioPlayerDelegate {
         map1_scene.addZomNode(node:node)
     }
     
+    deinit {
+        map1_scene = nil
+        WDLog(item: "怪物创建者释放了！！！")
+    }
 }

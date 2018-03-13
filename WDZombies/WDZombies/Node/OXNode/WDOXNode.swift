@@ -10,10 +10,12 @@ import UIKit
 
 class WDOXNode: WDBaseNode {
     
-    var behavior:WDOXBehavior = WDOXBehavior.init()
-    var model:WDOXModel = WDOXModel.init()
+    var behavior:WDOXBehavior! = WDOXBehavior.init()
+    var model:WDOXModel! = WDOXModel.init()
     
     deinit {
+        behavior = nil
+        model = nil 
         WDLog(item: "公牛释放了！！！！")
     }
     

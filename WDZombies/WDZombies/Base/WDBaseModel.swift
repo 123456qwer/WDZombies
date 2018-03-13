@@ -73,18 +73,24 @@ class WDBaseModel: NSObject {
     
     //狗
     func configureDogZom(){
+        self.attack1Music = "dog_attack"
+        self.diedMusic    = "dog_died"
         self.setTextureWithString(moveName: DOG_MOVE, diedName: DOG_DIED, attack1Name: DOG_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "dogPic", textureName: "dog_beAttack")
     }
     
     //海狮
     func configureSealZom(){
+        self.attack1Music = "seal_ice"
+        self.diedMusic    = "seal_died"
         self.setTextureWithString(moveName: SEAL_MOVE, diedName: SEAL_DIED, attack1Name: SEAL_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "sealPic", textureName: "seal_died_1")
     }
     
     //骷髅骑士
     func configureKulouKnightZom() {
+        self.attack1Music = "kulou_knight_attack"
+        self.diedMusic = "kulou_died"
         self.setTextureWithString(moveName: KULOU_KNIGHT_MOVE, diedName: KULOU_KNIGHT_DIED, attack1Name: KULOU_KNIGHT_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "kulouNightPic", textureName: "kulou_knight_died_1")
     }
@@ -97,6 +103,8 @@ class WDBaseModel: NSObject {
     
     //鱿鱼
     func configureSquidZom(){
+        self.attack1Music = "squid_attack"
+        self.diedMusic    = "squid_died"
         self.setTextureWithString(moveName: SQUID_MOVE, diedName: SQUID_DIED, attack1Name: SQUID_ATTACK1, attack2Name: "none")
         beAttackTexture = WDMapManager.sharedInstance.beAttackTextureWithName(atlasName: "squidNodePic", textureName: "squid_beAttack")
     }

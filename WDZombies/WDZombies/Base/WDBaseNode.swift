@@ -11,8 +11,7 @@ import SpriteKit
 
 class WDBaseNode: SKSpriteNode {
     
-    var boomBeginArr:NSMutableArray! = nil
-    var boomBoomArr:NSMutableArray!  = nil
+ 
     var moveDic:NSMutableDictionary! = nil
     var attackDic:NSMutableDictionary! = nil
     var diedArr:NSMutableArray! = nil

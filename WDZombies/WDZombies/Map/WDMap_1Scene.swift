@@ -43,8 +43,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     var levelNode:SKLabelNode!       //等级
     var bloodNode:SKSpriteNode!      //血条
     
-    let mapViewModel:WDMap_1ViewModel = WDMap_1ViewModel.init() //处理逻辑
-    let mapZomModel:WDMap_1ZomModel   = WDMap_1ZomModel.init()  //处理僵尸
+    var mapViewModel:WDMap_1ViewModel! = WDMap_1ViewModel.init() //处理逻辑
+    var mapZomModel:WDMap_1ZomModel!   = WDMap_1ZomModel.init()  //处理僵尸
     
     var _radius:CGFloat = 0
     var _arcCenter:CGPoint = CGPoint(x:0,y:0)
@@ -68,7 +68,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             boomModel.skillName = BOOM
             
             if boomModel.searchToDB(){
-                print("炸弹Model伤害就位")
             }
             
             self.createNodes()
@@ -122,6 +121,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     //初始化Nodes
     func createNodes(){
         
+       
+        
         if level == LAST_LEVEL {
             diedZomLabel = SKLabelNode.init(text: "score:0")
         }else{
@@ -138,6 +139,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         diedZomLabel.zPosition = 10000
         self.addChild(diedZomLabel)
         
+        
         overTimeLabel = SKLabelNode.init(text: "00:00")
         overTimeLabel.fontName = "VCR OSD Mono"
         overTimeLabel.fontColor = UIColor.red
@@ -151,6 +153,8 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         self.addChild(overTimeLabel)
         
         
+       
+        
         let perDic:NSMutableDictionary = WDTool.cutMoveImage(moveImage: UIImage(named:"person4.png")!)
         let text:SKTexture = (perDic.object(forKey: kRight)!as! NSMutableArray).object(at: 0) as! SKTexture
         
@@ -159,7 +163,6 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         
         weak var weakSelf = self
         personNode.ggAction = {() -> Void in
-            print("haha")
             weakSelf?.gameOver()
         }
         
@@ -262,6 +265,11 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     
     //normal/red僵尸相关
     @objc override func createZombies(timer:Timer){
+        
+        if self.personNode == nil {
+            return
+        }
+        
         //开始创建僵尸
         if level == LAST_LEVEL {
         
@@ -497,7 +505,7 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
         if level == LAST_LEVEL{
             score = score + node.experience
             diedZomLabel.text = "score:\(score)"
-           
+
             if self.diedZomCount == ZOMCOUNT{
                 self.diedZomCount = 0
                 self.zomCount = 0
@@ -710,9 +718,16 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
             }
         }
         
+        
+        
         fly_timer.invalidate()
         overTimer.invalidate()
         createZomTimer.invalidate()
+        
+        fly_timer = nil
+        overTimer = nil
+        createZomTimer = nil
+      
         
         if mapLink != nil {
             mapLink.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
@@ -731,8 +746,35 @@ class WDMap_1Scene: WDBaseScene,SKPhysicsContactDelegate {
     }
     
     
+    override func removeAll() {
+       
+
+        self.bgNode.removeAllChildren()
+        self.bgNode.removeAllActions()
+        
+        self.nearZom       = nil
+        self.mapZomModel   = nil
+        self.mapViewModel  = nil
+        self.personNode    = nil
+        self.boomModel     = nil
+        self.bgNode        = nil
+        self.diedZomLabel  = nil
+        self.overTimeLabel = nil
+        self.levelNode     = nil
+        self.bloodNode     = nil
+        
+        self.ggAction           = nil
+        self.nextAction         = nil
+        self.setExperienceBlock = nil
+        
+        
+        self.removeAllActions()
+        self.removeAllChildren()
+        self.removeFromParent()
+    }
+    
     deinit {
-        print("地图1被释放了！！！！！！！！！")
+        WDLog(item: "地图1释放了！！！！")
     }
     
 }

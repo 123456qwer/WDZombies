@@ -78,7 +78,6 @@ class WDPersonBehavior: WDBaseNodeBehavior {
    
         personNode.wdBlood -= number
         self.reduceBloodBlock()
-        WDAnimationTool.bloodAnimation(node: personNode)
         
         if personNode.wdBlood <= 0 && isGameOver == false{
             personNode.canMove = false
@@ -177,6 +176,8 @@ class WDPersonBehavior: WDBaseNodeBehavior {
         personNode.fireNode.isHidden = true
     }
     
-    
+    deinit {
+        WDLog(item: "人物管理者释放了")
+    }
     
 }

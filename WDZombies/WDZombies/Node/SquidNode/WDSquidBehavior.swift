@@ -70,6 +70,10 @@ class WDSquidBehavior: WDBaseNodeBehavior {
     //创建墨汁node
     func createInkAttack(personNode:WDPersonNode){
         
+        if squidNode == nil {
+            return
+        }
+        
         let inkNode:SKSpriteNode = SKSpriteNode.init(texture: squidNode.model.inkArr[0])
         inkNode.zPosition = 3000
         inkNode.name = SQUID_INK
@@ -97,8 +101,8 @@ class WDSquidBehavior: WDBaseNodeBehavior {
         
         let inkAction  = SKAction.animate(with: squidNode.model.inkArr, timePerFrame: TimeInterval(time / 6.0))
         let moveAction = SKAction.move(to: personNode.position, duration: TimeInterval(time))
-        
-        let groupAction = SKAction.group([inkAction,moveAction])
+        let musicA = SKAction.playSoundFileNamed(self.squidNode.model.attack1Music, waitForCompletion: false)
+        let groupAction = SKAction.group([inkAction,moveAction,musicA])
      
         
         inkNode.run(groupAction) {

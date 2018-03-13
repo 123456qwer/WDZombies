@@ -59,7 +59,9 @@ class WDKulouNightBehavior: WDBaseNodeBehavior {
         let personNode:WDPersonNode = nodeDic.object(forKey: "personNode") as! WDPersonNode
 
         let callAction = SKAction.animate(with: kulouKnightNode.model.attack1Arr, timePerFrame: 0.15)
-        kulouKnightNode.run(callAction) {
+        let musicA     = SKAction.playSoundFileNamed(self.kulouKnightNode.model.attack1Music, waitForCompletion: false)
+        let gr = SKAction.group([callAction,musicA])
+        kulouKnightNode.run(gr) {
             self.kulouKnightNode.canMove = true
             self.callKulouBlock(self.kulouKnightNode,personNode)
         }

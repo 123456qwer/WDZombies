@@ -11,9 +11,9 @@ import SpriteKit
 
 class WDPersonNode: WDBaseNode {
   
-    var immuneNode:SKSpriteNode = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "immuneAnimation")!))
+    var immuneNode:SKSpriteNode! = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "immuneAnimation")!))
     
-    var fuzhujiNode:SKSpriteNode = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "fuzhuji_1")!))
+    var fuzhujiNode:SKSpriteNode! = SKSpriteNode.init(texture: SKTexture.init(image: UIImage.init(named: "fuzhuji_1")!))
     var personBehavior:WDPersonBehavior! = nil
     var fireNode:SKSpriteNode! = nil
     var ggAction:gameOverAction!
@@ -22,12 +22,8 @@ class WDPersonNode: WDBaseNode {
     var lastRotation:CGFloat = 0
     var isImmune:Bool = false   //是否无敌状态
     var fly_fireArr:NSMutableArray = NSMutableArray.init()
-    var beFlashTexture:SKTexture = SKTexture.init(image: UIImage.init(named: "person_beFlash")!)
-    deinit {
-
-        WDLog(item: "玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
-        self.removeObserver(personBehavior, forKeyPath: "position")
-    }
+    var beFlashTexture:SKTexture! = SKTexture.init(image: UIImage.init(named: "person_beFlash")!)
+   
     
     func setPhy() -> Void {
         self.physicsBody?.categoryBitMask = PLAYER_CATEGORY;
@@ -61,10 +57,9 @@ class WDPersonNode: WDBaseNode {
         }
         
         moveDic = dic
-        fireDic = WDTool.cutFireImage()
-        boomBeginArr = WDTool.cutCustomImage(image: UIImage.init(named: "boomBegin")!, line: 1, arrange: 6, size: CGSize(width:130,height:110))
-        boomBoomArr = WDTool.cutCustomImage(image: UIImage.init(named: "boomAnimation")!, line: 1, arrange: 6, size: CGSize(width:130,height:110))
-        boomBoomArr.removeObject(at: 0)
+        fireDic = WDMapManager.sharedInstance.textureDic.object(forKey: PERSON_FIRE) as! NSMutableDictionary
+        
+    
         
         direction = kLeft
         self.position = CGPoint(x:kScreenWidth,y:kScreenHeight)
@@ -213,10 +208,18 @@ class WDPersonNode: WDBaseNode {
     
     
     
+
     
-    
-    
-    
+    deinit {
+        fuzhujiNode = nil
+        fireNode    = nil
+        immuneNode  = nil
+        beFlashTexture = nil
+        moveDic.removeAllObjects()
+        moveDic = nil
+        WDLog(item: "玩家node释放了！！！！！！！！！！！！！！！！！！！！！！！！！")
+        self.removeObserver(personBehavior, forKeyPath: "position")
+    }
     
     
 }

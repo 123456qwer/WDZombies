@@ -97,6 +97,11 @@ public let DOG_FIRE        = "DOG_FIRE"
 public let DOG_STAY_FIRE   = "DOG_STAY_FIRE"
 
 
+//玩家
+public let PERSON_NAME    = "PERSON_NAME"
+public let PERSON_FIRE    = "PERSON_FIRE"
+public let PERSON_BOOM1   = "PERSON_BOOM1"
+public let PERSON_BOOM2   = "PERSON_BOOM2"
 
 //声音
 public let MOVE_SOUND     = "MOVE_SOUND"

@@ -422,5 +422,9 @@ class WDMap_1ViewModel: NSObject {
         zomNode.removeFromParent()
     }
    
+    deinit {
+        
+        WDLog(item: "碰撞逻辑释放了！！！")
+    }
     
 }

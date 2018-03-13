@@ -61,7 +61,9 @@ class WDSealBehavior: WDBaseNodeBehavior {
                 if self.sealNode != nil{
                     let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
                     self.setIcePhy(iceNode: iceNode)
-                    iceNode.run(textureAction, completion: {
+                    let musicA = SKAction.playSoundFileNamed(self.sealNode.model.attack1Music, waitForCompletion: false)
+                    let gr = SKAction.group([textureAction,musicA])
+                    iceNode.run(gr, completion: {
                         iceNode.removeFromParent()
                         self.iceAttackAction(personNode: personNode, point: self.randomPosition(personNode: personNode))
                     })
@@ -85,7 +87,9 @@ class WDSealBehavior: WDBaseNodeBehavior {
                 if self.sealNode != nil{
                     let textureAction = SKAction.animate(with: self.sealNode.model.iceArr, timePerFrame: 0.1)
                     self.setIcePhy(iceNode: iceNode)
-                    iceNode.run(textureAction, completion: {
+                    let musicA = SKAction.playSoundFileNamed(self.sealNode.model.attack1Music, waitForCompletion: false)
+                    let gr = SKAction.group([textureAction,musicA])
+                    iceNode.run(gr, completion: {
                         iceNode.removeFromParent()
                     })
                 }
@@ -193,6 +197,10 @@ class WDSealBehavior: WDBaseNodeBehavior {
     }
     
     
+    deinit {
+        self.clearAction()
+        WDLog(item: "海报管理者释放了。。。。。")
+    }
     
     override func died() {
         super.died()
