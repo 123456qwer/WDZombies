@@ -27,10 +27,14 @@ class GameViewController: UIViewController {
     var mapName:String!                    = nil
     var _level:NSInteger = 1
     var _experienceView:UIView! = nil
+    
+    let player:WDSkillMusicPlayer = WDSkillMusicPlayer.init()
+    let bg_player:WDSkillMusicPlayer = WDSkillMusicPlayer.init()
+
 //********************生命周期*********************************//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bg_player.playWithName(musicName: "bg_music", volume: 1, numberOfLoops: -1)
         self.navigationController?.navigationBar.isHidden = true
         
         print(kScreenWidth,kScreenHeight)
@@ -178,6 +182,7 @@ class GameViewController: UIViewController {
     //技能学习
     @objc func learnSkill() {
         
+        self.btnMusic()
         let skillVC = WDSkillViewController.init()
         skillVC.modalTransitionStyle = .partialCurl
         self.present(skillVC, animated: true) {}
@@ -186,6 +191,7 @@ class GameViewController: UIViewController {
     //地图选择
     @objc func selectMap() -> Void {
         
+        self.btnMusic()
         let mapVC = WDMapViewController.init()
         mapVC.modalTransitionStyle = .crossDissolve
         //self.navigationController?.pushViewController(mapVC, animated: true)
@@ -202,6 +208,7 @@ class GameViewController: UIViewController {
     //技能选择
     @objc func selectSkill() {
         
+        self.btnMusic()
         var selectSkillVC:WDSelectSkillVC? = WDSelectSkillVC.init()
         selectSkillVC?.modalTransitionStyle = .crossDissolve
         self.present(selectSkillVC!, animated: true) {}
@@ -234,6 +241,7 @@ class GameViewController: UIViewController {
     //怪物简介
     @objc func showMonster(){
         
+        self.btnMusic()
         let monsterVC = WDMonsterVC.init()
         monsterVC.modalTransitionStyle = .partialCurl
         self.present(monsterVC, animated: true) {}
@@ -248,6 +256,7 @@ class GameViewController: UIViewController {
     //开始游戏
     @objc func starGame() -> Void {
         
+        player.playWithName(musicName: "btn")
         //技能按钮界面位置改变,增加技能Model
         skillAndFireView.setConfirmFrame()
         WDSkillManager.sharedInstance.initModelDic()
@@ -291,6 +300,7 @@ class GameViewController: UIViewController {
     //游戏结束
     @objc func gameOver() -> Void {
   
+        self.btnMusic()
         self.removeDiedView()
         self.showScene.removeAll()
 
@@ -307,6 +317,7 @@ class GameViewController: UIViewController {
     //playAgain
     @objc func playAgain()  {
         
+        self.btnMusic()
         self.removeDiedView()
         
         self.showScene.removeAll()
@@ -321,6 +332,7 @@ class GameViewController: UIViewController {
     
     //playNext
     @objc func playNext(){
+        self.btnMusic()
         _level += 1
         self.removeDiedView()
         self.showScene.removeAll()
@@ -479,6 +491,9 @@ class GameViewController: UIViewController {
         }
     }
     
+    func btnMusic() {
+        player.playWithName(musicName: "btn_music")
+    }
     
     func drawAction(radius:CGFloat,arcCenter:CGPoint,startAngle:CGFloat,endAngle:CGFloat,lineWidth:CGFloat) {
         
