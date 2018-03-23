@@ -229,9 +229,9 @@ class WDAnimationTool: NSObject {
         node.parent?.addChild(bloodNode)
         
         let alphaAction:SKAction = SKAction.fadeAlpha(to: 0, duration: 0.5)
-        bloodNode.run(alphaAction) {
-            bloodNode.removeFromParent()
-        }
+        let removeAction:SKAction = SKAction.removeFromParent()
+        let seq = SKAction.sequence([alphaAction,removeAction])
+        bloodNode.run(seq)
  
     }
     
@@ -257,9 +257,9 @@ class WDAnimationTool: NSObject {
         let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 300.0))
         let firA = SKAction.animate(with: node.fly_fireArr as! [SKTexture], timePerFrame: TimeInterval(distance / 300.0 / 6.0))
         let groupA = SKAction.group([action,firA])
-        firNode.run(groupA) {
-            firNode.removeFromParent()
-        }
+        let removeAction = SKAction.removeFromParent()
+        let seq = SKAction.sequence([groupA,removeAction])
+        firNode.run(seq)
         
         let body:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:20,height:29))
         
@@ -302,9 +302,9 @@ class WDAnimationTool: NSObject {
         firNode.yScale = 0.1
         node.parent?.addChild(firNode)
         let action:SKAction = SKAction.move(to: p, duration: TimeInterval(distance / 700.0))
-        firNode.run(action) {
-            firNode.removeFromParent()
-        }
+        let removeA = SKAction.removeFromParent()
+        let seq = SKAction.sequence([action,removeA])
+        firNode.run(seq)
         
         let body:SKPhysicsBody = SKPhysicsBody.init(rectangleOf: CGSize(width:20,height:29))
         
@@ -470,9 +470,9 @@ class WDAnimationTool: NSObject {
             body.contactTestBitMask = normal_zom;
             body.collisionBitMask = player_type ;
             boomNode.physicsBody = body;
-            boomNode.run(boomBomAn, completion: {
-                boomNode.removeFromParent()
-            })
+            let removeA = SKAction.removeFromParent()
+            let seq = SKAction.sequence([boomBomAn,removeA])
+            boomNode.run(seq)
         }
         
     }
